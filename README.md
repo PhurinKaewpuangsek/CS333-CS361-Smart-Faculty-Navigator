@@ -14,6 +14,21 @@ Before running the application locally, make sure you have the following install
 
 ---
 
+## Quickstart Guide
+
+1. Clone the repository and switch to Node 24:
+   ```bash
+   nvm use 24
+   npm install
+
+2. Configure environment variables:
+   ```bash
+   cp .env.example .env
+
+3. Spin up the local database:
+   ```bash
+   npm run db:up
+
 ## 🚀 Initial Repository Setup
 
 Run these commands in your terminal once to clone the repository and configure your environment:
