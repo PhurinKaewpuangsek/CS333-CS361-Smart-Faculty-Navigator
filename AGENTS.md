@@ -100,7 +100,7 @@ TBD lives or dies on **short-lived branches**:
 
 - Target lifetime: **≤ 1–2 days**. A branch older than ~3 days is a smell — split the issue.
 - Target size: **under ~400 changed lines** per PR. Big refactors get split into a stack of small issues.
-- **Delete the branch immediately after merge** (`gh pr merge --delete-branch`). Stale branches are not kept around.
+- **Delete the branch immediately after merge** — see the canonical merge command in §5. Stale branches are not kept around: a merged branch holds nothing that `main` does not, and leaving it around invites someone to start new work on a tip that already lags the trunk.
 - If work is incomplete but must land, hide it behind a config flag rather than holding the branch open for a week.
 
 ### 3.5 Staying in sync with the trunk
@@ -168,9 +168,29 @@ Every PR must have:
 4. **Green CI.** A red pipeline is never merged, and never "merged anyway to fix later".
 5. **At least one teammate review**, with all review threads resolved.
 
-Merge strategy: **squash merge** into `main` — it keeps the trunk history linear at one commit per issue — then delete the branch.
+### 5.1 Merge strategy: squash, always
 
-Agents **must not** merge a PR on their own. Opening the PR is the last step an agent takes; a human presses merge.
+`main` accepts **squash merges only**. No merge commits, no rebase merges.
+
+```bash
+gh pr merge <number> --squash --delete-branch
+```
+
+That single command is the whole merge step — it squashes, it closes the linked issue, and it removes the branch. Use it instead of the web UI so nothing is forgotten.
+
+Why squash:
+
+- `main` keeps a linear history at **one commit per issue**, so `git log --oneline` on the trunk reads as the list of finished work.
+- Work-in-progress commits (`wip`, `fix typo`, `address review`) never pollute the trunk.
+- Reverting a whole feature is one `git revert` of one commit.
+
+Consequence to remember: **with squash, the PR title becomes the commit message on `main`.** So the PR title must itself be a valid Conventional Commit line (§4) — `feat(api): add facility search endpoints`, not `Update files`. Put `Closes #N` in the PR body so the issue closes on merge.
+
+Repo settings back this up (Settings → General → Pull requests): squash merging is the only method enabled, and **Automatically delete head branches** is on, so a merged branch disappears even if someone merges from the web UI.
+
+### 5.2 Agents do not merge
+
+Agents **must not** merge a PR on their own. Opening the PR is the last step an agent takes; a human reviews and presses merge.
 
 ---
 
@@ -305,7 +325,7 @@ gh pr create --base main --title "feat(api): add facility search endpoints" --bo
 # 8. Watch CI. Fix red before asking for review.
 gh pr checks --watch
 
-# 9. STOP. A human reviews and merges.
+# 9. STOP. A human reviews and merges:  gh pr merge <n> --squash --delete-branch
 ```
 
 ---
