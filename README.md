@@ -133,3 +133,5 @@ Direct pushes to `main` are restricted. All contributions must use feature branc
    git push origin feature/your-feature-name
    ```
 4. **Merge requirements:** Automated CI checks must pass, and all review comments must be resolved before merging into `main`.
+
+<!-- workflow test: Issue #12 -->
