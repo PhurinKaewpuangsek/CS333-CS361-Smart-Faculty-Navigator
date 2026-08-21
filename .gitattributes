@@ -7,6 +7,8 @@ database/datasets/br3/source/*.json         -diff linguist-vendored
 # Written by database/tools/extract-br3.mjs. Review the generator, not the output.
 database/datasets/br3/reports/*.csv         -diff linguist-generated=true
 database/datasets/br3/survey/*.template.csv -diff linguist-generated=true
+database/datasets/br3/*.seed.json           -diff linguist-generated=true
+database/datasets/br3/*.seed.csv            -diff linguist-generated=true
 
 # The dataset is UTF-8 with LF and must stay byte-stable across platforms, otherwise
 # regenerating on Windows would produce a spurious diff against a Linux checkout.
