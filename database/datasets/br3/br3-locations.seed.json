@@ -1,0 +1,6965 @@
+{
+  "generated_by": "database/tools/extract-br3.mjs",
+  "manifest": "source/source-manifest.json",
+  "building": {
+    "code": "BR3",
+    "legacy_code": "LC3",
+    "name_th": "อาคาร บร.3",
+    "aliases": [
+      "BR3",
+      "LC3",
+      "บร3",
+      "บร.3"
+    ]
+  },
+  "floors": [
+    {
+      "floor": 1,
+      "map_asset_id": "br3-floor-1",
+      "asset": "frontend/public/maps/br3/floor-1.svg",
+      "viewbox": [
+        0,
+        0,
+        1217,
+        742
+      ],
+      "coordinate_transform": {
+        "translate_x": 40,
+        "translate_y": 40
+      }
+    },
+    {
+      "floor": 2,
+      "map_asset_id": "br3-floor-2",
+      "asset": "frontend/public/maps/br3/floor-2.svg",
+      "viewbox": [
+        0,
+        0,
+        1070,
+        528
+      ],
+      "coordinate_transform": {
+        "translate_x": -2,
+        "translate_y": -37
+      }
+    }
+  ],
+  "counts": {
+    "records": 131,
+    "rooms": 117,
+    "poi": 14,
+    "needs_field_validation": 6,
+    "with_derived_landmarks": 117
+  },
+  "records": [
+    {
+      "location_id": "BR3-F1-PLFTOILET",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "poi",
+      "room_code": "",
+      "aliases": [],
+      "name_th": "ห้องน้ำหญิง (ฝั่งซ้าย)",
+      "category": "toilet",
+      "map_asset_id": "br3-floor-1",
+      "x": 127,
+      "y": 356,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้องน้ำหญิง (ฝั่งซ้าย)",
+      "landmarks": [],
+      "source": {
+        "node_id": "LC3_LFToilet",
+        "node_type": "facility",
+        "x": 87,
+        "y": 316,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "inferred",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-PLMTOILET",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "poi",
+      "room_code": "",
+      "aliases": [],
+      "name_th": "ห้องน้ำชาย (ฝั่งซ้าย)",
+      "category": "toilet",
+      "map_asset_id": "br3-floor-1",
+      "x": 128,
+      "y": 307,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้องน้ำชาย (ฝั่งซ้าย)",
+      "landmarks": [],
+      "source": {
+        "node_id": "LC3_LMToilet",
+        "node_type": "facility",
+        "x": 88,
+        "y": 267,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "inferred",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-PRFTOILET",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "poi",
+      "room_code": "",
+      "aliases": [],
+      "name_th": "ห้องน้ำหญิง (ฝั่งขวา)",
+      "category": "toilet",
+      "map_asset_id": "br3-floor-1",
+      "x": 1142,
+      "y": 308,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้องน้ำหญิง (ฝั่งขวา)",
+      "landmarks": [],
+      "source": {
+        "node_id": "LC3_RFToilet",
+        "node_type": "facility",
+        "x": 1102,
+        "y": 268,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "inferred",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-PRMTOILET",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "poi",
+      "room_code": "",
+      "aliases": [],
+      "name_th": "ห้องน้ำชาย (ฝั่งขวา)",
+      "category": "toilet",
+      "map_asset_id": "br3-floor-1",
+      "x": 1145,
+      "y": 358,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้องน้ำชาย (ฝั่งขวา)",
+      "landmarks": [],
+      "source": {
+        "node_id": "LC3_RMToilet",
+        "node_type": "facility",
+        "x": 1105,
+        "y": 318,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "inferred",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-PSTAIR-1",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "poi",
+      "room_code": "",
+      "aliases": [],
+      "name_th": "บันได 1",
+      "category": "stairs",
+      "map_asset_id": "br3-floor-1",
+      "x": 160,
+      "y": 340,
+      "detail_th": "อาคาร บร.3 ชั้น 1 บันได 1",
+      "landmarks": [],
+      "source": {
+        "node_id": "LC3_stair-1",
+        "node_type": "stairs",
+        "x": 120,
+        "y": 300,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "inferred",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-PSTAIR-2",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "poi",
+      "room_code": "",
+      "aliases": [],
+      "name_th": "บันได 2",
+      "category": "stairs",
+      "map_asset_id": "br3-floor-1",
+      "x": 622,
+      "y": 270,
+      "detail_th": "อาคาร บร.3 ชั้น 1 บันได 2",
+      "landmarks": [],
+      "source": {
+        "node_id": "LC3_stair-2",
+        "node_type": "stairs",
+        "x": 582,
+        "y": 230,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "inferred",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-PSTAIR-3",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "poi",
+      "room_code": "",
+      "aliases": [],
+      "name_th": "บันได 3",
+      "category": "stairs",
+      "map_asset_id": "br3-floor-1",
+      "x": 1102,
+      "y": 323,
+      "detail_th": "อาคาร บร.3 ชั้น 1 บันได 3",
+      "landmarks": [],
+      "source": {
+        "node_id": "LC3_stair-3",
+        "node_type": "stairs",
+        "x": 1062,
+        "y": 283,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "inferred",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R101",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-101",
+      "aliases": [
+        "BR3-101",
+        "LC3-101",
+        "LC3_101",
+        "บร3-101",
+        "บร.3-101",
+        "101"
+      ],
+      "name_th": "ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-1",
+      "x": 543,
+      "y": 230,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 101 — ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 13,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-2",
+          "walk_hops": 7,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_101",
+        "node_type": "room",
+        "x": 503,
+        "y": 190,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R101-1",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-101/1",
+      "aliases": [
+        "BR3-101/1",
+        "LC3-101/1",
+        "LC3_101/1",
+        "บร3-101/1",
+        "บร.3-101/1",
+        "101/1"
+      ],
+      "name_th": "ห้องบรรยาย 4 (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "category": "lecture_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 376,
+      "y": 152,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 101/1 — ห้องบรรยาย 4 (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLMTOILET",
+          "walk_hops": 10,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-1",
+          "walk_hops": 11,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_101/1",
+        "node_type": "room",
+        "x": 336,
+        "y": 112,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R101-2",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-101/2",
+      "aliases": [
+        "BR3-101/2",
+        "LC3-101/2",
+        "LC3_101/2",
+        "บร3-101/2",
+        "บร.3-101/2",
+        "101/2"
+      ],
+      "name_th": "ห้องสัมมนาบัณฑิตศึกษา (คณิตศาสตร์และสถิติ)",
+      "category": "seminar_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 421,
+      "y": 152,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 101/2 — ห้องสัมมนาบัณฑิตศึกษา (คณิตศาสตร์และสถิติ)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLMTOILET",
+          "walk_hops": 11,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-1",
+          "walk_hops": 12,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_101/2",
+        "node_type": "room",
+        "x": 381,
+        "y": 112,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R102-1",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-102/1",
+      "aliases": [
+        "BR3-102/1",
+        "LC3-102/1",
+        "LC3_102/1",
+        "บร3-102/1",
+        "บร.3-102/1",
+        "102/1"
+      ],
+      "name_th": "ห้องสัมมนาบัณฑิตศึกษา (คณิตศาสตร์และสถิติ)",
+      "category": "seminar_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 517,
+      "y": 84,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 102/1 — ห้องสัมมนาบัณฑิตศึกษา (คณิตศาสตร์และสถิติ)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLMTOILET",
+          "walk_hops": 14,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-2",
+          "walk_hops": 10,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_102/1",
+        "node_type": "room",
+        "x": 477,
+        "y": 44,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R102-2",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-102/2",
+      "aliases": [
+        "BR3-102/2",
+        "LC3-102/2",
+        "LC3_102/2",
+        "บร3-102/2",
+        "บร.3-102/2",
+        "102/2"
+      ],
+      "name_th": "ห้องสัมมนาบัณฑิตศึกษา (คณิตศาสตร์และสถิติ)",
+      "category": "seminar_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 485,
+      "y": 85,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 102/2 — ห้องสัมมนาบัณฑิตศึกษา (คณิตศาสตร์และสถิติ)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLMTOILET",
+          "walk_hops": 13,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-2",
+          "walk_hops": 11,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_102/2",
+        "node_type": "room",
+        "x": 445,
+        "y": 45,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R103",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-103",
+      "aliases": [
+        "BR3-103",
+        "LC3-103",
+        "LC3_103",
+        "บร3-103",
+        "บร.3-103",
+        "103"
+      ],
+      "name_th": "ห้องบรรยายเรียนรวม",
+      "category": "lecture_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 440,
+      "y": 85,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 103 — ห้องบรรยายเรียนรวม",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLMTOILET",
+          "walk_hops": 12,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-2",
+          "walk_hops": 12,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_103",
+        "node_type": "room",
+        "x": 400,
+        "y": 45,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R104",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-104",
+      "aliases": [
+        "BR3-104",
+        "LC3-104",
+        "LC3_104",
+        "บร3-104",
+        "บร.3-104",
+        "104"
+      ],
+      "name_th": "ห้องบรรยายเรียนรวม",
+      "category": "lecture_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 376,
+      "y": 86,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 104 — ห้องบรรยายเรียนรวม",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLMTOILET",
+          "walk_hops": 10,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-1",
+          "walk_hops": 11,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_104",
+        "node_type": "room",
+        "x": 336,
+        "y": 46,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R104-1",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-104/1",
+      "aliases": [
+        "BR3-104/1",
+        "LC3-104/1",
+        "LC3_104/1",
+        "บร3-104/1",
+        "บร.3-104/1",
+        "104/1"
+      ],
+      "name_th": "ห้องพักนักศึกษาระดับบัณฑิตศึกษา (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "category": "student_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 327,
+      "y": 86,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 104/1 — ห้องพักนักศึกษาระดับบัณฑิตศึกษา (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLMTOILET",
+          "walk_hops": 9,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-1",
+          "walk_hops": 10,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_104/1",
+        "node_type": "room",
+        "x": 287,
+        "y": 46,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R105",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-105",
+      "aliases": [
+        "BR3-105",
+        "LC3-105",
+        "LC3_105",
+        "บร3-105",
+        "บร.3-105",
+        "105"
+      ],
+      "name_th": "ห้องบรรยายเรียนรวม",
+      "category": "lecture_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 327,
+      "y": 154,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 105 — ห้องบรรยายเรียนรวม",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLMTOILET",
+          "walk_hops": 9,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-1",
+          "walk_hops": 10,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_105",
+        "node_type": "room",
+        "x": 287,
+        "y": 114,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R106",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-106",
+      "aliases": [
+        "BR3-106",
+        "LC3-106",
+        "LC3_106",
+        "บร3-106",
+        "บร.3-106",
+        "106"
+      ],
+      "name_th": "ห้องบรรยายเรียนรวม",
+      "category": "lecture_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 278,
+      "y": 87,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 106 — ห้องบรรยายเรียนรวม",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLMTOILET",
+          "walk_hops": 8,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-1",
+          "walk_hops": 9,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_106",
+        "node_type": "room",
+        "x": 238,
+        "y": 47,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R107",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-107",
+      "aliases": [
+        "BR3-107",
+        "LC3-107",
+        "LC3_107",
+        "บร3-107",
+        "บร.3-107",
+        "107"
+      ],
+      "name_th": "ห้องบรรยายเรียนรวม",
+      "category": "lecture_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 251,
+      "y": 151,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 107 — ห้องบรรยายเรียนรวม",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLMTOILET",
+          "walk_hops": 7,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-1",
+          "walk_hops": 8,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_107",
+        "node_type": "room",
+        "x": 211,
+        "y": 111,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R108",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-108",
+      "aliases": [
+        "BR3-108",
+        "LC3-108",
+        "LC3_108",
+        "บร3-108",
+        "บร.3-108",
+        "108"
+      ],
+      "name_th": "ห้องบรรยายเรียนรวม",
+      "category": "lecture_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 216,
+      "y": 87,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 108 — ห้องบรรยายเรียนรวม",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLMTOILET",
+          "walk_hops": 6,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-1",
+          "walk_hops": 7,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_108",
+        "node_type": "room",
+        "x": 176,
+        "y": 47,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R108-1",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-108/1",
+      "aliases": [
+        "BR3-108/1",
+        "LC3-108/1",
+        "LC3_108/1",
+        "บร3-108/1",
+        "บร.3-108/1",
+        "108/1"
+      ],
+      "name_th": "ห้องเจ้าหน้าที่",
+      "category": "staff_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 172,
+      "y": 71,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 108/1 — ห้องเจ้าหน้าที่",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLMTOILET",
+          "walk_hops": 7,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-1",
+          "walk_hops": 8,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_108/1",
+        "node_type": "room",
+        "x": 132,
+        "y": 31,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R109",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-109",
+      "aliases": [
+        "BR3-109",
+        "LC3-109",
+        "LC3_109",
+        "บร3-109",
+        "บร.3-109",
+        "109"
+      ],
+      "name_th": "ห้องบรรยายเรียนรวม",
+      "category": "lecture_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 125,
+      "y": 90,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 109 — ห้องบรรยายเรียนรวม",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLMTOILET",
+          "walk_hops": 7,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-1",
+          "walk_hops": 8,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_109",
+        "node_type": "room",
+        "x": 85,
+        "y": 50,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R110",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-110",
+      "aliases": [
+        "BR3-110",
+        "LC3-110",
+        "LC3_110",
+        "บร3-110",
+        "บร.3-110",
+        "110"
+      ],
+      "name_th": "ห้องบรรยายเรียนรวม",
+      "category": "lecture_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 122,
+      "y": 142,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 110 — ห้องบรรยายเรียนรวม",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLMTOILET",
+          "walk_hops": 4,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-1",
+          "walk_hops": 5,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_110",
+        "node_type": "room",
+        "x": 82,
+        "y": 102,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R111",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-111",
+      "aliases": [
+        "BR3-111",
+        "LC3-111",
+        "LC3_111",
+        "บร3-111",
+        "บร.3-111",
+        "111"
+      ],
+      "name_th": "ห้องบรรยายเรียนรวม",
+      "category": "lecture_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 123,
+      "y": 209,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 111 — ห้องบรรยายเรียนรวม",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLMTOILET",
+          "walk_hops": 3,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-1",
+          "walk_hops": 4,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_111",
+        "node_type": "room",
+        "x": 83,
+        "y": 169,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R115",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-115",
+      "aliases": [
+        "BR3-115",
+        "LC3-115",
+        "LC3_115",
+        "บร3-115",
+        "บร.3-115",
+        "115"
+      ],
+      "name_th": "ห้องสัมมนาทางคณิตศาสตร์และสถิติ",
+      "category": "seminar_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 124,
+      "y": 397,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 115 — ห้องสัมมนาทางคณิตศาสตร์และสถิติ",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLFTOILET",
+          "walk_hops": 3,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-1",
+          "walk_hops": 4,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_115",
+        "node_type": "room",
+        "x": 84,
+        "y": 357,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R116",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-116",
+      "aliases": [
+        "BR3-116",
+        "LC3-116",
+        "LC3_116",
+        "บร3-116",
+        "บร.3-116",
+        "116"
+      ],
+      "name_th": "ห้องบรรยายเรียนรวม",
+      "category": "lecture_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 124,
+      "y": 463,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 116 — ห้องบรรยายเรียนรวม",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLFTOILET",
+          "walk_hops": 4,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-1",
+          "walk_hops": 5,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_116",
+        "node_type": "room",
+        "x": 84,
+        "y": 423,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R117",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-117",
+      "aliases": [
+        "BR3-117",
+        "LC3-117",
+        "LC3_117",
+        "บร3-117",
+        "บร.3-117",
+        "117"
+      ],
+      "name_th": "ห้องบรรยายเรียนรวม",
+      "category": "lecture_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 128,
+      "y": 523,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 117 — ห้องบรรยายเรียนรวม",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLFTOILET",
+          "walk_hops": 7,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-1",
+          "walk_hops": 8,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_117",
+        "node_type": "room",
+        "x": 88,
+        "y": 483,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R118",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-118",
+      "aliases": [
+        "BR3-118",
+        "LC3-118",
+        "LC3_118",
+        "บร3-118",
+        "บร.3-118",
+        "118"
+      ],
+      "name_th": "ห้องบรรยายเรียนรวม",
+      "category": "lecture_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 224,
+      "y": 530,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 118 — ห้องบรรยายเรียนรวม",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLFTOILET",
+          "walk_hops": 6,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-1",
+          "walk_hops": 7,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_118",
+        "node_type": "room",
+        "x": 184,
+        "y": 490,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R118-1",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-118/1",
+      "aliases": [
+        "BR3-118/1",
+        "LC3-118/1",
+        "LC3_118/1",
+        "บร3-118/1",
+        "บร.3-118/1",
+        "118/1"
+      ],
+      "name_th": "ห้องบรรยายเรียนรวม",
+      "category": "lecture_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 267,
+      "y": 531,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 118/1 — ห้องบรรยายเรียนรวม",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLFTOILET",
+          "walk_hops": 8,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-1",
+          "walk_hops": 9,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_118/1",
+        "node_type": "room",
+        "x": 227,
+        "y": 491,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R119",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-119",
+      "aliases": [
+        "BR3-119",
+        "LC3-119",
+        "LC3_119",
+        "บร3-119",
+        "บร.3-119",
+        "119"
+      ],
+      "name_th": "ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-1",
+      "x": 224,
+      "y": 460,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 119 — ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLFTOILET",
+          "walk_hops": 6,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-1",
+          "walk_hops": 7,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_119",
+        "node_type": "room",
+        "x": 184,
+        "y": 420,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R119-1",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-119/1",
+      "aliases": [
+        "BR3-119/1",
+        "LC3-119/1",
+        "LC3_119/1",
+        "บร3-119/1",
+        "บร.3-119/1",
+        "119/1"
+      ],
+      "name_th": "ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-1",
+      "x": 245,
+      "y": 459,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 119/1 — ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLFTOILET",
+          "walk_hops": 7,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-1",
+          "walk_hops": 8,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_119/1",
+        "node_type": "room",
+        "x": 205,
+        "y": 419,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R119-2",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-119/2",
+      "aliases": [
+        "BR3-119/2",
+        "LC3-119/2",
+        "LC3_119/2",
+        "บร3-119/2",
+        "บร.3-119/2",
+        "119/2"
+      ],
+      "name_th": "ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-1",
+      "x": 267,
+      "y": 459,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 119/2 — ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLFTOILET",
+          "walk_hops": 8,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-1",
+          "walk_hops": 9,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_119/2",
+        "node_type": "room",
+        "x": 227,
+        "y": 419,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R119-3",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-119/3",
+      "aliases": [
+        "BR3-119/3",
+        "LC3-119/3",
+        "LC3_119/3",
+        "บร3-119/3",
+        "บร.3-119/3",
+        "119/3"
+      ],
+      "name_th": "ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-1",
+      "x": 290,
+      "y": 458,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 119/3 — ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLFTOILET",
+          "walk_hops": 9,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-1",
+          "walk_hops": 10,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_119/3",
+        "node_type": "room",
+        "x": 250,
+        "y": 418,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R119-4",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-119/4",
+      "aliases": [
+        "BR3-119/4",
+        "LC3-119/4",
+        "LC3_119/4",
+        "บร3-119/4",
+        "บร.3-119/4",
+        "119/4"
+      ],
+      "name_th": "ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-1",
+      "x": 312,
+      "y": 460,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 119/4 — ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLFTOILET",
+          "walk_hops": 10,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-2",
+          "walk_hops": 11,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_119/4",
+        "node_type": "room",
+        "x": 272,
+        "y": 420,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R119-5",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-119/5",
+      "aliases": [
+        "BR3-119/5",
+        "LC3-119/5",
+        "LC3_119/5",
+        "บร3-119/5",
+        "บร.3-119/5",
+        "119/5"
+      ],
+      "name_th": "ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-1",
+      "x": 333,
+      "y": 460,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 119/5 — ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLFTOILET",
+          "walk_hops": 11,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-2",
+          "walk_hops": 10,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_119/5",
+        "node_type": "room",
+        "x": 293,
+        "y": 420,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R120",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-120",
+      "aliases": [
+        "BR3-120",
+        "LC3-120",
+        "LC3_120",
+        "บร3-120",
+        "บร.3-120",
+        "120"
+      ],
+      "name_th": "ห้องเก็บของ",
+      "category": "storage",
+      "map_asset_id": "br3-floor-1",
+      "x": 329,
+      "y": 528,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 120 — ห้องเก็บของ",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLFTOILET",
+          "walk_hops": 11,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-2",
+          "walk_hops": 10,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_120",
+        "node_type": "room",
+        "x": 289,
+        "y": 488,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R121",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-121",
+      "aliases": [
+        "BR3-121",
+        "LC3-121",
+        "LC3_121",
+        "บร3-121",
+        "บร.3-121",
+        "121"
+      ],
+      "name_th": "ห้องบรรยายเรียนรวม",
+      "category": "lecture_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 408,
+      "y": 531,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 121 — ห้องบรรยายเรียนรวม",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLFTOILET",
+          "walk_hops": 12,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-2",
+          "walk_hops": 9,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_121",
+        "node_type": "room",
+        "x": 368,
+        "y": 491,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R121-1",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-121/1",
+      "aliases": [
+        "BR3-121/1",
+        "LC3-121/1",
+        "LC3_121/1",
+        "บร3-121/1",
+        "บร.3-121/1",
+        "121/1"
+      ],
+      "name_th": "ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-1",
+      "x": 478,
+      "y": 536,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 121/1 — ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLFTOILET",
+          "walk_hops": 14,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-2",
+          "walk_hops": 9,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_121/1",
+        "node_type": "room",
+        "x": 438,
+        "y": 496,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R121-2",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-121/2",
+      "aliases": [
+        "BR3-121/2",
+        "LC3-121/2",
+        "LC3_121/2",
+        "บร3-121/2",
+        "บร.3-121/2",
+        "121/2"
+      ],
+      "name_th": "ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-1",
+      "x": 504,
+      "y": 511,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 121/2 — ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLFTOILET",
+          "walk_hops": 14,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-2",
+          "walk_hops": 9,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_121/2",
+        "node_type": "room",
+        "x": 464,
+        "y": 471,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R121-3",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-121/3",
+      "aliases": [
+        "BR3-121/3",
+        "LC3-121/3",
+        "LC3_121/3",
+        "บร3-121/3",
+        "บร.3-121/3",
+        "121/3"
+      ],
+      "name_th": "ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-1",
+      "x": 527,
+      "y": 536,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 121/3 — ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 14,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-2",
+          "walk_hops": 8,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_121/3",
+        "node_type": "room",
+        "x": 487,
+        "y": 496,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R121-4",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-121/4",
+      "aliases": [
+        "BR3-121/4",
+        "LC3-121/4",
+        "LC3_121/4",
+        "บร3-121/4",
+        "บร.3-121/4",
+        "121/4"
+      ],
+      "name_th": "ห้องโครงการให้คำปรึกษาทางสถิติเพื่อการวิจัย / ห้องสมาคมศิษย์เก่า คณะวิทยาศาสตร์และเทคโนโลยี",
+      "category": "service_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 758,
+      "y": 521,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 121/4 — ห้องโครงการให้คำปรึกษาทางสถิติเพื่อการวิจัย / ห้องสมาคมศิษย์เก่า คณะวิทยาศาสตร์และเทคโนโลยี",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 10,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-2",
+          "walk_hops": 6,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_121/4",
+        "node_type": "room",
+        "x": 718,
+        "y": 481,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R121-5",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-121/5",
+      "aliases": [
+        "BR3-121/5",
+        "LC3-121/5",
+        "LC3_121/5",
+        "บร3-121/5",
+        "บร.3-121/5",
+        "121/5"
+      ],
+      "name_th": "ห้องพักอาจารย์ (ฟิสิกส์)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-1",
+      "x": 805,
+      "y": 519,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 121/5 — ห้องพักอาจารย์ (ฟิสิกส์)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 9,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-2",
+          "walk_hops": 7,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_121/5",
+        "node_type": "room",
+        "x": 765,
+        "y": 479,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R122",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-122",
+      "aliases": [
+        "BR3-122",
+        "LC3-122",
+        "LC3_122",
+        "บร3-122",
+        "บร.3-122",
+        "122"
+      ],
+      "name_th": "ห้องบรรยายเรียนรวม",
+      "category": "lecture_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 408,
+      "y": 458,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 122 — ห้องบรรยายเรียนรวม",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLFTOILET",
+          "walk_hops": 12,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-2",
+          "walk_hops": 9,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_122",
+        "node_type": "room",
+        "x": 368,
+        "y": 418,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R122-1",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-122/1",
+      "aliases": [
+        "BR3-122/1",
+        "LC3-122/1",
+        "LC3_122/1",
+        "บร3-122/1",
+        "บร.3-122/1",
+        "122/1"
+      ],
+      "name_th": "ห้องเจ้าหน้าที่",
+      "category": "staff_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 478,
+      "y": 441,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 122/1 — ห้องเจ้าหน้าที่",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLFTOILET",
+          "walk_hops": 14,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-2",
+          "walk_hops": 9,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_122/1",
+        "node_type": "room",
+        "x": 438,
+        "y": 401,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R122-2",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-122/2",
+      "aliases": [
+        "BR3-122/2",
+        "LC3-122/2",
+        "LC3_122/2",
+        "บร3-122/2",
+        "บร.3-122/2",
+        "122/2"
+      ],
+      "name_th": "ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-1",
+      "x": 503,
+      "y": 461,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 122/2 — ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PLFTOILET",
+          "walk_hops": 14,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-2",
+          "walk_hops": 9,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_122/2",
+        "node_type": "room",
+        "x": 463,
+        "y": 421,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R122-3",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-122/3",
+      "aliases": [
+        "BR3-122/3",
+        "LC3-122/3",
+        "LC3_122/3",
+        "บร3-122/3",
+        "บร.3-122/3",
+        "122/3"
+      ],
+      "name_th": "ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-1",
+      "x": 527,
+      "y": 442,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 122/3 — ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 14,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-2",
+          "walk_hops": 8,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_122/3",
+        "node_type": "room",
+        "x": 487,
+        "y": 402,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R122-4",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-122/4",
+      "aliases": [
+        "BR3-122/4",
+        "LC3-122/4",
+        "LC3_122/4",
+        "บร3-122/4",
+        "บร.3-122/4",
+        "122/4"
+      ],
+      "name_th": "ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-1",
+      "x": 544,
+      "y": 442,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 122/4 — ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 14,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-2",
+          "walk_hops": 8,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_122/4",
+        "node_type": "room",
+        "x": 504,
+        "y": 402,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R122-5",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-122/5",
+      "aliases": [
+        "BR3-122/5",
+        "LC3-122/5",
+        "LC3_122/5",
+        "บร3-122/5",
+        "บร.3-122/5",
+        "122/5"
+      ],
+      "name_th": "ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-1",
+      "x": 568,
+      "y": 462,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 122/5 — ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 14,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-2",
+          "walk_hops": 8,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_122/5",
+        "node_type": "room",
+        "x": 528,
+        "y": 422,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R122-6",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-122/6",
+      "aliases": [
+        "BR3-122/6",
+        "LC3-122/6",
+        "LC3_122/6",
+        "บร3-122/6",
+        "บร.3-122/6",
+        "122/6"
+      ],
+      "name_th": "ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-1",
+      "x": 594,
+      "y": 443,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 122/6 — ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 13,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-2",
+          "walk_hops": 7,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_122/6",
+        "node_type": "room",
+        "x": 554,
+        "y": 403,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R123",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-123",
+      "aliases": [
+        "BR3-123",
+        "LC3-123",
+        "LC3_123",
+        "บร3-123",
+        "บร.3-123",
+        "123"
+      ],
+      "name_th": "ห้องพักอาจารย์ (ฟิสิกส์)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-1",
+      "x": 885,
+      "y": 484,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 123 — ห้องพักอาจารย์ (ฟิสิกส์)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 8,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-3",
+          "walk_hops": 7,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_123",
+        "node_type": "room",
+        "x": 845,
+        "y": 444,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R123-1",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-123/1",
+      "aliases": [
+        "BR3-123/1",
+        "LC3-123/1",
+        "LC3_123/1",
+        "บร3-123/1",
+        "บร.3-123/1",
+        "123/1"
+      ],
+      "name_th": "ห้องพักอาจารย์ (ฟิสิกส์)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-1",
+      "x": 887,
+      "y": 548,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 123/1 — ห้องพักอาจารย์ (ฟิสิกส์)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 9,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-3",
+          "walk_hops": 8,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_123/1",
+        "node_type": "room",
+        "x": 847,
+        "y": 508,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R124-1",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-124/1",
+      "aliases": [
+        "BR3-124/1",
+        "LC3-124/1",
+        "LC3_124/1",
+        "บร3-124/1",
+        "บร.3-124/1",
+        "124/1"
+      ],
+      "name_th": "ห้องวิจัยพลาสมาและนิวเคลียร์ฟิวชัน",
+      "category": "research_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 954,
+      "y": 533,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 124/1 — ห้องวิจัยพลาสมาและนิวเคลียร์ฟิวชัน",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 9,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-3",
+          "walk_hops": 8,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_124/1",
+        "node_type": "room",
+        "x": 914,
+        "y": 493,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R124-2",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-124/2",
+      "aliases": [
+        "BR3-124/2",
+        "LC3-124/2",
+        "LC3_124/2",
+        "บร3-124/2",
+        "บร.3-124/2",
+        "124/2"
+      ],
+      "name_th": "ห้องวิจัยพลาสมาและนิวเคลียร์ฟิวชัน",
+      "category": "research_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 954,
+      "y": 466,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 124/2 — ห้องวิจัยพลาสมาและนิวเคลียร์ฟิวชัน",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 8,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-3",
+          "walk_hops": 7,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_124/2",
+        "node_type": "room",
+        "x": 914,
+        "y": 426,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R125",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-125",
+      "aliases": [
+        "BR3-125",
+        "LC3-125",
+        "LC3_125",
+        "บร3-125",
+        "บร.3-125",
+        "125"
+      ],
+      "name_th": "",
+      "category": "unknown",
+      "map_asset_id": "br3-floor-1",
+      "x": 1037,
+      "y": 668,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 125",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 12,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-3",
+          "walk_hops": 11,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_125",
+        "node_type": "room",
+        "x": 997,
+        "y": 628,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "pending_survey",
+        "category": "pending_survey",
+        "coordinates": "svg_verified",
+        "detail_th": "pending_survey",
+        "landmarks": "pending_survey"
+      },
+      "flags": [
+        "needs_field_validation"
+      ]
+    },
+    {
+      "location_id": "BR3-F1-R125-1",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-125/1",
+      "aliases": [
+        "BR3-125/1",
+        "LC3-125/1",
+        "LC3_125/1",
+        "บร3-125/1",
+        "บร.3-125/1",
+        "125/1"
+      ],
+      "name_th": "ห้องเก็บของ",
+      "category": "storage",
+      "map_asset_id": "br3-floor-1",
+      "x": 1038,
+      "y": 633,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 125/1 — ห้องเก็บของ",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 13,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-3",
+          "walk_hops": 12,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_125/1",
+        "node_type": "room",
+        "x": 998,
+        "y": 593,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R126",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-126",
+      "aliases": [
+        "BR3-126",
+        "LC3-126",
+        "LC3_126",
+        "บร3-126",
+        "บร.3-126",
+        "126"
+      ],
+      "name_th": "",
+      "category": "unknown",
+      "map_asset_id": "br3-floor-1",
+      "x": 1127,
+      "y": 668,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 126",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 12,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-3",
+          "walk_hops": 11,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_126",
+        "node_type": "room",
+        "x": 1087,
+        "y": 628,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "pending_survey",
+        "category": "pending_survey",
+        "coordinates": "svg_verified",
+        "detail_th": "pending_survey",
+        "landmarks": "pending_survey"
+      },
+      "flags": [
+        "needs_field_validation"
+      ]
+    },
+    {
+      "location_id": "BR3-F1-R127",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-127",
+      "aliases": [
+        "BR3-127",
+        "LC3-127",
+        "LC3_127",
+        "บร3-127",
+        "บร.3-127",
+        "127"
+      ],
+      "name_th": "ห้องพักอาจารย์ (ฟิสิกส์)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-1",
+      "x": 1051,
+      "y": 517,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 127 — ห้องพักอาจารย์ (ฟิสิกส์)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 10,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-3",
+          "walk_hops": 9,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_127",
+        "node_type": "room",
+        "x": 1011,
+        "y": 477,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R128",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-128",
+      "aliases": [
+        "BR3-128",
+        "LC3-128",
+        "LC3_128",
+        "บร3-128",
+        "บร.3-128",
+        "128"
+      ],
+      "name_th": "ห้องปฏิบัติการอิเล็กทรอนิกส์",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-1",
+      "x": 1092,
+      "y": 516,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 128 — ห้องปฏิบัติการอิเล็กทรอนิกส์",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 12,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-3",
+          "walk_hops": 11,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_128",
+        "node_type": "room",
+        "x": 1052,
+        "y": 476,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R129",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-129",
+      "aliases": [
+        "BR3-129",
+        "LC3-129",
+        "LC3_129",
+        "บร3-129",
+        "บร.3-129",
+        "129"
+      ],
+      "name_th": "ห้องปฏิบัติการอิเล็กทรอนิกส์",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-1",
+      "x": 1136,
+      "y": 516,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 129 — ห้องปฏิบัติการอิเล็กทรอนิกส์",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 13,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-3",
+          "walk_hops": 12,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_129",
+        "node_type": "room",
+        "x": 1096,
+        "y": 476,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R130",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-130",
+      "aliases": [
+        "BR3-130",
+        "LC3-130",
+        "LC3_130",
+        "บร3-130",
+        "บร.3-130",
+        "130"
+      ],
+      "name_th": "ห้องเก็บของ",
+      "category": "storage",
+      "map_asset_id": "br3-floor-1",
+      "x": 1083,
+      "y": 376,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 130 — ห้องเก็บของ",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRMTOILET",
+          "walk_hops": 3,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-3",
+          "walk_hops": 5,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_130",
+        "node_type": "room",
+        "x": 1043,
+        "y": 336,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R131",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-131",
+      "aliases": [
+        "BR3-131",
+        "LC3-131",
+        "LC3_131",
+        "บร3-131",
+        "บร.3-131",
+        "131"
+      ],
+      "name_th": "ห้องเก็บของ",
+      "category": "storage",
+      "map_asset_id": "br3-floor-1",
+      "x": 1103,
+      "y": 377,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 131 — ห้องเก็บของ",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRMTOILET",
+          "walk_hops": 2,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-3",
+          "walk_hops": 6,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_131",
+        "node_type": "room",
+        "x": 1063,
+        "y": 337,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R132",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-132",
+      "aliases": [
+        "BR3-132",
+        "LC3-132",
+        "LC3_132",
+        "บร3-132",
+        "บร.3-132",
+        "132"
+      ],
+      "name_th": "ห้องควบคุมไฟฟ้า",
+      "category": "utility",
+      "map_asset_id": "br3-floor-1",
+      "x": 1138,
+      "y": 404,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 132 — ห้องควบคุมไฟฟ้า",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRMTOILET",
+          "walk_hops": 7,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-3",
+          "walk_hops": 7,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_132",
+        "node_type": "room",
+        "x": 1098,
+        "y": 364,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R135",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-135",
+      "aliases": [
+        "BR3-135",
+        "LC3-135",
+        "LC3_135",
+        "บร3-135",
+        "บร.3-135",
+        "135"
+      ],
+      "name_th": "",
+      "category": "unknown",
+      "map_asset_id": "br3-floor-1",
+      "x": 1129,
+      "y": 213,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 135",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 3,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-3",
+          "walk_hops": 4,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_135",
+        "node_type": "room",
+        "x": 1089,
+        "y": 173,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "pending_survey",
+        "category": "pending_survey",
+        "coordinates": "svg_verified",
+        "detail_th": "pending_survey",
+        "landmarks": "pending_survey"
+      },
+      "flags": [
+        "needs_field_validation"
+      ]
+    },
+    {
+      "location_id": "BR3-F1-R136",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-136",
+      "aliases": [
+        "BR3-136",
+        "LC3-136",
+        "LC3_136",
+        "บร3-136",
+        "บร.3-136",
+        "136"
+      ],
+      "name_th": "ห้องพักอาจารย์ (ฟิสิกส์)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-1",
+      "x": 1060,
+      "y": 94,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 136 — ห้องพักอาจารย์ (ฟิสิกส์)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 4,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-3",
+          "walk_hops": 5,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_136",
+        "node_type": "room",
+        "x": 1020,
+        "y": 54,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R137-1",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-137/1",
+      "aliases": [
+        "BR3-137/1",
+        "LC3-137/1",
+        "LC3_137/1",
+        "บร3-137/1",
+        "บร.3-137/1",
+        "137/1"
+      ],
+      "name_th": "ห้องวิจัยฟิสิกส์",
+      "category": "research_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 1016,
+      "y": 103,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 137/1 — ห้องวิจัยฟิสิกส์",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 5,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-3",
+          "walk_hops": 6,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_137/1",
+        "node_type": "room",
+        "x": 976,
+        "y": 63,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R137-2",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-137/2",
+      "aliases": [
+        "BR3-137/2",
+        "LC3-137/2",
+        "LC3_137/2",
+        "บร3-137/2",
+        "บร.3-137/2",
+        "137/2"
+      ],
+      "name_th": "ห้องวิจัยฟิสิกส์",
+      "category": "research_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 954,
+      "y": 103,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 137/2 — ห้องวิจัยฟิสิกส์",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 6,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-3",
+          "walk_hops": 5,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_137/2",
+        "node_type": "room",
+        "x": 914,
+        "y": 63,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R137-3",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-137/3",
+      "aliases": [
+        "BR3-137/3",
+        "LC3-137/3",
+        "LC3_137/3",
+        "บร3-137/3",
+        "บร.3-137/3",
+        "137/3"
+      ],
+      "name_th": "ห้องวิจัยฟิสิกส์",
+      "category": "research_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 886,
+      "y": 103,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 137/3 — ห้องวิจัยฟิสิกส์",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 7,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-3",
+          "walk_hops": 6,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_137/3",
+        "node_type": "room",
+        "x": 846,
+        "y": 63,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R138",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-138",
+      "aliases": [
+        "BR3-138",
+        "LC3-138",
+        "LC3_138",
+        "บร3-138",
+        "บร.3-138",
+        "138"
+      ],
+      "name_th": "ห้องพักอาจารย์ (ฟิสิกส์)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-1",
+      "x": 833,
+      "y": 102,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 138 — ห้องพักอาจารย์ (ฟิสิกส์)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 8,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-3",
+          "walk_hops": 7,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_138",
+        "node_type": "room",
+        "x": 793,
+        "y": 62,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R139",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-139",
+      "aliases": [
+        "BR3-139",
+        "LC3-139",
+        "LC3_139",
+        "บร3-139",
+        "บร.3-139",
+        "139"
+      ],
+      "name_th": "ห้องวิจัยฟิสิกส์",
+      "category": "research_room",
+      "map_asset_id": "br3-floor-1",
+      "x": 802,
+      "y": 87,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 139 — ห้องวิจัยฟิสิกส์",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 10,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-3",
+          "walk_hops": 9,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_139",
+        "node_type": "room",
+        "x": 762,
+        "y": 47,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R140",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-140",
+      "aliases": [
+        "BR3-140",
+        "LC3-140",
+        "LC3_140",
+        "บร3-140",
+        "บร.3-140",
+        "140"
+      ],
+      "name_th": "ห้องปฏิบัติการอิเล็กทรอนิกส์",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-1",
+      "x": 780,
+      "y": 134,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 140 — ห้องปฏิบัติการอิเล็กทรอนิกส์",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 10,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-3",
+          "walk_hops": 9,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_140",
+        "node_type": "room",
+        "x": 740,
+        "y": 94,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F1-R141",
+      "building_code": "BR3",
+      "floor": 1,
+      "location_kind": "room",
+      "room_code": "BR3-141",
+      "aliases": [
+        "BR3-141",
+        "LC3-141",
+        "LC3_141",
+        "บร3-141",
+        "บร.3-141",
+        "141"
+      ],
+      "name_th": "ห้องปฏิบัติการอิเล็กทรอนิกส์",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-1",
+      "x": 721,
+      "y": 209,
+      "detail_th": "อาคาร บร.3 ชั้น 1 ห้อง 141 — ห้องปฏิบัติการอิเล็กทรอนิกส์",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F1-PRFTOILET",
+          "walk_hops": 9,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F1-PSTAIR-3",
+          "walk_hops": 8,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_141",
+        "node_type": "room",
+        "x": 681,
+        "y": 169,
+        "translation": {
+          "dx": 40,
+          "dy": 40
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-PSTAIR-1",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "poi",
+      "room_code": "",
+      "aliases": [],
+      "name_th": "บันได 1",
+      "category": "stairs",
+      "map_asset_id": "br3-floor-2",
+      "x": 89,
+      "y": 303,
+      "detail_th": "อาคาร บร.3 ชั้น 2 บันได 1",
+      "landmarks": [],
+      "source": {
+        "node_id": "LC3_F2_stair-1",
+        "node_type": "stairs",
+        "x": 91,
+        "y": 340,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "inferred",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-PSTAIR-2",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "poi",
+      "room_code": "",
+      "aliases": [],
+      "name_th": "บันได 2",
+      "category": "stairs",
+      "map_asset_id": "br3-floor-2",
+      "x": 529,
+      "y": 228,
+      "detail_th": "อาคาร บร.3 ชั้น 2 บันได 2",
+      "landmarks": [],
+      "source": {
+        "node_id": "LC3_F2_stair-2",
+        "node_type": "stairs",
+        "x": 531,
+        "y": 265,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "inferred",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-PSTAIR-3",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "poi",
+      "room_code": "",
+      "aliases": [],
+      "name_th": "บันได 3",
+      "category": "stairs",
+      "map_asset_id": "br3-floor-2",
+      "x": 984,
+      "y": 316,
+      "detail_th": "อาคาร บร.3 ชั้น 2 บันได 3",
+      "landmarks": [],
+      "source": {
+        "node_id": "LC3_F2_stair-3",
+        "node_type": "stairs",
+        "x": 986,
+        "y": 353,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "inferred",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-PLFTL",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "poi",
+      "room_code": "",
+      "aliases": [],
+      "name_th": "ห้องน้ำหญิง (ฝั่งซ้าย)",
+      "category": "toilet",
+      "map_asset_id": "br3-floor-2",
+      "x": 31,
+      "y": 337,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้องน้ำหญิง (ฝั่งซ้าย)",
+      "landmarks": [],
+      "source": {
+        "node_id": "LC3_LFTL",
+        "node_type": "facility",
+        "x": 33,
+        "y": 374,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "inferred",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-PLMTL",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "poi",
+      "room_code": "",
+      "aliases": [],
+      "name_th": "ห้องน้ำชาย (ฝั่งซ้าย)",
+      "category": "toilet",
+      "map_asset_id": "br3-floor-2",
+      "x": 31,
+      "y": 281,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้องน้ำชาย (ฝั่งซ้าย)",
+      "landmarks": [],
+      "source": {
+        "node_id": "LC3_LMTL",
+        "node_type": "facility",
+        "x": 33,
+        "y": 318,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "inferred",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-PRFTL",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "poi",
+      "room_code": "",
+      "aliases": [],
+      "name_th": "ห้องน้ำหญิง (ฝั่งขวา)",
+      "category": "toilet",
+      "map_asset_id": "br3-floor-2",
+      "x": 1021,
+      "y": 283,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้องน้ำหญิง (ฝั่งขวา)",
+      "landmarks": [],
+      "source": {
+        "node_id": "LC3_RFTL",
+        "node_type": "facility",
+        "x": 1023,
+        "y": 320,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "inferred",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-PRMTL",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "poi",
+      "room_code": "",
+      "aliases": [],
+      "name_th": "ห้องน้ำชาย (ฝั่งขวา)",
+      "category": "toilet",
+      "map_asset_id": "br3-floor-2",
+      "x": 1022,
+      "y": 335,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้องน้ำชาย (ฝั่งขวา)",
+      "landmarks": [],
+      "source": {
+        "node_id": "LC3_RMTL",
+        "node_type": "facility",
+        "x": 1024,
+        "y": 372,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "inferred",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R201",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-201",
+      "aliases": [
+        "BR3-201",
+        "LC3-201",
+        "LC3_201",
+        "บร3-201",
+        "บร.3-201",
+        "201"
+      ],
+      "name_th": "ห้องสำนักงานภาควิชาคณิตศาสตร์และสถิติ",
+      "category": "department_office",
+      "map_asset_id": "br3-floor-2",
+      "x": 452,
+      "y": 245,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 201 — ห้องสำนักงานภาควิชาคณิตศาสตร์และสถิติ",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PLFTL",
+          "walk_hops": 7,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-2",
+          "walk_hops": 5,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_201",
+        "node_type": "room",
+        "x": 454,
+        "y": 282,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R203",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-203",
+      "aliases": [
+        "BR3-203",
+        "LC3-203",
+        "LC3_203",
+        "บร3-203",
+        "บร.3-203",
+        "203"
+      ],
+      "name_th": "ห้องปฏิบัติการระบบบำบัดน้ำเสีย",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-2",
+      "x": 419,
+      "y": 168,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 203 — ห้องปฏิบัติการระบบบำบัดน้ำเสีย",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PLFTL",
+          "walk_hops": 9,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-2",
+          "walk_hops": 5,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_203",
+        "node_type": "room",
+        "x": 421,
+        "y": 205,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R204",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-204",
+      "aliases": [
+        "BR3-204",
+        "LC3-204",
+        "LC3_204",
+        "บร3-204",
+        "บร.3-204",
+        "204"
+      ],
+      "name_th": "ห้องเตรียมปฏิบัติการระบบบำบัดน้ำเสีย",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-2",
+      "x": 419,
+      "y": 29,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 204 — ห้องเตรียมปฏิบัติการระบบบำบัดน้ำเสีย",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PLFTL",
+          "walk_hops": 10,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-2",
+          "walk_hops": 6,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_204",
+        "node_type": "room",
+        "x": 421,
+        "y": 66,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R205",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-205",
+      "aliases": [
+        "BR3-205",
+        "LC3-205",
+        "LC3_205",
+        "บร3-205",
+        "บร.3-205",
+        "205"
+      ],
+      "name_th": "ห้องปฏิบัติการนิเวศวิทยาและสิ่งแวดล้อมศิลปกรรม",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-2",
+      "x": 332,
+      "y": 114,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 205 — ห้องปฏิบัติการนิเวศวิทยาและสิ่งแวดล้อมศิลปกรรม",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PLMTL",
+          "walk_hops": 8,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-2",
+          "walk_hops": 8,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_205",
+        "node_type": "room",
+        "x": 334,
+        "y": 151,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R206",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-206",
+      "aliases": [
+        "BR3-206",
+        "LC3-206",
+        "LC3_206",
+        "บร3-206",
+        "บร.3-206",
+        "206"
+      ],
+      "name_th": "ห้องปฏิบัติการนิเวศวิทยาทางทะเล ชายฝั่ง และน้ำกร่อย",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-2",
+      "x": 300,
+      "y": 106,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 206 — ห้องปฏิบัติการนิเวศวิทยาทางทะเล ชายฝั่ง และน้ำกร่อย",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PLMTL",
+          "walk_hops": 7,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-1",
+          "walk_hops": 8,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_206",
+        "node_type": "room",
+        "x": 302,
+        "y": 143,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R207",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-207",
+      "aliases": [
+        "BR3-207",
+        "LC3-207",
+        "LC3_207",
+        "บร3-207",
+        "บร.3-207",
+        "207"
+      ],
+      "name_th": "ห้องเตรียมปฏิบัติการด้านชีววิทยาทางทะเล",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-2",
+      "x": 202,
+      "y": 106,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 207 — ห้องเตรียมปฏิบัติการด้านชีววิทยาทางทะเล",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PLMTL",
+          "walk_hops": 7,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-1",
+          "walk_hops": 8,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_207",
+        "node_type": "room",
+        "x": 204,
+        "y": 143,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R208",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-208",
+      "aliases": [
+        "BR3-208",
+        "LC3-208",
+        "LC3_208",
+        "บร3-208",
+        "บร.3-208",
+        "208"
+      ],
+      "name_th": "ห้องปฏิบัติการด้านชีววิทยาทางทะเล",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-2",
+      "x": 175,
+      "y": 106,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 208 — ห้องปฏิบัติการด้านชีววิทยาทางทะเล",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PLMTL",
+          "walk_hops": 6,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-1",
+          "walk_hops": 7,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_208",
+        "node_type": "room",
+        "x": 177,
+        "y": 143,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R209",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-209",
+      "aliases": [
+        "BR3-209",
+        "LC3-209",
+        "LC3_209",
+        "บร3-209",
+        "บร.3-209",
+        "209"
+      ],
+      "name_th": "ห้องปฏิบัติการวิทยาศาสตร์สิ่งแวดล้อมทางดิน",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-2",
+      "x": 86,
+      "y": 107,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 209 — ห้องปฏิบัติการวิทยาศาสตร์สิ่งแวดล้อมทางดิน",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PLMTL",
+          "walk_hops": 6,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-1",
+          "walk_hops": 7,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_209",
+        "node_type": "room",
+        "x": 88,
+        "y": 144,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R210-1",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-210/1",
+      "aliases": [
+        "BR3-210/1",
+        "LC3-210/1",
+        "LC3_210/1",
+        "บร3-210/1",
+        "บร.3-210/1",
+        "210/1"
+      ],
+      "name_th": "",
+      "category": "unknown",
+      "map_asset_id": "br3-floor-2",
+      "x": 52,
+      "y": 136,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 210/1",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PLMTL",
+          "walk_hops": 5,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-1",
+          "walk_hops": 6,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_210/1",
+        "node_type": "room",
+        "x": 54,
+        "y": 173,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "pending_survey",
+        "category": "pending_survey",
+        "coordinates": "svg_verified",
+        "detail_th": "pending_survey",
+        "landmarks": "pending_survey"
+      },
+      "flags": [
+        "needs_field_validation"
+      ]
+    },
+    {
+      "location_id": "BR3-F2-R211-1",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-211/1",
+      "aliases": [
+        "BR3-211/1",
+        "LC3-211/1",
+        "LC3_211/1",
+        "บร3-211/1",
+        "บร.3-211/1",
+        "211/1"
+      ],
+      "name_th": "",
+      "category": "unknown",
+      "map_asset_id": "br3-floor-2",
+      "x": 16,
+      "y": 136,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 211/1",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PLMTL",
+          "walk_hops": 6,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-1",
+          "walk_hops": 7,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_211/1",
+        "node_type": "room",
+        "x": 18,
+        "y": 173,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "pending_survey",
+        "category": "pending_survey",
+        "coordinates": "svg_verified",
+        "detail_th": "pending_survey",
+        "landmarks": "pending_survey"
+      },
+      "flags": [
+        "needs_field_validation"
+      ]
+    },
+    {
+      "location_id": "BR3-F2-R211-2",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-211/2",
+      "aliases": [
+        "BR3-211/2",
+        "LC3-211/2",
+        "LC3_211/2",
+        "บร3-211/2",
+        "บร.3-211/2",
+        "211/2"
+      ],
+      "name_th": "",
+      "category": "unknown",
+      "map_asset_id": "br3-floor-2",
+      "x": 23,
+      "y": 154,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 211/2",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PLMTL",
+          "walk_hops": 5,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-1",
+          "walk_hops": 6,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_211/2",
+        "node_type": "room",
+        "x": 25,
+        "y": 191,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "pending_survey",
+        "category": "pending_survey",
+        "coordinates": "svg_verified",
+        "detail_th": "pending_survey",
+        "landmarks": "pending_survey"
+      },
+      "flags": [
+        "needs_field_validation"
+      ]
+    },
+    {
+      "location_id": "BR3-F2-R212",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-212",
+      "aliases": [
+        "BR3-212",
+        "LC3-212",
+        "LC3_212",
+        "บร3-212",
+        "บร.3-212",
+        "212"
+      ],
+      "name_th": "ห้องเตรียมปฏิบัติการวิเคราะห์คุณภาพน้ำจืด",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-2",
+      "x": 86,
+      "y": 161,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 212 — ห้องเตรียมปฏิบัติการวิเคราะห์คุณภาพน้ำจืด",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PLMTL",
+          "walk_hops": 4,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-1",
+          "walk_hops": 5,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_212",
+        "node_type": "room",
+        "x": 88,
+        "y": 198,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R213",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-213",
+      "aliases": [
+        "BR3-213",
+        "LC3-213",
+        "LC3_213",
+        "บร3-213",
+        "บร.3-213",
+        "213"
+      ],
+      "name_th": "ห้องปฏิบัติการวิเคราะห์คุณภาพน้ำจืด",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-2",
+      "x": 52,
+      "y": 185,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 213 — ห้องปฏิบัติการวิเคราะห์คุณภาพน้ำจืด",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PLMTL",
+          "walk_hops": 3,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-1",
+          "walk_hops": 4,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_213",
+        "node_type": "room",
+        "x": 54,
+        "y": 222,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R217",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-217",
+      "aliases": [
+        "BR3-217",
+        "LC3-217",
+        "LC3_217",
+        "บร3-217",
+        "บร.3-217",
+        "217"
+      ],
+      "name_th": "ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ และภาคอื่นๆ)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-2",
+      "x": 69,
+      "y": 414,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 217 — ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ และภาคอื่นๆ)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PLFTL",
+          "walk_hops": 3,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-1",
+          "walk_hops": 4,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_217",
+        "node_type": "room",
+        "x": 71,
+        "y": 451,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R220",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-220",
+      "aliases": [
+        "BR3-220",
+        "LC3-220",
+        "LC3_220",
+        "บร3-220",
+        "บร.3-220",
+        "220"
+      ],
+      "name_th": "ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-2",
+      "x": 342,
+      "y": 430,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 220 — ห้องพักอาจารย์ (คณิตศาสตร์และสถิติ)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PLFTL",
+          "walk_hops": 4,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-1",
+          "walk_hops": 5,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_220",
+        "node_type": "room",
+        "x": 344,
+        "y": 467,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R221",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-221",
+      "aliases": [
+        "BR3-221",
+        "LC3-221",
+        "LC3_221",
+        "บร3-221",
+        "บร.3-221",
+        "221"
+      ],
+      "name_th": "ห้องพักนักศึกษาระดับบัณฑิตศึกษา (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "category": "student_room",
+      "map_asset_id": "br3-floor-2",
+      "x": 450,
+      "y": 431,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 221 — ห้องพักนักศึกษาระดับบัณฑิตศึกษา (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PLFTL",
+          "walk_hops": 5,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-1",
+          "walk_hops": 6,
+          "text_th": "ใกล้บันได 1",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_221",
+        "node_type": "room",
+        "x": 452,
+        "y": 468,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R222",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-222",
+      "aliases": [
+        "BR3-222",
+        "LC3-222",
+        "LC3_222",
+        "บร3-222",
+        "บร.3-222",
+        "222"
+      ],
+      "name_th": "ห้องปฏิบัติการทางคณิตศาสตร์และสถิติ",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-2",
+      "x": 611,
+      "y": 436,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 222 — ห้องปฏิบัติการทางคณิตศาสตร์และสถิติ",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PLFTL",
+          "walk_hops": 8,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-2",
+          "walk_hops": 7,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_222",
+        "node_type": "room",
+        "x": 613,
+        "y": 473,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R223-1",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-223/1",
+      "aliases": [
+        "BR3-223/1",
+        "LC3-223/1",
+        "LC3_223/1",
+        "บร3-223/1",
+        "บร.3-223/1",
+        "223/1"
+      ],
+      "name_th": "ห้องพักอาจารย์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-2",
+      "x": 649,
+      "y": 439,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 223/1 — ห้องพักอาจารย์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRMTL",
+          "walk_hops": 11,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 11,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_223/1",
+        "node_type": "room",
+        "x": 651,
+        "y": 476,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R223-2",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-223/2",
+      "aliases": [
+        "BR3-223/2",
+        "LC3-223/2",
+        "LC3_223/2",
+        "บร3-223/2",
+        "บร.3-223/2",
+        "223/2"
+      ],
+      "name_th": "ห้องพักอาจารย์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-2",
+      "x": 649,
+      "y": 465,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 223/2 — ห้องพักอาจารย์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRMTL",
+          "walk_hops": 10,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 10,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_223/2",
+        "node_type": "room",
+        "x": 651,
+        "y": 502,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R223-3",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-223/3",
+      "aliases": [
+        "BR3-223/3",
+        "LC3-223/3",
+        "LC3_223/3",
+        "บร3-223/3",
+        "บร.3-223/3",
+        "223/3"
+      ],
+      "name_th": "ห้องพักอาจารย์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-2",
+      "x": 648,
+      "y": 490,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 223/3 — ห้องพักอาจารย์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRMTL",
+          "walk_hops": 11,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 11,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_223/3",
+        "node_type": "room",
+        "x": 650,
+        "y": 527,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R223-4",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-223/4",
+      "aliases": [
+        "BR3-223/4",
+        "LC3-223/4",
+        "LC3_223/4",
+        "บร3-223/4",
+        "บร.3-223/4",
+        "223/4"
+      ],
+      "name_th": "ห้องพักอาจารย์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-2",
+      "x": 648,
+      "y": 518,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 223/4 — ห้องพักอาจารย์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRMTL",
+          "walk_hops": 12,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 12,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_223/4",
+        "node_type": "room",
+        "x": 650,
+        "y": 555,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R223-5",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-223/5",
+      "aliases": [
+        "BR3-223/5",
+        "LC3-223/5",
+        "LC3_223/5",
+        "บร3-223/5",
+        "บร.3-223/5",
+        "223/5"
+      ],
+      "name_th": "ห้องพักอาจารย์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-2",
+      "x": 682,
+      "y": 490,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 223/5 — ห้องพักอาจารย์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRMTL",
+          "walk_hops": 11,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 11,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_223/5",
+        "node_type": "room",
+        "x": 684,
+        "y": 527,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R223-6",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-223/6",
+      "aliases": [
+        "BR3-223/6",
+        "LC3-223/6",
+        "LC3_223/6",
+        "บร3-223/6",
+        "บร.3-223/6",
+        "223/6"
+      ],
+      "name_th": "ห้องพักอาจารย์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-2",
+      "x": 681,
+      "y": 518,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 223/6 — ห้องพักอาจารย์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRMTL",
+          "walk_hops": 12,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 12,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_223/6",
+        "node_type": "room",
+        "x": 683,
+        "y": 555,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R223-7",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-223/7",
+      "aliases": [
+        "BR3-223/7",
+        "LC3-223/7",
+        "LC3_223/7",
+        "บร3-223/7",
+        "บร.3-223/7",
+        "223/7"
+      ],
+      "name_th": "ห้องพักอาจารย์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-2",
+      "x": 733,
+      "y": 490,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 223/7 — ห้องพักอาจารย์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRMTL",
+          "walk_hops": 11,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 11,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_223/7",
+        "node_type": "room",
+        "x": 735,
+        "y": 527,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R223-8",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-223/8",
+      "aliases": [
+        "BR3-223/8",
+        "LC3-223/8",
+        "LC3_223/8",
+        "บร3-223/8",
+        "บร.3-223/8",
+        "223/8"
+      ],
+      "name_th": "ห้องพักอาจารย์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-2",
+      "x": 730,
+      "y": 519,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 223/8 — ห้องพักอาจารย์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRMTL",
+          "walk_hops": 12,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 12,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_223/8",
+        "node_type": "room",
+        "x": 732,
+        "y": 556,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R223-9",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-223/9",
+      "aliases": [
+        "BR3-223/9",
+        "LC3-223/9",
+        "LC3_223/9",
+        "บร3-223/9",
+        "บร.3-223/9",
+        "223/9"
+      ],
+      "name_th": "ห้องพักอาจารย์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-2",
+      "x": 764,
+      "y": 438,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 223/9 — ห้องพักอาจารย์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRMTL",
+          "walk_hops": 11,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 11,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_223/9",
+        "node_type": "room",
+        "x": 766,
+        "y": 475,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R223-10",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-223/10",
+      "aliases": [
+        "BR3-223/10",
+        "LC3-223/10",
+        "LC3_223/10",
+        "บร3-223/10",
+        "บร.3-223/10",
+        "223/10"
+      ],
+      "name_th": "ห้องพักอาจารย์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-2",
+      "x": 765,
+      "y": 465,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 223/10 — ห้องพักอาจารย์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRMTL",
+          "walk_hops": 10,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 10,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_223/10",
+        "node_type": "room",
+        "x": 767,
+        "y": 502,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R223-11",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-223/11",
+      "aliases": [
+        "BR3-223/11",
+        "LC3-223/11",
+        "LC3_223/11",
+        "บร3-223/11",
+        "บร.3-223/11",
+        "223/11"
+      ],
+      "name_th": "ห้องพักอาจารย์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-2",
+      "x": 766,
+      "y": 490,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 223/11 — ห้องพักอาจารย์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRMTL",
+          "walk_hops": 11,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 11,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_223/11",
+        "node_type": "room",
+        "x": 768,
+        "y": 527,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R223-12",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-223/12",
+      "aliases": [
+        "BR3-223/12",
+        "LC3-223/12",
+        "LC3_223/12",
+        "บร3-223/12",
+        "บร.3-223/12",
+        "223/12"
+      ],
+      "name_th": "ห้องพักอาจารย์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-2",
+      "x": 767,
+      "y": 519,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 223/12 — ห้องพักอาจารย์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRMTL",
+          "walk_hops": 12,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 12,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_223/12",
+        "node_type": "room",
+        "x": 769,
+        "y": 556,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R224",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-224",
+      "aliases": [
+        "BR3-224",
+        "LC3-224",
+        "LC3_224",
+        "บร3-224",
+        "บร.3-224",
+        "224"
+      ],
+      "name_th": "ห้องปฏิบัติการคอมพิวเตอร์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-2",
+      "x": 686,
+      "y": 465,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 224 — ห้องปฏิบัติการคอมพิวเตอร์ (วิทยาศาสตร์สิ่งแวดล้อม)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRMTL",
+          "walk_hops": 8,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 8,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_224",
+        "node_type": "room",
+        "x": 688,
+        "y": 502,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R225",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-225",
+      "aliases": [
+        "BR3-225",
+        "LC3-225",
+        "LC3_225",
+        "บร3-225",
+        "บร.3-225",
+        "225"
+      ],
+      "name_th": "ห้องประชุมภาควิชาคณิตศาสตร์และสถิติ",
+      "category": "meeting_room",
+      "map_asset_id": "br3-floor-2",
+      "x": 805,
+      "y": 434,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 225 — ห้องประชุมภาควิชาคณิตศาสตร์และสถิติ",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRMTL",
+          "walk_hops": 7,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 7,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_225",
+        "node_type": "room",
+        "x": 807,
+        "y": 471,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R226-1",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-226/1",
+      "aliases": [
+        "BR3-226/1",
+        "LC3-226/1",
+        "LC3_226/1",
+        "บร3-226/1",
+        "บร.3-226/1",
+        "226/1"
+      ],
+      "name_th": "ห้องควบคุม",
+      "category": "utility",
+      "map_asset_id": "br3-floor-2",
+      "x": 866,
+      "y": 458,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 226/1 — ห้องควบคุม",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRMTL",
+          "walk_hops": 8,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 8,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_226/1",
+        "node_type": "room",
+        "x": 868,
+        "y": 495,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R226-2",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-226/2",
+      "aliases": [
+        "BR3-226/2",
+        "LC3-226/2",
+        "LC3_226/2",
+        "บร3-226/2",
+        "บร.3-226/2",
+        "226/2"
+      ],
+      "name_th": "ห้องควบคุม",
+      "category": "utility",
+      "map_asset_id": "br3-floor-2",
+      "x": 879,
+      "y": 434,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 226/2 — ห้องควบคุม",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRMTL",
+          "walk_hops": 6,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 6,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_226/2",
+        "node_type": "room",
+        "x": 881,
+        "y": 471,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R227",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-227",
+      "aliases": [
+        "BR3-227",
+        "LC3-227",
+        "LC3_227",
+        "บร3-227",
+        "บร.3-227",
+        "227"
+      ],
+      "name_th": "ห้องสัมมนาภาควิชาคณิตศาสตร์และสถิติ",
+      "category": "seminar_room",
+      "map_asset_id": "br3-floor-2",
+      "x": 943,
+      "y": 433,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 227 — ห้องสัมมนาภาควิชาคณิตศาสตร์และสถิติ",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRMTL",
+          "walk_hops": 5,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 5,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_227",
+        "node_type": "room",
+        "x": 945,
+        "y": 470,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R227-1",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-227/1",
+      "aliases": [
+        "BR3-227/1",
+        "LC3-227/1",
+        "LC3_227/1",
+        "บร3-227/1",
+        "บร.3-227/1",
+        "227/1"
+      ],
+      "name_th": "ห้องสัมมนาภาควิชาคณิตศาสตร์และสถิติ",
+      "category": "seminar_room",
+      "map_asset_id": "br3-floor-2",
+      "x": 1031,
+      "y": 432,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 227/1 — ห้องสัมมนาภาควิชาคณิตศาสตร์และสถิติ",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRMTL",
+          "walk_hops": 8,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 8,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_227/1",
+        "node_type": "room",
+        "x": 1033,
+        "y": 469,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R228",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-228",
+      "aliases": [
+        "BR3-228",
+        "LC3-228",
+        "LC3_228",
+        "บร3-228",
+        "บร.3-228",
+        "228"
+      ],
+      "name_th": "ห้องเก็บของ",
+      "category": "storage",
+      "map_asset_id": "br3-floor-2",
+      "x": 964,
+      "y": 352,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 228 — ห้องเก็บของ",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRMTL",
+          "walk_hops": 3,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 5,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_228",
+        "node_type": "room",
+        "x": 966,
+        "y": 389,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R229",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-229",
+      "aliases": [
+        "BR3-229",
+        "LC3-229",
+        "LC3_229",
+        "บร3-229",
+        "บร.3-229",
+        "229"
+      ],
+      "name_th": "ห้องเก็บของ",
+      "category": "storage",
+      "map_asset_id": "br3-floor-2",
+      "x": 980,
+      "y": 353,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 229 — ห้องเก็บของ",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRMTL",
+          "walk_hops": 2,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 6,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_229",
+        "node_type": "room",
+        "x": 982,
+        "y": 390,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R230",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-230",
+      "aliases": [
+        "BR3-230",
+        "LC3-230",
+        "LC3_230",
+        "บร3-230",
+        "บร.3-230",
+        "230"
+      ],
+      "name_th": "ห้องประชุม/บรรยาย 1",
+      "category": "lecture_room",
+      "map_asset_id": "br3-floor-2",
+      "x": 1003,
+      "y": 400,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 230 — ห้องประชุม/บรรยาย 1",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRMTL",
+          "walk_hops": 7,
+          "text_th": "ใกล้ห้องน้ำชาย (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 7,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_230",
+        "node_type": "room",
+        "x": 1005,
+        "y": 437,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R233",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-233",
+      "aliases": [
+        "BR3-233",
+        "LC3-233",
+        "LC3_233",
+        "บร3-233",
+        "บร.3-233",
+        "233"
+      ],
+      "name_th": "ห้องบรรยาย 2",
+      "category": "lecture_room",
+      "map_asset_id": "br3-floor-2",
+      "x": 965,
+      "y": 188,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 233 — ห้องบรรยาย 2",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRFTL",
+          "walk_hops": 3,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 5,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_233",
+        "node_type": "room",
+        "x": 967,
+        "y": 225,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R234",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-234",
+      "aliases": [
+        "BR3-234",
+        "LC3-234",
+        "LC3_234",
+        "บร3-234",
+        "บร.3-234",
+        "234"
+      ],
+      "name_th": "ห้องประชุม/บรรยาย 3",
+      "category": "lecture_room",
+      "map_asset_id": "br3-floor-2",
+      "x": 1045,
+      "y": 131,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 234 — ห้องประชุม/บรรยาย 3",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRFTL",
+          "walk_hops": 10,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 12,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_234",
+        "node_type": "room",
+        "x": 1047,
+        "y": 168,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R234-1",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-234/1",
+      "aliases": [
+        "BR3-234/1",
+        "LC3-234/1",
+        "LC3_234/1",
+        "บร3-234/1",
+        "บร.3-234/1",
+        "234/1"
+      ],
+      "name_th": "ห้องประชุม/บรรยาย 3",
+      "category": "lecture_room",
+      "map_asset_id": "br3-floor-2",
+      "x": 964,
+      "y": 150,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 234/1 — ห้องประชุม/บรรยาย 3",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRFTL",
+          "walk_hops": 4,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 6,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_234/1",
+        "node_type": "room",
+        "x": 966,
+        "y": 187,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R235-1",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-235/1",
+      "aliases": [
+        "BR3-235/1",
+        "LC3-235/1",
+        "LC3_235/1",
+        "บร3-235/1",
+        "บร.3-235/1",
+        "235/1"
+      ],
+      "name_th": "ห้องปฏิบัติการนิเวศวิทยาน้ำจืด",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-2",
+      "x": 1017,
+      "y": 121,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 235/1 — ห้องปฏิบัติการนิเวศวิทยาน้ำจืด",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRFTL",
+          "walk_hops": 8,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 10,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_235/1",
+        "node_type": "room",
+        "x": 1019,
+        "y": 158,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R235-2",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-235/2",
+      "aliases": [
+        "BR3-235/2",
+        "LC3-235/2",
+        "LC3_235/2",
+        "บร3-235/2",
+        "บร.3-235/2",
+        "235/2"
+      ],
+      "name_th": "ห้องปฏิบัติการนิเวศวิทยาน้ำจืด",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-2",
+      "x": 967,
+      "y": 121,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 235/2 — ห้องปฏิบัติการนิเวศวิทยาน้ำจืด",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRFTL",
+          "walk_hops": 7,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 9,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_235/2",
+        "node_type": "room",
+        "x": 969,
+        "y": 158,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R235-3",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-235/3",
+      "aliases": [
+        "BR3-235/3",
+        "LC3-235/3",
+        "LC3_235/3",
+        "บร3-235/3",
+        "บร.3-235/3",
+        "235/3"
+      ],
+      "name_th": "ห้องปฏิบัติการนิเวศวิทยาน้ำจืด",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-2",
+      "x": 967,
+      "y": 110,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 235/3 — ห้องปฏิบัติการนิเวศวิทยาน้ำจืด",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRFTL",
+          "walk_hops": 8,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 10,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_235/3",
+        "node_type": "room",
+        "x": 969,
+        "y": 147,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R236-1",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-236/1",
+      "aliases": [
+        "BR3-236/1",
+        "LC3-236/1",
+        "LC3_236/1",
+        "บร3-236/1",
+        "บร.3-236/1",
+        "236/1"
+      ],
+      "name_th": "ห้องปฏิบัติการชุมชน/เมือง",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-2",
+      "x": 871,
+      "y": 110,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 236/1 — ห้องปฏิบัติการชุมชน/เมือง",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRFTL",
+          "walk_hops": 6,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-2",
+          "walk_hops": 8,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_236/1",
+        "node_type": "room",
+        "x": 873,
+        "y": 147,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R236-2",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-236/2",
+      "aliases": [
+        "BR3-236/2",
+        "LC3-236/2",
+        "LC3_236/2",
+        "บร3-236/2",
+        "บร.3-236/2",
+        "236/2"
+      ],
+      "name_th": "ห้องสำนักงานภาควิชาวิทยาศาสตร์สิ่งแวดล้อม",
+      "category": "department_office",
+      "map_asset_id": "br3-floor-2",
+      "x": 871,
+      "y": 76,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 236/2 — ห้องสำนักงานภาควิชาวิทยาศาสตร์สิ่งแวดล้อม",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRFTL",
+          "walk_hops": 7,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-2",
+          "walk_hops": 9,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_236/2",
+        "node_type": "room",
+        "x": 873,
+        "y": 113,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R236-3",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-236/3",
+      "aliases": [
+        "BR3-236/3",
+        "LC3-236/3",
+        "LC3_236/3",
+        "บร3-236/3",
+        "บร.3-236/3",
+        "236/3"
+      ],
+      "name_th": "ห้องสำนักงานภาควิชาวิทยาศาสตร์สิ่งแวดล้อม",
+      "category": "department_office",
+      "map_asset_id": "br3-floor-2",
+      "x": 942,
+      "y": 117,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 236/3 — ห้องสำนักงานภาควิชาวิทยาศาสตร์สิ่งแวดล้อม",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRFTL",
+          "walk_hops": 6,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-3",
+          "walk_hops": 8,
+          "text_th": "ใกล้บันได 3",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_236/3",
+        "node_type": "room",
+        "x": 944,
+        "y": 154,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R237",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-237",
+      "aliases": [
+        "BR3-237",
+        "LC3-237",
+        "LC3_237",
+        "บร3-237",
+        "บร.3-237",
+        "237"
+      ],
+      "name_th": "ห้องพักอาจารย์และเตรียมปฏิบัติการนิเวศวิทยาป่าไม้",
+      "category": "faculty_office",
+      "map_asset_id": "br3-floor-2",
+      "x": 854,
+      "y": 27,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 237 — ห้องพักอาจารย์และเตรียมปฏิบัติการนิเวศวิทยาป่าไม้",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRFTL",
+          "walk_hops": 9,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-2",
+          "walk_hops": 9,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_237",
+        "node_type": "room",
+        "x": 856,
+        "y": 64,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R238",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-238",
+      "aliases": [
+        "BR3-238",
+        "LC3-238",
+        "LC3_238",
+        "บร3-238",
+        "บร.3-238",
+        "238"
+      ],
+      "name_th": "ห้องปฏิบัติการนิเวศวิทยาป่าไม้",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-2",
+      "x": 763,
+      "y": 114,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 238 — ห้องปฏิบัติการนิเวศวิทยาป่าไม้",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRFTL",
+          "walk_hops": 7,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-2",
+          "walk_hops": 7,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_238",
+        "node_type": "room",
+        "x": 765,
+        "y": 151,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R239",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-239",
+      "aliases": [
+        "BR3-239",
+        "LC3-239",
+        "LC3_239",
+        "บร3-239",
+        "บร.3-239",
+        "239"
+      ],
+      "name_th": "ห้องปฏิบัติการมลพิษทางอากาศและเสียง",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-2",
+      "x": 668,
+      "y": 28,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 239 — ห้องปฏิบัติการมลพิษทางอากาศและเสียง",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRFTL",
+          "walk_hops": 8,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-2",
+          "walk_hops": 6,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_239",
+        "node_type": "room",
+        "x": 670,
+        "y": 65,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R240",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-240",
+      "aliases": [
+        "BR3-240",
+        "LC3-240",
+        "LC3_240",
+        "บร3-240",
+        "บร.3-240",
+        "240"
+      ],
+      "name_th": "ห้องปฏิบัติการเครื่องมือวิเคราะห์โลหะหนัก (AAS)",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-2",
+      "x": 640,
+      "y": 77,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 240 — ห้องปฏิบัติการเครื่องมือวิเคราะห์โลหะหนัก (AAS)",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRFTL",
+          "walk_hops": 10,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-2",
+          "walk_hops": 5,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_240",
+        "node_type": "room",
+        "x": 642,
+        "y": 114,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R241",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-241",
+      "aliases": [
+        "BR3-241",
+        "LC3-241",
+        "LC3_241",
+        "บร3-241",
+        "บร.3-241",
+        "241"
+      ],
+      "name_th": "ห้องปฏิบัติการวิเคราะห์น้ำและน้ำเสีย",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-2",
+      "x": 640,
+      "y": 177,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 241 — ห้องปฏิบัติการวิเคราะห์น้ำและน้ำเสีย",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PRFTL",
+          "walk_hops": 10,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งขวา)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-2",
+          "walk_hops": 4,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_241",
+        "node_type": "room",
+        "x": 642,
+        "y": 214,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R243-1",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-243/1",
+      "aliases": [
+        "BR3-243/1",
+        "LC3-243/1",
+        "LC3_243/1",
+        "บร3-243/1",
+        "บร.3-243/1",
+        "243/1"
+      ],
+      "name_th": "ห้องปฏิบัติการด้านแบคทีเรีย",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-2",
+      "x": 602,
+      "y": 246,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 243/1 — ห้องปฏิบัติการด้านแบคทีเรีย",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PLFTL",
+          "walk_hops": 9,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-2",
+          "walk_hops": 4,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_243/1",
+        "node_type": "room",
+        "x": 604,
+        "y": 283,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    },
+    {
+      "location_id": "BR3-F2-R243-2",
+      "building_code": "BR3",
+      "floor": 2,
+      "location_kind": "room",
+      "room_code": "BR3-243/2",
+      "aliases": [
+        "BR3-243/2",
+        "LC3-243/2",
+        "LC3_243/2",
+        "บร3-243/2",
+        "บร.3-243/2",
+        "243/2"
+      ],
+      "name_th": "ห้องปฏิบัติการพิษวิทยาสิ่งแวดล้อม",
+      "category": "laboratory",
+      "map_asset_id": "br3-floor-2",
+      "x": 603,
+      "y": 371,
+      "detail_th": "อาคาร บร.3 ชั้น 2 ห้อง 243/2 — ห้องปฏิบัติการพิษวิทยาสิ่งแวดล้อม",
+      "landmarks": [
+        {
+          "kind": "near_toilet",
+          "ref_location_id": "BR3-F2-PLFTL",
+          "walk_hops": 8,
+          "text_th": "ใกล้ห้องน้ำหญิง (ฝั่งซ้าย)",
+          "verification": "derived_unverified"
+        },
+        {
+          "kind": "near_stairs",
+          "ref_location_id": "BR3-F2-PSTAIR-2",
+          "walk_hops": 5,
+          "text_th": "ใกล้บันได 2",
+          "verification": "derived_unverified"
+        }
+      ],
+      "source": {
+        "node_id": "LC3_F2_243/2",
+        "node_type": "room",
+        "x": 605,
+        "y": 408,
+        "translation": {
+          "dx": -2,
+          "dy": -37
+        }
+      },
+      "verification": {
+        "name_th": "from_source",
+        "category": "derived",
+        "coordinates": "svg_verified",
+        "detail_th": "derived",
+        "landmarks": "pending_survey"
+      },
+      "flags": []
+    }
+  ]
+}

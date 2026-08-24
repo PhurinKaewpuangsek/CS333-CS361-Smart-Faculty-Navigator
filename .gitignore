@@ -141,3 +141,6 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# BR3 map QA previews (derived, ~1.5 MB of pin-baked SVG)
+database/datasets/br3/reports/qa/
