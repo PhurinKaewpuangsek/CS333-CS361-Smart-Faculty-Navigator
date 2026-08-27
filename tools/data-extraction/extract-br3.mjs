@@ -4,8 +4,8 @@
  * Node 24 stdlib only — AGENTS.md §8.3 forbids installing dependencies at the repo
  * root, and no service package.json exists yet, so this script must stay dependency-free.
  *
- *   node database/tools/extract-br3.mjs                 regenerate the node inventory
- *   node database/tools/extract-br3.mjs --verify-assets re-check asset hashes and bounds
+ *   node tools/data-extraction/extract-br3.mjs                 regenerate the node inventory
+ *   node tools/data-extraction/extract-br3.mjs --verify-assets re-check asset hashes and bounds
  *
  * Scope is issue #8: nodes only. The 302 routing edges in the source graph are read but
  * never emitted — routing is a later issue. Schema and DB import belong to #7 and #19.
@@ -17,7 +17,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
-const DATASET_DIR = join(REPO_ROOT, 'database', 'datasets', 'br3');
+const DATASET_DIR = join(REPO_ROOT, 'tools', 'data-extraction', 'br3');
 const MANIFEST_PATH = join(DATASET_DIR, 'source', 'source-manifest.json');
 const GRAPH_PATH = join(DATASET_DIR, 'source', 'graph.source.json');
 const INVENTORY_PATH = join(DATASET_DIR, 'reports', 'node-inventory.csv');

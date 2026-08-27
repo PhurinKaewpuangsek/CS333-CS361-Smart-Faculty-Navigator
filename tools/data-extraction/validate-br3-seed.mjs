@@ -2,7 +2,7 @@
  * Validates the BR3 seed dataset against its provenance manifest and the invariants that
  * make the coordinates trustworthy.
  *
- *   node --test database/tools/validate-br3-seed.mjs
+ *   node --test tools/data-extraction/validate-br3-seed.mjs
  *
  * Uses node:test and node:assert from the Node 24 stdlib. No npm dependency, because
  * AGENTS.md §8.3 forbids installing at the repo root and no service owns this data.
@@ -16,7 +16,7 @@ import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
-const DATASET_DIR = join(REPO_ROOT, 'database', 'datasets', 'br3');
+const DATASET_DIR = join(REPO_ROOT, 'tools', 'data-extraction', 'br3');
 
 const read = (...p) => readFileSync(join(DATASET_DIR, ...p), 'utf8');
 const readJson = (...p) => JSON.parse(read(...p));

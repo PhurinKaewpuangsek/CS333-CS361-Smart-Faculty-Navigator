@@ -13,7 +13,7 @@
   },
   "graph": {
     "source_path": "Database/graph.json",
-    "dest_path": "database/datasets/br3/source/graph.source.json",
+    "dest_path": "tools/data-extraction/br3/source/graph.source.json",
     "sha256": "23197fcc6de964e3d2f61a34c07c2303b13536294954506433984dc6c1a081eb",
     "node_count": 288,
     "edge_count": 302,
