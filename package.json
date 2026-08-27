@@ -1,10 +1,9 @@
 {
-  "name": "project-torch",
+  "name": "smart-faculty-navigator-root",
   "private": true,
   "scripts": {
-    "db:up": "docker compose up -d",
-    "db:down": "docker compose down",
-    "db:logs": "docker compose logs -f",
-    "db:reset": "docker compose down -v && docker compose up -d"
+    "dev": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "preview": "npm --prefix frontend run preview"
   }
 }
