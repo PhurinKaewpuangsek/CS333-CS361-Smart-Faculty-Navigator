@@ -23,9 +23,10 @@ jobs:
       - name: Validate Setup
         run: echo "Monorepo Structure and CI connection verified."
 
-      - name: Install & Build Frontend
+      - name: Install, Lint, Test & Build Frontend
         run: |
           cd frontend
           npm ci
           npm run lint
+          npm test
           npm run build
