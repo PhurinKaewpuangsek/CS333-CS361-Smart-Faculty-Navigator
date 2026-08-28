@@ -1,0 +1,4 @@
+.react-transform-wrapper,
+.react-transform-component {
+  touch-action: none;
+}
