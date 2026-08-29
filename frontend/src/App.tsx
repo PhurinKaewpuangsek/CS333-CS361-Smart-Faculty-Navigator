@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useRooms } from './hooks/useRooms'
 import MapContainer from './components/map/MapContainer'
+import RoomSearchPanel from './components/RoomSearchPanel'
 
 function App() {
   const { rooms, loading, error } = useRooms()
@@ -18,6 +19,11 @@ function App() {
   return (
     <div style={{ padding: '24px', fontFamily: 'system-ui, sans-serif' }}>
       <h1>Smart Faculty Navigator</h1>
+
+      <section style={{ marginBottom: '32px' }}>
+        {/* Search & Filter Component — ปักหมุดจริงบน MapContainer ผ่าน handleSelectRoom เดียวกัน */}
+        <RoomSearchPanel onSelectRoom={handleSelectRoom} />
+      </section>
 
       <section style={{ marginBottom: '32px' }}>
         <h2>Floor Plan (BR3)</h2>
