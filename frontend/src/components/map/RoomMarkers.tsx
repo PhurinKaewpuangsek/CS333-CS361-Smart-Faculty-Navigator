@@ -12,6 +12,7 @@ export interface RoomMarkersProps {
 const HIT_RADIUS = 10
 const PIN_RADIUS = 5
 const SELECTED_RADIUS = 7
+const HALO_RADIUS = 14
 
 function RoomMarkers({
   rooms,
@@ -56,6 +57,18 @@ function RoomMarkers({
               r={HIT_RADIUS}
               fill="transparent"
             />
+            {isSelected && (
+              <circle
+                data-testid="room-selected-halo"
+                cx={room.coordinates.x}
+                cy={room.coordinates.y}
+                r={HALO_RADIUS}
+                fill="none"
+                stroke="#ef4444"
+                strokeWidth={2}
+                strokeDasharray="4 3"
+              />
+            )}
             <circle
               cx={room.coordinates.x}
               cy={room.coordinates.y}
