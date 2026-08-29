@@ -39,7 +39,6 @@ function App() {
             onSelectRoom={handleSelectRoom}
           />
         )}
-        {selectedRoomId && <p>Selected room: {selectedRoomId}</p>}
       </section>
 
       {/* Bottom Sheet แสดงรายละเอียดห้อง — รับ event จากทั้ง Search และ Map Marker Click ผ่าน handleSelectRoom */}
