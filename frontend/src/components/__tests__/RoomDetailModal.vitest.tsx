@@ -1,22 +1,24 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import { describe, it, expect, vi } from 'vitest'
-import RoomDetailModal from '@/components/RoomDetailModal'
-import { useRooms } from '@/hooks/useRooms'
-import '@testing-library/jest-dom'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import RoomDetailModal from '../RoomDetailModal'
+import { useRooms } from '../../hooks/useRooms.ts'
+import type { Room } from '../../types/room.ts'
 
 
 // Mock useRooms hook
-vi.mock('@/hooks/useRooms')
+vi.mock('../../hooks/useRooms.ts')
 
-const mockRooms = [
+const mockRooms: Room[] = [
   {
     id: 'room-1',
     code: 'BR3-F1-R111',
     roomNumber: '111',
     nameThai: 'ห้องเรียน 111',
     building: 'BR3',
-    floor: '1',
+    floor: 1,
     category: 'LECTURE_ROOM',
+    coordinates: { x: 0, y: 0 },  
+    aliases: [],   
     landmarks: [{ kind: 'NEAR', ref_location_id: 'lift-1' }],
   },
   {
@@ -25,11 +27,13 @@ const mockRooms = [
     roomNumber: '112',
     nameThai: 'ห้องปฏิบัติการ 112',
     building: 'BR3',
-    floor: '1',
+    floor: 1,
     category: 'LAB',
+    coordinates: { x: 0, y: 0 },   
+    aliases: [],   
     landmarks: [], // ไม่สั่งมี landmark เพื่อทดสอบ Fallback
   },
-]as any
+]
 
 describe('RoomDetailModal Component', () => {
   beforeEach(() => {

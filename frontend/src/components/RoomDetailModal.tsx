@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { PointerEvent as ReactPointerEvent } from 'react'
 import { useRooms } from '../hooks/useRooms.ts'
 import { getBuildingLabel, getCategoryLabel, getLandmarkText } from '../services/roomDisplay.ts'
@@ -17,8 +17,17 @@ export function RoomDetailModal({ selectedRoomId, onClose }: RoomDetailModalProp
   
   const { rooms, loading, error } = useRooms()
 
-  const [dragOffset, setDragOffset] = useState(0)
-  const dragStartY = useRef<number | null>(null)
+  const [drag, setDrag] = useState<{ startY: number | null; offset: number }>({
+    startY: null,
+    offset: 0,
+  })
+
+  // reset ตอนเปลี่ยนห้อง — ทำตอน render แทน useEffect
+  const [prevRoomId, setPrevRoomId] = useState(selectedRoomId)
+    if (prevRoomId !== selectedRoomId) {
+    setPrevRoomId(selectedRoomId)
+    setDrag({ startY: null, offset: 0 })
+  }
 
   const isOpen = selectedRoomId !== null
   const room: Room | undefined = isOpen
@@ -35,11 +44,6 @@ export function RoomDetailModal({ selectedRoomId, onClose }: RoomDetailModalProp
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [isOpen, onClose])
 
-  // รีเซ็ตสถานะการลาก ทุกครั้งที่เปลี่ยนห้อง/เปิดใหม่
-  useEffect(() => {
-    setDragOffset(0)
-    dragStartY.current = null
-  }, [selectedRoomId])
 
   // ล็อกการ scroll พื้นหลังตอน Modal เปิดอยู่ (กัน UI เต็มจอเลื่อนพร้อมกัน)
   useEffect(() => {
@@ -54,22 +58,21 @@ export function RoomDetailModal({ selectedRoomId, onClose }: RoomDetailModalProp
   if (!isOpen) return null
 
   function handlePointerDown(event: ReactPointerEvent<HTMLDivElement>) {
-    dragStartY.current = event.clientY
-  }
+  setDrag({ startY: event.clientY, offset: 0 })
+}
 
-  function handlePointerMove(event: ReactPointerEvent<HTMLDivElement>) {
-    if (dragStartY.current === null) return
-    const delta = event.clientY - dragStartY.current
-    if (delta > 0) setDragOffset(delta)
-  }
+function handlePointerMove(event: ReactPointerEvent<HTMLDivElement>) {
+  setDrag((current) => {
+    if (current.startY === null) return current
+    const delta = event.clientY - current.startY
+    return delta > 0 ? { ...current, offset: delta } : current
+  })
+}
 
-  function handlePointerUp() {
-    if (dragOffset > DRAG_TO_CLOSE_THRESHOLD) {
-      onClose()
-    }
-    setDragOffset(0)
-    dragStartY.current = null
-  }
+function handlePointerUp() {
+  if (drag.offset > DRAG_TO_CLOSE_THRESHOLD) onClose()
+  setDrag({ startY: null, offset: 0 })
+}
 
   const landmarks = room?.landmarks ?? []
   const hasLandmarks = landmarks.length > 0
@@ -91,8 +94,8 @@ export function RoomDetailModal({ selectedRoomId, onClose }: RoomDetailModalProp
         aria-labelledby="room-modal-title"
         className="relative flex max-h-[85vh] w-full max-w-md flex-col overflow-hidden rounded-t-2xl bg-white shadow-xl sm:max-h-[80vh] sm:rounded-2xl"
         style={{
-          transform: `translateY(${dragOffset}px)`,
-          transition: dragStartY.current === null ? 'transform 150ms ease-out' : 'none',
+         transform: `translateY(${drag.offset}px)`,
+         transition: drag.startY === null ? 'transform 150ms ease-out' : 'none',
         }}
       >
         {/* แถบจับลาก + ปุ่มปิด */}
