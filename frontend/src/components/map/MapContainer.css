@@ -1,4 +1,15 @@
-.react-transform-wrapper,
+/* The library ships `width/height: fit-content` on its wrapper, which makes the
+   wrapper as wide as the floor plan (1217px). Pan bounds are derived from
+   wrapperWidth - contentWidth * scale, so a fit-content wrapper collapses the
+   pan range to ~0 on narrow viewports and the map snaps back. Force the wrapper
+   to the visible viewport box so bounds are computed against what's on screen. */
+.react-transform-wrapper {
+  width: 100% !important;
+  max-width: 100%;
+  touch-action: none;
+  overscroll-behavior: contain;
+}
+
 .react-transform-component {
   touch-action: none;
 }

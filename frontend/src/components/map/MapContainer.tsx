@@ -37,8 +37,11 @@ function MapContainer({
         ))}
       </div>
 
-      <TransformWrapper minScale={0.5} maxScale={4} centerOnInit>
-        <TransformComponent>
+      <TransformWrapper minScale={0.2} maxScale={6} centerOnInit centerZoomedOut>
+        <TransformComponent
+          wrapperStyle={{ width: '100%', height: '70vh' }}
+          contentStyle={{ width: floorConfig.width, height: floorConfig.height }}
+        >
           <div style={{ position: 'relative', width: floorConfig.width, height: floorConfig.height }}>
             <FloorPlanSvg floorConfig={floorConfig} />
             <RoomMarkers
