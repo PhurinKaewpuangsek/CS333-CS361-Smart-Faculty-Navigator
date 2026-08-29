@@ -29,4 +29,5 @@ jobs:
           npm ci
           npm run lint
           npm test
+          npm run test:ui
           npm run build
