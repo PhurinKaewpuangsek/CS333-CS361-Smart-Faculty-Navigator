@@ -12,42 +12,44 @@ function App() {
   function handleSelectRoom(roomId: string) {
     setSelectedRoomId(roomId)
     const selected = rooms.find((room) => room.id === roomId)
-    if (selected) {
+    if (selected && selected.floor !== currentFloor) {
       setCurrentFloor(selected.floor)
     }
   }
 
   return (
-    <div style={{ padding: '24px', fontFamily: 'system-ui, sans-serif' }}>
-      <h1>Smart Faculty Navigator</h1>
+    <main className="relative h-screen w-screen overflow-hidden bg-slate-100 font-sans">
+      {/* Primary Workspace: Interactive SVG Map */}
+      <MapContainer
+        rooms={rooms}
+        currentFloor={currentFloor}
+        onFloorChange={setCurrentFloor}
+        selectedRoomId={selectedRoomId}
+        onSelectRoom={handleSelectRoom}
+      />
 
-      <section style={{ marginBottom: '32px' }}>
-        {/* Search & Filter Component — ปักหมุดจริงบน MapContainer ผ่าน handleSelectRoom เดียวกัน */}
-        <RoomSearchPanel onSelectRoom={handleSelectRoom} />
-      </section>
-
-      <section style={{ marginBottom: '32px' }}>
-        <h2>Floor Plan (BR3)</h2>
-        {loading && <p>กำลังโหลดข้อมูลห้อง...</p>}
-        {error && <p style={{ color: 'red' }}>เกิดข้อผิดพลาด: {error.message}</p>}
-        {!loading && !error && (
-          <MapContainer
+      {/* Floating Search & Category Filter Overlay */}
+      <div className="pointer-events-none absolute top-4 left-4 right-4 z-20 max-w-sm sm:right-auto">
+        <div className="pointer-events-auto">
+          <RoomSearchPanel
             rooms={rooms}
-            currentFloor={currentFloor}
-            onFloorChange={setCurrentFloor}
-            selectedRoomId={selectedRoomId}
+            loading={loading}
+            error={error}
             onSelectRoom={handleSelectRoom}
           />
-        )}
-      </section>
+        </div>
+      </div>
 
-      {/* Bottom Sheet แสดงรายละเอียดห้อง — รับ event จากทั้ง Search และ Map Marker Click ผ่าน handleSelectRoom */}
+      {/* Room Detail Modal: Bottom Sheet on Mobile, Side Panel on Desktop */}
       <RoomDetailModal
+        rooms={rooms}
+        loading={loading}
+        error={error}
         selectedRoomId={selectedRoomId}
         onClose={() => setSelectedRoomId(null)}
       />
-    </div>
+    </main>
   )
 }
 
-export default App
+export default App

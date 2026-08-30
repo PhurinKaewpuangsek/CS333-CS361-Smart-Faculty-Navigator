@@ -11,9 +11,18 @@ function FloorPlanSvg({ floorConfig }: FloorPlanSvgProps) {
       alt={`Floor plan: ${floorConfig.label}`}
       width={floorConfig.width}
       height={floorConfig.height}
+      className="max-w-none max-h-none select-none pointer-events-none"
+      style={{
+        width: floorConfig.width,
+        height: floorConfig.height,
+        maxWidth: 'none',
+        maxHeight: 'none',
+        display: 'block',
+      }}
       draggable={false}
     />
   )
 }
 
 export default FloorPlanSvg
+

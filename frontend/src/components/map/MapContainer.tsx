@@ -1,5 +1,9 @@
+import { useRef, useEffect } from 'react'
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
+import type { ReactZoomPanPinchRef } from 'react-zoom-pan-pinch'
+import { Crosshair, Plus, Minus } from '@phosphor-icons/react'
 import type { Room } from '../../types/room'
+
 import { FLOOR_CONFIGS, getFloorConfig } from './floorConfig'
 import FloorPlanSvg from './FloorPlanSvg'
 import RoomMarkers from './RoomMarkers'
@@ -13,6 +17,9 @@ export interface MapContainerProps {
   onSelectRoom: (roomId: string) => void
 }
 
+const PADDING_X = 300
+const PADDING_Y = 240
+
 function MapContainer({
   rooms,
   currentFloor,
@@ -21,27 +28,146 @@ function MapContainer({
   onSelectRoom,
 }: MapContainerProps) {
   const floorConfig = getFloorConfig(currentFloor)
+  const transformRef = useRef<ReactZoomPanPinchRef | null>(null)
+
+  useEffect(() => {
+    if (!selectedRoomId) return
+    const room = rooms.find((r) => r.id === selectedRoomId)
+    if (!room || room.floor !== currentFloor) return
+
+    // Small delay to ensure SVG and layout are ready
+    const timer = setTimeout(() => {
+      if (!transformRef.current) return
+      const wrapper = transformRef.current.instance?.wrapperComponent
+      const wrapperWidth = wrapper?.clientWidth ?? window.innerWidth
+      const wrapperHeight = wrapper?.clientHeight ?? window.innerHeight
+
+      const isMobile = wrapperWidth < 640
+      const targetScale = 1.8
+
+      // On mobile: top search bar takes ~65px and bottom modal takes ~40-45% of height.
+      // Target the vertical center of the open map area (~36% of viewport height).
+      // On desktop: search panel sits on the left and modal card on the right.
+      // Target the center of the viewport (wrapperWidth / 2, wrapperHeight / 2).
+      const targetX = wrapperWidth / 2
+      const targetY = isMobile ? wrapperHeight * 0.36 : wrapperHeight / 2
+
+      const posX = targetX - (room.coordinates.x + PADDING_X) * targetScale
+      const posY = targetY - (room.coordinates.y + PADDING_Y) * targetScale
+
+      transformRef.current.setTransform(posX, posY, targetScale, 650, 'easeOutCubic')
+    }, 50)
+
+    return () => clearTimeout(timer)
+  }, [selectedRoomId, currentFloor, rooms])
 
   return (
-    <div>
-      <div role="group" aria-label="Floor switcher">
-        {FLOOR_CONFIGS.map((config) => (
-          <button
-            key={config.floor}
-            type="button"
-            aria-pressed={config.floor === currentFloor}
-            onClick={() => onFloorChange(config.floor)}
-          >
-            {config.label}
-          </button>
-        ))}
+    <div className="relative h-full w-full overflow-hidden">
+      {/* Re-center floating action button */}
+      <button
+        type="button"
+        aria-label="จัดกึ่งกลางแผนที่"
+        onClick={() => transformRef.current?.resetTransform(650, 'easeOutCubic')}
+        className="absolute bottom-[11.25rem] right-4 z-10 flex h-11 w-11 items-center justify-center rounded-2xl bg-white/95 text-slate-700 shadow-2xl backdrop-blur-md border border-slate-100/80 hover:bg-slate-50 hover:text-blue-600 hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0 transition-all duration-200 cursor-pointer sm:bottom-[11.25rem] sm:right-6"
+      >
+        <Crosshair size={22} weight="bold" aria-hidden="true" />
+      </button>
+
+      {/* Vertical +/- zoom controls pill floating above floor switcher */}
+      <div
+        role="group"
+        aria-label="Zoom controls"
+        className="absolute bottom-20 right-4 z-10 flex flex-col items-center rounded-2xl bg-white/95 p-1 shadow-2xl backdrop-blur-md border border-slate-100/80 sm:bottom-20 sm:right-6"
+      >
+        <button
+          type="button"
+          aria-label="ขยายแผนที่"
+          onClick={() => transformRef.current?.zoomIn(0.4, 250, 'easeOutCubic')}
+          className="flex h-9 w-9 items-center justify-center rounded-xl text-slate-600 hover:bg-slate-100 hover:text-blue-600 active:bg-slate-200 active:text-blue-700 transition-all duration-150 cursor-pointer"
+        >
+          <Plus size={18} weight="bold" aria-hidden="true" />
+        </button>
+        <div className="my-0.5 h-px w-6 bg-slate-100" />
+        <button
+          type="button"
+          aria-label="ย่อแผนที่"
+          onClick={() => transformRef.current?.zoomOut(0.4, 250, 'easeOutCubic')}
+          className="flex h-9 w-9 items-center justify-center rounded-xl text-slate-600 hover:bg-slate-100 hover:text-blue-600 active:bg-slate-200 active:text-blue-700 transition-all duration-150 cursor-pointer"
+        >
+          <Minus size={18} weight="bold" aria-hidden="true" />
+        </button>
       </div>
 
-      <TransformWrapper minScale={0.2} maxScale={6} centerOnInit centerZoomedOut>
+      {/* Floor switcher floating on the map */}
+      <div
+        role="group"
+        aria-label="Floor switcher"
+        className="absolute bottom-6 right-4 z-10 flex gap-1.5 rounded-2xl bg-white/95 p-1.5 shadow-2xl backdrop-blur-md border border-slate-100/80 sm:bottom-6 sm:right-6"
+      >
+        {FLOOR_CONFIGS.map((config) => {
+          const isActive = config.floor === currentFloor
+          return (
+            <button
+              key={config.floor}
+              type="button"
+              aria-pressed={isActive}
+              onClick={() => onFloorChange(config.floor)}
+              className={
+                isActive
+                  ? 'rounded-xl bg-blue-600 border border-blue-600 px-3.5 py-1.5 text-sm font-medium text-white shadow-sm hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 transition-all duration-200 cursor-pointer'
+                  : 'rounded-xl border border-slate-200 bg-slate-100 px-3.5 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-200/80 hover:border-slate-300 hover:-translate-y-0.5 hover:shadow-sm active:translate-y-0 transition-all duration-200 cursor-pointer'
+              }
+            >
+              {config.label}
+            </button>
+          )
+        })}
+      </div>
+
+      <TransformWrapper
+        ref={transformRef}
+        minScale={0.8}
+        maxScale={4}
+        centerOnInit
+        centerZoomedOut
+        limitToBounds={true}
+        disablePadding={false}
+        smooth={false}
+        wheel={{
+          step: 0.2,
+          disabled: false,
+          wheelDisabled: false,
+          touchPadDisabled: false,
+        }}
+        zoomAnimation={{
+          disabled: false,
+          size: 0.2,
+          animationTime: 200,
+          animationType: 'easeOutCubic',
+        }}
+        autoAlignment={{
+          sizeX: 300,
+          sizeY: 250,
+          animationTime: 650,
+          velocityAlignmentTime: 650,
+          animationType: 'easeOutCubic',
+        }}
+        doubleClick={{
+          animationTime: 650,
+          animationType: 'easeOutCubic',
+        }}
+        velocityAnimation={{
+          animationTime: 400,
+          animationType: 'easeOutCubic',
+        }}
+      >
+
         <TransformComponent
-          wrapperStyle={{ width: '100%', height: '70vh' }}
-          contentStyle={{ width: floorConfig.width, height: floorConfig.height }}
+          wrapperClass="w-full h-full overflow-hidden"
+          wrapperStyle={{ width: '100%', height: '100%' }}
+          contentStyle={{ padding: `${PADDING_Y}px ${PADDING_X}px` }}
         >
+
           <div style={{ position: 'relative', width: floorConfig.width, height: floorConfig.height }}>
             <FloorPlanSvg floorConfig={floorConfig} />
             <RoomMarkers
@@ -54,8 +180,10 @@ function MapContainer({
           </div>
         </TransformComponent>
       </TransformWrapper>
+
     </div>
   )
 }
 
 export default MapContainer
+

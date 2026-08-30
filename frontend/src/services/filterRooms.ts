@@ -28,22 +28,32 @@ export const CATEGORY_FILTERS: CategoryFilterOption[] = [
   },
   {
     key: 'lecture_room',
-    label: 'ห้องเรียน',
+    label: 'ห้องบรรยาย',
     matchCategories: ['lecture_room'],
   },
   {
-    key: 'lecture_hall',
-    label: 'ห้องบรรยาย',
+    key: 'seminar_room',
+    label: 'ห้องสัมมนา',
     matchCategories: ['seminar_room'],
   },
   {
+    key: 'meeting_room',
+    label: 'ห้องประชุม',
+    matchCategories: ['meeting_room'],
+  },
+  {
+    key: 'research_room',
+    label: 'ห้องวิจัย',
+    matchCategories: ['research_room'],
+  },
+  {
     key: 'laboratory',
-    label: 'ห้องแล็บ',
-    matchCategories: ['laboratory', 'research_room'],
+    label: 'ห้องปฏิบัติการ',
+    matchCategories: ['laboratory', 'lab'],
   },
   {
     key: 'office',
-    label: 'สำนักงาน',
+    label: 'สำนักงาน / ห้องพักอาจารย์',
     matchCategories: ['faculty_office', 'department_office', 'staff_room'],
   },
   {
@@ -56,7 +66,6 @@ export const CATEGORY_FILTERS: CategoryFilterOption[] = [
       'storage',
       'service_room',
       'student_room',
-      'meeting_room',
       'unknown',
     ],
   },
@@ -64,17 +73,111 @@ export const CATEGORY_FILTERS: CategoryFilterOption[] = [
 
 export const DEFAULT_CATEGORY_KEY = CATEGORY_FILTERS[0].key
 
-function normalize(value: string): string {
+/**
+ * พจนานุกรมคำพ้อง (Synonym Dictionary)
+ * จับคู่คำค้นหาทั่วไป คำย่อ ภาษาอังกฤษ คำทับศัพท์ และสแลง
+ * เข้ากับคำที่เป็นทางการ/ชื่อจริงของห้อง เพื่อให้ค้นหาได้สะดวกและครอบคลุม
+ */
+export const SYNONYM_DICTIONARY: Record<string, string[]> = {
+  // Laboratories
+  lab: ['ห้องปฏิบัติการ', 'laboratory', 'แลป', 'แล็ป'],
+  แลป: ['ห้องปฏิบัติการ', 'lab', 'laboratory'],
+  แล็ป: ['ห้องปฏิบัติการ', 'lab', 'laboratory'],
+  ห้องแลป: ['ห้องปฏิบัติการ', 'lab'],
+  ห้องแล็ป: ['ห้องปฏิบัติการ', 'lab'],
+  laboratory: ['ห้องปฏิบัติการ', 'lab'],
+
+  // Lecture / Classrooms
+  ห้องเรียน: ['ห้องบรรยายเรียนรวม', 'ห้องบรรยาย', 'lecture'],
+  เรียน: ['ห้องบรรยายเรียนรวม', 'ห้องบรรยาย', 'ห้องเรียน'],
+  บรรยาย: ['ห้องบรรยายเรียนรวม', 'ห้องบรรยาย', 'lecture'],
+  lecture: ['ห้องบรรยายเรียนรวม', 'ห้องบรรยาย', 'ห้องเรียน'],
+  classroom: ['ห้องบรรยายเรียนรวม', 'ห้องบรรยาย', 'ห้องเรียน'],
+  class: ['ห้องบรรยายเรียนรวม', 'ห้องบรรยาย', 'ห้องเรียน'],
+
+  // Restrooms / Toilets
+  toilet: ['ห้องน้ำ', 'สุขา', 'restroom', 'wc'],
+  toilets: ['ห้องน้ำ', 'สุขา', 'restroom', 'wc'],
+  wc: ['ห้องน้ำ', 'สุขา', 'toilet'],
+  restroom: ['ห้องน้ำ', 'สุขา', 'toilet'],
+  ห้องส้วม: ['ห้องน้ำ', 'สุขา'],
+  ส้วม: ['ห้องน้ำ', 'สุขา'],
+  สุขา: ['ห้องน้ำ'],
+
+  // Meeting / Seminars
+  meeting: ['ห้องประชุม'],
+  ประชุม: ['ห้องประชุม', 'meeting'],
+  seminar: ['ห้องสัมมนา'],
+  สัมมนา: ['ห้องสัมมนา', 'seminar'],
+
+  // Offices / Faculty rooms
+  office: ['สำนักงาน', 'ห้องพักอาจารย์', 'ห้องสาขาวิชา', 'ภาควิชา'],
+  ออฟฟิศ: ['สำนักงาน', 'ห้องพักอาจารย์'],
+  อาจารย์: ['ห้องพักอาจารย์', 'สำนักงาน'],
+  ห้องอาจารย์: ['ห้องพักอาจารย์'],
+  ห้องพักอาจารย์: ['สำนักงาน', 'ห้องพักอาจารย์'],
+  ห้องพักครู: ['ห้องพักอาจารย์'],
+
+  // Research
+  research: ['ห้องวิจัย', 'ห้องปฏิบัติการวิจัย'],
+  วิจัย: ['ห้องวิจัย', 'ห้องปฏิบัติการวิจัย', 'research'],
+
+  // Utilities / Stairs / Elevators / Storage
+  stairs: ['บันได'],
+  บันได: ['stairs', 'บันไดหนีไฟ'],
+  lift: ['ลิฟต์', 'ลิฟท์'],
+  elevator: ['ลิฟต์', 'ลิฟท์'],
+  ลิฟต์: ['lift', 'elevator'],
+  ลิฟท์: ['lift', 'elevator'],
+  storage: ['ห้องเก็บของ'],
+  เก็บของ: ['ห้องเก็บของ', 'storage'],
+}
+
+export function normalize(value: string): string {
   return value.trim().toLowerCase()
 }
 
-function roomMatchesQuery(room: Room, normalizedQuery: string): boolean {
-  if (normalizedQuery === '') return true
+/**
+ * ขยายคำค้นหาจากพจนานุกรมคำพ้อง
+ * คืนค่าชุดคำค้นหาที่รวมทั้งคำค้นหาดั้งเดิมของผู้ใช้ และคำที่เป็นทางการที่เกี่ยวข้อง
+ */
+export function getExpandedSearchTerms(query: string): string[] {
+  const normalized = normalize(query)
+  if (!normalized) return []
 
-  if (normalize(room.code).includes(normalizedQuery)) return true
-  if (normalize(room.nameThai).includes(normalizedQuery)) return true
+  const terms = new Set<string>([normalized])
 
-  return room.aliases.some((alias) => normalize(alias).includes(normalizedQuery))
+  // 1. ตรวจสอบคำค้นหาแบบตรงตัวใน SYNONYM_DICTIONARY
+  if (SYNONYM_DICTIONARY[normalized]) {
+    for (const synonym of SYNONYM_DICTIONARY[normalized]) {
+      terms.add(normalize(synonym))
+    }
+  }
+
+  // 2. ตรวจสอบคำที่ตรงกับคีย์ใน dictionary เมื่อค้นหาแบบหลายคำ
+  for (const [key, synonyms] of Object.entries(SYNONYM_DICTIONARY)) {
+    if (normalized === key || normalized.split(/\s+/).includes(key)) {
+      for (const synonym of synonyms) {
+        terms.add(normalize(synonym))
+      }
+    }
+  }
+
+  return Array.from(terms)
+}
+
+function roomMatchesQuery(room: Room, searchTerms: string[]): boolean {
+  if (searchTerms.length === 0) return true
+
+  const normalizedCode = normalize(room.code)
+  const normalizedName = normalize(room.nameThai)
+  const normalizedAliases = room.aliases.map(normalize)
+
+  return searchTerms.some((term) => {
+    if (normalizedCode.includes(term)) return true
+    if (normalizedName.includes(term)) return true
+    return normalizedAliases.some((alias) => alias.includes(term))
+  })
 }
 
 function roomMatchesCategory(room: Room, categoryKey: string): boolean {
@@ -87,15 +190,15 @@ function roomMatchesCategory(room: Room, categoryKey: string): boolean {
 }
 
 /**
- * กรองห้องจาก query (ค้นหาแบบ case-insensitive ใน code, nameThai, aliases)
+ * กรองห้องจาก query (ค้นหาแบบ case-insensitive พร้อมระบบขยายคำพ้องใน code, nameThai, aliases)
  * และ category (key จาก CATEGORY_FILTERS ด้านบน)
  *
  * Pure function — ไม่แตะ state หรือ side effect ใดๆ จึงเทสได้ตรงไปตรงมา
  */
 export function filterRooms(rooms: Room[], query: string, category: string): Room[] {
-  const normalizedQuery = normalize(query)
+  const searchTerms = getExpandedSearchTerms(query)
 
   return rooms.filter(
-    (room) => roomMatchesQuery(room, normalizedQuery) && roomMatchesCategory(room, category)
+    (room) => roomMatchesQuery(room, searchTerms) && roomMatchesCategory(room, category)
   )
 }

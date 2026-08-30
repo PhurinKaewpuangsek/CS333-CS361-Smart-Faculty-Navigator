@@ -106,4 +106,63 @@ describe('MapContainer', () => {
 
     expect(onSelectRoom).toHaveBeenCalledWith('BR3-F1-R101')
   })
+
+  it('renders selected marker with aria-pressed="true" when selectedRoomId matches', () => {
+    render(
+      <MapContainer
+        rooms={rooms}
+        currentFloor={1}
+        onFloorChange={vi.fn()}
+        selectedRoomId="BR3-F1-R101"
+        onSelectRoom={vi.fn()}
+      />
+    )
+
+    expect(screen.getByRole('button', { name: 'ห้อง 101' })).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    )
+  })
+
+  it('renders re-center button and allows clicking to reset map position', async () => {
+    const user = userEvent.setup()
+    render(
+      <MapContainer
+        rooms={rooms}
+        currentFloor={1}
+        onFloorChange={vi.fn()}
+        selectedRoomId={null}
+        onSelectRoom={vi.fn()}
+      />
+    )
+
+    const recenterButton = screen.getByRole('button', { name: /จัดกึ่งกลางแผนที่/i })
+    expect(recenterButton).toBeInTheDocument()
+
+    await user.click(recenterButton)
+  })
+
+  it('renders zoom in and zoom out buttons and handles clicks', async () => {
+    const user = userEvent.setup()
+    render(
+      <MapContainer
+        rooms={rooms}
+        currentFloor={1}
+        onFloorChange={vi.fn()}
+        selectedRoomId={null}
+        onSelectRoom={vi.fn()}
+      />
+    )
+
+    const zoomInButton = screen.getByRole('button', { name: /ขยายแผนที่/i })
+    const zoomOutButton = screen.getByRole('button', { name: /ย่อแผนที่/i })
+
+    expect(zoomInButton).toBeInTheDocument()
+    expect(zoomOutButton).toBeInTheDocument()
+
+    await user.click(zoomInButton)
+    await user.click(zoomOutButton)
+  })
 })
+
+

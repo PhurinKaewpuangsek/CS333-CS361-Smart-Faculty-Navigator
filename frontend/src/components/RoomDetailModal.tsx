@@ -1,34 +1,54 @@
-import { useEffect, useState } from 'react'
-import type { PointerEvent as ReactPointerEvent } from 'react'
-import { useRooms } from '../hooks/useRooms.ts'
-import { getBuildingLabel, getCategoryLabel, getLandmarkText } from '../services/roomDisplay.ts'
+import { useEffect } from 'react'
+import type { ReactNode } from 'react'
+import {
+  MapPin,
+  BookOpen,
+  Flask,
+  Briefcase,
+  Toilet,
+  Gear,
+  Package,
+  Bell,
+  Users,
+  ChalkboardTeacher,
+  X,
+  Atom,
+} from '@phosphor-icons/react'
+import { getBuildingLabel, getCategoryLabel, getLandmarkText, getCategoryColor } from '../services/roomDisplay.ts'
+
 import type { Room } from '../types/room.ts'
 
 export interface RoomDetailModalProps {
+  rooms: Room[]
+  loading?: boolean
+  error?: Error | null
   /** id ของห้องที่ถูกเลือก (มาจาก Search Result หรือ Map Marker Click) — null = ปิด Modal */
   selectedRoomId: string | null
   onClose: () => void
 }
 
-/** ระยะลาก (px) ที่ต้องลากลงเกินก่อนจะถือว่าผู้ใช้ต้องการปิด Modal ด้วย Gesture */
-const DRAG_TO_CLOSE_THRESHOLD = 96
+function renderCategoryIcon(category: string): ReactNode {
+  const key = (category || '').toLowerCase()
+  if (key.includes('lab')) return <Flask size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
+  if (key.includes('lecture')) return <BookOpen size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
+  if (key.includes('seminar')) return <ChalkboardTeacher size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
+  if (key.includes('office')) return <Briefcase size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
+  if (key.includes('toilet') || key.includes('restroom')) return <Toilet size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
+  if (key.includes('student') || key.includes('meeting') || key.includes('staff')) return <Users size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
+  if (key.includes('research')) return <Atom size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
+  if (key.includes('utility')) return <Gear size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
+  if (key.includes('storage')) return <Package size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
+  if (key.includes('service')) return <Bell size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
+  return <MapPin size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
+}
 
-export function RoomDetailModal({ selectedRoomId, onClose }: RoomDetailModalProps) {
-  
-  const { rooms, loading, error } = useRooms()
-
-  const [drag, setDrag] = useState<{ startY: number | null; offset: number }>({
-    startY: null,
-    offset: 0,
-  })
-
-  // reset ตอนเปลี่ยนห้อง — ทำตอน render แทน useEffect
-  const [prevRoomId, setPrevRoomId] = useState(selectedRoomId)
-    if (prevRoomId !== selectedRoomId) {
-    setPrevRoomId(selectedRoomId)
-    setDrag({ startY: null, offset: 0 })
-  }
-
+export function RoomDetailModal({
+  rooms,
+  loading = false,
+  error = null,
+  selectedRoomId,
+  onClose,
+}: RoomDetailModalProps) {
   const isOpen = selectedRoomId !== null
   const room: Room | undefined = isOpen
     ? rooms.find((r) => r.id === selectedRoomId)
@@ -44,76 +64,30 @@ export function RoomDetailModal({ selectedRoomId, onClose }: RoomDetailModalProp
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [isOpen, onClose])
 
-
-  // ล็อกการ scroll พื้นหลังตอน Modal เปิดอยู่ (กัน UI เต็มจอเลื่อนพร้อมกัน)
-  useEffect(() => {
-    if (!isOpen) return
-    const originalOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.body.style.overflow = originalOverflow
-    }
-  }, [isOpen])
-
   if (!isOpen) return null
-
-  function handlePointerDown(event: ReactPointerEvent<HTMLDivElement>) {
-  setDrag({ startY: event.clientY, offset: 0 })
-}
-
-function handlePointerMove(event: ReactPointerEvent<HTMLDivElement>) {
-  setDrag((current) => {
-    if (current.startY === null) return current
-    const delta = event.clientY - current.startY
-    return delta > 0 ? { ...current, offset: delta } : current
-  })
-}
-
-function handlePointerUp() {
-  if (drag.offset > DRAG_TO_CLOSE_THRESHOLD) onClose()
-  setDrag({ startY: null, offset: 0 })
-}
 
   const landmarks = room?.landmarks ?? []
   const hasLandmarks = landmarks.length > 0
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center">
-      {/* Backdrop — แตะเพื่อปิด */}
-      <div
-        data-testid="room-modal-backdrop"
-        className="absolute inset-0 bg-black/50"
-        aria-hidden="true"
-        onClick={onClose}
-      />
-
-      {/* Bottom Sheet */}
+    <div className="fixed inset-0 z-50 flex items-end justify-center pointer-events-none sm:justify-end sm:items-start sm:p-4">
+      {/* Modal Card: Bottom Sheet on Mobile, Floating Side Card on Desktop */}
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="room-modal-title"
-        className="relative flex max-h-[85vh] w-full max-w-md flex-col overflow-hidden rounded-t-2xl bg-white shadow-xl sm:max-h-[80vh] sm:rounded-2xl"
-        style={{
-         transform: `translateY(${drag.offset}px)`,
-         transition: drag.startY === null ? 'transform 150ms ease-out' : 'none',
-        }}
+        className="pointer-events-auto relative flex max-h-[85vh] w-full max-w-md flex-col overflow-hidden rounded-t-2xl bg-white shadow-2xl animate-modal-mobile sm:animate-modal-desktop sm:max-h-[calc(100vh-2rem)] sm:w-96 sm:rounded-3xl sm:border sm:border-slate-100"
       >
-        {/* แถบจับลาก + ปุ่มปิด */}
-        <div
-          className="sticky top-0 z-10 flex shrink-0 touch-none flex-col items-center bg-white pb-1 pt-2"
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={handlePointerUp}
-          onPointerCancel={handlePointerUp}
-        >
-          <div className="h-1.5 w-10 rounded-full bg-gray-300" aria-hidden="true" />
+        {/* Top Header with Close Button */}
+        <div className="relative flex shrink-0 items-center justify-end bg-white px-5 pt-3 pb-1 sm:pt-4 sm:pb-2">
+          <div className="h-1.5 w-10 rounded-full bg-slate-200 sm:hidden mx-auto absolute left-1/2 -translate-x-1/2 top-2" aria-hidden="true" />
           <button
             type="button"
             onClick={onClose}
             aria-label="ปิดหน้าต่างรายละเอียดห้อง"
-            className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full text-lg leading-none text-gray-500 hover:bg-gray-100"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 hover:bg-slate-100 hover:text-slate-700 active:bg-slate-200 transition-colors cursor-pointer"
           >
-            ✕
+            <X size={18} weight="bold" />
           </button>
         </div>
 
@@ -125,7 +99,7 @@ function handlePointerUp() {
 
           {!loading && error && (
             <p className="py-6 text-center text-sm text-red-600">
-              เกิดข้อผิดพลาดในการโหลดข้อมูลห้อง
+              เกิดข้อผิดพลาดในการโหลดข้อมูลห้อง: {error.message}
             </p>
           )}
 
@@ -148,9 +122,18 @@ function handlePointerUp() {
                 {room.code ? ` (${room.code})` : ''}
               </p>
 
-              <span className="mt-3 inline-block w-fit rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
-                {getCategoryLabel(room.category)}
-              </span>
+              {(() => {
+                const color = getCategoryColor(room.category)
+                return (
+                  <span
+                    className={`mt-3 inline-flex items-center gap-1.5 w-fit rounded-full border ${color.border} ${color.bg} px-3 py-1 text-xs font-medium ${color.text} shadow-sm`}
+                  >
+                    {renderCategoryIcon(room.category)}
+                    <span>{getCategoryLabel(room.category)}</span>
+                  </span>
+                )
+              })()}
+
 
               <div className="mt-5 border-t border-gray-100 pt-4">
                 <h3 className="text-sm font-semibold text-gray-800">จุดสังเกตใกล้เคียง</h3>
@@ -162,11 +145,12 @@ function handlePointerUp() {
                         key={`${landmark.kind}-${landmark.ref_location_id ?? index}`}
                         className="flex items-start gap-2 text-sm text-gray-700"
                       >
-                        <span aria-hidden="true">📍</span>
+                        <MapPin size={16} weight="fill" className="text-red-500 shrink-0 mt-0.5" aria-hidden="true" />
                         <span>{getLandmarkText(landmark)}</span>
                       </li>
                     ))}
                   </ul>
+
                 ) : (
                   <p className="mt-2 text-sm text-gray-400">
                     ยังไม่มีข้อมูลจุดสังเกตสำหรับห้องนี้
@@ -182,3 +166,5 @@ function handlePointerUp() {
 }
 
 export default RoomDetailModal
+
+

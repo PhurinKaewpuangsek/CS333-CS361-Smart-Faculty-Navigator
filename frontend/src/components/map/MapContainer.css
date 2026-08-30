@@ -5,6 +5,7 @@
    to the visible viewport box so bounds are computed against what's on screen. */
 .react-transform-wrapper {
   width: 100% !important;
+  height: 100% !important;
   max-width: 100%;
   touch-action: none;
   overscroll-behavior: contain;
@@ -13,3 +14,5 @@
 .react-transform-component {
   touch-action: none;
 }
+
+
