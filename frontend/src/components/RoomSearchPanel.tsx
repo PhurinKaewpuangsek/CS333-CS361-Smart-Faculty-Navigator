@@ -28,7 +28,12 @@ export default function RoomSearchPanel({
   const [query, setQuery] = useState('')
   const [categoryKey, setCategoryKey] = useState(DEFAULT_CATEGORY_KEY)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-  const [isFilterExpanded, setIsFilterExpanded] = useState(true)
+  const [isFilterExpanded, setIsFilterExpanded] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth >= 640
+    }
+    return true
+  })
 
   const panelRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -58,7 +63,10 @@ export default function RoomSearchPanel({
     setIsDropdownOpen(false)
     // 2. Dismiss mobile virtual keyboard
     inputRef.current?.blur()
-    // 3. Keep existing query intact (do not clear query)
+    // 3. Automatically collapse filter bar on mobile to show more map area
+    if (typeof window !== 'undefined' && window.innerWidth < 640) {
+      setIsFilterExpanded(false)
+    }
     // 4. Trigger room selection
     onSelectRoom(roomId)
   }

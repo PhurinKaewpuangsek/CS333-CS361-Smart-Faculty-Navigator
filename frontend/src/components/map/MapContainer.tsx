@@ -45,15 +45,17 @@ function MapContainer({
       const isMobile = wrapperWidth < 640
       const targetScale = 1.8
 
-      // On mobile: position target slightly higher (35% of viewport height) to avoid bottom sheet
-      // On desktop: adjust center for side panel if needed
-      const targetX = isMobile ? wrapperWidth / 2 : Math.max(wrapperWidth / 2, (wrapperWidth - 384) / 2)
-      const targetY = isMobile ? wrapperHeight * 0.35 : wrapperHeight / 2
+      // On mobile: top search bar takes ~65px and bottom modal takes ~40-45% of height.
+      // Target the vertical center of the open map area (~36% of viewport height).
+      // On desktop: search panel sits on the left and modal card on the right.
+      // Target the center of the viewport (wrapperWidth / 2, wrapperHeight / 2).
+      const targetX = wrapperWidth / 2
+      const targetY = isMobile ? wrapperHeight * 0.36 : wrapperHeight / 2
 
       const posX = targetX - (room.coordinates.x + PADDING_X) * targetScale
       const posY = targetY - (room.coordinates.y + PADDING_Y) * targetScale
 
-      transformRef.current.setTransform(posX, posY, targetScale, 300, 'easeOutQuad')
+      transformRef.current.setTransform(posX, posY, targetScale, 650, 'easeOutCubic')
     }, 50)
 
     return () => clearTimeout(timer)
@@ -65,7 +67,7 @@ function MapContainer({
       <button
         type="button"
         aria-label="จัดกึ่งกลางแผนที่"
-        onClick={() => transformRef.current?.resetTransform(300)}
+        onClick={() => transformRef.current?.resetTransform(650, 'easeOutCubic')}
         className="absolute bottom-20 right-4 z-10 flex h-11 w-11 items-center justify-center rounded-2xl bg-white/95 text-slate-700 shadow-2xl backdrop-blur-md border border-slate-100/80 hover:bg-slate-50 hover:text-blue-600 hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0 transition-all duration-200 cursor-pointer sm:bottom-20 sm:right-6"
       >
         <Crosshair size={22} weight="bold" aria-hidden="true" />
@@ -97,21 +99,41 @@ function MapContainer({
         })}
       </div>
 
-
       <TransformWrapper
         ref={transformRef}
-        minScale={0.2}
-        maxScale={6}
+        minScale={0.8}
+        maxScale={4}
         centerOnInit
         centerZoomedOut
         limitToBounds={true}
         disablePadding={false}
+        smooth={false}
+        wheel={{
+          step: 0.2,
+          disabled: false,
+          wheelDisabled: false,
+          touchPadDisabled: false,
+        }}
+        zoomAnimation={{
+          disabled: false,
+          size: 0.2,
+          animationTime: 200,
+          animationType: 'easeOutCubic',
+        }}
         autoAlignment={{
           sizeX: 300,
           sizeY: 250,
-          animationTime: 250,
-          velocityAlignmentTime: 400,
-          animationType: 'easeOut',
+          animationTime: 650,
+          velocityAlignmentTime: 650,
+          animationType: 'easeOutCubic',
+        }}
+        doubleClick={{
+          animationTime: 650,
+          animationType: 'easeOutCubic',
+        }}
+        velocityAnimation={{
+          animationTime: 400,
+          animationType: 'easeOutCubic',
         }}
       >
 

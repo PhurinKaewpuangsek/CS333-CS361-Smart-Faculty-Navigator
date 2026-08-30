@@ -133,5 +133,43 @@ describe('RoomSearchPanel Component', () => {
     await user.click(outside)
     expect(screen.queryByRole('list')).not.toBeInTheDocument()
   })
+
+  it('starts with filter collapsed by default on mobile viewport (< 640px)', () => {
+    const originalWidth = window.innerWidth
+    window.innerWidth = 375
+
+    try {
+      render(<RoomSearchPanel rooms={mockRooms} onSelectRoom={vi.fn()} />)
+      const toggleButton = screen.getByRole('button', { name: /แสดงตัวกรอง/i })
+      expect(toggleButton).toHaveAttribute('aria-expanded', 'false')
+    } finally {
+      window.innerWidth = originalWidth
+    }
+  })
+
+  it('auto-collapses filter bar on mobile when a room is selected', async () => {
+    const originalWidth = window.innerWidth
+    window.innerWidth = 375
+    const user = userEvent.setup()
+
+    try {
+      render(<RoomSearchPanel rooms={mockRooms} onSelectRoom={vi.fn()} />)
+      const toggleButton = screen.getByRole('button', { name: /แสดงตัวกรอง/i })
+      // Expand filter
+      await user.click(toggleButton)
+      expect(toggleButton).toHaveAttribute('aria-expanded', 'true')
+
+      // Type and select a room
+      const input = screen.getByPlaceholderText(/ค้นหาห้อง/i)
+      await user.type(input, '101')
+      const resultButton = screen.getByRole('button', { name: /BR3-101/i })
+      await user.click(resultButton)
+
+      // Filter bar should now be auto-collapsed
+      expect(toggleButton).toHaveAttribute('aria-expanded', 'false')
+    } finally {
+      window.innerWidth = originalWidth
+    }
+  })
 })
 
