@@ -15,6 +15,9 @@ export interface MapContainerProps {
   onSelectRoom: (roomId: string) => void
 }
 
+const PADDING_X = 300
+const PADDING_Y = 240
+
 function MapContainer({
   rooms,
   currentFloor,
@@ -45,8 +48,8 @@ function MapContainer({
       const targetX = isMobile ? wrapperWidth / 2 : Math.max(wrapperWidth / 2, (wrapperWidth - 384) / 2)
       const targetY = isMobile ? wrapperHeight * 0.35 : wrapperHeight / 2
 
-      const posX = targetX - room.coordinates.x * targetScale
-      const posY = targetY - room.coordinates.y * targetScale
+      const posX = targetX - (room.coordinates.x + PADDING_X) * targetScale
+      const posY = targetY - (room.coordinates.y + PADDING_Y) * targetScale
 
       transformRef.current.setTransform(posX, posY, targetScale, 300, 'easeOutQuad')
     }, 50)
@@ -54,8 +57,35 @@ function MapContainer({
     return () => clearTimeout(timer)
   }, [selectedRoomId, currentFloor, rooms])
 
+
   return (
     <div className="relative h-full w-full overflow-hidden">
+      {/* Re-center floating action button */}
+      <button
+        type="button"
+        aria-label="จัดกึ่งกลางแผนที่"
+        onClick={() => transformRef.current?.resetTransform(300)}
+        className="absolute bottom-20 right-4 z-10 flex h-11 w-11 items-center justify-center rounded-2xl bg-white/90 text-slate-700 shadow-lg backdrop-blur hover:bg-slate-50 hover:text-blue-600 active:scale-95 transition-all sm:bottom-20 sm:right-6"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          className="h-5 w-5"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <circle cx="12" cy="12" r="7" />
+          <line x1="12" y1="2" x2="12" y2="6" />
+          <line x1="12" y1="18" x2="12" y2="22" />
+          <line x1="2" y1="12" x2="6" y2="12" />
+          <line x1="18" y1="12" x2="22" y2="12" />
+          <circle cx="12" cy="12" r="2" fill="currentColor" />
+        </svg>
+      </button>
+
       {/* Floor switcher floating on the map */}
       <div
         role="group"
@@ -88,13 +118,23 @@ function MapContainer({
         maxScale={6}
         centerOnInit
         centerZoomedOut
-        limitToBounds={false}
+        limitToBounds={true}
+        disablePadding={false}
+        autoAlignment={{
+          sizeX: 300,
+          sizeY: 250,
+          animationTime: 250,
+          velocityAlignmentTime: 400,
+          animationType: 'easeOut',
+        }}
       >
 
         <TransformComponent
+          wrapperClass="w-full h-full overflow-hidden"
           wrapperStyle={{ width: '100%', height: '100%' }}
-          contentStyle={{ width: floorConfig.width, height: floorConfig.height }}
+          contentStyle={{ padding: `${PADDING_Y}px ${PADDING_X}px` }}
         >
+
           <div style={{ position: 'relative', width: floorConfig.width, height: floorConfig.height }}>
             <FloorPlanSvg floorConfig={floorConfig} />
             <RoomMarkers
@@ -107,6 +147,7 @@ function MapContainer({
           </div>
         </TransformComponent>
       </TransformWrapper>
+
     </div>
   )
 }

@@ -123,5 +123,24 @@ describe('MapContainer', () => {
       'true'
     )
   })
+
+  it('renders re-center button and allows clicking to reset map position', async () => {
+    const user = userEvent.setup()
+    render(
+      <MapContainer
+        rooms={rooms}
+        currentFloor={1}
+        onFloorChange={vi.fn()}
+        selectedRoomId={null}
+        onSelectRoom={vi.fn()}
+      />
+    )
+
+    const recenterButton = screen.getByRole('button', { name: /จัดกึ่งกลางแผนที่/i })
+    expect(recenterButton).toBeInTheDocument()
+
+    await user.click(recenterButton)
+  })
 })
+
 
