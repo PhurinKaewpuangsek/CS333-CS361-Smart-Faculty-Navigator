@@ -1,6 +1,21 @@
 import { useEffect, useState } from 'react'
-import type { PointerEvent as ReactPointerEvent } from 'react'
-import { getBuildingLabel, getCategoryLabel, getLandmarkText } from '../services/roomDisplay.ts'
+import type { PointerEvent as ReactPointerEvent, ReactNode } from 'react'
+import {
+  MapPin,
+  BookOpen,
+  Flask,
+  Briefcase,
+  Toilet,
+  Gear,
+  Package,
+  Bell,
+  Users,
+  ChalkboardTeacher,
+  X,
+  Atom,
+} from '@phosphor-icons/react'
+import { getBuildingLabel, getCategoryLabel, getLandmarkText, getCategoryColor } from '../services/roomDisplay.ts'
+
 import type { Room } from '../types/room.ts'
 
 export interface RoomDetailModalProps {
@@ -14,6 +29,21 @@ export interface RoomDetailModalProps {
 
 /** ระยะลาก (px) ที่ต้องลากลงเกินก่อนจะถือว่าผู้ใช้ต้องการปิด Modal ด้วย Gesture */
 const DRAG_TO_CLOSE_THRESHOLD = 96
+
+function renderCategoryIcon(category: string): ReactNode {
+  const key = (category || '').toLowerCase()
+  if (key.includes('lab')) return <Flask size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
+  if (key.includes('lecture')) return <BookOpen size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
+  if (key.includes('seminar')) return <ChalkboardTeacher size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
+  if (key.includes('office')) return <Briefcase size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
+  if (key.includes('toilet') || key.includes('restroom')) return <Toilet size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
+  if (key.includes('student') || key.includes('meeting') || key.includes('staff')) return <Users size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
+  if (key.includes('research')) return <Atom size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
+  if (key.includes('utility')) return <Gear size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
+  if (key.includes('storage')) return <Package size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
+  if (key.includes('service')) return <Bell size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
+  return <MapPin size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
+}
 
 export function RoomDetailModal({
   rooms,
@@ -81,7 +111,6 @@ export function RoomDetailModal({
         onClick={onClose}
       />
 
-
       {/* Sheet / Side Panel */}
       <div
         role="dialog"
@@ -106,9 +135,9 @@ export function RoomDetailModal({
             type="button"
             onClick={onClose}
             aria-label="ปิดหน้าต่างรายละเอียดห้อง"
-            className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full text-lg leading-none text-gray-500 hover:bg-gray-100 sm:static"
+            className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full text-gray-500 hover:bg-gray-100 hover:text-gray-800 transition-colors sm:static"
           >
-            ✕
+            <X size={18} weight="bold" />
           </button>
         </div>
 
@@ -143,9 +172,18 @@ export function RoomDetailModal({
                 {room.code ? ` (${room.code})` : ''}
               </p>
 
-              <span className="mt-3 inline-block w-fit rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
-                {getCategoryLabel(room.category)}
-              </span>
+              {(() => {
+                const color = getCategoryColor(room.category)
+                return (
+                  <span
+                    className={`mt-3 inline-flex items-center gap-1.5 w-fit rounded-full border ${color.border} ${color.bg} px-3 py-1 text-xs font-medium ${color.text} shadow-sm`}
+                  >
+                    {renderCategoryIcon(room.category)}
+                    <span>{getCategoryLabel(room.category)}</span>
+                  </span>
+                )
+              })()}
+
 
               <div className="mt-5 border-t border-gray-100 pt-4">
                 <h3 className="text-sm font-semibold text-gray-800">จุดสังเกตใกล้เคียง</h3>
@@ -157,11 +195,12 @@ export function RoomDetailModal({
                         key={`${landmark.kind}-${landmark.ref_location_id ?? index}`}
                         className="flex items-start gap-2 text-sm text-gray-700"
                       >
-                        <span aria-hidden="true">📍</span>
+                        <MapPin size={16} weight="fill" className="text-red-500 shrink-0 mt-0.5" aria-hidden="true" />
                         <span>{getLandmarkText(landmark)}</span>
                       </li>
                     ))}
                   </ul>
+
                 ) : (
                   <p className="mt-2 text-sm text-gray-400">
                     ยังไม่มีข้อมูลจุดสังเกตสำหรับห้องนี้
@@ -177,4 +216,5 @@ export function RoomDetailModal({
 }
 
 export default RoomDetailModal
+
 

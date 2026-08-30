@@ -28,12 +28,13 @@ export default function RoomSearchPanel({
   const [query, setQuery] = useState('')
   const [categoryKey, setCategoryKey] = useState(DEFAULT_CATEGORY_KEY)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const [isFilterExpanded, setIsFilterExpanded] = useState(true)
 
   const panelRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const hasActiveQueryOrFilter =
-    query.trim() !== '' || categoryKey !== DEFAULT_CATEGORY_KEY
+  const hasActiveFilter = categoryKey !== DEFAULT_CATEGORY_KEY
+  const hasActiveQueryOrFilter = query.trim() !== '' || hasActiveFilter
 
   const results = useMemo(
     () => (hasActiveQueryOrFilter ? filterRooms(rooms, query, categoryKey) : []),
@@ -101,7 +102,7 @@ export default function RoomSearchPanel({
   return (
     <div
       ref={panelRef}
-      className="w-full max-w-sm space-y-3 rounded-3xl bg-white/95 p-3 shadow-xl backdrop-blur"
+      className="w-full max-w-sm space-y-3 rounded-3xl bg-white/95 px-4 py-4 shadow-2xl backdrop-blur-md border border-slate-100/80 transition-all duration-200"
     >
       <SearchBar
         inputRef={inputRef}
@@ -109,8 +110,19 @@ export default function RoomSearchPanel({
         onChange={handleQueryChange}
         onFocus={handleInputFocus}
         onKeyDown={handleInputKeyDown}
+        isFilterOpen={isFilterExpanded}
+        hasActiveFilter={hasActiveFilter}
+        onToggleFilter={() => setIsFilterExpanded((prev) => !prev)}
       />
-      <CategoryFilter value={categoryKey} onChange={handleCategoryChange} />
+      <div
+        className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${
+          isFilterExpanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+        }`}
+      >
+        <div className="overflow-hidden">
+          <CategoryFilter value={categoryKey} onChange={handleCategoryChange} />
+        </div>
+      </div>
       {showDropdown && (
         <SearchResultList
           rooms={results}

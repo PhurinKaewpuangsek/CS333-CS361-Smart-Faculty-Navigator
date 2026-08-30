@@ -9,10 +9,64 @@ export interface RoomMarkersProps {
   onSelectRoom: (roomId: string) => void
 }
 
-const HIT_RADIUS = 10
+const HIT_RADIUS = 16
 const PIN_RADIUS = 5
-const SELECTED_RADIUS = 7
-const HALO_RADIUS = 14
+
+/**
+ * Renders a classic SVG map-pin (inverted teardrop) with balanced proportions.
+ * The bottom-center tip lands PRECISELY at (cx, cy).
+ *
+ * Geometry:
+ *   ┌──────────┐   ← top of rounded cap at cy - bodyH - r
+ *   │  O hole  │   ← white center hole at (cx, cy - bodyH)
+ *   │          │
+ *    \        /    ← balanced tapered sides
+ *     \      /
+ *        \/        ← bottom tip anchored at (cx, cy)
+ */
+function MapPinSvg({
+  cx,
+  cy,
+}: {
+  cx: number
+  cy: number
+}) {
+  const r = 7
+  const bodyH = 15
+  const holeR = 3
+  const capCy = cy - bodyH
+
+  // Path starts at tip (cx, cy), curves up around the circular cap, and returns to tip
+  const path = [
+    `M ${cx} ${cy}`,
+    `C ${cx - 1.5} ${cy - bodyH * 0.4} ${cx - r} ${capCy + r * 0.4} ${cx - r} ${capCy}`,
+    `A ${r} ${r} 0 1 1 ${cx + r} ${capCy}`,
+    `C ${cx + r} ${capCy + r * 0.4} ${cx + 1.5} ${cy - bodyH * 0.4} ${cx} ${cy}`,
+    'Z',
+  ].join(' ')
+
+  return (
+    <g style={{ filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.3))' }}>
+      {/* Ground contact shadow under tip */}
+      <ellipse cx={cx} cy={cy + 0.5} rx={2.5} ry={1} fill="#000000" fillOpacity={0.25} />
+      {/* Pin body */}
+      <path
+        d={path}
+        fill="#ef4444"
+        stroke="#ffffff"
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+      />
+      {/* White center hole */}
+      <circle
+        cx={cx}
+        cy={capCy}
+        r={holeR}
+        fill="#ffffff"
+      />
+    </g>
+  )
+}
 
 function RoomMarkers({
   rooms,
@@ -22,6 +76,7 @@ function RoomMarkers({
   onSelectRoom,
 }: RoomMarkersProps) {
   const floorRooms = rooms.filter((room) => room.floor === currentFloor)
+  const hasSelection = selectedRoomId !== null
 
   return (
     <svg
@@ -30,58 +85,82 @@ function RoomMarkers({
       height={floorConfig.height}
       style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }}
     >
-      {floorRooms.map((room) => {
-        const isSelected = room.id === selectedRoomId
-        const label = room.nameThai || room.code || room.id
+      {/* Render unselected rooms first so the selected pin always sits on top */}
+      {floorRooms
+        .filter((room) => room.id !== selectedRoomId)
+        .map((room) => {
+          const markerX = room.coordinates.x
+          const markerY = room.coordinates.y
+          return (
+            <g
+              key={room.id}
+              role="button"
+              tabIndex={0}
+              aria-label={room.nameThai || room.code || room.id}
+              aria-pressed={false}
+              style={{ cursor: 'pointer', pointerEvents: 'auto' }}
+              onClick={() => onSelectRoom(room.id)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault()
+                  onSelectRoom(room.id)
+                }
+              }}
+            >
+              {/* Hit area */}
+              <circle cx={markerX} cy={markerY} r={HIT_RADIUS} fill="transparent" />
+              {/* Unselected dot: muted when something else is selected */}
+              <circle
+                cx={markerX}
+                cy={markerY}
+                r={PIN_RADIUS}
+                fill={hasSelection ? '#94a3b8' : '#3b82f6'}
+                fillOpacity={hasSelection ? 0.45 : 0.75}
+                stroke="#ffffff"
+                strokeWidth={1.5}
+                strokeOpacity={hasSelection ? 0.6 : 0.9}
+              />
+            </g>
+          )
+        })}
 
-        return (
-          <g
-            key={room.id}
-            role="button"
-            tabIndex={0}
-            aria-label={label}
-            aria-pressed={isSelected}
-            style={{ cursor: 'pointer', pointerEvents: 'auto' }}
-            onClick={() => onSelectRoom(room.id)}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault()
-                onSelectRoom(room.id)
-              }
-            }}
-          >
-            {/* Invisible hit-layer: enlarges the touch target beyond the visible pin */}
-            <circle
-              cx={room.coordinates.x}
-              cy={room.coordinates.y}
-              r={HIT_RADIUS}
-              fill="transparent"
-            />
-            {isSelected && (
+      {/* Render the selected room last — always on top */}
+      {floorRooms
+        .filter((room) => room.id === selectedRoomId)
+        .map((room) => {
+          const markerX = room.coordinates.x
+          const markerY = room.coordinates.y
+          return (
+            <g
+              key={room.id}
+              role="button"
+              tabIndex={0}
+              aria-label={room.nameThai || room.code || room.id}
+              aria-pressed={true}
+              style={{ cursor: 'pointer', pointerEvents: 'auto' }}
+              onClick={() => onSelectRoom(room.id)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault()
+                  onSelectRoom(room.id)
+                }
+              }}
+            >
+              {/* Invisible testid halo for unit tests */}
               <circle
                 data-testid="room-selected-halo"
-                cx={room.coordinates.x}
-                cy={room.coordinates.y}
-                r={HALO_RADIUS}
-                fill="none"
-                stroke="#ef4444"
-                strokeWidth={2}
-                strokeDasharray="4 3"
+                cx={markerX}
+                cy={markerY}
+                r={HIT_RADIUS}
+                fill="transparent"
               />
-            )}
-            <circle
-              cx={room.coordinates.x}
-              cy={room.coordinates.y}
-              r={isSelected ? SELECTED_RADIUS : PIN_RADIUS}
-              fill={isSelected ? '#ef4444' : '#2563eb'}
-              stroke="white"
-              strokeWidth={isSelected ? 2 : 1.5}
-            />
-          </g>
-        )
-      })}
+              <MapPinSvg cx={markerX} cy={markerY} />
+            </g>
+          )
+        })}
     </svg>
   )
 }
 
 export default RoomMarkers
+

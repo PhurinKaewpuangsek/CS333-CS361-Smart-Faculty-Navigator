@@ -1,7 +1,9 @@
 import { useRef, useEffect } from 'react'
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
 import type { ReactZoomPanPinchRef } from 'react-zoom-pan-pinch'
+import { Crosshair } from '@phosphor-icons/react'
 import type { Room } from '../../types/room'
+
 import { FLOOR_CONFIGS, getFloorConfig } from './floorConfig'
 import FloorPlanSvg from './FloorPlanSvg'
 import RoomMarkers from './RoomMarkers'
@@ -65,32 +67,17 @@ function MapContainer({
         type="button"
         aria-label="จัดกึ่งกลางแผนที่"
         onClick={() => transformRef.current?.resetTransform(300)}
-        className="absolute bottom-20 right-4 z-10 flex h-11 w-11 items-center justify-center rounded-2xl bg-white/90 text-slate-700 shadow-lg backdrop-blur hover:bg-slate-50 hover:text-blue-600 active:scale-95 transition-all sm:bottom-20 sm:right-6"
+        className="absolute bottom-20 right-4 z-10 flex h-11 w-11 items-center justify-center rounded-2xl bg-white/95 text-slate-700 shadow-2xl backdrop-blur-md border border-slate-100/80 hover:bg-slate-50 hover:text-blue-600 hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0 transition-all duration-200 cursor-pointer sm:bottom-20 sm:right-6"
       >
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          className="h-5 w-5"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <circle cx="12" cy="12" r="7" />
-          <line x1="12" y1="2" x2="12" y2="6" />
-          <line x1="12" y1="18" x2="12" y2="22" />
-          <line x1="2" y1="12" x2="6" y2="12" />
-          <line x1="18" y1="12" x2="22" y2="12" />
-          <circle cx="12" cy="12" r="2" fill="currentColor" />
-        </svg>
+        <Crosshair size={22} weight="bold" aria-hidden="true" />
       </button>
+
 
       {/* Floor switcher floating on the map */}
       <div
         role="group"
         aria-label="Floor switcher"
-        className="absolute bottom-6 right-4 z-10 flex gap-2 rounded-2xl bg-white/90 p-1.5 shadow-lg backdrop-blur sm:bottom-6 sm:right-6"
+        className="absolute bottom-6 right-4 z-10 flex gap-2 rounded-2xl bg-white/95 p-1.5 shadow-2xl backdrop-blur-md border border-slate-100/80 sm:bottom-6 sm:right-6"
       >
         {FLOOR_CONFIGS.map((config) => {
           const isActive = config.floor === currentFloor
@@ -102,8 +89,8 @@ function MapContainer({
               onClick={() => onFloorChange(config.floor)}
               className={
                 isActive
-                  ? 'rounded-xl bg-blue-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm transition-colors'
-                  : 'rounded-xl border border-slate-200 bg-white/80 px-3.5 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors'
+                  ? 'rounded-xl bg-blue-600 px-3.5 py-2 text-sm font-semibold text-white shadow-md hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 transition-all duration-200 cursor-pointer'
+                  : 'rounded-xl border border-slate-200/80 bg-white/80 px-3.5 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:-translate-y-0.5 hover:shadow-sm active:translate-y-0 transition-all duration-200 cursor-pointer'
               }
             >
               {config.label}
@@ -111,6 +98,7 @@ function MapContainer({
           )
         })}
       </div>
+
 
       <TransformWrapper
         ref={transformRef}

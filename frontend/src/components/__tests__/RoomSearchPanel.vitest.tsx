@@ -56,8 +56,9 @@ describe('RoomSearchPanel Component', () => {
     const user = userEvent.setup()
     render(<RoomSearchPanel rooms={mockRooms} onSelectRoom={vi.fn()} />)
 
-    const labButton = screen.getByRole('button', { name: 'ห้องแล็บ' })
+    const labButton = screen.getByRole('button', { name: 'ห้องปฏิบัติการ' })
     await user.click(labButton)
+
 
     expect(screen.getByRole('list')).toBeInTheDocument()
     expect(screen.getByText('BR3-201')).toBeInTheDocument()

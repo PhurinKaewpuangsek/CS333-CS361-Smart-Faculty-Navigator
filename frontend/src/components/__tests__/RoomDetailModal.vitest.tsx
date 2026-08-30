@@ -46,8 +46,9 @@ describe('RoomDetailModal Component', () => {
     expect(screen.getByText('ห้องเรียน 111')).toBeInTheDocument()
     expect(screen.getByText(/BR3-F1-R111/)).toBeInTheDocument()
     // เช็คการ Render Landmark
-    expect(screen.getByText(/📍/)).toBeInTheDocument()
+    expect(screen.getByText('NEAR')).toBeInTheDocument()
   })
+
 
   it('3. แสดง Fallback Text เมื่อห้องไม่มีข้อมูล landmarks (landmarks เป็น array ว่าง)', () => {
     render(

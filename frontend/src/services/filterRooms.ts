@@ -28,22 +28,32 @@ export const CATEGORY_FILTERS: CategoryFilterOption[] = [
   },
   {
     key: 'lecture_room',
-    label: 'ห้องเรียน',
+    label: 'ห้องบรรยาย',
     matchCategories: ['lecture_room'],
   },
   {
-    key: 'lecture_hall',
-    label: 'ห้องบรรยาย',
+    key: 'seminar_room',
+    label: 'ห้องสัมมนา',
     matchCategories: ['seminar_room'],
   },
   {
+    key: 'meeting_room',
+    label: 'ห้องประชุม',
+    matchCategories: ['meeting_room'],
+  },
+  {
+    key: 'research_room',
+    label: 'ห้องวิจัย',
+    matchCategories: ['research_room'],
+  },
+  {
     key: 'laboratory',
-    label: 'ห้องแล็บ',
-    matchCategories: ['laboratory', 'research_room'],
+    label: 'ห้องปฏิบัติการ',
+    matchCategories: ['laboratory', 'lab'],
   },
   {
     key: 'office',
-    label: 'สำนักงาน',
+    label: 'สำนักงาน / ห้องพักอาจารย์',
     matchCategories: ['faculty_office', 'department_office', 'staff_room'],
   },
   {
@@ -56,7 +66,6 @@ export const CATEGORY_FILTERS: CategoryFilterOption[] = [
       'storage',
       'service_room',
       'student_room',
-      'meeting_room',
       'unknown',
     ],
   },
