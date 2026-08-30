@@ -103,10 +103,10 @@ export function RoomDetailModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center pointer-events-none sm:justify-end sm:items-start sm:p-4">
-      {/* Backdrop (Mobile only) — แตะเพื่อปิด โดยไม่ทำให้หน้าจอมืด */}
+      {/* Backdrop (Mobile only) — แตะทะลุไปยังแผนที่ด้านหลัง */}
       <div
         data-testid="room-modal-backdrop"
-        className="absolute inset-0 bg-transparent pointer-events-auto sm:hidden"
+        className="absolute inset-0 bg-transparent pointer-events-none sm:hidden"
         aria-hidden="true"
         onClick={onClose}
       />
