@@ -59,7 +59,6 @@ function MapContainer({
     return () => clearTimeout(timer)
   }, [selectedRoomId, currentFloor, rooms])
 
-
   return (
     <div className="relative h-full w-full overflow-hidden">
       {/* Re-center floating action button */}
@@ -72,12 +71,11 @@ function MapContainer({
         <Crosshair size={22} weight="bold" aria-hidden="true" />
       </button>
 
-
       {/* Floor switcher floating on the map */}
       <div
         role="group"
         aria-label="Floor switcher"
-        className="absolute bottom-6 right-4 z-10 flex gap-2 rounded-2xl bg-white/95 p-1.5 shadow-2xl backdrop-blur-md border border-slate-100/80 sm:bottom-6 sm:right-6"
+        className="absolute bottom-6 right-4 z-10 flex gap-1.5 rounded-2xl bg-white/95 p-1.5 shadow-2xl backdrop-blur-md border border-slate-100/80 sm:bottom-6 sm:right-6"
       >
         {FLOOR_CONFIGS.map((config) => {
           const isActive = config.floor === currentFloor
@@ -89,8 +87,8 @@ function MapContainer({
               onClick={() => onFloorChange(config.floor)}
               className={
                 isActive
-                  ? 'rounded-xl bg-blue-600 px-3.5 py-2 text-sm font-semibold text-white shadow-md hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 transition-all duration-200 cursor-pointer'
-                  : 'rounded-xl border border-slate-200/80 bg-white/80 px-3.5 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:-translate-y-0.5 hover:shadow-sm active:translate-y-0 transition-all duration-200 cursor-pointer'
+                  ? 'rounded-xl bg-blue-600 border border-blue-600 px-3.5 py-1.5 text-sm font-medium text-white shadow-sm hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 transition-all duration-200 cursor-pointer'
+                  : 'rounded-xl border border-slate-200 bg-slate-100 px-3.5 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-200/80 hover:border-slate-300 hover:-translate-y-0.5 hover:shadow-sm active:translate-y-0 transition-all duration-200 cursor-pointer'
               }
             >
               {config.label}

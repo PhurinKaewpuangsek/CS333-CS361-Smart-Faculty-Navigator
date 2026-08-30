@@ -116,7 +116,7 @@ export function RoomDetailModal({
         role="dialog"
         aria-modal="true"
         aria-labelledby="room-modal-title"
-        className="pointer-events-auto relative flex max-h-[85vh] w-full max-w-md flex-col overflow-hidden rounded-t-2xl bg-white shadow-2xl sm:max-h-[calc(100vh-2rem)] sm:w-96 sm:rounded-3xl sm:border sm:border-slate-100"
+        className="pointer-events-auto relative flex max-h-[85vh] w-full max-w-md flex-col overflow-hidden rounded-t-2xl bg-white shadow-2xl animate-modal-mobile sm:animate-modal-desktop sm:max-h-[calc(100vh-2rem)] sm:w-96 sm:rounded-3xl sm:border sm:border-slate-100"
         style={{
           transform: drag.offset > 0 ? `translateY(${drag.offset}px)` : undefined,
           transition: drag.startY === null ? 'transform 150ms ease-out' : 'none',

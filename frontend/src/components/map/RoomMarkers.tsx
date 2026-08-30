@@ -1,3 +1,5 @@
+import { useContext, useState, useEffect } from 'react'
+import { Context } from 'react-zoom-pan-pinch'
 import type { Room } from '../../types/room'
 import type { FloorConfig } from './floorConfig'
 
@@ -10,60 +12,80 @@ export interface RoomMarkersProps {
 }
 
 const HIT_RADIUS = 16
-const PIN_RADIUS = 5
 
 /**
- * Renders a classic SVG map-pin (inverted teardrop) with balanced proportions.
- * The bottom-center tip lands PRECISELY at (cx, cy).
- *
- * Geometry:
- *   ┌──────────┐   ← top of rounded cap at cy - bodyH - r
- *   │  O hole  │   ← white center hole at (cx, cy - bodyH)
- *   │          │
- *    \        /    ← balanced tapered sides
- *     \      /
- *        \/        ← bottom tip anchored at (cx, cy)
+ * Safely extracts current zoom scale from react-zoom-pan-pinch context.
+ * Falls back to scale=1 in standalone test environments.
  */
-function MapPinSvg({
+function useTransformScale(): number {
+  const transformContext = useContext(Context)
+  const [scale, setScale] = useState<number>(
+    transformContext?.state?.scale ?? 1
+  )
+
+  useEffect(() => {
+    if (!transformContext) return
+    const callback = (ref: { state: { scale: number } }) => {
+      const currentScale = ref?.state?.scale
+      if (currentScale && currentScale > 0) {
+        setScale(currentScale)
+      }
+    }
+    transformContext.onChangeCallbacks.add(callback)
+    return () => {
+      transformContext.onChangeCallbacks.delete(callback)
+    }
+  }, [transformContext])
+
+  return scale
+}
+
+/**
+ * Classic Google Maps SVG pin (30x40px) in standard Google Red (#EA4335)
+ * with a dark circular center cutout and an elliptical ground drop shadow.
+ *
+ * Anchoring:
+ * - The sharp bottom tip anchors precisely at (cx, cy).
+ * - The entire 40px pin body extends upwards (y: 0 to -40) without covering room text.
+ */
+function GoogleMapsPin({
   cx,
   cy,
+  invScale,
 }: {
   cx: number
   cy: number
+  invScale: number
 }) {
-  const r = 7
-  const bodyH = 15
-  const holeR = 3
-  const capCy = cy - bodyH
-
-  // Path starts at tip (cx, cy), curves up around the circular cap, and returns to tip
-  const path = [
-    `M ${cx} ${cy}`,
-    `C ${cx - 1.5} ${cy - bodyH * 0.4} ${cx - r} ${capCy + r * 0.4} ${cx - r} ${capCy}`,
-    `A ${r} ${r} 0 1 1 ${cx + r} ${capCy}`,
-    `C ${cx + r} ${capCy + r * 0.4} ${cx + 1.5} ${cy - bodyH * 0.4} ${cx} ${cy}`,
-    'Z',
-  ].join(' ')
-
   return (
-    <g style={{ filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.3))' }}>
-      {/* Ground contact shadow under tip */}
-      <ellipse cx={cx} cy={cy + 0.5} rx={2.5} ry={1} fill="#000000" fillOpacity={0.25} />
-      {/* Pin body */}
-      <path
-        d={path}
-        fill="#ef4444"
-        stroke="#ffffff"
-        strokeWidth={1.5}
-        strokeLinejoin="round"
+    <g
+      transform={`translate(${cx}, ${cy}) scale(${invScale})`}
+      style={{
+        filter: 'drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25))',
+      }}
+    >
+      {/* Elliptical ground drop shadow under pin tip */}
+      <ellipse
+        data-testid="room-selected-halo"
+        cx={0}
+        cy={2.5}
+        rx={6.5}
+        ry={2.5}
+        fill="#000000"
+        fillOpacity={0.3}
       />
-      {/* White center hole */}
-      <circle
-        cx={cx}
-        cy={capCy}
-        r={holeR}
-        fill="#ffffff"
-      />
+
+      {/* Floating pin body with smooth entrance animation */}
+      <g className="animate-pin-drop">
+        {/* Google Maps Teardrop Shape: Google Red #EA4335 (No white border) */}
+        <path
+          d="M 0 0 C -2.5 -8 -15 -15 -15 -25 A 15 15 0 1 1 15 -25 C 15 -15 2.5 -8 0 0 Z"
+          fill="#EA4335"
+        />
+
+        {/* Dark circular center cutout */}
+        <circle cx={0} cy={-25} r={5.5} fill="#76120e" />
+      </g>
     </g>
   )
 }
@@ -75,8 +97,9 @@ function RoomMarkers({
   selectedRoomId,
   onSelectRoom,
 }: RoomMarkersProps) {
+  const scale = useTransformScale()
+  const invScale = 1 / (scale || 1)
   const floorRooms = rooms.filter((room) => room.floor === currentFloor)
-  const hasSelection = selectedRoomId !== null
 
   return (
     <svg
@@ -85,7 +108,7 @@ function RoomMarkers({
       height={floorConfig.height}
       style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }}
     >
-      {/* Render unselected rooms first so the selected pin always sits on top */}
+      {/* Render unselected room hitboxes: transparent with crisp hover feedback, no cluttering dots */}
       {floorRooms
         .filter((room) => room.id !== selectedRoomId)
         .map((room) => {
@@ -98,6 +121,7 @@ function RoomMarkers({
               tabIndex={0}
               aria-label={room.nameThai || room.code || room.id}
               aria-pressed={false}
+              className="group"
               style={{ cursor: 'pointer', pointerEvents: 'auto' }}
               onClick={() => onSelectRoom(room.id)}
               onKeyDown={(event) => {
@@ -107,18 +131,13 @@ function RoomMarkers({
                 }
               }}
             >
-              {/* Hit area */}
-              <circle cx={markerX} cy={markerY} r={HIT_RADIUS} fill="transparent" />
-              {/* Unselected dot: muted when something else is selected */}
+              {/* Forgiving hit box area with crisp hover/active visual feedback */}
               <circle
                 cx={markerX}
                 cy={markerY}
-                r={PIN_RADIUS}
-                fill={hasSelection ? '#94a3b8' : '#3b82f6'}
-                fillOpacity={hasSelection ? 0.45 : 0.75}
-                stroke="#ffffff"
-                strokeWidth={1.5}
-                strokeOpacity={hasSelection ? 0.6 : 0.9}
+                r={HIT_RADIUS}
+                fill="transparent"
+                className="transition-all duration-150 group-hover:fill-blue-500/15 group-hover:stroke-blue-500 group-hover:stroke-2"
               />
             </g>
           )
@@ -146,15 +165,7 @@ function RoomMarkers({
                 }
               }}
             >
-              {/* Invisible testid halo for unit tests */}
-              <circle
-                data-testid="room-selected-halo"
-                cx={markerX}
-                cy={markerY}
-                r={HIT_RADIUS}
-                fill="transparent"
-              />
-              <MapPinSvg cx={markerX} cy={markerY} />
+              <GoogleMapsPin cx={markerX} cy={markerY} invScale={invScale} />
             </g>
           )
         })}
