@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import type { PointerEvent as ReactPointerEvent } from 'react'
-import { useRooms } from '../hooks/useRooms.ts'
 import { getBuildingLabel, getCategoryLabel, getLandmarkText } from '../services/roomDisplay.ts'
 import type { Room } from '../types/room.ts'
 
 export interface RoomDetailModalProps {
+  rooms: Room[]
+  loading?: boolean
+  error?: Error | null
   /** id ของห้องที่ถูกเลือก (มาจาก Search Result หรือ Map Marker Click) — null = ปิด Modal */
   selectedRoomId: string | null
   onClose: () => void
@@ -13,10 +15,13 @@ export interface RoomDetailModalProps {
 /** ระยะลาก (px) ที่ต้องลากลงเกินก่อนจะถือว่าผู้ใช้ต้องการปิด Modal ด้วย Gesture */
 const DRAG_TO_CLOSE_THRESHOLD = 96
 
-export function RoomDetailModal({ selectedRoomId, onClose }: RoomDetailModalProps) {
-  
-  const { rooms, loading, error } = useRooms()
-
+export function RoomDetailModal({
+  rooms,
+  loading = false,
+  error = null,
+  selectedRoomId,
+  onClose,
+}: RoomDetailModalProps) {
   const [drag, setDrag] = useState<{ startY: number | null; offset: number }>({
     startY: null,
     offset: 0,
@@ -24,7 +29,7 @@ export function RoomDetailModal({ selectedRoomId, onClose }: RoomDetailModalProp
 
   // reset ตอนเปลี่ยนห้อง — ทำตอน render แทน useEffect
   const [prevRoomId, setPrevRoomId] = useState(selectedRoomId)
-    if (prevRoomId !== selectedRoomId) {
+  if (prevRoomId !== selectedRoomId) {
     setPrevRoomId(selectedRoomId)
     setDrag({ startY: null, offset: 0 })
   }
@@ -44,74 +49,64 @@ export function RoomDetailModal({ selectedRoomId, onClose }: RoomDetailModalProp
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [isOpen, onClose])
 
-
-  // ล็อกการ scroll พื้นหลังตอน Modal เปิดอยู่ (กัน UI เต็มจอเลื่อนพร้อมกัน)
-  useEffect(() => {
-    if (!isOpen) return
-    const originalOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.body.style.overflow = originalOverflow
-    }
-  }, [isOpen])
-
   if (!isOpen) return null
 
   function handlePointerDown(event: ReactPointerEvent<HTMLDivElement>) {
-  setDrag({ startY: event.clientY, offset: 0 })
-}
+    setDrag({ startY: event.clientY, offset: 0 })
+  }
 
-function handlePointerMove(event: ReactPointerEvent<HTMLDivElement>) {
-  setDrag((current) => {
-    if (current.startY === null) return current
-    const delta = event.clientY - current.startY
-    return delta > 0 ? { ...current, offset: delta } : current
-  })
-}
+  function handlePointerMove(event: ReactPointerEvent<HTMLDivElement>) {
+    setDrag((current) => {
+      if (current.startY === null) return current
+      const delta = event.clientY - current.startY
+      return delta > 0 ? { ...current, offset: delta } : current
+    })
+  }
 
-function handlePointerUp() {
-  if (drag.offset > DRAG_TO_CLOSE_THRESHOLD) onClose()
-  setDrag({ startY: null, offset: 0 })
-}
+  function handlePointerUp() {
+    if (drag.offset > DRAG_TO_CLOSE_THRESHOLD) onClose()
+    setDrag({ startY: null, offset: 0 })
+  }
 
   const landmarks = room?.landmarks ?? []
   const hasLandmarks = landmarks.length > 0
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center">
-      {/* Backdrop — แตะเพื่อปิด */}
+    <div className="fixed inset-0 z-50 flex items-end justify-center pointer-events-none sm:justify-end sm:items-start sm:p-4">
+      {/* Backdrop (Mobile only) — แตะเพื่อปิด โดยไม่ทำให้หน้าจอมืด */}
       <div
         data-testid="room-modal-backdrop"
-        className="absolute inset-0 bg-black/50"
+        className="absolute inset-0 bg-transparent pointer-events-auto sm:hidden"
         aria-hidden="true"
         onClick={onClose}
       />
 
-      {/* Bottom Sheet */}
+
+      {/* Sheet / Side Panel */}
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="room-modal-title"
-        className="relative flex max-h-[85vh] w-full max-w-md flex-col overflow-hidden rounded-t-2xl bg-white shadow-xl sm:max-h-[80vh] sm:rounded-2xl"
+        className="pointer-events-auto relative flex max-h-[85vh] w-full max-w-md flex-col overflow-hidden rounded-t-2xl bg-white shadow-2xl sm:max-h-[calc(100vh-2rem)] sm:w-96 sm:rounded-3xl sm:border sm:border-slate-100"
         style={{
-         transform: `translateY(${drag.offset}px)`,
-         transition: drag.startY === null ? 'transform 150ms ease-out' : 'none',
+          transform: drag.offset > 0 ? `translateY(${drag.offset}px)` : undefined,
+          transition: drag.startY === null ? 'transform 150ms ease-out' : 'none',
         }}
       >
         {/* แถบจับลาก + ปุ่มปิด */}
         <div
-          className="sticky top-0 z-10 flex shrink-0 touch-none flex-col items-center bg-white pb-1 pt-2"
+          className="sticky top-0 z-10 flex shrink-0 touch-none flex-col items-center bg-white pb-1 pt-2 sm:pt-4 sm:pb-2 sm:items-end sm:px-4"
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
           onPointerCancel={handlePointerUp}
         >
-          <div className="h-1.5 w-10 rounded-full bg-gray-300" aria-hidden="true" />
+          <div className="h-1.5 w-10 rounded-full bg-gray-300 sm:hidden" aria-hidden="true" />
           <button
             type="button"
             onClick={onClose}
             aria-label="ปิดหน้าต่างรายละเอียดห้อง"
-            className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full text-lg leading-none text-gray-500 hover:bg-gray-100"
+            className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full text-lg leading-none text-gray-500 hover:bg-gray-100 sm:static"
           >
             ✕
           </button>
@@ -125,7 +120,7 @@ function handlePointerUp() {
 
           {!loading && error && (
             <p className="py-6 text-center text-sm text-red-600">
-              เกิดข้อผิดพลาดในการโหลดข้อมูลห้อง
+              เกิดข้อผิดพลาดในการโหลดข้อมูลห้อง: {error.message}
             </p>
           )}
 
@@ -182,3 +177,4 @@ function handlePointerUp() {
 }
 
 export default RoomDetailModal
+

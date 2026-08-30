@@ -106,4 +106,22 @@ describe('MapContainer', () => {
 
     expect(onSelectRoom).toHaveBeenCalledWith('BR3-F1-R101')
   })
+
+  it('renders selected marker with aria-pressed="true" when selectedRoomId matches', () => {
+    render(
+      <MapContainer
+        rooms={rooms}
+        currentFloor={1}
+        onFloorChange={vi.fn()}
+        selectedRoomId="BR3-F1-R101"
+        onSelectRoom={vi.fn()}
+      />
+    )
+
+    expect(screen.getByRole('button', { name: 'ห้อง 101' })).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    )
+  })
 })
+
