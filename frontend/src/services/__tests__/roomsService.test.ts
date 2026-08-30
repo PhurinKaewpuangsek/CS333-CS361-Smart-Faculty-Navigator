@@ -63,10 +63,10 @@ describe('roomsService - Data Access Layer', () => {
 
       const room = normalizeRoom(samplePoi)
 
-      assert.strictEqual(room.id, 'BR3-F1-PLFTOILET')
+      assert.strictEqual(room.id, 'LC3-F1-PLFTOILET')
       assert.strictEqual(room.code, '')
       assert.strictEqual(room.nameThai, 'ห้องน้ำหญิง (ฝั่งซ้าย)')
-      assert.strictEqual(room.building, 'BR3')
+      assert.strictEqual(room.building, 'LC3')
       assert.strictEqual(room.floor, 1)
       assert.strictEqual(room.roomNumber, '')
       assert.strictEqual(room.category, 'toilet')
@@ -126,8 +126,8 @@ describe('roomsService - Data Access Layer', () => {
 
         const rooms = await getRooms()
         assert.strictEqual(rooms.length, 131)
-        assert.strictEqual(rooms[0].id, 'BR3-F1-PLFTOILET')
-        assert.strictEqual(rooms[0].building, 'BR3')
+        assert.strictEqual(rooms[0].id, 'LC3-F1-PLFTOILET')
+        assert.strictEqual(rooms[0].building, 'LC3')
       } finally {
         globalThis.fetch = originalFetch
       }

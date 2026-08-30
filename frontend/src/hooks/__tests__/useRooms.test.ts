@@ -96,10 +96,10 @@ describe('useRooms()', () => {
     assert.strictEqual(readResult().error, null)
     assert.deepStrictEqual(readResult().rooms, [
       {
-        id: 'BR3-F1-R101',
-        code: 'BR3-101',
+        id: 'LC3-F1-R101',
+        code: 'LC3-101',
         nameThai: 'ห้องบรรยาย 1',
-        building: 'BR3',
+        building: 'LC3',
         floor: 1,
         roomNumber: '101',
         category: 'lecture_room',
