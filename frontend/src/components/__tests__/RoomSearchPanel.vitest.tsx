@@ -64,7 +64,7 @@ describe('RoomSearchPanel Component', () => {
     expect(screen.queryByText('BR3-101')).not.toBeInTheDocument()
   })
 
-  it('calls onSelectRoom when a search result item is clicked', async () => {
+  it('collapses dropdown and retains query when a room is selected', async () => {
     const user = userEvent.setup()
     const handleSelectRoom = vi.fn()
     render(<RoomSearchPanel rooms={mockRooms} onSelectRoom={handleSelectRoom} />)
@@ -72,10 +72,65 @@ describe('RoomSearchPanel Component', () => {
     const input = screen.getByPlaceholderText(/ค้นหาห้อง/i)
     await user.type(input, '101')
 
+    expect(screen.getByRole('list')).toBeInTheDocument()
+
     const resultButton = screen.getByRole('button', { name: /BR3-101/i })
     await user.click(resultButton)
 
-    expect(handleSelectRoom).toHaveBeenCalledTimes(1)
+    // Selection called
     expect(handleSelectRoom).toHaveBeenCalledWith('BR3-F1-R101')
+    // Dropdown collapsed
+    expect(screen.queryByRole('list')).not.toBeInTheDocument()
+    // Query retained
+    expect(input).toHaveValue('101')
+  })
+
+  it('re-opens dropdown when search input is focused again with existing query', async () => {
+    const user = userEvent.setup()
+    render(<RoomSearchPanel rooms={mockRooms} onSelectRoom={vi.fn()} />)
+
+    const input = screen.getByPlaceholderText(/ค้นหาห้อง/i)
+    await user.type(input, '101')
+
+    const resultButton = screen.getByRole('button', { name: /BR3-101/i })
+    await user.click(resultButton)
+    expect(screen.queryByRole('list')).not.toBeInTheDocument()
+
+    // Focus input again
+    await user.click(input)
+    expect(screen.getByRole('list')).toBeInTheDocument()
+    expect(screen.getByText('BR3-101')).toBeInTheDocument()
+  })
+
+  it('dismisses dropdown when Escape key is pressed', async () => {
+    const user = userEvent.setup()
+    render(<RoomSearchPanel rooms={mockRooms} onSelectRoom={vi.fn()} />)
+
+    const input = screen.getByPlaceholderText(/ค้นหาห้อง/i)
+    await user.type(input, '101')
+    expect(screen.getByRole('list')).toBeInTheDocument()
+
+    await user.keyboard('{Escape}')
+    expect(screen.queryByRole('list')).not.toBeInTheDocument()
+    expect(input).toHaveValue('101')
+  })
+
+  it('dismisses dropdown when clicking outside', async () => {
+    const user = userEvent.setup()
+    render(
+      <div>
+        <div data-testid="outside-area">Outside</div>
+        <RoomSearchPanel rooms={mockRooms} onSelectRoom={vi.fn()} />
+      </div>
+    )
+
+    const input = screen.getByPlaceholderText(/ค้นหาห้อง/i)
+    await user.type(input, '101')
+    expect(screen.getByRole('list')).toBeInTheDocument()
+
+    const outside = screen.getByTestId('outside-area')
+    await user.click(outside)
+    expect(screen.queryByRole('list')).not.toBeInTheDocument()
   })
 })
+

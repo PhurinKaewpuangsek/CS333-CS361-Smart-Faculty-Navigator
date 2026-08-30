@@ -88,7 +88,9 @@ function MapContainer({
         maxScale={6}
         centerOnInit
         centerZoomedOut
+        limitToBounds={false}
       >
+
         <TransformComponent
           wrapperStyle={{ width: '100%', height: '100%' }}
           contentStyle={{ width: floorConfig.width, height: floorConfig.height }}

@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useRef, useEffect } from 'react'
+import type { KeyboardEvent } from 'react'
 import { filterRooms, DEFAULT_CATEGORY_KEY } from '../services/filterRooms.ts'
 import SearchBar from './SearchBar.tsx'
 import CategoryFilter from './CategoryFilter.tsx'
@@ -15,7 +16,8 @@ export interface RoomSearchPanelProps {
 
 /**
  * Search & Filter Component — floating overlay บนแผนที่
- * รับข้อมูล rooms, loading, error จาก App.tsx และซ่อนผลลัพธ์เมื่อไม่มีการค้นหา
+ * รับข้อมูล rooms, loading, error จาก App.tsx
+ * ควบคุมการเปิด/ปิด dropdown ผลลัพธ์ และซ่อน dropdown อัตโนมัติเมื่อเลือกห้อง
  */
 export default function RoomSearchPanel({
   rooms,
@@ -25,27 +27,100 @@ export default function RoomSearchPanel({
 }: RoomSearchPanelProps) {
   const [query, setQuery] = useState('')
   const [categoryKey, setCategoryKey] = useState(DEFAULT_CATEGORY_KEY)
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
-  const isSearchActive = query.trim() !== '' || categoryKey !== DEFAULT_CATEGORY_KEY
+  const panelRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const hasActiveQueryOrFilter =
+    query.trim() !== '' || categoryKey !== DEFAULT_CATEGORY_KEY
 
   const results = useMemo(
-    () => (isSearchActive ? filterRooms(rooms, query, categoryKey) : []),
-    [rooms, query, categoryKey, isSearchActive]
+    () => (hasActiveQueryOrFilter ? filterRooms(rooms, query, categoryKey) : []),
+    [rooms, query, categoryKey, hasActiveQueryOrFilter]
   )
 
+  const showDropdown = isDropdownOpen && hasActiveQueryOrFilter
+
+  function handleQueryChange(newQuery: string) {
+    setQuery(newQuery)
+    setIsDropdownOpen(true)
+  }
+
+  function handleCategoryChange(newCategoryKey: string) {
+    setCategoryKey(newCategoryKey)
+    setIsDropdownOpen(true)
+  }
+
+  function handleSelect(roomId: string) {
+    // 1. Immediately hide the search results dropdown
+    setIsDropdownOpen(false)
+    // 2. Dismiss mobile virtual keyboard
+    inputRef.current?.blur()
+    // 3. Keep existing query intact (do not clear query)
+    // 4. Trigger room selection
+    onSelectRoom(roomId)
+  }
+
+  function handleInputFocus() {
+    setIsDropdownOpen(true)
+  }
+
+  function handleInputKeyDown(event: KeyboardEvent<HTMLInputElement>) {
+    if (event.key === 'Escape') {
+      setIsDropdownOpen(false)
+      inputRef.current?.blur()
+    }
+  }
+
+  useEffect(() => {
+    function handlePointerDownOutside(event: MouseEvent | TouchEvent) {
+      if (panelRef.current && !panelRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false)
+      }
+    }
+
+    function handleKeyDown(event: globalThis.KeyboardEvent) {
+      if (event.key === 'Escape') {
+        setIsDropdownOpen(false)
+        inputRef.current?.blur()
+      }
+    }
+
+    document.addEventListener('mousedown', handlePointerDownOutside)
+    document.addEventListener('touchstart', handlePointerDownOutside)
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('mousedown', handlePointerDownOutside)
+      document.removeEventListener('touchstart', handlePointerDownOutside)
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
+
   return (
-    <div className="w-full max-w-sm space-y-3 rounded-3xl bg-white/95 p-3 shadow-xl backdrop-blur">
-      <SearchBar value={query} onChange={setQuery} />
-      <CategoryFilter value={categoryKey} onChange={setCategoryKey} />
-      {isSearchActive && (
+    <div
+      ref={panelRef}
+      className="w-full max-w-sm space-y-3 rounded-3xl bg-white/95 p-3 shadow-xl backdrop-blur"
+    >
+      <SearchBar
+        inputRef={inputRef}
+        value={query}
+        onChange={handleQueryChange}
+        onFocus={handleInputFocus}
+        onKeyDown={handleInputKeyDown}
+      />
+      <CategoryFilter value={categoryKey} onChange={handleCategoryChange} />
+      {showDropdown && (
         <SearchResultList
           rooms={results}
           loading={loading}
           error={error}
-          onSelectRoom={onSelectRoom}
+          onSelectRoom={handleSelect}
         />
       )}
     </div>
   )
 }
+
 
