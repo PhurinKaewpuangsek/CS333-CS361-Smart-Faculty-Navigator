@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useRooms } from './hooks/useRooms'
 import MapContainer from './components/map/MapContainer'
 import RoomSearchPanel from './components/RoomSearchPanel'
+import RoomDetailModal from './components/RoomDetailModal'
 
 function App() {
   const { rooms, loading, error } = useRooms()
@@ -38,10 +39,15 @@ function App() {
             onSelectRoom={handleSelectRoom}
           />
         )}
-        {selectedRoomId && <p>Selected room: {selectedRoomId}</p>}
       </section>
+
+      {/* Bottom Sheet แสดงรายละเอียดห้อง — รับ event จากทั้ง Search และ Map Marker Click ผ่าน handleSelectRoom */}
+      <RoomDetailModal
+        selectedRoomId={selectedRoomId}
+        onClose={() => setSelectedRoomId(null)}
+      />
     </div>
   )
 }
 
-export default App
+export default App
