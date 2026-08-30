@@ -141,6 +141,28 @@ describe('MapContainer', () => {
 
     await user.click(recenterButton)
   })
+
+  it('renders zoom in and zoom out buttons and handles clicks', async () => {
+    const user = userEvent.setup()
+    render(
+      <MapContainer
+        rooms={rooms}
+        currentFloor={1}
+        onFloorChange={vi.fn()}
+        selectedRoomId={null}
+        onSelectRoom={vi.fn()}
+      />
+    )
+
+    const zoomInButton = screen.getByRole('button', { name: /ขยายแผนที่/i })
+    const zoomOutButton = screen.getByRole('button', { name: /ย่อแผนที่/i })
+
+    expect(zoomInButton).toBeInTheDocument()
+    expect(zoomOutButton).toBeInTheDocument()
+
+    await user.click(zoomInButton)
+    await user.click(zoomOutButton)
+  })
 })
 
 

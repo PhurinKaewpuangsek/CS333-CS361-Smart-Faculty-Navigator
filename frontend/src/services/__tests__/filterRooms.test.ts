@@ -109,4 +109,42 @@ describe('filterRooms()', () => {
     const result = filterRooms(sampleRooms, '', 'this-key-does-not-exist')
     assert.strictEqual(result.length, sampleRooms.length)
   })
+
+  describe('synonym and slang expansions', () => {
+    it('matches laboratory via "lab", "แลป", "แล็ป", "ห้องแลป", "ห้องแล็ป"', () => {
+      const labQueries = ['lab', 'LAB', 'แลป', 'แล็ป', 'ห้องแลป', 'ห้องแล็ป']
+      for (const q of labQueries) {
+        const result = filterRooms(sampleRooms, q, 'all')
+        assert.deepStrictEqual(
+          result.map((r) => r.id),
+          ['BR3-F1-R102'],
+          `Failed matching for query "${q}"`
+        )
+      }
+    })
+
+    it('matches lecture room via "ห้องเรียน", "เรียน", "บรรยาย", "lecture"', () => {
+      const lectureQueries = ['ห้องเรียน', 'เรียน', 'บรรยาย', 'lecture', 'LECTURE']
+      for (const q of lectureQueries) {
+        const result = filterRooms(sampleRooms, q, 'all')
+        assert.deepStrictEqual(
+          result.map((r) => r.id),
+          ['BR3-F1-R101'],
+          `Failed matching for query "${q}"`
+        )
+      }
+    })
+
+    it('matches toilet via "toilet", "wc", "restroom", "สุขา", "ส้วม"', () => {
+      const toiletQueries = ['toilet', 'WC', 'restroom', 'สุขา', 'ส้วม']
+      for (const q of toiletQueries) {
+        const result = filterRooms(sampleRooms, q, 'all')
+        assert.deepStrictEqual(
+          result.map((r) => r.id),
+          ['BR3-F1-PLMTOILET'],
+          `Failed matching for query "${q}"`
+        )
+      }
+    })
+  })
 })

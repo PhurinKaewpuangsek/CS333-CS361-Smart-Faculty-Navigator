@@ -32,6 +32,14 @@ const mockRooms: Room[] = [
 ]
 
 describe('RoomSearchPanel Component', () => {
+  it('renders the TORCH brand logo at the top of the panel', () => {
+    render(<RoomSearchPanel rooms={mockRooms} onSelectRoom={vi.fn()} />)
+
+    const logo = screen.getByRole('img', { name: /TORCH Faculty Nav System/i })
+    expect(logo).toBeInTheDocument()
+    expect(logo).toHaveClass('h-12')
+  })
+
   it('does not render the search result list when query is empty and category is all', () => {
     render(<RoomSearchPanel rooms={mockRooms} onSelectRoom={vi.fn()} />)
 

@@ -1,6 +1,7 @@
 import { useMemo, useState, useRef, useEffect } from 'react'
 import type { KeyboardEvent } from 'react'
 import { filterRooms, DEFAULT_CATEGORY_KEY } from '../services/filterRooms.ts'
+import torchLogo from '../assets/torchv1.PNG'
 import SearchBar from './SearchBar.tsx'
 import CategoryFilter from './CategoryFilter.tsx'
 import SearchResultList from './SearchResultList.tsx'
@@ -112,6 +113,14 @@ export default function RoomSearchPanel({
       ref={panelRef}
       className="w-full max-w-sm space-y-3 rounded-3xl bg-white/95 px-4 py-4 shadow-2xl backdrop-blur-md border border-slate-100/80 transition-all duration-200"
     >
+      <div className="flex items-center justify-start mb-4">
+        <img
+          src={torchLogo}
+          alt="TORCH Faculty Nav System"
+          className="h-12 w-auto object-contain"
+        />
+      </div>
+
       <SearchBar
         inputRef={inputRef}
         value={query}

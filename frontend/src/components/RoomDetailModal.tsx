@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import type { PointerEvent as ReactPointerEvent, ReactNode } from 'react'
+import { useEffect } from 'react'
+import type { ReactNode } from 'react'
 import {
   MapPin,
   BookOpen,
@@ -27,9 +27,6 @@ export interface RoomDetailModalProps {
   onClose: () => void
 }
 
-/** ระยะลาก (px) ที่ต้องลากลงเกินก่อนจะถือว่าผู้ใช้ต้องการปิด Modal ด้วย Gesture */
-const DRAG_TO_CLOSE_THRESHOLD = 96
-
 function renderCategoryIcon(category: string): ReactNode {
   const key = (category || '').toLowerCase()
   if (key.includes('lab')) return <Flask size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
@@ -52,18 +49,6 @@ export function RoomDetailModal({
   selectedRoomId,
   onClose,
 }: RoomDetailModalProps) {
-  const [drag, setDrag] = useState<{ startY: number | null; offset: number }>({
-    startY: null,
-    offset: 0,
-  })
-
-  // reset ตอนเปลี่ยนห้อง — ทำตอน render แทน useEffect
-  const [prevRoomId, setPrevRoomId] = useState(selectedRoomId)
-  if (prevRoomId !== selectedRoomId) {
-    setPrevRoomId(selectedRoomId)
-    setDrag({ startY: null, offset: 0 })
-  }
-
   const isOpen = selectedRoomId !== null
   const room: Room | undefined = isOpen
     ? rooms.find((r) => r.id === selectedRoomId)
@@ -81,61 +66,26 @@ export function RoomDetailModal({
 
   if (!isOpen) return null
 
-  function handlePointerDown(event: ReactPointerEvent<HTMLDivElement>) {
-    setDrag({ startY: event.clientY, offset: 0 })
-  }
-
-  function handlePointerMove(event: ReactPointerEvent<HTMLDivElement>) {
-    setDrag((current) => {
-      if (current.startY === null) return current
-      const delta = event.clientY - current.startY
-      return delta > 0 ? { ...current, offset: delta } : current
-    })
-  }
-
-  function handlePointerUp() {
-    if (drag.offset > DRAG_TO_CLOSE_THRESHOLD) onClose()
-    setDrag({ startY: null, offset: 0 })
-  }
-
   const landmarks = room?.landmarks ?? []
   const hasLandmarks = landmarks.length > 0
 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center pointer-events-none sm:justify-end sm:items-start sm:p-4">
-      {/* Backdrop (Mobile only) — แตะทะลุไปยังแผนที่ด้านหลัง */}
-      <div
-        data-testid="room-modal-backdrop"
-        className="absolute inset-0 bg-transparent pointer-events-none sm:hidden"
-        aria-hidden="true"
-        onClick={onClose}
-      />
-
-      {/* Sheet / Side Panel */}
+      {/* Modal Card: Bottom Sheet on Mobile, Floating Side Card on Desktop */}
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="room-modal-title"
         className="pointer-events-auto relative flex max-h-[85vh] w-full max-w-md flex-col overflow-hidden rounded-t-2xl bg-white shadow-2xl animate-modal-mobile sm:animate-modal-desktop sm:max-h-[calc(100vh-2rem)] sm:w-96 sm:rounded-3xl sm:border sm:border-slate-100"
-        style={{
-          transform: drag.offset > 0 ? `translateY(${drag.offset}px)` : undefined,
-          transition: drag.startY === null ? 'transform 150ms ease-out' : 'none',
-        }}
       >
-        {/* แถบจับลาก + ปุ่มปิด */}
-        <div
-          className="sticky top-0 z-10 flex shrink-0 touch-none flex-col items-center bg-white pb-1 pt-2 sm:pt-4 sm:pb-2 sm:items-end sm:px-4"
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={handlePointerUp}
-          onPointerCancel={handlePointerUp}
-        >
-          <div className="h-1.5 w-10 rounded-full bg-gray-300 sm:hidden" aria-hidden="true" />
+        {/* Top Header with Close Button */}
+        <div className="relative flex shrink-0 items-center justify-end bg-white px-5 pt-3 pb-1 sm:pt-4 sm:pb-2">
+          <div className="h-1.5 w-10 rounded-full bg-slate-200 sm:hidden mx-auto absolute left-1/2 -translate-x-1/2 top-2" aria-hidden="true" />
           <button
             type="button"
             onClick={onClose}
             aria-label="ปิดหน้าต่างรายละเอียดห้อง"
-            className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full text-gray-500 hover:bg-gray-100 hover:text-gray-800 transition-colors sm:static"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 hover:bg-slate-100 hover:text-slate-700 active:bg-slate-200 transition-colors cursor-pointer"
           >
             <X size={18} weight="bold" />
           </button>

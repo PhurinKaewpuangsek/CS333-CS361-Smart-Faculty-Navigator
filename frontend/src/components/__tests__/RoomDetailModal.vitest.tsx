@@ -75,15 +75,23 @@ describe('RoomDetailModal Component', () => {
     expect(handleClose).toHaveBeenCalledTimes(1)
   })
 
-  it('5. เรียกใช้ onClose เมื่อคลิกที่พื้นที่ Backdrop ด้านนอก', () => {
+  it('5. ไม่มี backdrop overlay บดบังแผนที่ และ wrapper เป็น pointer-events-none', () => {
+    render(
+      <RoomDetailModal rooms={mockRooms} selectedRoomId="room-1" onClose={vi.fn()} />
+    )
+
+    expect(screen.queryByTestId('room-modal-backdrop')).toBeNull()
+    const dialog = screen.getByRole('dialog')
+    expect(dialog).toHaveClass('pointer-events-auto')
+  })
+
+  it('6. เรียกใช้ onClose เมื่อกดปุ่ม Escape บนแป้นพิมพ์', () => {
     const handleClose = vi.fn()
     render(
       <RoomDetailModal rooms={mockRooms} selectedRoomId="room-1" onClose={handleClose} />
     )
 
-    const backdrop = screen.getByTestId('room-modal-backdrop')
-    fireEvent.click(backdrop)
-
+    fireEvent.keyDown(window, { key: 'Escape' })
     expect(handleClose).toHaveBeenCalledTimes(1)
   })
 })
