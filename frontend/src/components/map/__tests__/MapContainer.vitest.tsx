@@ -163,6 +163,27 @@ describe('MapContainer', () => {
     await user.click(zoomInButton)
     await user.click(zoomOutButton)
   })
+
+  it('calls onClearSelection when clicking empty map background area', async () => {
+    const user = userEvent.setup()
+    const onClearSelection = vi.fn()
+
+    render(
+      <MapContainer
+        rooms={rooms}
+        currentFloor={1}
+        onFloorChange={vi.fn()}
+        selectedRoomId="BR3-F1-R101"
+        onSelectRoom={vi.fn()}
+        onClearSelection={onClearSelection}
+      />
+    )
+
+    const mapBackground = screen.getByTestId('map-background')
+    await user.click(mapBackground)
+
+    expect(onClearSelection).toHaveBeenCalledTimes(1)
+  })
 })
 
 
