@@ -1,8 +1,8 @@
 /**
- * Validates the BR3 seed dataset against its provenance manifest and the invariants that
+ * Validates the LC3 seed dataset against its provenance manifest and the invariants that
  * make the coordinates trustworthy.
  *
- *   node --test tools/data-extraction/validate-br3-seed.mjs
+ *   node --test tools/data-extraction/validate-lc3-seed.mjs
  *
  * Uses node:test and node:assert from the Node 24 stdlib. No npm dependency, because
  * AGENTS.md §8.3 forbids installing at the repo root and no service owns this data.
@@ -16,14 +16,14 @@ import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
-const DATASET_DIR = join(REPO_ROOT, 'tools', 'data-extraction', 'br3');
+const DATASET_DIR = join(REPO_ROOT, 'tools', 'data-extraction', 'lc3');
 
 const read = (...p) => readFileSync(join(DATASET_DIR, ...p), 'utf8');
 const readJson = (...p) => JSON.parse(read(...p));
 
 const manifest = readJson('source', 'source-manifest.json');
-const seed = readJson('br3-locations.seed.json');
-const seedCsvText = read('br3-locations.seed.csv');
+const seed = readJson('lc3-locations.seed.json');
+const seedCsvText = read('lc3-locations.seed.csv');
 const inventoryText = read('reports', 'node-inventory.csv');
 
 const floorsById = new Map(seed.floors.map((f) => [f.map_asset_id, f]));
@@ -97,10 +97,11 @@ test('aliases do not collide across different locations', () => {
   }
 });
 
-test('every room carries Latin and Thai search forms', () => {
+test('every room carries canonical and source search forms', () => {
   for (const r of seed.records.filter((x) => x.location_kind === 'room')) {
-    for (const prefix of ['BR3-', 'LC3-', 'บร3-', 'บร.3-']) {
-      assert.ok(r.aliases.some((a) => a.startsWith(prefix)), `${r.location_id} has no "${prefix}" alias`);
+    const roomNumber = r.room_code.slice('LC3-'.length);
+    for (const alias of [r.room_code, `LC3_${roomNumber}`, roomNumber]) {
+      assert.ok(r.aliases.includes(alias), `${r.location_id} has no "${alias}" alias`);
     }
   }
 });
@@ -145,7 +146,7 @@ test('every landmark reference resolves to a real location on the same floor', (
 
 test('nothing claims field verification without survey evidence', () => {
   // The whole point of the verification block: "field_verified" must mean somebody checked.
-  const survey = parseCsv(read('survey', 'br3-field-survey.template.csv'));
+  const survey = parseCsv(read('survey', 'lc3-field-survey.template.csv'));
   const evidenced = new Set(survey.filter((s) => s.evidence_ref.trim()).map((s) => s.source_node_id));
   for (const r of seed.records) {
     for (const [field, status] of Object.entries(r.verification)) {

@@ -7,10 +7,10 @@ import type { Room } from '../../../types/room'
 
 const rooms: Room[] = [
   {
-    id: 'BR3-F1-R101',
-    code: 'BR3-101',
+    id: 'LC3-F1-R101',
+    code: 'LC3-101',
     nameThai: 'ห้อง 101',
-    building: 'BR3',
+    building: 'LC3',
     floor: 1,
     roomNumber: '101',
     category: 'lecture_room',
@@ -19,10 +19,10 @@ const rooms: Room[] = [
     aliases: [],
   },
   {
-    id: 'BR3-F2-R201',
-    code: 'BR3-201',
+    id: 'LC3-F2-R201',
+    code: 'LC3-201',
     nameThai: 'ห้อง 201',
-    building: 'BR3',
+    building: 'LC3',
     floor: 2,
     roomNumber: '201',
     category: 'lecture_room',
@@ -65,7 +65,7 @@ describe('RoomMarkers', () => {
     await user.click(screen.getByRole('button', { name: 'ห้อง 101' }))
 
     expect(onSelectRoom).toHaveBeenCalledTimes(1)
-    expect(onSelectRoom).toHaveBeenCalledWith('BR3-F1-R101')
+    expect(onSelectRoom).toHaveBeenCalledWith('LC3-F1-R101')
   })
 
   it('supports keyboard activation via Enter and Space', async () => {
@@ -88,7 +88,7 @@ describe('RoomMarkers', () => {
     await user.keyboard(' ')
 
     expect(onSelectRoom).toHaveBeenCalledTimes(2)
-    expect(onSelectRoom).toHaveBeenCalledWith('BR3-F1-R101')
+    expect(onSelectRoom).toHaveBeenCalledWith('LC3-F1-R101')
   })
 
   it('renders a selected halo only for the selected room', () => {
@@ -97,7 +97,7 @@ describe('RoomMarkers', () => {
         rooms={rooms}
         currentFloor={1}
         floorConfig={getFloorConfig(1)}
-        selectedRoomId="BR3-F1-R101"
+        selectedRoomId="LC3-F1-R101"
         onSelectRoom={vi.fn()}
       />
     )

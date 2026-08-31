@@ -89,6 +89,6 @@ vite.config.ts.timestamp-*
 .vite/
 **/.vite/
 
-# BR3 map QA previews (derived, ~1.5 MB of pin-baked SVG)
-tools/data-extraction/datasets/br3/reports/qa/
+# LC3 map QA previews (derived, ~1.5 MB of pin-baked SVG)
+tools/data-extraction/lc3/reports/qa/
 tools/data-extraction/**/reports/qa/

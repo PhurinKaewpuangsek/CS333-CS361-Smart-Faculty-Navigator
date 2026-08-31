@@ -6,10 +6,10 @@ import type { Room } from '../../types/room.ts'
 const mockRooms: Room[] = [
   {
     id: 'room-1',
-    code: 'BR3-F1-R111',
+    code: 'LC3-F1-R111',
     roomNumber: '111',
     nameThai: 'ห้องเรียน 111',
-    building: 'BR3',
+    building: 'LC3',
     floor: 1,
     category: 'LECTURE_ROOM',
     coordinates: { x: 0, y: 0 },
@@ -18,10 +18,10 @@ const mockRooms: Room[] = [
   },
   {
     id: 'room-2',
-    code: 'BR3-F1-R112',
+    code: 'LC3-F1-R112',
     roomNumber: '112',
     nameThai: 'ห้องปฏิบัติการ 112',
-    building: 'BR3',
+    building: 'LC3',
     floor: 1,
     category: 'LAB',
     coordinates: { x: 0, y: 0 },
@@ -44,7 +44,7 @@ describe('RoomDetailModal Component', () => {
     )
 
     expect(screen.getByText('ห้องเรียน 111')).toBeInTheDocument()
-    expect(screen.getByText(/BR3-F1-R111/)).toBeInTheDocument()
+    expect(screen.getByText(/LC3-F1-R111/)).toBeInTheDocument()
     // เช็คการ Render Landmark
     expect(screen.getByText('NEAR')).toBeInTheDocument()
   })

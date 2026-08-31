@@ -1,10 +1,10 @@
 /**
- * Bakes the extracted BR3 pins into copies of the floor-plan SVGs so a reviewer can confirm
+ * Bakes the extracted LC3 pins into copies of the floor-plan SVGs so a reviewer can confirm
  * that every marker lands inside the room it claims.
  *
- *   node database/tools/preview-br3-overlay.mjs
+ *   node tools/data-extraction/preview-lc3-overlay.mjs
  *
- * Output goes to database/datasets/br3/reports/qa/ which is gitignored — these are ~1.5 MB
+ * Output goes to tools/data-extraction/lc3/reports/qa/ which is gitignored — these are ~1.5 MB
  * of derived artwork and must never enter the repo.
  *
  * The pins are written directly into the SVG rather than served from an HTML page that
@@ -18,7 +18,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
-const DATASET_DIR = join(REPO_ROOT, 'database', 'datasets', 'br3');
+const DATASET_DIR = join(REPO_ROOT, 'tools', 'data-extraction', 'lc3');
 const QA_DIR = join(DATASET_DIR, 'reports', 'qa');
 
 /**
@@ -118,7 +118,7 @@ function main() {
   const leftWing = included.filter((r) => r.floor === '1' && Number(r.source_x) < LEFT_WING_MAX_SOURCE_X);
   const survey = included.filter((r) => r.flags.includes('needs_field_validation'));
   const checklist = [
-    '# BR3 pin verification checklist',
+    '# LC3 pin verification checklist',
     '',
     'Open the `.preview.svg` files in a browser and confirm each pin sits inside the room it names.',
     '',
@@ -146,7 +146,7 @@ function main() {
   writeFileSync(checklistPath, checklist, 'utf8');
   written.push([checklistPath, `${leftWing.length} left-wing + ${survey.length} survey rows`]);
 
-  console.log('preview-br3-overlay: OK');
+  console.log('preview-lc3-overlay: OK');
   for (const [path, note] of written) console.log(`  ${path.slice(REPO_ROOT.length + 1)}  (${note})`);
 }
 
