@@ -18,7 +18,7 @@ function App() {
   }
 
   return (
-    <main className="relative h-screen w-screen overflow-hidden bg-slate-100 font-sans">
+    <main className="relative h-[100dvh] w-screen overflow-hidden bg-slate-100 font-sans">
       {/* Primary Workspace: Interactive SVG Map */}
       <MapContainer
         rooms={rooms}
