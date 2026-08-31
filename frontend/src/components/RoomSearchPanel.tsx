@@ -111,13 +111,13 @@ export default function RoomSearchPanel({
   return (
     <div
       ref={panelRef}
-      className="w-full max-w-sm space-y-3 rounded-3xl bg-white/95 px-4 py-4 shadow-2xl backdrop-blur-md border border-slate-100/80 transition-all duration-200"
+      className="w-full max-w-sm space-y-2.5 sm:space-y-3 rounded-3xl bg-white/95 px-4 py-3 sm:py-4 shadow-2xl backdrop-blur-md border border-slate-100/80 transition-all duration-200"
     >
-      <div className="flex items-center justify-start mb-4">
+      <div className="flex items-center justify-start mb-2 sm:mb-4">
         <img
           src={torchLogo}
           alt="TORCH Faculty Nav System"
-          className="h-12 w-auto object-contain"
+          className="h-7 sm:h-10 w-auto object-contain"
         />
       </div>
 

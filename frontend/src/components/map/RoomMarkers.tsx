@@ -123,10 +123,14 @@ function RoomMarkers({
               aria-pressed={false}
               className="group"
               style={{ cursor: 'pointer', pointerEvents: 'auto' }}
-              onClick={() => onSelectRoom(room.id)}
+              onClick={(event) => {
+                event.stopPropagation()
+                onSelectRoom(room.id)
+              }}
               onKeyDown={(event) => {
                 if (event.key === 'Enter' || event.key === ' ') {
                   event.preventDefault()
+                  event.stopPropagation()
                   onSelectRoom(room.id)
                 }
               }}
@@ -157,10 +161,14 @@ function RoomMarkers({
               aria-label={room.nameThai || room.code || room.id}
               aria-pressed={true}
               style={{ cursor: 'pointer', pointerEvents: 'auto' }}
-              onClick={() => onSelectRoom(room.id)}
+              onClick={(event) => {
+                event.stopPropagation()
+                onSelectRoom(room.id)
+              }}
               onKeyDown={(event) => {
                 if (event.key === 'Enter' || event.key === ' ') {
                   event.preventDefault()
+                  event.stopPropagation()
                   onSelectRoom(room.id)
                 }
               }}

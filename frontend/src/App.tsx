@@ -8,17 +8,28 @@ function App() {
   const { rooms, loading, error } = useRooms()
   const [currentFloor, setCurrentFloor] = useState(1)
   const [selectedRoomId, setSelectedRoomId] = useState<string | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   function handleSelectRoom(roomId: string) {
     setSelectedRoomId(roomId)
+    setIsModalOpen(true)
     const selected = rooms.find((room) => room.id === roomId)
     if (selected && selected.floor !== currentFloor) {
       setCurrentFloor(selected.floor)
     }
   }
 
+  function handleCloseModal() {
+    setIsModalOpen(false)
+  }
+
+  function handleClearSelection() {
+    setSelectedRoomId(null)
+    setIsModalOpen(false)
+  }
+
   return (
-    <main className="relative h-screen w-screen overflow-hidden bg-slate-100 font-sans">
+    <main className="relative h-[100dvh] w-screen overflow-hidden bg-slate-100 font-sans">
       {/* Primary Workspace: Interactive SVG Map */}
       <MapContainer
         rooms={rooms}
@@ -26,6 +37,7 @@ function App() {
         onFloorChange={setCurrentFloor}
         selectedRoomId={selectedRoomId}
         onSelectRoom={handleSelectRoom}
+        onClearSelection={handleClearSelection}
       />
 
       {/* Floating Search & Category Filter Overlay */}
@@ -41,13 +53,16 @@ function App() {
       </div>
 
       {/* Room Detail Modal: Bottom Sheet on Mobile, Side Panel on Desktop */}
-      <RoomDetailModal
-        rooms={rooms}
-        loading={loading}
-        error={error}
-        selectedRoomId={selectedRoomId}
-        onClose={() => setSelectedRoomId(null)}
-      />
+      {isModalOpen && selectedRoomId && (
+        <RoomDetailModal
+          rooms={rooms}
+          loading={loading}
+          error={error}
+          selectedRoomId={selectedRoomId}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+        />
+      )}
     </main>
   )
 }
