@@ -22,8 +22,10 @@ export interface RoomDetailModalProps {
   rooms: Room[]
   loading?: boolean
   error?: Error | null
-  /** id ของห้องที่ถูกเลือก (มาจาก Search Result หรือ Map Marker Click) — null = ปิด Modal */
+  /** id ของห้องที่ถูกเลือก (มาจาก Search Result หรือ Map Marker Click) */
   selectedRoomId: string | null
+  /** ควบคุมการแสดงผล Modal — ถ้าไม่ระบุจะเปิดเมื่อ selectedRoomId !== null */
+  isOpen?: boolean
   onClose: () => void
 }
 
@@ -47,9 +49,13 @@ export function RoomDetailModal({
   loading = false,
   error = null,
   selectedRoomId,
+  isOpen: isOpenProp,
   onClose,
 }: RoomDetailModalProps) {
-  const isOpen = selectedRoomId !== null
+  const isOpen =
+    isOpenProp !== undefined
+      ? isOpenProp && selectedRoomId !== null
+      : selectedRoomId !== null
   const room: Room | undefined = isOpen
     ? rooms.find((r) => r.id === selectedRoomId)
     : undefined

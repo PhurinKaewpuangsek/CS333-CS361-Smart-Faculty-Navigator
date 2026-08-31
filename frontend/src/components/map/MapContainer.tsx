@@ -15,6 +15,7 @@ export interface MapContainerProps {
   onFloorChange: (floor: number) => void
   selectedRoomId: string | null
   onSelectRoom: (roomId: string) => void
+  onClearSelection?: () => void
 }
 
 const PADDING_X = 300
@@ -26,9 +27,11 @@ function MapContainer({
   onFloorChange,
   selectedRoomId,
   onSelectRoom,
+  onClearSelection,
 }: MapContainerProps) {
   const floorConfig = getFloorConfig(currentFloor)
   const transformRef = useRef<ReactZoomPanPinchRef | null>(null)
+  const pointerStartRef = useRef<{ x: number; y: number } | null>(null)
 
   useEffect(() => {
     if (!selectedRoomId) return
@@ -168,7 +171,21 @@ function MapContainer({
           contentStyle={{ padding: `${PADDING_Y}px ${PADDING_X}px` }}
         >
 
-          <div style={{ position: 'relative', width: floorConfig.width, height: floorConfig.height }}>
+          <div
+            data-testid="map-background"
+            style={{ position: 'relative', width: floorConfig.width, height: floorConfig.height }}
+            onPointerDown={(e) => {
+              pointerStartRef.current = { x: e.clientX, y: e.clientY }
+            }}
+            onClick={(e) => {
+              if (pointerStartRef.current) {
+                const dx = Math.abs(e.clientX - pointerStartRef.current.x)
+                const dy = Math.abs(e.clientY - pointerStartRef.current.y)
+                if (dx > 5 || dy > 5) return
+              }
+              onClearSelection?.()
+            }}
+          >
             <FloorPlanSvg floorConfig={floorConfig} />
             <RoomMarkers
               rooms={rooms}
