@@ -1,16 +1,16 @@
 import type { RawRoomRecord, Room, RoomsDataResponse } from '../types/room'
 
 export function normalizeRoom(raw: RawRoomRecord): Room {
-  const roomCode = (raw.room_code ?? '').replace(/^BR3-/i, 'LC3-')
+  const roomCode = raw.room_code ?? ''
   const derivedRoomNumber =
     raw.room_number ??
     (roomCode.includes('-') ? roomCode.substring(roomCode.indexOf('-') + 1) : roomCode)
 
   return {
-    id: (raw.location_id ?? '').replace(/BR3/gi, 'LC3'),
+    id: raw.location_id ?? '',
     code: roomCode,
     nameThai: raw.name_th ?? '',
-    building: (raw.building_code ?? '').replace(/^BR3$/i, 'LC3'),
+    building: raw.building_code ?? '',
     floor: typeof raw.floor === 'number' ? raw.floor : Number(raw.floor) || 0,
     roomNumber: derivedRoomNumber,
     category: raw.category ?? '',

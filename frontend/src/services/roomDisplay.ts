@@ -7,8 +7,7 @@ import type { Landmark } from '../types/room.ts'
  */
 
 const BUILDING_NAMES_TH: Record<string, string> = {
-  LC3: 'อาคาร บร.3',
-  BR3: 'อาคาร บร.3',
+  LC3: 'อาคาร LC3',
 }
 
 const CATEGORY_LABELS_TH: Record<string, string> = {

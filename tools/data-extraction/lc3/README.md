@@ -1,7 +1,7 @@
-# BR3 map assets and location inventory
+# LC3 map assets and location inventory
 
-Floor-plan assets and the extracted location inventory for **อาคาร บร.3** (building code `BR3`,
-legacy code `LC3`), floors 1–2. Issue #8.
+Floor-plan assets and the extracted location inventory for **อาคาร LC3** (building code `LC3`),
+floors 1–2. Issue #8.
 
 This directory is **data and assets only**. It contains no SQL, no importer, and no runtime code.
 
@@ -9,24 +9,24 @@ This directory is **data and assets only**. It contains no SQL, no importer, and
 
 | Path | What it is |
 | --- | --- |
-| `br3-locations.seed.json` | **Generated. The seed dataset — the deliverable.** 131 records |
-| `br3-locations.seed.csv` | Generated from the same in-memory array as the JSON, so the two cannot drift |
+| `lc3-locations.seed.json` | **Generated. The seed dataset — the deliverable.** 131 records |
+| `lc3-locations.seed.csv` | Generated from the same in-memory array as the JSON, so the two cannot drift |
 | `source/graph.source.json` | Byte-identical copy of the upstream `Database/graph.json` blob (288 nodes, 302 edges) |
 | `source/source-manifest.json` | Provenance: source repo + commit, SHA-256 of every copied file, per-floor viewBox and coordinate transform |
 | `reports/node-inventory.csv` | Generated. Every one of the 288 source nodes with a disposition and a reason |
-| `survey/br3-field-survey.template.csv` | Generated. Worksheet for the things that need a person standing in the building |
-| `../../../frontend/public/maps/br3/floor-{1,2}.svg` | The floor-plan assets, byte-identical to the upstream blobs |
+| `survey/lc3-field-survey.template.csv` | Generated. Worksheet for the things that need a person standing in the building |
+| `../../../frontend/public/maps/lc3/floor-{1,2}.svg` | The floor-plan assets, byte-identical to the upstream blobs |
 
 ## Commands
 
 ```bash
-node database/tools/extract-br3.mjs                  # regenerate seed + inventory + survey template
-node database/tools/extract-br3.mjs --verify-assets  # also re-check SHA-256 and viewBox
-node --test database/tools/validate-br3-seed.mjs     # 22 checks over the generated dataset
-node database/tools/preview-br3-overlay.mjs          # write pin-baked QA SVGs to reports/qa/
+node tools/data-extraction/extract-lc3.mjs                  # regenerate seed + inventory + survey template
+node tools/data-extraction/extract-lc3.mjs --verify-assets  # also re-check SHA-256 and viewBox
+node --test tools/data-extraction/validate-lc3-seed.mjs     # 22 checks over the generated dataset
+node tools/data-extraction/preview-lc3-overlay.mjs          # write pin-baked QA SVGs to reports/qa/
 ```
 
-Everything under "Generated" above comes out of `extract-br3.mjs`. **Never hand-edit them** —
+Everything under "Generated" above comes out of `extract-lc3.mjs`. **Never hand-edit them** —
 the next run overwrites your change. Corrections belong in the generator or in the survey results.
 
 Both scripts are Node 24 stdlib with **zero dependencies** — `AGENTS.md` §8.3 forbids installing
@@ -34,7 +34,7 @@ at the repo root, and neither `frontend/` nor `backend/` owns this data. For the
 are `.mjs` rather than TypeScript: no TS toolchain exists outside the two service directories yet.
 
 They are not wired into CI. `.github/workflows/` is off-limits outside a `ci/` issue (§6.4); wiring
-`extract-br3.mjs` in as a drift check is a follow-up.
+`extract-lc3.mjs` in as a drift check is a follow-up.
 
 ## Coordinate system
 
@@ -84,7 +84,7 @@ the asset is ever swapped again.
 
 ## Room codes
 
-Room code is `BR3-` plus the **full** upstream node name, slash included: `BR3-101/1`.
+Room code is `LC3-` plus the **full** upstream node name, slash included: `LC3-101/1`.
 
 > The slash is part of the room number, not a duplicate marker. `101/1` is ห้องบรรยาย 4 and
 > `101/2` is ห้องสัมมนาบัณฑิตศึกษา — different rooms. `125` has no name upstream while `125/1` is
@@ -141,7 +141,7 @@ The 302 edges are read for this and **never emitted** — no routing data is in 
 - **Issue #7** owns the facility schema. Nothing in this directory is a ratified contract; the
   inventory's column set is a starting point for that discussion, not a decision.
 - **Issue #19** owns the DDL and the importer. `database/init.sql` is untouched.
-- **Issue #10** will render these SVGs. They live under `frontend/public/maps/br3/` so Vite serves
+- **Issue #10** will render these SVGs. They live under `frontend/public/maps/lc3/` so Vite serves
   them once the frontend is scaffolded; `map_asset_id` in the inventory is the logical handle.
 
 Upstream is a teammate's coursework repo

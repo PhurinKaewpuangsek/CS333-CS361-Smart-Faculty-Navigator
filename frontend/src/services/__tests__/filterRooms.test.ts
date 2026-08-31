@@ -5,10 +5,10 @@ import type { Room } from '../../types/room.ts'
 
 function makeRoom(overrides: Partial<Room>): Room {
   return {
-    id: 'BR3-F1-R000',
-    code: 'BR3-000',
+    id: 'LC3-F1-R000',
+    code: 'LC3-000',
     nameThai: 'ห้องทดสอบ',
-    building: 'BR3',
+    building: 'LC3',
     floor: 1,
     roomNumber: '000',
     category: 'lecture_room',
@@ -21,21 +21,21 @@ function makeRoom(overrides: Partial<Room>): Room {
 
 const sampleRooms: Room[] = [
   makeRoom({
-    id: 'BR3-F1-R101',
-    code: 'BR3-101',
+    id: 'LC3-F1-R101',
+    code: 'LC3-101',
     nameThai: 'ห้องบรรยาย 1',
     category: 'lecture_room',
     aliases: ['LC3-101', '101'],
   }),
   makeRoom({
-    id: 'BR3-F1-R102',
-    code: 'BR3-102',
+    id: 'LC3-F1-R102',
+    code: 'LC3-102',
     nameThai: 'ห้องปฏิบัติการเคมี',
     category: 'laboratory',
     aliases: ['LC3-102', '102'],
   }),
   makeRoom({
-    id: 'BR3-F1-PLMTOILET',
+    id: 'LC3-F1-PLMTOILET',
     code: '',
     nameThai: 'ห้องน้ำชาย (ฝั่งซ้าย)',
     category: 'toilet',
@@ -50,10 +50,10 @@ describe('filterRooms()', () => {
   })
 
   it('matches by room code, case-insensitively', () => {
-    const result = filterRooms(sampleRooms, 'br3-101', 'all')
+    const result = filterRooms(sampleRooms, 'lc3-101', 'all')
     assert.deepStrictEqual(
       result.map((room) => room.id),
-      ['BR3-F1-R101']
+      ['LC3-F1-R101']
     )
   })
 
@@ -61,7 +61,7 @@ describe('filterRooms()', () => {
     const result = filterRooms(sampleRooms, 'เคมี', 'all')
     assert.deepStrictEqual(
       result.map((room) => room.id),
-      ['BR3-F1-R102']
+      ['LC3-F1-R102']
     )
   })
 
@@ -69,7 +69,7 @@ describe('filterRooms()', () => {
     const result = filterRooms(sampleRooms, 'lc3-102', 'all')
     assert.deepStrictEqual(
       result.map((room) => room.id),
-      ['BR3-F1-R102']
+      ['LC3-F1-R102']
     )
   })
 
@@ -77,7 +77,7 @@ describe('filterRooms()', () => {
     const result = filterRooms(sampleRooms, '', 'laboratory')
     assert.deepStrictEqual(
       result.map((room) => room.id),
-      ['BR3-F1-R102']
+      ['LC3-F1-R102']
     )
   })
 
@@ -85,7 +85,7 @@ describe('filterRooms()', () => {
     const matching = filterRooms(sampleRooms, '102', 'laboratory')
     assert.deepStrictEqual(
       matching.map((room) => room.id),
-      ['BR3-F1-R102']
+      ['LC3-F1-R102']
     )
 
     const mismatchedCategory = filterRooms(sampleRooms, '102', 'lecture_room')
@@ -98,10 +98,10 @@ describe('filterRooms()', () => {
   })
 
   it('trims whitespace around the query', () => {
-    const result = filterRooms(sampleRooms, '  Br3-101  ', 'all')
+    const result = filterRooms(sampleRooms, '  Lc3-101  ', 'all')
     assert.deepStrictEqual(
       result.map((room) => room.id),
-      ['BR3-F1-R101']
+      ['LC3-F1-R101']
     )
   })
 
@@ -117,7 +117,7 @@ describe('filterRooms()', () => {
         const result = filterRooms(sampleRooms, q, 'all')
         assert.deepStrictEqual(
           result.map((r) => r.id),
-          ['BR3-F1-R102'],
+          ['LC3-F1-R102'],
           `Failed matching for query "${q}"`
         )
       }
@@ -129,7 +129,7 @@ describe('filterRooms()', () => {
         const result = filterRooms(sampleRooms, q, 'all')
         assert.deepStrictEqual(
           result.map((r) => r.id),
-          ['BR3-F1-R101'],
+          ['LC3-F1-R101'],
           `Failed matching for query "${q}"`
         )
       }
@@ -141,7 +141,7 @@ describe('filterRooms()', () => {
         const result = filterRooms(sampleRooms, q, 'all')
         assert.deepStrictEqual(
           result.map((r) => r.id),
-          ['BR3-F1-PLMTOILET'],
+          ['LC3-F1-PLMTOILET'],
           `Failed matching for query "${q}"`
         )
       }

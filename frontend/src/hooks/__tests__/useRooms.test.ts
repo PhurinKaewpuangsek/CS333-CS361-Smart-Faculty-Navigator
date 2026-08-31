@@ -76,10 +76,10 @@ describe('useRooms()', () => {
         createResponse({
           records: [
             {
-              location_id: 'BR3-F1-R101',
-              room_code: 'BR3-101',
+              location_id: 'LC3-F1-R101',
+              room_code: 'LC3-101',
               name_th: 'ห้องบรรยาย 1',
-              building_code: 'BR3',
+              building_code: 'LC3',
               floor: 1,
               room_number: '101',
               category: 'lecture_room',

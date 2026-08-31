@@ -1,11 +1,11 @@
 /**
- * Extracts the BR3 (อาคาร บร.3) location inventory from the legacy CS232 map graph.
+ * Extracts the LC3 (อาคาร LC3) location inventory from the legacy CS232 map graph.
  *
  * Node 24 stdlib only — AGENTS.md §8.3 forbids installing dependencies at the repo
  * root, and no service package.json exists yet, so this script must stay dependency-free.
  *
- *   node tools/data-extraction/extract-br3.mjs                 regenerate the node inventory
- *   node tools/data-extraction/extract-br3.mjs --verify-assets re-check asset hashes and bounds
+ *   node tools/data-extraction/extract-lc3.mjs                 regenerate the node inventory
+ *   node tools/data-extraction/extract-lc3.mjs --verify-assets re-check asset hashes and bounds
  *
  * Scope is issue #8: nodes only. The 302 routing edges in the source graph are read but
  * never emitted — routing is a later issue. Schema and DB import belong to #7 and #19.
@@ -17,13 +17,13 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
-const DATASET_DIR = join(REPO_ROOT, 'tools', 'data-extraction', 'br3');
+const DATASET_DIR = join(REPO_ROOT, 'tools', 'data-extraction', 'lc3');
 const MANIFEST_PATH = join(DATASET_DIR, 'source', 'source-manifest.json');
 const GRAPH_PATH = join(DATASET_DIR, 'source', 'graph.source.json');
 const INVENTORY_PATH = join(DATASET_DIR, 'reports', 'node-inventory.csv');
-const SURVEY_PATH = join(DATASET_DIR, 'survey', 'br3-field-survey.template.csv');
-const SEED_JSON_PATH = join(DATASET_DIR, 'br3-locations.seed.json');
-const SEED_CSV_PATH = join(DATASET_DIR, 'br3-locations.seed.csv');
+const SURVEY_PATH = join(DATASET_DIR, 'survey', 'lc3-field-survey.template.csv');
+const SEED_JSON_PATH = join(DATASET_DIR, 'lc3-locations.seed.json');
+const SEED_CSV_PATH = join(DATASET_DIR, 'lc3-locations.seed.csv');
 
 /**
  * Beyond this many walkable hops a POI stops being a useful landmark. 15 is not arbitrary:
@@ -335,7 +335,7 @@ function main() {
       y: c.disposition === 'include' ? y : '',
       // The slash in "101/1" is part of the room number — 101/1 and 101/2 are different
       // rooms with different purposes. Never split on it to derive a "base" room code.
-      room_code: c.disposition === 'include' && c.kind === 'room' ? `BR3-${node.name}` : '',
+      room_code: c.disposition === 'include' && c.kind === 'room' ? `LC3-${node.name}` : '',
       location_kind: c.kind ?? '',
       category: c.category ?? '',
       name_th: c.nameTh ?? '',
@@ -349,14 +349,14 @@ function main() {
 
     const prefix = c.kind === 'room' ? 'R' : 'P';
     const aliases = c.kind === 'room'
-      ? [`BR3-${node.name}`, `LC3-${node.name}`, `LC3_${node.name}`, `บร3-${node.name}`, `บร.3-${node.name}`, node.name]
+      ? [`LC3-${node.name}`, `LC3_${node.name}`, node.name]
       : [];
     seedByNodeId.set(node.id, {
-      location_id: `BR3-F${node.floor}-${prefix}${slug(node.name)}`,
-      building_code: 'BR3',
+      location_id: `LC3-F${node.floor}-${prefix}${slug(node.name)}`,
+      building_code: 'LC3',
       floor: node.floor,
       location_kind: c.kind,
-      room_code: c.kind === 'room' ? `BR3-${node.name}` : '',
+      room_code: c.kind === 'room' ? `LC3-${node.name}` : '',
       aliases: [...new Set(aliases)],
       name_th: c.nameTh,
       category: c.category,
@@ -366,8 +366,8 @@ function main() {
       // Only states what is actually known. The landmark clause is appended by the field pass,
       // never generated here — an unverified "ใกล้ห้องน้ำ" in user-facing text is a lie.
       detail_th: c.nameTh
-        ? `อาคาร บร.3 ชั้น ${node.floor} ${c.kind === 'room' ? `ห้อง ${node.name} — ${c.nameTh}` : c.nameTh}`
-        : `อาคาร บร.3 ชั้น ${node.floor} ห้อง ${node.name}`,
+        ? `อาคาร LC3 ชั้น ${node.floor} ${c.kind === 'room' ? `ห้อง ${node.name} — ${c.nameTh}` : c.nameTh}`
+        : `อาคาร LC3 ชั้น ${node.floor} ห้อง ${node.name}`,
       landmarks: [],
       source: { node_id: node.id, node_type: node.type, x: node.x, y: node.y, translation: { dx, dy } },
       verification: {
@@ -401,7 +401,7 @@ function main() {
   }
 
   if (problems.length > 0) {
-    console.error('extract-br3: FAILED\n');
+    console.error('extract-lc3: FAILED\n');
     for (const p of problems) console.error(`  - ${p}`);
     process.exitCode = 1;
     return;
@@ -454,9 +454,9 @@ function main() {
 
   const withLandmarks = seedRecords.filter((r) => r.landmarks.length > 0).length;
   const seedDoc = {
-    generated_by: 'database/tools/extract-br3.mjs',
+    generated_by: 'tools/data-extraction/extract-lc3.mjs',
     manifest: 'source/source-manifest.json',
-    building: { code: 'BR3', legacy_code: 'LC3', name_th: 'อาคาร บร.3', aliases: ['BR3', 'LC3', 'บร3', 'บร.3'] },
+    building: { code: 'LC3', name_th: 'อาคาร LC3', aliases: ['LC3'] },
     floors: manifest.assets.map((a) => ({
       floor: a.floor,
       map_asset_id: a.map_asset_id,
@@ -476,7 +476,7 @@ function main() {
   writeFileSync(SEED_JSON_PATH, JSON.stringify(seedDoc, null, 2) + '\n', 'utf8');
   writeFileSync(SEED_CSV_PATH, seedToCsv(seedRecords), 'utf8');
 
-  console.log('extract-br3: OK');
+  console.log('extract-lc3: OK');
   console.log(`  source nodes            ${graph.nodes.length}`);
   console.log(`  include                 ${counts.include}`);
   console.log(`  exclude_out_of_scope    ${counts.exclude_out_of_scope}`);

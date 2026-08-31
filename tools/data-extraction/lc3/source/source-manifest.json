@@ -1,0 +1,90 @@
+{
+  "manifest_version": 1,
+  "building": {
+    "code": "LC3",
+    "name_th": "อาคาร LC3"
+  },
+  "source": {
+    "repository": "https://github.com/ronnakrit303/CS232-Map_Navigation",
+    "commit": "7bfa02ce8842154b7cbaa027b0f3be6ccb584d36",
+    "commit_date": "2026-05-10",
+    "retrieved_at": "2026-08-21"
+  },
+  "graph": {
+    "source_path": "Database/graph.json",
+    "dest_path": "tools/data-extraction/lc3/source/graph.source.json",
+    "sha256": "23197fcc6de964e3d2f61a34c07c2303b13536294954506433984dc6c1a081eb",
+    "node_count": 288,
+    "edge_count": 302,
+    "coordinate_space": "svg_user_units",
+    "notes": "Coordinates are integer pixel offsets in the legacy floor-plan SVG coordinate space (origin top-left, y increases downward). They are not latitude/longitude.",
+    "bytes": 87489,
+    "source_blob": "HEAD:Database/graph.json"
+  },
+  "assets": [
+    {
+      "map_asset_id": "lc3-floor-1",
+      "floor": 1,
+      "source_path": "Frontend/resources/LC3-MAP-1stFloor-old.svg",
+      "dest_path": "frontend/public/maps/lc3/floor-1.svg",
+      "sha256": "cabffbb6689465df214b39cb38b465d8c1696ae98c149594f3ea94d33d3ceb5e",
+      "bytes": 286578,
+      "upstream_sha256": "d14e34f7fbd03844b9e9ef33e4ccbf2365c971e0ff472b0e86178b6785366676",
+      "modification": "Removed the 4 red QR-marker glyphs (QR1-QR4) baked into the upstream artwork. QR anchor points are out of scope for this version — see modification_note below. Geometry, viewBox and all room/structure paths are untouched.",
+      "viewbox": [
+        0,
+        0,
+        1217,
+        742
+      ],
+      "coordinate_transform": {
+        "translate_x": 40,
+        "translate_y": 40
+      },
+      "supersedes": "Frontend/resources/LC3-MAP-1stFloor.svg",
+      "transform_evidence": {
+        "method": "Matched every <rect> by (width,height) between the superseded asset and this one, then took the modal (dx,dy) offset.",
+        "rects_matched_at_offset": 196,
+        "rects_in_superseded_asset": 221,
+        "known_divergence": "29 rects do not match at this offset; they cluster at x < 200 (left wing), which was redrawn in this asset. Pins in that region need 100% visual verification.",
+        "selected_because": "Roughly 44% more path geometry (105 vs 90 paths), 28 vs 18 room-number glyph outlines, a uniform #EFEEEE structural palette instead of a mixed #E5E5E5/#D9D9D9/#CACACA one, and a decorative outer frame."
+      },
+      "bytes": 290243
+    },
+    {
+      "map_asset_id": "lc3-floor-2",
+      "floor": 2,
+      "source_path": "Frontend/resources/LC3-MAP-2ndFloor-old.svg",
+      "dest_path": "frontend/public/maps/lc3/floor-2.svg",
+      "sha256": "836852d4355ab936293bf14ca4d7f85e375f8ec115d51732811a6f3f6852c484",
+      "bytes": 435327,
+      "upstream_sha256": "b3e111b85e016d4ea7a6e1a4e513f0c961a463b8acde7bc44d8fe32461073a36",
+      "modification": "Removed the 4 red QR-marker glyphs (QR5-QR8) baked into the upstream artwork. QR anchor points are out of scope for this version — see modification_note below. Geometry, viewBox and all room/structure paths are untouched.",
+      "viewbox": [
+        0,
+        0,
+        1070,
+        528
+      ],
+      "coordinate_transform": {
+        "translate_x": -2,
+        "translate_y": -37
+      },
+      "supersedes": "Frontend/resources/LC3-MAP-2ndFloor.svg",
+      "transform_evidence": {
+        "method": "Matched every <rect> by (width,height) between the superseded asset and this one, then took the modal (dx,dy) offset.",
+        "rects_matched_at_offset": 236,
+        "rects_in_superseded_asset": 240,
+        "known_divergence": "4 rects do not match at this offset; the artwork is otherwise identical to the superseded asset.",
+        "selected_because": "A tight crop that removes roughly 238px of empty vertical space, and an opaque white background rect — the superseded asset has a transparent background and renders poorly on dark surfaces."
+      },
+      "bytes": 441329
+    }
+  ],
+  "modification_note": "Both floor assets deviate from the upstream blob: the 4 red circular QR-marker glyphs baked into each floor's artwork (QR1-4 on floor 1, QR5-8 on floor 2) were removed. QR anchor points are out of scope for this dataset version (the corresponding LC3_QR1..QR8 nodes are already excluded from the seed with reason qr_anchor_not_a_room) and showing markers the app has no matching feature for was judged misleading. sha256 is of the edited file; upstream_sha256 on each asset is kept for provenance and is what `git cat-file -p <commit>:<source_path> | sha256sum` still produces. No structural/room geometry, viewBox, or coordinate space was touched by this edit.",
+  "integrity_rules": [
+    "Copy assets byte-for-byte. Do not run SVGO, reformat, or edit the viewBox - any geometry change invalidates coordinate_transform.",
+    "coordinate_transform is the single source of truth for remapping legacy graph coordinates onto these assets. Tools must read it from this manifest rather than hardcoding the numbers.",
+    "Hashes are of the upstream COMMITTED BLOB (LF line endings), obtained with `git cat-file -p <commit>:<source_path>` - not of a working-tree checkout. A Windows checkout with core.autocrlf=true yields CRLF and a different hash. .gitattributes pins these paths to eol=lf so every platform's working tree matches these hashes."
+  ]
+}

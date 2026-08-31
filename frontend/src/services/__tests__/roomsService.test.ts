@@ -12,12 +12,12 @@ describe('roomsService - Data Access Layer', () => {
   describe('normalizeRoom()', () => {
     it('correctly maps raw seed fields to Room interface', () => {
       const sampleRaw: RawRoomRecord = {
-        location_id: 'BR3-F1-R101-1',
-        building_code: 'BR3',
+        location_id: 'LC3-F1-R101-1',
+        building_code: 'LC3',
         floor: 1,
         location_kind: 'room',
-        room_code: 'BR3-101/1',
-        aliases: ['BR3-101/1', '101/1'],
+        room_code: 'LC3-101/1',
+        aliases: ['LC3-101/1', '101/1'],
         name_th: 'ห้องบรรยาย 4 (วิทยาศาสตร์สิ่งแวดล้อม)',
         category: 'lecture_room',
         x: 376,
@@ -25,7 +25,7 @@ describe('roomsService - Data Access Layer', () => {
         landmarks: [
           {
             kind: 'near_toilet',
-            ref_location_id: 'BR3-F1-PLMTOILET',
+            ref_location_id: 'LC3-F1-PLMTOILET',
             walk_hops: 10,
             text_th: 'ใกล้ห้องน้ำชาย (ฝั่งซ้าย)',
             verification: 'derived_unverified',
@@ -44,13 +44,13 @@ describe('roomsService - Data Access Layer', () => {
       assert.strictEqual(room.category, 'lecture_room')
       assert.deepStrictEqual(room.coordinates, { x: 376, y: 152 })
       assert.strictEqual(room.landmarks.length, 1)
-      assert.deepStrictEqual(room.aliases, ['BR3-101/1', '101/1'])
+      assert.deepStrictEqual(room.aliases, ['LC3-101/1', '101/1'])
     })
 
     it('handles POI records without room_code or landmarks gracefully', () => {
       const samplePoi: RawRoomRecord = {
-        location_id: 'BR3-F1-PLFTOILET',
-        building_code: 'BR3',
+        location_id: 'LC3-F1-PLFTOILET',
+        building_code: 'LC3',
         floor: 1,
         location_kind: 'poi',
         room_code: '',

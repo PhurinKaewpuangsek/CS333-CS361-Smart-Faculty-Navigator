@@ -3,8 +3,8 @@ import assert from 'node:assert/strict'
 import { getBuildingLabel, getCategoryLabel, getLandmarkText, getCategoryColor } from '../roomDisplay.ts'
 
 describe('getBuildingLabel', () => {
-  it('แปลงรหัสอาคารที่รู้จัก (BR3) เป็นชื่อภาษาไทย', () => {
-    assert.equal(getBuildingLabel('BR3'), 'อาคาร บร.3')
+  it('แปลงรหัสอาคารที่รู้จัก (LC3) เป็นชื่อภาษาไทย', () => {
+    assert.equal(getBuildingLabel('LC3'), 'อาคาร LC3')
   })
 
   it('คืนรหัสเดิมเมื่อเป็นอาคารที่ยังไม่มีชื่อแปลไว้', () => {

@@ -1,14 +1,14 @@
 # Floor-plan assets are copied verbatim from an upstream repo and verified by SHA-256 in
-# tools/data-extraction/datasets/br3/source/source-manifest.json. Collapse them in review — reading them
+# tools/data-extraction/lc3/source/source-manifest.json. Collapse them in review — reading them
 # line by line proves nothing that the hash check does not already prove.
-frontend/public/maps/br3/*.svg                    -diff linguist-vendored
-tools/data-extraction/datasets/br3/source/*.json  -diff linguist-vendored
+frontend/public/maps/lc3/*.svg                    -diff linguist-vendored
+tools/data-extraction/lc3/source/*.json           -diff linguist-vendored
 
 # Written by data extraction tools. Review the generator, not the output.
-tools/data-extraction/datasets/br3/reports/*.csv        -diff linguist-generated=true
-tools/data-extraction/datasets/br3/survey/*.template.csv -diff linguist-generated=true
-tools/data-extraction/datasets/br3/*.seed.json          -diff linguist-generated=true
-tools/data-extraction/datasets/br3/*.seed.csv           -diff linguist-generated=true
+tools/data-extraction/lc3/reports/*.csv         -diff linguist-generated=true
+tools/data-extraction/lc3/survey/*.template.csv -diff linguist-generated=true
+tools/data-extraction/lc3/*.seed.json            -diff linguist-generated=true
+tools/data-extraction/lc3/*.seed.csv             -diff linguist-generated=true
 frontend/public/data/rooms.json                         -diff linguist-generated=true
 
 # The dataset is UTF-8 with LF and must stay byte-stable across platforms, otherwise

@@ -6,11 +6,11 @@ import type { Room } from '../../types/room'
 
 const mockRooms: Room[] = [
   {
-    id: 'BR3-F1-R101',
-    code: 'BR3-101',
+    id: 'LC3-F1-R101',
+    code: 'LC3-101',
     roomNumber: '101',
     nameThai: 'ห้องเรียน 101',
-    building: 'BR3',
+    building: 'LC3',
     floor: 1,
     category: 'lecture_room',
     coordinates: { x: 100, y: 200 },
@@ -18,11 +18,11 @@ const mockRooms: Room[] = [
     landmarks: [],
   },
   {
-    id: 'BR3-F2-R201',
-    code: 'BR3-201',
+    id: 'LC3-F2-R201',
+    code: 'LC3-201',
     roomNumber: '201',
     nameThai: 'ห้องปฏิบัติการ 201',
-    building: 'BR3',
+    building: 'LC3',
     floor: 2,
     category: 'laboratory',
     coordinates: { x: 300, y: 400 },
@@ -45,7 +45,7 @@ describe('RoomSearchPanel Component', () => {
 
     expect(screen.getByPlaceholderText(/ค้นหาห้อง/i)).toBeInTheDocument()
     expect(screen.queryByRole('list')).not.toBeInTheDocument()
-    expect(screen.queryByText('BR3-101')).not.toBeInTheDocument()
+    expect(screen.queryByText('LC3-101')).not.toBeInTheDocument()
   })
 
   it('renders matching results when user types a search query', async () => {
@@ -56,8 +56,8 @@ describe('RoomSearchPanel Component', () => {
     await user.type(input, '101')
 
     expect(screen.getByRole('list')).toBeInTheDocument()
-    expect(screen.getByText('BR3-101')).toBeInTheDocument()
-    expect(screen.queryByText('BR3-201')).not.toBeInTheDocument()
+    expect(screen.getByText('LC3-101')).toBeInTheDocument()
+    expect(screen.queryByText('LC3-201')).not.toBeInTheDocument()
   })
 
   it('renders filtered results when user selects a category', async () => {
@@ -69,8 +69,8 @@ describe('RoomSearchPanel Component', () => {
 
 
     expect(screen.getByRole('list')).toBeInTheDocument()
-    expect(screen.getByText('BR3-201')).toBeInTheDocument()
-    expect(screen.queryByText('BR3-101')).not.toBeInTheDocument()
+    expect(screen.getByText('LC3-201')).toBeInTheDocument()
+    expect(screen.queryByText('LC3-101')).not.toBeInTheDocument()
   })
 
   it('collapses dropdown and retains query when a room is selected', async () => {
@@ -83,11 +83,11 @@ describe('RoomSearchPanel Component', () => {
 
     expect(screen.getByRole('list')).toBeInTheDocument()
 
-    const resultButton = screen.getByRole('button', { name: /BR3-101/i })
+    const resultButton = screen.getByRole('button', { name: /LC3-101/i })
     await user.click(resultButton)
 
     // Selection called
-    expect(handleSelectRoom).toHaveBeenCalledWith('BR3-F1-R101')
+    expect(handleSelectRoom).toHaveBeenCalledWith('LC3-F1-R101')
     // Dropdown collapsed
     expect(screen.queryByRole('list')).not.toBeInTheDocument()
     // Query retained
@@ -101,14 +101,14 @@ describe('RoomSearchPanel Component', () => {
     const input = screen.getByPlaceholderText(/ค้นหาห้อง/i)
     await user.type(input, '101')
 
-    const resultButton = screen.getByRole('button', { name: /BR3-101/i })
+    const resultButton = screen.getByRole('button', { name: /LC3-101/i })
     await user.click(resultButton)
     expect(screen.queryByRole('list')).not.toBeInTheDocument()
 
     // Focus input again
     await user.click(input)
     expect(screen.getByRole('list')).toBeInTheDocument()
-    expect(screen.getByText('BR3-101')).toBeInTheDocument()
+    expect(screen.getByText('LC3-101')).toBeInTheDocument()
   })
 
   it('dismisses dropdown when Escape key is pressed', async () => {
@@ -170,7 +170,7 @@ describe('RoomSearchPanel Component', () => {
       // Type and select a room
       const input = screen.getByPlaceholderText(/ค้นหาห้อง/i)
       await user.type(input, '101')
-      const resultButton = screen.getByRole('button', { name: /BR3-101/i })
+      const resultButton = screen.getByRole('button', { name: /LC3-101/i })
       await user.click(resultButton)
 
       // Filter bar should now be auto-collapsed

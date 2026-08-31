@@ -7,8 +7,8 @@ export interface FloorConfig {
 }
 
 export const FLOOR_CONFIGS: FloorConfig[] = [
-  { floor: 1, label: '1st Floor', asset: '/maps/br3/floor-1.svg', width: 1217, height: 742 },
-  { floor: 2, label: '2nd Floor', asset: '/maps/br3/floor-2.svg', width: 1070, height: 528 },
+  { floor: 1, label: '1st Floor', asset: '/maps/lc3/floor-1.svg', width: 1217, height: 742 },
+  { floor: 2, label: '2nd Floor', asset: '/maps/lc3/floor-2.svg', width: 1070, height: 528 },
 ]
 
 export function getFloorConfig(floor: number): FloorConfig {
