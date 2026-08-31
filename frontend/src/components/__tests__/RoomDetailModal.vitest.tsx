@@ -94,4 +94,16 @@ describe('RoomDetailModal Component', () => {
     fireEvent.keyDown(window, { key: 'Escape' })
     expect(handleClose).toHaveBeenCalledTimes(1)
   })
+
+  it('7. ไม่ render UI เมื่อ isOpen เป็น false แม้ว่า selectedRoomId จะมีค่า', () => {
+    const { container } = render(
+      <RoomDetailModal
+        rooms={mockRooms}
+        selectedRoomId="room-1"
+        isOpen={false}
+        onClose={vi.fn()}
+      />
+    )
+    expect(container.firstChild).toBeNull()
+  })
 })

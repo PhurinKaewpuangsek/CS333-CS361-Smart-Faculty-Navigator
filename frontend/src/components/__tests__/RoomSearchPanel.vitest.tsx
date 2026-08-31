@@ -37,7 +37,7 @@ describe('RoomSearchPanel Component', () => {
 
     const logo = screen.getByRole('img', { name: /TORCH Faculty Nav System/i })
     expect(logo).toBeInTheDocument()
-    expect(logo).toHaveClass('h-12')
+    expect(logo).toHaveClass('h-7')
   })
 
   it('does not render the search result list when query is empty and category is all', () => {
