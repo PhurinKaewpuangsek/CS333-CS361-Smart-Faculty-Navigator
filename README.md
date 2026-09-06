@@ -88,6 +88,30 @@ CS333-CS361-Smart-Faculty-Navigator/
 
 ---
 
+### 🛠️ Pre-requisites (สิ่งที่ต้องเตรียมก่อนเริ่มงาน)
+
+**1. ติดตั้ง AWS SAM CLI (ทำครั้งแรกครั้งเดียว)**
+เครื่องคอมพิวเตอร์ของทุกคนต้องมีเครื่องมือสำหรับอ่านไฟล์ IaC หากยังไม่มี ให้ติดตั้งตามนี้:
+*   **Windows (PowerShell as Admin):** รันคำสั่ง `winget install -e --id Amazon.SAM-CLI`
+*   **Mac (Homebrew):** รันคำสั่ง `brew install aws-sam-cli`
+*(💡 ติดตั้งเสร็จแล้ว ต้องปิดแล้วเปิด VSCode / Terminal ใหม่ด้วยนะ)*
+
+**2. การใส่ AWS Credentials (ต้องทำทุกครั้งที่ Start Lab ใหม่)**
+เนื่องจากเราใช้ AWS Academy Learner Lab กุญแจ (Credentials) ของเราจะหมดอายุทุกๆ 4 ชั่วโมง เมื่อคุณกดปุ่ม "Start Lab" บนหน้าเว็บ ให้ทำตามนี้:
+1. คลิกที่ **AWS Details** (ข้างปุ่ม Start Lab)
+2. กดปุ่ม **Show** ตรงหัวข้อ AWS CLI
+3. **เลือกระบบปฏิบัติการให้ถูกแท็บ:** (Windows เลือก PowerShell / Mac เลือก bash)
+4. ก๊อปปี้โค้ดทั้งหมดมา Paste ลงใน Terminal (VSCode) ของโปรเจกต์ แล้วกด Enter เช่น:
+   ```powershell
+   $env:AWS_ACCESS_KEY_ID="ASIA..."
+   $env:AWS_SECRET_ACCESS_KEY="..."
+   $env:AWS_SESSION_TOKEN="..."
+   ```
+
+*(⚠️ ถ้าไม่ทำขั้นตอนนี้ คุณจะรันคำสั่ง `sam deploy` ไม่ได้ เพราะ SAM จะไม่รู้ว่าต้องเอาโค้ดไปสร้างที่บัญชีของใคร)*
+
+---
+
 ### Step 1: Initial Setup (ทำครั้งแรกครั้งเดียว)
 
 ติดตั้ง Dependencies สำหรับฝั่งหน้าบ้าน (Frontend):
