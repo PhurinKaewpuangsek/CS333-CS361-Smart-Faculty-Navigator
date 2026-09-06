@@ -21,16 +21,28 @@ This document establishes the **workflow, code quality, directory boundaries, an
 
 ## 📌 1. Project Overview & Architecture
 
-- **Project Name:** Project TORCH — Smart Faculty Navigator (CS333 / CS361)
-- **Product shape (V1):** an *Information Service* — search faculty rooms/facilities and render an interactive SVG floor plan. Turn-by-turn routing, timetable integration, beacon hardware, and an admin CRUD panel are **out of V1 scope**.
-- **Repo Structure:** Monorepo (`frontend/`, `backend/`, `database/`)
-- **Tech Stack:**
-  - **Frontend:** React + Vite + TypeScript
-  - **Backend:** Node.js + Express + TypeScript
-  - **Database:** PostgreSQL 16 (Alpine Docker container: `cloud-postgres`)
+
+* **Project Name:** Project TORCH — Smart Faculty Navigator (CS333 / CS361)
+* **Product Shape:** A read-heavy *Information Service* and interactive indoor navigation tool. The system overlays dynamic cloud data (room details, landmarks, class/exam schedules) onto interactive SVG floor plans. It is a strictly public-facing utility application (NO user authentication, NO client-side data mutation).
+* **V2 Architecture & Scope Additions:**
+* **Serverless Cloud Infrastructure:** Migrated from local static JSON to a fully serverless AWS architecture (Lambda, DynamoDB, implicit API Gateway) strictly managed via Infrastructure as Code (AWS SAM / `template.yaml`).
+* **Dynamic Schedule Engine:** Integrates real-world ground truth data (class/exam schedules) stored in DynamoDB to display current room utilization.
+* **Purpose-Based Search:** Advanced client-side filtering allowing users to search not only by room names (e.g., "LC3-103") but also by academic intent (e.g., subject codes like "CS361" or event names), resolving to the correct room and rendering the map pin automatically.
+
+
+* **Repo Structure:** Monorepo containing:
+  * `frontend/` (React + Vite + Tailwind client)
+  * `functions/` (AWS Lambda source code in Node.js)
+  * `tools/` (Data extraction, CSV formatting, and DynamoDB seeding scripts)
+  * `template.yaml` (AWS SAM IaC definition at the project root)
+* **Tech Stack:**
+  - **Frontend:** React + Vite + TypeScript + Tailwind CSS
+  - **Backend:** AWS Lambda (Node.js, runtime `nodejs24.x`) + Amazon API Gateway (implicit, managed by SAM `Globals`)
+  - **Database:** Amazon DynamoDB (on-demand capacity)
+  - **Infrastructure as Code:** AWS SAM (`template.yaml` at repo root)
   - **Runtime:** Node.js 24 (matches CI — see §6.1)
-  - **CI/CD:** GitHub Actions (`.github/workflows/ci.yml`)
-- **Default branch:** `main`
+  - **CI/CD:** GitHub Actions — `.github/workflows/ci.yml` (lint/test) + `.github/workflows/deploy-backend.yml` (SAM deploy on merge to `main`)
+* **Default branch:** `main`
 
 ---
 
@@ -40,14 +52,20 @@ Keep dependencies, imports, and execution localized to their respective service 
 
 ```text
 CS333-CS361-Smart-Faculty-Navigator/
-├── .github/workflows/  <-- CI/CD Workflows (Do NOT edit unless instructed)
-├── backend/            <-- Express API, route logic, DB queries (Node environment)
-├── database/           <-- SQL migrations, graph dataset JSONs, seed scripts
-├── frontend/           <-- React client application (Vite environment)
-├── .env.example        <-- Blueprint for environment variables
-├── AGENTS.md           <-- This file — rules for AI CLI tools
-├── docker-compose.yml  <-- Local database container spec (`cloud-postgres`)
-└── README.md           <-- Teammate onboarding guide
+├── .github/workflows/      <-- CI/CD Workflows (Do NOT edit unless instructed)
+├── frontend/               <-- React client application (Vite environment)
+├── functions/              <-- AWS Lambda source code (one subfolder per function)
+│   ├── get-locations/      <-- Example: GET /api/locations handler
+│   │   ├── index.mjs
+│   │   └── package.json    <-- Each Lambda has its own dependencies
+│   └── get-schedules/      <-- Example: GET /api/schedules handler
+├── tools/                  <-- Tooling, data extraction, and seed scripts
+│   └── data-extraction/
+├── .env.example            <-- Blueprint for environment variables
+├── AGENTS.md               <-- This file — rules for AI CLI tools
+├── template.yaml           <-- AWS SAM IaC — all Lambda, API Gateway, DynamoDB definitions
+├── samconfig.toml          <-- SAM deploy configuration (stack name, region — safe to commit)
+└── README.md               <-- Teammate onboarding guide
 ```
 
 ---
@@ -74,25 +92,13 @@ Issue #N ─► branch off latest main ─► small commits ─► PR ─► CI 
 - One branch solves **one** issue. Do not bundle unrelated fixes; open a separate issue instead.
 - The issue is closed automatically by the PR (`Closes #N`), not by hand.
 
-### 3.3 Branch naming
+### 3.3 Branch Naming
 
-This team names issues **exactly like the branch that will implement them** (e.g. issue `feat/db-facility-schema` → branch `feat/db-facility-schema`). Follow that convention.
 
-```text
-<type>/<short-kebab-case-description>
-```
-
-| Type | Use for | Example |
-| :-- | :-- | :-- |
-| `feat/` | New user-facing capability | `feat/api-facility-search-endpoints` |
-| `fix/` | Bug fix | `fix/search-empty-query-crash` |
-| `docs/` | Documentation only | `docs/define-v1system-boundary` |
-| `test/` | Tests only | `test/ci-api-integration-tests` |
-| `chore/` | Tooling, deps, config | `chore/workflow-test` |
-| `refactor/` | Behaviour-preserving cleanup | `refactor/extract-room-repository` |
-| `ci/` | Pipeline changes | `ci/add-typecheck-job` |
-
-Rules: lowercase, kebab-case, no spaces, no Thai characters, no personal names (`somchai-branch` ❌).
+This team names GitHub Issues using problem-driven or goal-driven titles (e.g., "User can search for classrooms..."). **Do NOT convert the issue title into a branch name.**
+To find the correct branch name, you MUST read the full issue description. Every issue contains a specific section formatted like this:
+`Set Branch Name as: > **<branch-name>**`
+You must extract the exact string provided in that blockquote and use it to create or checkout your branch (e.g., if the issue says `Set Branch Name as: > **feat/dynamic-location-api**`, you must use `feat/dynamic-location-api`). Never guess or invent your own branch names.
 
 ### 3.4 Branch lifetime
 
@@ -153,15 +159,15 @@ Every PR must have:
 
    ```markdown
    ## What
-   Adds GET /facilities with `q` and `category` filters.
+   Adds GET /api/locations Lambda that scans DynamoDB.
 
    ## Why
-   Frontend search box needs a backing endpoint.
+   Frontend needs to fetch room locations dynamically from the cloud.
 
    ## How to verify
-   `npm run dev` in backend/, then `curl "localhost:3000/facilities?q=lab"`.
+   `sam local start-api`, then `curl "localhost:3000/api/locations"`.
 
-   Closes #9
+   Closes #48
    ```
 
 3. **Base branch `main`.** Never target another feature branch.
@@ -192,11 +198,11 @@ Because `push` fires on every branch, **your feature branch is checked from its 
 
 Do **not** claim these run today. Add them only through a dedicated `ci/` issue:
 
-- `npm ci` + `npm run lint` (backend, frontend)
-- `tsc --noEmit` type check (backend, frontend)
-- `npm test` unit + API integration tests (tracked by issue `test/ci-api-integration-tests`)
+- `npm ci` + `npm run lint` (frontend, each Lambda)
+- `tsc --noEmit` type check (frontend)
+- `npm test` unit tests (frontend, Lambda handlers)
 - `npm run build` for the Vite frontend
-- A Postgres service container for DB-backed tests
+- `sam validate` + `sam build` for IaC validation
 
 ### 6.3 Definition of Done
 
@@ -250,26 +256,34 @@ git commit --amend --no-edit
 
 ### 8.2 Environment parity & security
 
-- Never hardcode DB credentials, ports, or secret keys in source files.
-- Backend reads `process.env.<VAR>` (loaded via `dotenv`); frontend reads `import.meta.env.VITE_<VAR>`.
-- Any new variable must be added to `.env.example` with a **placeholder**, never a real value, in the same PR.
+- Never hardcode DB credentials, API URLs, or secret keys in source files.
+- Lambda functions read environment variables declared in `template.yaml` (`Environment: Variables:`). Frontend reads `import.meta.env.VITE_<VAR>`.
+- Any new frontend variable must be added to `.env.example` with a **placeholder**, never a real value, in the same PR.
 - `.env` is git-ignored and stays that way. If you ever see `.env` staged, unstage it and tell the human.
-- The local DB is the Docker container **`cloud-postgres`** on port `5432` (`npm run db:up` / `db:down` / `db:reset` from the repo root).
+- AWS credentials for CI/CD are stored as GitHub Secrets (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN`) — never hardcoded.
+- For testing backend changes, deploy to a personal AWS Learner Lab sandbox via `sam deploy --guided` or mock responses in unit tests. See the README "Developer Workflow" section.
 
 ### 8.3 Monorepo isolation
 
-- No relative cross-directory imports between `/frontend` and `/backend` (`import x from '../../backend/...'` is forbidden).
-- `frontend/` and `backend/` keep separate `package.json` files. Install dependencies **inside** the service that needs them, never at the root.
-- The root `package.json` holds only repo-wide Docker/DB scripts.
+- No relative cross-directory imports between `/frontend` and `/functions` (`import x from '../../functions/...'` is forbidden).
+- Each Lambda in `functions/<name>/` has its **own `package.json`**. Install dependencies inside the Lambda folder, never at the root.
+- `frontend/` keeps its own `package.json`. Install frontend dependencies inside `frontend/`.
+- The root `package.json` holds only repo-wide convenience scripts (e.g. `npm run dev` → frontend).
 
-### 8.4 Database changes
+### 8.4 Infrastructure & database changes (AWS SAM — No ClickOps)
 
-- Schema changes are **additive, versioned SQL files** under `database/`. Never edit an already-merged migration — add a new one.
-- Never run a destructive statement (`DROP`, `TRUNCATE`, unbounded `DELETE`) against anything but a local throwaway container.
+All cloud resources are declared in `template.yaml` at the repo root. **No one creates, modifies, or deletes AWS resources via the AWS Console.** Every infra change goes through `template.yaml` → PR → merge → automated `sam deploy`.
+
+- **DynamoDB tables:** declare under `Resources:` with `Type: AWS::DynamoDB::Table`. Use on-demand (`BillingMode: PAY_PER_REQUEST`). Never delete an attribute that the frontend or a Lambda currently reads without checking all consumers first.
+- **Adding a GSI or changing a table schema:** add/modify the resource in `template.yaml`. Never edit a table directly in the AWS Console.
+- **Lambda functions:** one subfolder per function in `functions/<name>/`. Declare the function in `template.yaml` with `Type: AWS::Serverless::Function`, `Runtime: nodejs24.x`.
+- **API Gateway (implicit — single gateway):** every Lambda must declare its API event using `Type: Api` **without** specifying `RestApiId`. **Do NOT create a separate `AWS::Serverless::Api` resource.** All endpoints share the single implicit API Gateway whose CORS is configured in the `Globals` block of `template.yaml`.
+- **CORS in Lambda responses:** in addition to the `Globals` CORS config (which handles `OPTIONS` preflight), every Lambda `Response` object must include `"Access-Control-Allow-Origin": "*"` in its `headers`.
+- **Destructive operations:** never run unbounded `DeleteItem` / `DeleteTable` against production. Seed scripts target local DynamoDB only unless explicitly deploying data.
 
 ### 8.5 Future-proofing
 
-- Keep API endpoints and graph/spatial algorithms modular so real-time updates (WebSockets, SSE, caching) can be added later without rewriting the database interfaces.
+- Keep API endpoints and data-access patterns modular so real-time updates (WebSockets, SSE, caching) can be added later without rewriting the Lambda handlers.
 
 ---
 
@@ -286,8 +300,8 @@ git pull --ff-only origin main
 git switch -c feat/api-facility-search-endpoints
 
 # 3. Work in small commits
-git add backend/src/routes/facilities.ts
-git commit -m "feat(api): add /facilities search endpoint with category filter (#9)"
+git add functions/get-locations/index.mjs template.yaml
+git commit -m "feat(api): add /locations Lambda with DynamoDB scan (#48)"
 
 # 4. Stay in sync with the trunk (daily, and before pushing)
 git fetch origin
@@ -322,5 +336,7 @@ An agent must **never** do any of the following without an explicit, specific in
 - [ ] Edit files under `.github/workflows/` outside a `ci/` issue
 - [ ] Skip, disable, or weaken a CI check to turn a PR green
 - [ ] Add any AI or bot attribution to commits, PRs, issues, or comments (section 7)
-- [ ] Install dependencies at the repo root instead of inside `frontend/` or `backend/`
+- [ ] Install dependencies at the repo root instead of inside `frontend/` or `functions/<name>/`
 - [ ] Rewrite history that has already been pushed and shared
+- [ ] Create or modify AWS resources via the AWS Console instead of `template.yaml` (No ClickOps — section 8.4)
+- [ ] Create a separate `AWS::Serverless::Api` resource or specify `RestApiId` on a Lambda event (section 8.4)
