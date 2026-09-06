@@ -22,7 +22,7 @@
 ---
 
 ## Architecture & Tech Stack
-![TORCH V1 Architecture](docs/TorchV1_architecture.drawio.png)
+![TORCH V2 Architecture](docs/TorchV2_architecture.drawio.png)
 
 * **Frontend:** React 18, Vite, TypeScript, Tailwind CSS (Hosted on AWS S3)
 * **Backend & Compute:** AWS Lambda (Node.js 24.x) via Implicit API Gateway
