@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Project TORCH — Smart Faculty Navigator (CS333/CS361)
+  SAM template defining all Lambda functions, the implicit API Gateway, and DynamoDB tables.
+
+# ---------------------------------------------------------------------------
+# Globals — apply to every Lambda function and the single implicit API Gateway
+# ---------------------------------------------------------------------------
+Globals:
+  Function:
+    Runtime: nodejs24.x
+  Api:
+    Cors:
+      AllowMethods: "'GET,OPTIONS'"
+      AllowHeaders: "'Content-Type'"
+      AllowOrigin: "'*'"
+
+# ---------------------------------------------------------------------------
+# Resources
+# ---------------------------------------------------------------------------
+Resources:
+  # Placeholder resource so CloudFormation validation passes while the stack
+  # is bootstrapped. Remove this once the first real Lambda resource is added.
+  PlaceholderLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /torch/placeholder
+      RetentionInDays: 7

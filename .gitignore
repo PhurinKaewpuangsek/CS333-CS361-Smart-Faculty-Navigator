@@ -92,3 +92,10 @@ vite.config.ts.timestamp-*
 # LC3 map QA previews (derived, ~1.5 MB of pin-baked SVG)
 tools/data-extraction/lc3/reports/qa/
 tools/data-extraction/**/reports/qa/
+
+# AWS SAM build artifacts — never commit the generated .aws-sam/ directory
+# samconfig.toml is intentionally NOT listed here; it is safe to commit (see AGENTS.md §2)
+.aws-sam/
+
+# Explicit local env overrides (also matched by .env.* above, listed for clarity)
+.env.local
