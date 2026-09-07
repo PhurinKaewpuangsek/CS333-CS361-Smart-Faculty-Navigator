@@ -1,4 +1,4 @@
-name: CD - Deploy to S3
+name: CD - Frontend (S3)
 
 on:
   workflow_dispatch:

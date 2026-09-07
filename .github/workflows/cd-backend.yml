@@ -1,9 +1,14 @@
-name: CD - Deploy Backend (SAM)
+name: CD - Backend (SAM)
 
 on:
   push:
     branches:
       - main
+    paths:
+      - 'template.yaml'
+      - 'functions/**'
+      - 'samconfig.toml'
+      - '.github/workflows/cd-backend.yml'
 
 jobs:
   deploy-backend:
