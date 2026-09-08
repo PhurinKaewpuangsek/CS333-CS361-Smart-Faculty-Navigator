@@ -41,7 +41,7 @@ This document establishes the **workflow, code quality, directory boundaries, an
   - **Database:** Amazon DynamoDB (on-demand capacity)
   - **Infrastructure as Code:** AWS SAM (`template.yaml` at repo root)
   - **Runtime:** Node.js 24 (matches CI — see §6.1)
-  - **CI/CD:** GitHub Actions — `.github/workflows/ci.yml` (lint/test) + `.github/workflows/deploy-backend.yml` (SAM deploy on merge to `main`)
+  - **CI/CD:** GitHub Actions — `.github/workflows/ci.yml` (lint/test) + `.github/workflows/cd-backend.yml` (SAM deploy on merge to `main`)
 * **Default branch:** `main`
 
 ---
@@ -61,7 +61,6 @@ CS333-CS361-Smart-Faculty-Navigator/
 │   └── get-schedules/      <-- Example: GET /api/schedules handler
 ├── tools/                  <-- Tooling, data extraction, and seed scripts
 │   └── data-extraction/
-├── .env.example            <-- Blueprint for environment variables
 ├── AGENTS.md               <-- This file — rules for AI CLI tools
 ├── template.yaml           <-- AWS SAM IaC — all Lambda, API Gateway, DynamoDB definitions
 ├── samconfig.toml          <-- SAM deploy configuration (stack name, region — safe to commit)
@@ -279,7 +278,7 @@ All cloud resources are declared in `template.yaml` at the repo root. **No one c
 - **Lambda functions:** one subfolder per function in `functions/<name>/`. Declare the function in `template.yaml` with `Type: AWS::Serverless::Function`, `Runtime: nodejs24.x`.
 - **API Gateway (implicit — single gateway):** every Lambda must declare its API event using `Type: Api` **without** specifying `RestApiId`. **Do NOT create a separate `AWS::Serverless::Api` resource.** All endpoints share the single implicit API Gateway whose CORS is configured in the `Globals` block of `template.yaml`.
 - **CORS in Lambda responses:** in addition to the `Globals` CORS config (which handles `OPTIONS` preflight), every Lambda `Response` object must include `"Access-Control-Allow-Origin": "*"` in its `headers`.
-- **Destructive operations:** never run unbounded `DeleteItem` / `DeleteTable` against production. Seed scripts target local DynamoDB only unless explicitly deploying data.
+- **Destructive operations:** never run unbounded `DeleteItem` / `DeleteTable` against production. Seed scripts target your own personal AWS Learner Lab sandbox table by default — never point a seed script at the shared production stack's table directly; production data flows through the automated CD pipeline only.
 
 ### 8.5 Future-proofing
 
