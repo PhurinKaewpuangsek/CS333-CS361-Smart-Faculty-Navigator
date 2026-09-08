@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
 import RoomDetailModal from '../RoomDetailModal'
 import type { Room } from '../../types/room.ts'
 
@@ -31,6 +31,10 @@ const mockRooms: Room[] = [
 ]
 
 describe('RoomDetailModal Component', () => {
+  beforeEach(() => {
+    localStorage.clear()
+    vi.unstubAllEnvs()
+  })
   it('1. ไม่ render UI เมื่อ selectedRoomId เป็น null', () => {
     const { container } = render(
       <RoomDetailModal rooms={mockRooms} selectedRoomId={null} onClose={vi.fn()} />
