@@ -106,4 +106,104 @@ describe('RoomDetailModal Component', () => {
     )
     expect(container.firstChild).toBeNull()
   })
+
+  describe('Edit Mode & CRUD operations', () => {
+    it('8. ไม่แสดงปุ่ม Edit หาก VITE_ENABLE_EDIT_MODE ไม่ได้เป็น true', () => {
+      vi.stubEnv('VITE_ENABLE_EDIT_MODE', 'false')
+      render(
+        <RoomDetailModal rooms={mockRooms} selectedRoomId="room-1" onClose={vi.fn()} />
+      )
+      expect(screen.queryByRole('button', { name: /edit/i })).toBeNull()
+      vi.unstubAllEnvs()
+    })
+
+    it('9. แสดงปุ่ม Edit เมื่อ VITE_ENABLE_EDIT_MODE เป็น true', () => {
+      vi.stubEnv('VITE_ENABLE_EDIT_MODE', 'true')
+      render(
+        <RoomDetailModal rooms={mockRooms} selectedRoomId="room-1" onClose={vi.fn()} />
+      )
+      expect(screen.getByRole('button', { name: /edit/i })).toBeInTheDocument()
+      vi.unstubAllEnvs()
+    })
+
+    it('10. กดปุ่ม Edit แล้วแสดง Input ชื่อห้อง และความจุ', () => {
+      vi.stubEnv('VITE_ENABLE_EDIT_MODE', 'true')
+      render(
+        <RoomDetailModal rooms={mockRooms} selectedRoomId="room-1" onClose={vi.fn()} />
+      )
+
+      const editButton = screen.getByRole('button', { name: /edit/i })
+      fireEvent.click(editButton)
+
+      expect(screen.getByLabelText(/ชื่อห้อง/i)).toBeInTheDocument()
+      expect(screen.getByLabelText(/ความจุ/i)).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: /save/i })).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: /cancel/i })).toBeInTheDocument()
+      vi.unstubAllEnvs()
+    })
+
+    it('11. กด Save แล้วยิง PUT API ไปที่ VITE_API_BASE_URL + /api/locations/{id} พร้อม Payload และอัปเดตข้อมูลบนหน้าจอ', async () => {
+      vi.stubEnv('VITE_ENABLE_EDIT_MODE', 'true')
+      vi.stubEnv('VITE_API_BASE_URL', 'https://api.example.com')
+
+      const mockFetch = vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({ message: 'Updated' }),
+      })
+      globalThis.fetch = mockFetch
+
+      render(
+        <RoomDetailModal rooms={mockRooms} selectedRoomId="room-1" onClose={vi.fn()} />
+      )
+
+      fireEvent.click(screen.getByRole('button', { name: /edit/i }))
+
+      const nameInput = screen.getByLabelText(/ชื่อห้อง/i)
+      const capacityInput = screen.getByLabelText(/ความจุ/i)
+
+      fireEvent.change(nameInput, { target: { value: 'ห้องเรียนใหม่ 111' } })
+      fireEvent.change(capacityInput, { target: { value: '45' } })
+
+      fireEvent.click(screen.getByRole('button', { name: /save/i }))
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        'https://api.example.com/api/locations/room-1',
+        expect.objectContaining({
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: 'ห้องเรียนใหม่ 111',
+            name_th: 'ห้องเรียนใหม่ 111',
+            nameThai: 'ห้องเรียนใหม่ 111',
+            capacity: 45,
+          }),
+        })
+      )
+
+      expect(await screen.findByText('ห้องเรียนใหม่ 111')).toBeInTheDocument()
+      expect(await screen.findByText(/ความจุ 45 คน/)).toBeInTheDocument()
+
+      vi.unstubAllEnvs()
+    })
+
+    it('12. กด Cancel ใน Edit Mode แล้วกลับสู่ View Mode โดยไม่อัปเดตข้อมูล', () => {
+      vi.stubEnv('VITE_ENABLE_EDIT_MODE', 'true')
+      render(
+        <RoomDetailModal rooms={mockRooms} selectedRoomId="room-1" onClose={vi.fn()} />
+      )
+
+      fireEvent.click(screen.getByRole('button', { name: /edit/i }))
+
+      const nameInput = screen.getByLabelText(/ชื่อห้อง/i)
+      fireEvent.change(nameInput, { target: { value: 'ห้องที่แก้ไขแต่กดยกเลิก' } })
+
+      fireEvent.click(screen.getByRole('button', { name: /cancel/i }))
+
+      expect(screen.queryByLabelText(/ชื่อห้อง/i)).toBeNull()
+      expect(screen.getByText('ห้องเรียน 111')).toBeInTheDocument()
+      expect(screen.queryByText('ห้องที่แก้ไขแต่กดยกเลิก')).toBeNull()
+
+      vi.unstubAllEnvs()
+    })
+  })
 })

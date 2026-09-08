@@ -12,7 +12,7 @@ Globals:
     Runtime: nodejs24.x
   Api:
     Cors:
-      AllowMethods: "'GET,OPTIONS'"
+      AllowMethods: "'GET,PUT,OPTIONS'"
       AllowHeaders: "'Content-Type'"
       AllowOrigin: "'*'"
 
@@ -27,3 +27,39 @@ Resources:
     Properties:
       LogGroupName: /torch/placeholder
       RetentionInDays: 7
+
+  SmartFacultyLocations:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: SmartFacultyLocations
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: location_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: location_id
+          KeyType: HASH
+
+  UpdateLocationFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: functions/update-location/
+      Handler: index.handler
+      Role: !Sub "arn:aws:iam::${AWS::AccountId}:role/LabRole"
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref SmartFacultyLocations
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref SmartFacultyLocations
+      Events:
+        UpdateLocation:
+          Type: Api
+          Properties:
+            Path: /api/locations/{location_id}
+            Method: put
+
+Outputs:
+  ApiUrl:
+    Description: Implicit API Gateway endpoint URL
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod"

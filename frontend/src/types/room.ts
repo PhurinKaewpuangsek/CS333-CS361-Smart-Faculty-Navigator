@@ -23,6 +23,7 @@ export interface Room {
   coordinates: Coordinates
   landmarks: Landmark[]
   aliases: string[]
+  capacity?: number
 }
 
 export interface RawRoomRecord {
@@ -40,6 +41,7 @@ export interface RawRoomRecord {
   y?: number
   detail_th?: string
   landmarks?: Landmark[]
+  capacity?: number
   source?: unknown
   verification?: unknown
   flags?: unknown[]
