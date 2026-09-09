@@ -261,3 +261,125 @@ test('no routing topology leaked into the seed', () => {
   }
   assert.ok(!('edges' in seed), 'seed document carries edges');
 });
+
+/* ================================================================ schedule seed ===== */
+/*
+ * The tests below validate tools/data-extraction/lc3/lc3-schedules.seed.csv.
+ *
+ * Key invariant (acceptance criterion from Issue #47):
+ *   Every row's room_code MUST resolve to a known location_id in the locations seed.
+ *   If any row cannot be resolved the script exits non-zero immediately — no silent skip.
+ *
+ * The suite is skipped gracefully when the CSV contains only the header row
+ * (i.e. no data has been keyed yet) so the existing CI remains green while
+ * the field team is still entering data from the survey photos.
+ */
+
+const ALLOWED_DAYS = new Set(['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']);
+const ALLOWED_EVENT_TYPES = new Set(['class', 'exam', 'activity']);
+const TIME_RE = /^\d{2}:\d{2}$/;
+const SCHEDULE_REQUIRED_FIELDS = ['event_code', 'event_name', 'room_code', 'day_of_week', 'start_time', 'end_time', 'event_type'];
+
+// Build room_code → location_id lookup from the locations seed (rooms only).
+const roomCodeToLocationId = new Map(
+  seed.records
+    .filter((r) => r.location_kind === 'room' && r.room_code)
+    .map((r) => [r.room_code, r.location_id])
+);
+
+let scheduleRows;
+try {
+  const scheduleCsvText = read('lc3-schedules.seed.csv');
+  scheduleRows = parseCsv(scheduleCsvText);
+} catch {
+  // File is missing entirely — not an error at this stage; skip schedule tests.
+  scheduleRows = null;
+}
+
+const scheduleDataExists = scheduleRows !== null && scheduleRows.length > 0;
+
+test('schedule seed — CSV exists and has the required header columns', () => {
+  if (scheduleRows === null) return; // File doesn't exist yet; nothing to check.
+  const rawText = read('lc3-schedules.seed.csv');
+  const headerLine = rawText.split('\n')[0].replace(/\r/, '');
+  const actualHeaders = headerLine.split(',');
+  for (const field of SCHEDULE_REQUIRED_FIELDS) {
+    assert.ok(actualHeaders.includes(field), `lc3-schedules.seed.csv is missing required column: "${field}"`);
+  }
+});
+
+test('schedule seed — every row has all required fields non-empty', () => {
+  if (!scheduleDataExists) return; // No data rows yet — skip.
+  for (let i = 0; i < scheduleRows.length; i += 1) {
+    const row = scheduleRows[i];
+    for (const field of SCHEDULE_REQUIRED_FIELDS) {
+      assert.ok(
+        row[field] !== undefined && row[field].trim() !== '',
+        `lc3-schedules.seed.csv row ${i + 2}: field "${field}" is empty`
+      );
+    }
+  }
+});
+
+test('schedule seed — day_of_week values are valid', () => {
+  if (!scheduleDataExists) return;
+  for (let i = 0; i < scheduleRows.length; i += 1) {
+    const { day_of_week } = scheduleRows[i];
+    assert.ok(
+      ALLOWED_DAYS.has(day_of_week),
+      `lc3-schedules.seed.csv row ${i + 2}: invalid day_of_week "${day_of_week}" — must be one of ${[...ALLOWED_DAYS].join(', ')}`
+    );
+  }
+});
+
+test('schedule seed — start_time and end_time are in HH:MM format and end > start', () => {
+  if (!scheduleDataExists) return;
+  for (let i = 0; i < scheduleRows.length; i += 1) {
+    const { start_time, end_time } = scheduleRows[i];
+    assert.ok(TIME_RE.test(start_time), `lc3-schedules.seed.csv row ${i + 2}: start_time "${start_time}" is not HH:MM`);
+    assert.ok(TIME_RE.test(end_time), `lc3-schedules.seed.csv row ${i + 2}: end_time "${end_time}" is not HH:MM`);
+    assert.ok(
+      end_time > start_time,
+      `lc3-schedules.seed.csv row ${i + 2}: end_time "${end_time}" is not after start_time "${start_time}"`
+    );
+  }
+});
+
+test('schedule seed — event_type values are valid', () => {
+  if (!scheduleDataExists) return;
+  for (let i = 0; i < scheduleRows.length; i += 1) {
+    const { event_type } = scheduleRows[i];
+    assert.ok(
+      ALLOWED_EVENT_TYPES.has(event_type),
+      `lc3-schedules.seed.csv row ${i + 2}: invalid event_type "${event_type}" — must be one of ${[...ALLOWED_EVENT_TYPES].join(', ')}`
+    );
+  }
+});
+
+test('schedule seed — every room_code resolves to a known location_id (NO silent skip)', () => {
+  if (!scheduleDataExists) return;
+  // KEY acceptance criterion from Issue #47:
+  // Any unresolvable room_code is an immediate hard failure — no silent skip allowed.
+  for (let i = 0; i < scheduleRows.length; i += 1) {
+    const { room_code } = scheduleRows[i];
+    const locationId = roomCodeToLocationId.get(room_code);
+    assert.ok(
+      locationId !== undefined,
+      `lc3-schedules.seed.csv row ${i + 2}: room_code "${room_code}" cannot be resolved to any location_id in lc3-locations.seed.json — check for typos or add the room to the locations seed first`
+    );
+  }
+});
+
+test('schedule seed — no two rows share the same room + day + start_time (no duplicate slots)', () => {
+  if (!scheduleDataExists) return;
+  const seen = new Map();
+  for (let i = 0; i < scheduleRows.length; i += 1) {
+    const { room_code, day_of_week, start_time } = scheduleRows[i];
+    const key = `${room_code}|${day_of_week}|${start_time}`;
+    assert.ok(
+      !seen.has(key),
+      `lc3-schedules.seed.csv row ${i + 2}: duplicate slot — room "${room_code}" on ${day_of_week} at ${start_time} already claimed by row ${seen.get(key)}`
+    );
+    seen.set(key, i + 2);
+  }
+});
