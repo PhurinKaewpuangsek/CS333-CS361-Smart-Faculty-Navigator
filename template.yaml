@@ -59,6 +59,30 @@ Resources:
             Path: /api/locations/{location_id}
             Method: put
 
+  GetLocationsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: functions/get-locations/
+      Handler: index.handler
+      Role: !Sub "arn:aws:iam::${AWS::AccountId}:role/LabRole"
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref SmartFacultyLocations
+      # Read-only by design: this endpoint may Scan the table and nothing else.
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action: dynamodb:Scan
+              Resource: !GetAtt SmartFacultyLocations.Arn
+      Events:
+        GetLocations:
+          # Type: Api with no RestApiId — joins the single implicit API Gateway
+          # whose CORS is configured in Globals. Never declare AWS::Serverless::Api.
+          Type: Api
+          Properties:
+            Path: /api/locations
+            Method: get
+
 Outputs:
   ApiUrl:
     Description: Implicit API Gateway endpoint URL

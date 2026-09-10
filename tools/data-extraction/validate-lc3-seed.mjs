@@ -79,6 +79,12 @@ test('assets are LF, because the manifest hashes are of the upstream LF blob', (
 
 /* --------------------------------------------------------------------- invariants ----- */
 
+test('the dataset holds exactly the 131 records the seeder ships to DynamoDB', () => {
+  assert.equal(seed.records.length, 131, 'record count changed — update the seeder and API expectations');
+  assert.equal(seed.counts.records, seed.records.length, 'counts.records disagrees with records[]');
+  assert.equal(seed.records.filter((r) => !r.location_id).length, 0, 'record without a partition key');
+});
+
 test('identifiers are unique', () => {
   assert.equal(byId.size, seed.records.length, 'duplicate location_id');
   const rooms = seed.records.filter((r) => r.location_kind === 'room');

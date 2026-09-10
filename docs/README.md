@@ -21,5 +21,5 @@
 ## เอกสารที่ควรมีเพิ่มในอนาคต (ยังไม่ได้เขียน)
 
 - `system-boundary-v1.md` — ขอบเขตระบบ V1 (อะไรอยู่ใน / นอก scope)
-- `data-model.md` — โครงสร้าง `rooms.json` และแผน migrate เข้า DynamoDB
+- `data-model.md` — โครงสร้างข้อมูลใน DynamoDB table `SmartFacultyLocations` และ contract ของ `GET /api/locations`
 - `deployment-runbook.md` — ขั้นตอน deploy + วิธีต่อ AWS credentials ของ Learner Lab

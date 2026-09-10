@@ -1,39 +1,58 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert'
-import fs from 'node:fs'
-import path from 'node:path'
-import { normalizeRoom, getRooms } from '../roomsService.ts'
+import { normalizeRoom, getRooms, ROOMS_ENDPOINT } from '../roomsService.ts'
 import type { RawRoomRecord, RoomsDataResponse } from '../../types/room.ts'
 
-describe('roomsService - Data Access Layer', () => {
-  const roomsJsonPath = path.resolve(process.cwd(), 'public/data/rooms.json')
-  const rawData: RoomsDataResponse = JSON.parse(fs.readFileSync(roomsJsonPath, 'utf-8'))
+/**
+ * Fixtures are inline on purpose. Room data now lives in DynamoDB and reaches the app
+ * through GET /api/locations, so there is no local JSON file to read from disk.
+ * Dataset-wide invariants (record count, provenance, coordinates) are asserted in
+ * tools/data-extraction/validate-lc3-seed.mjs instead.
+ */
+const SAMPLE_ROOM: RawRoomRecord = {
+  location_id: 'LC3-F1-R101-1',
+  building_code: 'LC3',
+  floor: 1,
+  location_kind: 'room',
+  room_code: 'LC3-101/1',
+  aliases: ['LC3-101/1', '101/1'],
+  name_th: 'ห้องบรรยาย 4 (วิทยาศาสตร์สิ่งแวดล้อม)',
+  category: 'lecture_room',
+  x: 376,
+  y: 152,
+  landmarks: [
+    {
+      kind: 'near_toilet',
+      ref_location_id: 'LC3-F1-PLMTOILET',
+      walk_hops: 10,
+      text_th: 'ใกล้ห้องน้ำชาย (ฝั่งซ้าย)',
+      verification: 'derived_unverified',
+    },
+  ],
+}
 
+const SAMPLE_POI: RawRoomRecord = {
+  location_id: 'LC3-F1-PLFTOILET',
+  building_code: 'LC3',
+  floor: 1,
+  location_kind: 'poi',
+  room_code: '',
+  aliases: [],
+  name_th: 'ห้องน้ำหญิง (ฝั่งซ้าย)',
+  category: 'toilet',
+  x: 127,
+  y: 356,
+}
+
+const API_RESPONSE: RoomsDataResponse = {
+  counts: { records: 2 },
+  records: [SAMPLE_POI, SAMPLE_ROOM],
+}
+
+describe('roomsService - Data Access Layer', () => {
   describe('normalizeRoom()', () => {
     it('correctly maps raw seed fields to Room interface', () => {
-      const sampleRaw: RawRoomRecord = {
-        location_id: 'LC3-F1-R101-1',
-        building_code: 'LC3',
-        floor: 1,
-        location_kind: 'room',
-        room_code: 'LC3-101/1',
-        aliases: ['LC3-101/1', '101/1'],
-        name_th: 'ห้องบรรยาย 4 (วิทยาศาสตร์สิ่งแวดล้อม)',
-        category: 'lecture_room',
-        x: 376,
-        y: 152,
-        landmarks: [
-          {
-            kind: 'near_toilet',
-            ref_location_id: 'LC3-F1-PLMTOILET',
-            walk_hops: 10,
-            text_th: 'ใกล้ห้องน้ำชาย (ฝั่งซ้าย)',
-            verification: 'derived_unverified',
-          },
-        ],
-      }
-
-      const room = normalizeRoom(sampleRaw)
+      const room = normalizeRoom(SAMPLE_ROOM)
 
       assert.strictEqual(room.id, 'LC3-F1-R101-1')
       assert.strictEqual(room.code, 'LC3-101/1')
@@ -48,20 +67,7 @@ describe('roomsService - Data Access Layer', () => {
     })
 
     it('handles POI records without room_code or landmarks gracefully', () => {
-      const samplePoi: RawRoomRecord = {
-        location_id: 'LC3-F1-PLFTOILET',
-        building_code: 'LC3',
-        floor: 1,
-        location_kind: 'poi',
-        room_code: '',
-        aliases: [],
-        name_th: 'ห้องน้ำหญิง (ฝั่งซ้าย)',
-        category: 'toilet',
-        x: 127,
-        y: 356,
-      }
-
-      const room = normalizeRoom(samplePoi)
+      const room = normalizeRoom(SAMPLE_POI)
 
       assert.strictEqual(room.id, 'LC3-F1-PLFTOILET')
       assert.strictEqual(room.code, '')
@@ -75,11 +81,8 @@ describe('roomsService - Data Access Layer', () => {
       assert.deepStrictEqual(room.aliases, [])
     })
 
-    it('normalizes all 131 records from rooms.json without any undefined fields', () => {
-      assert.strictEqual(rawData.records.length, 131, 'rooms.json must contain 131 records')
-
-      const normalizedRooms = rawData.records.map(normalizeRoom)
-      assert.strictEqual(normalizedRooms.length, 131)
+    it('leaves no required field undefined for a record missing every optional key', () => {
+      const room = normalizeRoom({ location_id: 'LC3-F2-R999' })
 
       const requiredKeys = [
         'id',
@@ -94,40 +97,43 @@ describe('roomsService - Data Access Layer', () => {
         'aliases',
       ] as const
 
-      for (const [index, room] of normalizedRooms.entries()) {
-        for (const key of requiredKeys) {
-          assert.notStrictEqual(
-            room[key],
-            undefined,
-            `Record at index ${index} (${room.id}) has undefined field: ${key}`
-          )
-        }
-        assert.notStrictEqual(room.coordinates.x, undefined)
-        assert.notStrictEqual(room.coordinates.y, undefined)
-        assert.ok(Array.isArray(room.landmarks))
-        assert.ok(Array.isArray(room.aliases))
+      for (const key of requiredKeys) {
+        assert.notStrictEqual(room[key], undefined, `normalizeRoom left ${key} undefined`)
       }
+      assert.strictEqual(room.coordinates.x, 0)
+      assert.strictEqual(room.coordinates.y, 0)
+      assert.ok(Array.isArray(room.landmarks))
+      assert.ok(Array.isArray(room.aliases))
     })
   })
 
   describe('getRooms()', () => {
-    it('fetches and returns 131 normalized rooms from data.records', async () => {
+    it('targets the /api/locations endpoint built from VITE_API_BASE_URL', () => {
+      assert.ok(
+        ROOMS_ENDPOINT.endsWith('/api/locations'),
+        `expected ROOMS_ENDPOINT to end with /api/locations, got "${ROOMS_ENDPOINT}"`
+      )
+      assert.ok(!ROOMS_ENDPOINT.includes('rooms.json'), 'must not read the retired static file')
+    })
+
+    it('fetches the API and returns normalized rooms from data.records', async () => {
       const originalFetch = globalThis.fetch
       try {
         globalThis.fetch = async (input: RequestInfo | URL) => {
-          assert.strictEqual(String(input), '/data/rooms.json')
+          assert.strictEqual(String(input), ROOMS_ENDPOINT)
           return {
             ok: true,
             status: 200,
             statusText: 'OK',
-            json: async () => rawData,
+            json: async () => API_RESPONSE,
           } as Response
         }
 
         const rooms = await getRooms()
-        assert.strictEqual(rooms.length, 131)
+        assert.strictEqual(rooms.length, 2)
         assert.strictEqual(rooms[0].id, 'LC3-F1-PLFTOILET')
         assert.strictEqual(rooms[0].building, 'LC3')
+        assert.strictEqual(rooms[1].id, 'LC3-F1-R101-1')
       } finally {
         globalThis.fetch = originalFetch
       }
