@@ -6,6 +6,13 @@
     "build": "npm --prefix frontend run build",
     "preview": "npm --prefix frontend run preview",
     "lint": "npm --prefix frontend run lint",
-    "test": "npm --prefix frontend run test"
+    "test": "npm --prefix frontend run test",
+    "bootstrap": "node scripts/bootstrap.mjs",
+    "deploy": "sam build && sam deploy --no-confirm-changeset --no-fail-on-empty-changeset",
+    "seed": "node scripts/seed.mjs",
+    "env:pull": "node scripts/write-env.mjs",
+    "site:publish": "node scripts/publish-site.mjs",
+    "site:empty": "node scripts/empty-site-bucket.mjs",
+    "verify": "node scripts/verify.mjs"
   }
 }

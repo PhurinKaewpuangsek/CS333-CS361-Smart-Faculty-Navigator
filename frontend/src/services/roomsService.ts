@@ -23,8 +23,19 @@ export function normalizeRoom(raw: RawRoomRecord): Room {
   }
 }
 
+/**
+ * Base URL of the deployed API Gateway stage, from VITE_API_BASE_URL.
+ *
+ * `import.meta.env` is optional-chained because the unit tests for this module run
+ * under plain `node --test`, where Vite never injects it. Trailing slashes are
+ * stripped so this matches how RoomDetailModal builds its own request URLs.
+ */
+const API_BASE_URL = (import.meta.env?.VITE_API_BASE_URL ?? '').replace(/\/+$/, '')
+
+export const ROOMS_ENDPOINT = `${API_BASE_URL}/api/locations`
+
 export async function getRooms(): Promise<Room[]> {
-  const response = await fetch('/data/rooms.json')
+  const response = await fetch(ROOMS_ENDPOINT)
 
   if (!response.ok) {
     throw new Error(`Failed to fetch rooms: ${response.status} ${response.statusText}`)

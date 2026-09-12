@@ -5,6 +5,34 @@ Description: >
   SAM template defining all Lambda functions, the implicit API Gateway, and DynamoDB tables.
 
 # ---------------------------------------------------------------------------
+# Parameters — everything that has to differ between one teammate's account and
+# another's. Deploying with no overrides reproduces the shared setup exactly.
+# ---------------------------------------------------------------------------
+Parameters:
+  LocationsTableName:
+    Type: String
+    Default: SmartFacultyLocations
+    Description: >
+      Name of the locations table. The default is the name issue #48 requires, so a
+      plain `sam deploy` needs no override. Change it only when two people have to
+      share one AWS account: two stacks cannot both own a fixed table name.
+      Changing it on a live stack REPLACES the table — re-run the seed afterwards.
+    AllowedPattern: "^[A-Za-z0-9_.-]{3,255}$"
+
+  ExistingLambdaRoleName:
+    Type: String
+    Default: LabRole
+    Description: >
+      An IAM role that already exists in the account, which both functions assume.
+      AWS Academy Learner Lab cannot create IAM roles, so it reuses LabRole (the
+      default). Deploy a normal AWS account with an empty string instead and this
+      template creates its own least-privilege roles.
+
+Conditions:
+  UseExistingLambdaRole: !Not [!Equals [!Ref ExistingLambdaRoleName, ""]]
+  CreateLambdaRoles: !Equals [!Ref ExistingLambdaRoleName, ""]
+
+# ---------------------------------------------------------------------------
 # Globals — apply to every Lambda function and the single implicit API Gateway
 # ---------------------------------------------------------------------------
 Globals:
@@ -20,18 +48,10 @@ Globals:
 # Resources
 # ---------------------------------------------------------------------------
 Resources:
-  # Placeholder resource so CloudFormation validation passes while the stack
-  # is bootstrapped. Remove this once the first real Lambda resource is added.
-  PlaceholderLogGroup:
-    Type: AWS::Logs::LogGroup
-    Properties:
-      LogGroupName: /torch/placeholder
-      RetentionInDays: 7
-
   SmartFacultyLocations:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: SmartFacultyLocations
+      TableName: !Ref LocationsTableName
       BillingMode: PAY_PER_REQUEST
       AttributeDefinitions:
         - AttributeName: location_id
@@ -40,12 +60,70 @@ Resources:
         - AttributeName: location_id
           KeyType: HASH
 
+  # Function roles, created only outside Learner Lab (ExistingLambdaRoleName = "").
+  # They cannot be written as `Role: !If [..., arn, !Ref AWS::NoValue]`: the SAM
+  # transform decides whether to synthesize a role by looking at whether the Role
+  # key is present, long before CloudFormation resolves the intrinsic — so that
+  # form silently skips role generation and then fails on a missing Role.
+  GetLocationsRole:
+    Type: AWS::IAM::Role
+    Condition: CreateLambdaRoles
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: ScanLocationsOnly
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:Scan
+                Resource: !GetAtt SmartFacultyLocations.Arn
+
+  UpdateLocationRole:
+    Type: AWS::IAM::Role
+    Condition: CreateLambdaRoles
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: LocationsTableCrud
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:GetItem
+                  - dynamodb:PutItem
+                  - dynamodb:UpdateItem
+                  - dynamodb:DeleteItem
+                  - dynamodb:Query
+                  - dynamodb:Scan
+                Resource: !GetAtt SmartFacultyLocations.Arn
+
   UpdateLocationFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: functions/update-location/
       Handler: index.handler
-      Role: !Sub "arn:aws:iam::${AWS::AccountId}:role/LabRole"
+      Role: !If
+        - UseExistingLambdaRole
+        - !Sub "arn:aws:iam::${AWS::AccountId}:role/${ExistingLambdaRoleName}"
+        - !GetAtt UpdateLocationRole.Arn
       Environment:
         Variables:
           TABLE_NAME: !Ref SmartFacultyLocations
@@ -59,7 +137,91 @@ Resources:
             Path: /api/locations/{location_id}
             Method: put
 
+  GetLocationsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: functions/get-locations/
+      Handler: index.handler
+      Role: !If
+        - UseExistingLambdaRole
+        - !Sub "arn:aws:iam::${AWS::AccountId}:role/${ExistingLambdaRoleName}"
+        - !GetAtt GetLocationsRole.Arn
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref SmartFacultyLocations
+      # Read-only by design: this endpoint may Scan the table and nothing else.
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action: dynamodb:Scan
+              Resource: !GetAtt SmartFacultyLocations.Arn
+      Events:
+        GetLocations:
+          # Type: Api with no RestApiId — joins the single implicit API Gateway
+          # whose CORS is configured in Globals. Never declare AWS::Serverless::Api.
+          Type: Api
+          Properties:
+            Path: /api/locations
+            Method: get
+
+  # The website itself, so `sam deploy` builds the whole system and nobody has to
+  # create a bucket by hand on the console (README: "No ClickOps").
+  SiteBucket:
+    Type: AWS::S3::Bucket
+    # Disposable sandbox hosting. Retain would orphan a bucket whose name is
+    # deterministic, so the next deploy of the same stack name would collide.
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      # Globally unique without asking anyone for input. Keep stack names lowercase
+      # and short: S3 forbids uppercase and caps the whole name at 63 characters.
+      BucketName: !Sub "${AWS::StackName}-site-${AWS::AccountId}"
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        # Single-page app: an unknown path must return the app shell, not S3's XML 404.
+        ErrorDocument: index.html
+      OwnershipControls:
+        # ACLs disabled — the bucket policy below is the only thing granting access.
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        IgnorePublicAcls: true
+        # These two must be false, or S3's secure-by-default behaviour rejects
+        # SiteBucketPolicy and the stack rolls back.
+        BlockPublicPolicy: false
+        RestrictPublicBuckets: false
+
+  SiteBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref SiteBucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: PublicReadForWebsiteObjects
+            Effect: Allow
+            Principal: "*"
+            Action: s3:GetObject
+            Resource: !Sub "${SiteBucket.Arn}/*"
+
+# ---------------------------------------------------------------------------
+# Outputs — the scripts under scripts/ read these instead of hardcoding names,
+# so every teammate's stack drives their own environment.
+# ---------------------------------------------------------------------------
 Outputs:
   ApiUrl:
     Description: Implicit API Gateway endpoint URL
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod"
+
+  SiteUrl:
+    Description: S3 static website endpoint (http only — CloudFront is out of scope)
+    Value: !GetAtt SiteBucket.WebsiteURL
+
+  SiteBucketName:
+    Description: Bucket the built frontend is synced into
+    Value: !Ref SiteBucket
+
+  LocationsTableName:
+    Description: DynamoDB table the seed script and the API read
+    Value: !Ref SmartFacultyLocations
