@@ -27,6 +27,15 @@ export interface RoomMarkersProps {
   onSelectRoom: (roomId: string) => void
 }
 
+/**
+ * Hover growth has to scale about the marker itself. SVG elements default to
+ * `transform-box: view-box`, so a Tailwind origin class (origin-bottom, or the default
+ * centre) resolves against the whole floor plan and the marker slides away from the
+ * pointer — which drops the hover, snaps it back, and makes the pin flee the cursor.
+ * Local (0,0) is the pin tip and the dot centre, because the parent `g` translates there.
+ */
+const HOVER_ORIGIN = { transformOrigin: '0px 0px' } as const
+
 /** Screen-px radius of the invisible tap target around a dot. */
 const DOT_HIT_RADIUS = 11
 
@@ -185,6 +194,7 @@ function RoomMarkers({
               stroke="white"
               strokeWidth={1.5}
               className="transition-transform duration-150 group-hover:scale-150"
+              style={HOVER_ORIGIN}
             />
             {side && (
               <MarkerLabel
@@ -215,6 +225,7 @@ function RoomMarkers({
             <g
               data-testid="room-pin"
               className="transition-transform duration-150 group-hover:scale-110"
+              style={HOVER_ORIGIN}
             >
               <path d={PIN_PATH} fill={color} stroke="white" strokeWidth={1.5} />
               {renderIcon(room, -7, -PIN_HEAD_Y - 7, 14)}

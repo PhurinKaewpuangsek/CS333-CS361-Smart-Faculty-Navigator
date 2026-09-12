@@ -188,6 +188,22 @@ describe('RoomMarkers', () => {
     expect(onSelectRoom).toHaveBeenCalledWith('LC3-F1-R101-OFFICE')
   })
 
+  it('scales markers about their own anchor on hover, so a pin cannot flee the cursor', () => {
+    render(
+      <RoomMarkers
+        rooms={[rooms[0]]}
+        currentFloor={1}
+        floorConfig={getFloorConfig(1)}
+        selectedRoomId={null}
+        onSelectRoom={vi.fn()}
+      />
+    )
+
+    // SVG defaults to transform-box: view-box, where any origin keyword resolves
+    // against the whole floor plan and slides the marker out from under the pointer.
+    expect(screen.getByTestId('room-pin').style.transformOrigin).toBe('0px 0px')
+  })
+
   it('draws separate man and woman pictograms for the two restrooms', () => {
     const restroom = (id: string, nameThai: string, x: number): Room => ({
       ...rooms[0],
