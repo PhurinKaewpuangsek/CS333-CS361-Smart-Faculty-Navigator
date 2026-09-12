@@ -127,6 +127,49 @@ export function getCategoryAreaFill(categoryKey?: string): string {
   return CATEGORY_AREA_FILLS[categoryKey.toLowerCase()] ?? DEFAULT_CATEGORY_AREA_FILL
 }
 
+/**
+ * Map-pin colours: the 600-level of the same families as CATEGORY_AREA_FILLS, dark
+ * enough to carry a white icon and to read as label text over the floor plan.
+ *
+ * Keeps this file's colour rule — blue is reserved for the active filter and red for the
+ * selected pin — so no category pin may be blue or red. Lime drops to 700 because
+ * lime-600 is too light behind a white glyph.
+ */
+export const CATEGORY_PIN_COLORS: Record<string, string> = {
+  lecture_room: '#7c3aed', // violet-600
+  seminar_room: '#c026d3', // fuchsia-600
+  meeting_room: '#0d9488', // teal-600
+  research_room: '#059669', // emerald-600
+  laboratory: '#4d7c0f', // lime-700
+  lab: '#4d7c0f',
+  faculty_office: '#d97706', // amber-600
+  department_office: '#d97706',
+  staff_room: '#d97706',
+  office: '#d97706',
+}
+
+/** slate-600 — facilities (toilets, stairs) and anything unclassified. */
+export const DEFAULT_CATEGORY_PIN_COLOR = '#475569'
+
+export function getCategoryPinColor(categoryKey?: string): string {
+  if (!categoryKey) return DEFAULT_CATEGORY_PIN_COLOR
+  return CATEGORY_PIN_COLORS[categoryKey.toLowerCase()] ?? DEFAULT_CATEGORY_PIN_COLOR
+}
+
+export type RestroomGender = 'male' | 'female'
+
+/**
+ * Which restroom a POI is, read from its Thai name ("ห้องน้ำชาย (ฝั่งซ้าย)").
+ * The map draws a different pictogram for each, so a student can tell them apart
+ * without reading the label. Returns null when the name says neither.
+ */
+export function getRestroomGender(name?: string): RestroomGender | null {
+  if (!name) return null
+  if (name.includes('หญิง')) return 'female'
+  if (name.includes('ชาย')) return 'male'
+  return null
+}
+
 export function getCategoryColor(categoryKey?: string): CategoryColorStyle {
   if (!categoryKey) return DEFAULT_CATEGORY_COLOR
   const key = categoryKey.toLowerCase()

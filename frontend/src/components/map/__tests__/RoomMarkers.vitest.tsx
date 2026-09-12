@@ -120,4 +120,96 @@ describe('RoomMarkers', () => {
 
     expect(screen.queryByTestId('room-selected-halo')).not.toBeInTheDocument()
   })
+
+  it('shows the room number beside the pin, because students look for door numbers', () => {
+    render(
+      <RoomMarkers
+        rooms={rooms}
+        currentFloor={1}
+        floorConfig={getFloorConfig(1)}
+        selectedRoomId={null}
+        onSelectRoom={vi.fn()}
+      />
+    )
+
+    expect(screen.getByText('101')).toBeInTheDocument()
+    expect(screen.getByTestId('room-pin')).toBeInTheDocument()
+  })
+
+  it('labels a POI without a room number by its short name', () => {
+    const toilet: Room = {
+      ...rooms[0],
+      id: 'LC3-F1-PLFTOILET',
+      code: '',
+      nameThai: 'ห้องน้ำหญิง (ฝั่งซ้าย)',
+      roomNumber: '',
+      category: 'toilet',
+    }
+
+    render(
+      <RoomMarkers
+        rooms={[toilet]}
+        currentFloor={1}
+        floorConfig={getFloorConfig(1)}
+        selectedRoomId={null}
+        onSelectRoom={vi.fn()}
+      />
+    )
+
+    expect(screen.getByText('ห้องน้ำหญิง')).toBeInTheDocument()
+  })
+
+  it('collapses a crowded lower-priority room to a dot that is still clickable', async () => {
+    const user = userEvent.setup()
+    const onSelectRoom = vi.fn()
+    const office: Room = {
+      ...rooms[0],
+      id: 'LC3-F1-R101-OFFICE',
+      nameThai: 'ห้องพักอาจารย์',
+      roomNumber: '101/9',
+      category: 'faculty_office',
+      coordinates: { x: 104, y: 200 },
+    }
+
+    render(
+      <RoomMarkers
+        rooms={[rooms[0], office]}
+        currentFloor={1}
+        floorConfig={getFloorConfig(1)}
+        selectedRoomId={null}
+        onSelectRoom={onSelectRoom}
+      />
+    )
+
+    expect(screen.getAllByTestId('room-pin')).toHaveLength(1)
+    expect(screen.getAllByTestId('room-dot')).toHaveLength(1)
+
+    await user.click(screen.getByRole('button', { name: 'ห้องพักอาจารย์' }))
+    expect(onSelectRoom).toHaveBeenCalledWith('LC3-F1-R101-OFFICE')
+  })
+
+  it('draws separate man and woman pictograms for the two restrooms', () => {
+    const restroom = (id: string, nameThai: string, x: number): Room => ({
+      ...rooms[0],
+      id,
+      code: '',
+      nameThai,
+      roomNumber: '',
+      category: 'toilet',
+      coordinates: { x, y: 200 },
+    })
+
+    render(
+      <RoomMarkers
+        rooms={[restroom('M', 'ห้องน้ำชาย (ฝั่งซ้าย)', 100), restroom('F', 'ห้องน้ำหญิง (ฝั่งซ้าย)', 400)]}
+        currentFloor={1}
+        floorConfig={getFloorConfig(1)}
+        selectedRoomId={null}
+        onSelectRoom={vi.fn()}
+      />
+    )
+
+    expect(screen.getByTestId('icon-restroom-male')).toBeInTheDocument()
+    expect(screen.getByTestId('icon-restroom-female')).toBeInTheDocument()
+  })
 })

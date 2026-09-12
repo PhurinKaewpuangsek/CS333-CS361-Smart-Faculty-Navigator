@@ -1,7 +1,23 @@
-import { useContext, useState, useEffect } from 'react'
+import { createElement, useContext, useEffect, useMemo, useState } from 'react'
+import type { KeyboardEvent, MouseEvent, ReactNode } from 'react'
 import { Context } from 'react-zoom-pan-pinch'
 import type { Room } from '../../types/room'
 import type { FloorConfig } from './floorConfig'
+import { getCategoryIcon } from '../categoryIcon'
+import { getCategoryPinColor } from '../../services/roomDisplay'
+import {
+  DOT_LABEL_FONT_SIZE,
+  DOT_RADIUS,
+  LABEL_FONT_SIZE,
+  LABEL_GAP,
+  PIN_HEAD_Y,
+  PIN_WIDTH,
+  SELECTED_PIN_HEAD_Y,
+  SELECTED_PIN_WIDTH,
+  getMarkerLabel,
+  layoutMarkers,
+} from '../../services/markerLayout'
+import type { LabelSide } from '../../services/markerLayout'
 
 export interface RoomMarkersProps {
   rooms: Room[]
@@ -11,7 +27,16 @@ export interface RoomMarkersProps {
   onSelectRoom: (roomId: string) => void
 }
 
-const HIT_RADIUS = 16
+/** Screen-px radius of the invisible tap target around a dot. */
+const DOT_HIT_RADIUS = 11
+
+/** Category pin: 24×32px teardrop, tip at (0,0), head centred at (0,-20). */
+const PIN_PATH = 'M 0 0 C -2 -6.4 -12 -12 -12 -20 A 12 12 0 1 1 12 -20 C 12 -12 2 -6.4 0 0 Z'
+/** Selected pin: the larger 30×40px Google red teardrop, head centred at (0,-25). */
+const SELECTED_PIN_PATH = 'M 0 0 C -2.5 -8 -15 -15 -15 -25 A 15 15 0 1 1 15 -25 C 15 -15 2.5 -8 0 0 Z'
+
+const SELECTED_PIN_COLOR = '#EA4335'
+const SELECTED_LABEL_COLOR = '#0f172a'
 
 /**
  * Safely extracts current zoom scale from react-zoom-pan-pinch context.
@@ -40,53 +65,52 @@ function useTransformScale(): number {
   return scale
 }
 
-/**
- * Classic Google Maps SVG pin (30x40px) in standard Google Red (#EA4335)
- * with a dark circular center cutout and an elliptical ground drop shadow.
- *
- * Anchoring:
- * - The sharp bottom tip anchors precisely at (cx, cy).
- * - The entire 40px pin body extends upwards (y: 0 to -40) without covering room text.
- */
-function GoogleMapsPin({
-  cx,
-  cy,
-  invScale,
+function renderIcon(room: Room, x: number, y: number, size: number): ReactNode {
+  return createElement(getCategoryIcon(room.category, room.nameThai), {
+    x,
+    y,
+    size,
+    color: 'white',
+    weight: 'fill',
+    'aria-hidden': true,
+  })
+}
+
+/** Room number (or POI name) beside a pin, with a white halo so it reads over any tint. */
+function MarkerLabel({
+  text,
+  side,
+  offset,
+  y,
+  color,
+  fontSize = LABEL_FONT_SIZE,
+  bold = false,
 }: {
-  cx: number
-  cy: number
-  invScale: number
+  text: string
+  side: LabelSide
+  offset: number
+  y: number
+  color: string
+  fontSize?: number
+  bold?: boolean
 }) {
   return (
-    <g
-      transform={`translate(${cx}, ${cy}) scale(${invScale})`}
-      style={{
-        filter: 'drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25))',
-      }}
+    <text
+      x={side === 'right' ? offset : -offset}
+      y={y}
+      dominantBaseline="central"
+      textAnchor={side === 'right' ? 'start' : 'end'}
+      fontSize={fontSize}
+      fontWeight={bold ? 700 : 600}
+      fill={color}
+      stroke="white"
+      strokeWidth={fontSize / 4}
+      strokeLinejoin="round"
+      paintOrder="stroke"
+      style={{ userSelect: 'none' }}
     >
-      {/* Elliptical ground drop shadow under pin tip */}
-      <ellipse
-        data-testid="room-selected-halo"
-        cx={0}
-        cy={2.5}
-        rx={6.5}
-        ry={2.5}
-        fill="#000000"
-        fillOpacity={0.3}
-      />
-
-      {/* Floating pin body with smooth entrance animation */}
-      <g className="animate-pin-drop">
-        {/* Google Maps Teardrop Shape: Google Red #EA4335 (No white border) */}
-        <path
-          d="M 0 0 C -2.5 -8 -15 -15 -15 -25 A 15 15 0 1 1 15 -25 C 15 -15 2.5 -8 0 0 Z"
-          fill="#EA4335"
-        />
-
-        {/* Dark circular center cutout */}
-        <circle cx={0} cy={-25} r={5.5} fill="#76120e" />
-      </g>
-    </g>
+      {text}
+    </text>
   )
 }
 
@@ -99,87 +123,150 @@ function RoomMarkers({
 }: RoomMarkersProps) {
   const scale = useTransformScale()
   const invScale = 1 / (scale || 1)
-  const floorRooms = rooms.filter((room) => room.floor === currentFloor)
+  // Re-run collision layout per 0.1 zoom step, not on every wheel frame.
+  const layoutScale = Math.round((scale || 1) * 10) / 10
+
+  const floorRooms = useMemo(
+    () => rooms.filter((room) => room.floor === currentFloor),
+    [rooms, currentFloor]
+  )
+  const layout = useMemo(
+    () => layoutMarkers({ rooms: floorRooms, scale: layoutScale, selectedRoomId }),
+    [floorRooms, layoutScale, selectedRoomId]
+  )
+
+  const dots = floorRooms.filter((room) => room.id !== selectedRoomId && layout.get(room.id)?.mode === 'dot')
+  const pins = floorRooms.filter((room) => room.id !== selectedRoomId && layout.get(room.id)?.mode === 'pin')
+  const selected = floorRooms.filter((room) => room.id === selectedRoomId)
+
+  const interactiveProps = (room: Room, isSelected: boolean) => ({
+    role: 'button',
+    tabIndex: 0,
+    'aria-label': room.nameThai || room.code || room.id,
+    'aria-pressed': isSelected,
+    style: { cursor: 'pointer', pointerEvents: 'auto' as const },
+    onClick: (event: MouseEvent) => {
+      event.stopPropagation()
+      onSelectRoom(room.id)
+    },
+    onKeyDown: (event: KeyboardEvent) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault()
+        event.stopPropagation()
+        onSelectRoom(room.id)
+      }
+    },
+  })
 
   return (
     <svg
       viewBox={`0 0 ${floorConfig.width} ${floorConfig.height}`}
       width={floorConfig.width}
       height={floorConfig.height}
-      style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }}
+      style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none', overflow: 'visible' }}
     >
-      {/* Render unselected room hitboxes: transparent with crisp hover feedback, no cluttering dots */}
-      {floorRooms
-        .filter((room) => room.id !== selectedRoomId)
-        .map((room) => {
-          const markerX = room.coordinates.x
-          const markerY = room.coordinates.y
-          return (
-            <g
-              key={room.id}
-              role="button"
-              tabIndex={0}
-              aria-label={room.nameThai || room.code || room.id}
-              aria-pressed={false}
-              className="group"
-              style={{ cursor: 'pointer', pointerEvents: 'auto' }}
-              onClick={(event) => {
-                event.stopPropagation()
-                onSelectRoom(room.id)
-              }}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter' || event.key === ' ') {
-                  event.preventDefault()
-                  event.stopPropagation()
-                  onSelectRoom(room.id)
-                }
-              }}
-            >
-              {/* Forgiving hit box area with crisp hover/active visual feedback */}
-              <circle
-                cx={markerX}
-                cy={markerY}
-                r={HIT_RADIUS}
-                fill="transparent"
-                className="transition-all duration-150 group-hover:fill-blue-500/15 group-hover:stroke-blue-500 group-hover:stroke-2"
+      {/* Paint order: dots → pins (with labels) → selected. The layout guarantees no
+          label overlaps another pin, so labels never end up under a later marker. */}
+      {dots.map((room) => {
+        const color = getCategoryPinColor(room.category)
+        const side = layout.get(room.id)?.label ?? null
+        return (
+          <g
+            key={room.id}
+            {...interactiveProps(room, false)}
+            className="group"
+            transform={`translate(${room.coordinates.x}, ${room.coordinates.y}) scale(${invScale})`}
+          >
+            <circle r={DOT_HIT_RADIUS} fill="transparent" />
+            <circle
+              data-testid="room-dot"
+              r={DOT_RADIUS}
+              fill={color}
+              stroke="white"
+              strokeWidth={1.5}
+              className="transition-transform duration-150 group-hover:scale-150"
+            />
+            {side && (
+              <MarkerLabel
+                text={getMarkerLabel(room)}
+                side={side}
+                offset={DOT_RADIUS + LABEL_GAP}
+                y={0}
+                color={color}
+                fontSize={DOT_LABEL_FONT_SIZE}
               />
-            </g>
-          )
-        })}
+            )}
+          </g>
+        )
+      })}
 
-      {/* Render the selected room last — always on top */}
-      {floorRooms
-        .filter((room) => room.id === selectedRoomId)
-        .map((room) => {
-          const markerX = room.coordinates.x
-          const markerY = room.coordinates.y
-          return (
+      {pins.map((room) => {
+        const color = getCategoryPinColor(room.category)
+        const side = layout.get(room.id)?.label ?? null
+        const props = interactiveProps(room, false)
+        return (
+          <g
+            key={room.id}
+            {...props}
+            className="group"
+            transform={`translate(${room.coordinates.x}, ${room.coordinates.y}) scale(${invScale})`}
+            style={{ ...props.style, filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25))' }}
+          >
             <g
-              key={room.id}
-              role="button"
-              tabIndex={0}
-              aria-label={room.nameThai || room.code || room.id}
-              aria-pressed={true}
-              style={{ cursor: 'pointer', pointerEvents: 'auto' }}
-              onClick={(event) => {
-                event.stopPropagation()
-                onSelectRoom(room.id)
-              }}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter' || event.key === ' ') {
-                  event.preventDefault()
-                  event.stopPropagation()
-                  onSelectRoom(room.id)
-                }
-              }}
+              data-testid="room-pin"
+              className="transition-transform duration-150 group-hover:scale-110"
             >
-              <GoogleMapsPin cx={markerX} cy={markerY} invScale={invScale} />
+              <path d={PIN_PATH} fill={color} stroke="white" strokeWidth={1.5} />
+              {renderIcon(room, -7, -PIN_HEAD_Y - 7, 14)}
             </g>
-          )
-        })}
+            {side && (
+              <MarkerLabel
+                text={getMarkerLabel(room)}
+                side={side}
+                offset={PIN_WIDTH / 2 + LABEL_GAP}
+                y={-PIN_HEAD_Y}
+                color={color}
+              />
+            )}
+          </g>
+        )
+      })}
+
+      {selected.map((room) => {
+        const side = layout.get(room.id)?.label ?? 'right'
+        return (
+          <g
+            key={room.id}
+            {...interactiveProps(room, true)}
+            transform={`translate(${room.coordinates.x}, ${room.coordinates.y}) scale(${invScale})`}
+          >
+            {/* Elliptical ground shadow under the pin tip */}
+            <ellipse
+              data-testid="room-selected-halo"
+              cx={0}
+              cy={2.5}
+              rx={6.5}
+              ry={2.5}
+              fill="#000000"
+              fillOpacity={0.3}
+            />
+            <g className="animate-pin-drop" style={{ filter: 'drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25))' }}>
+              <path d={SELECTED_PIN_PATH} fill={SELECTED_PIN_COLOR} />
+              {renderIcon(room, -9, -SELECTED_PIN_HEAD_Y - 9, 18)}
+            </g>
+            <MarkerLabel
+              text={getMarkerLabel(room)}
+              side={side}
+              offset={SELECTED_PIN_WIDTH / 2 + LABEL_GAP}
+              y={-SELECTED_PIN_HEAD_Y}
+              color={SELECTED_LABEL_COLOR}
+              bold
+            />
+          </g>
+        )
+      })}
     </svg>
   )
 }
 
 export default RoomMarkers
-
