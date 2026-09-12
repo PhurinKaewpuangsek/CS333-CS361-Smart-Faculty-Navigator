@@ -20,14 +20,6 @@ Globals:
 # Resources
 # ---------------------------------------------------------------------------
 Resources:
-  # Placeholder resource so CloudFormation validation passes while the stack
-  # is bootstrapped. Remove this once the first real Lambda resource is added.
-  PlaceholderLogGroup:
-    Type: AWS::Logs::LogGroup
-    Properties:
-      LogGroupName: /torch/placeholder
-      RetentionInDays: 7
-
   SmartFacultyLocations:
     Type: AWS::DynamoDB::Table
     Properties:
