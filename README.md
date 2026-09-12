@@ -54,6 +54,8 @@ CS333-CS361-Smart-Faculty-Navigator/
 │   │   └── index.mjs
 │   └── get-schedules/         # GET /api/schedules — ดึงข้อมูลตารางเรียนจาก DynamoDB
 │       └── index.mjs
+├── scripts/                   # Deploy helpers (bootstrap, seed, env:pull, site:publish, verify)
+│   └── lib/stack.mjs          # อ่าน stack name/region จาก samconfig.toml และ Outputs จาก CloudFormation
 ├── tools/                     # Data extraction & Seeding scripts
 │   └── data-extraction/
 │       └── lc3/               # LC3 ground truth data (Seeds, CSVs, Validators)
@@ -90,11 +92,12 @@ CS333-CS361-Smart-Faculty-Navigator/
 
 ### 🛠️ Pre-requisites (สิ่งที่ต้องเตรียมก่อนเริ่มงาน)
 
-**1. ติดตั้ง AWS SAM CLI (ทำครั้งแรกครั้งเดียว)**
-เครื่องคอมพิวเตอร์ของทุกคนต้องมีเครื่องมือสำหรับอ่านไฟล์ IaC หากยังไม่มี ให้ติดตั้งตามนี้:
-*   **Windows (PowerShell as Admin):** รันคำสั่ง `winget install -e --id Amazon.SAM-CLI`
-*   **Mac (Homebrew):** รันคำสั่ง `brew install aws-sam-cli`
-*(💡 ติดตั้งเสร็จแล้ว ต้องปิดแล้วเปิด VSCode / Terminal ใหม่ด้วยนะ)*
+**1. ติดตั้ง AWS SAM CLI + AWS CLI (ทำครั้งแรกครั้งเดียว)**
+เครื่องคอมพิวเตอร์ของทุกคนต้องมีเครื่องมือสำหรับอ่านไฟล์ IaC และคุยกับ AWS หากยังไม่มี ให้ติดตั้งตามนี้:
+*   **Windows (PowerShell as Admin):** `winget install -e --id Amazon.SAM-CLI` แล้ว `winget install -e --id Amazon.AWSCLI`
+*   **Mac (Homebrew):** `brew install aws-sam-cli awscli`
+*(💡 ติดตั้งเสร็จแล้ว ต้องปิดแล้วเปิด VSCode / Terminal ใหม่ด้วยนะ ไม่งั้น PATH จะยังเป็นของเก่าแล้วขึ้นว่า `sam : The term 'sam' is not recognized`)*
+*(💡 SAM CLI ไม่ได้แถม AWS CLI มาให้ แต่ script ใน `scripts/` ใช้ทั้งคู่ ต้องลงทั้งสองตัว)*
 
 **2. การใส่ AWS Credentials (ต้องทำทุกครั้งที่ Start Lab ใหม่)**
 เนื่องจากเราใช้ AWS Academy Learner Lab กุญแจ (Credentials) ของเราจะหมดอายุทุกๆ 4 ชั่วโมง เมื่อคุณกดปุ่ม "Start Lab" บนหน้าเว็บ ให้ทำตามนี้:
@@ -117,67 +120,69 @@ CS333-CS361-Smart-Faculty-Navigator/
 ติดตั้ง Dependencies สำหรับฝั่งหน้าบ้าน (Frontend):
 
 ```bash
-cd frontend
-npm install
-
+npm --prefix frontend install
 ```
 
-### Step 2: สร้าง Backend ของตัวเอง (Personal Sandbox)
+### Step 2: สร้างระบบทั้งก้อนของตัวเอง (Personal Sandbox) — คำสั่งเดียวจบ
 
-**ทำไมต้องทำขั้นตอนนี้?** เพื่อไม่ให้การทดสอบระบบของคุณไปกวนการทำงานของเพื่อน หรือเผลอไปทำข้อมูลบน Production พัง ทุกคนจึงต้องสร้าง Sandbox ส่วนตัวบนบัญชี AWS Academy Learner Lab ของตัวเอง เอาไว้ใช้สำหรับ Dev & Test ฟีเจอร์ที่ตัวเองรับผิดชอบโดยเฉพาะ
+**ทำไมต้องทำขั้นตอนนี้?** เพื่อไม่ให้การทดสอบระบบของคุณไปกวนการทำงานของเพื่อน หรือเผลอไปทำข้อมูลบน Production พัง ทุกคนจึงต้องสร้าง Sandbox ส่วนตัวบนบัญชี AWS Academy Learner Lab ของตัวเอง
 
-เมื่อมีการเขียนโค้ด Lambda ใหม่ หรือแก้ไข `template.yaml`:
-
-1. เปิด Terminal ที่ Root folder แล้วรัน:
+เปิด Terminal ที่ Root folder (หลังใส่ Credentials แล้ว) แล้วรัน:
 
 ```bash
-sam deploy --guided
-
+npm run bootstrap
 ```
 
-2. ทำตามขั้นตอนบนหน้าจอเพื่อสร้าง API และ Database ขึ้นบน **AWS Academy Learner Lab ของตัวเอง**
-3. **สำคัญมาก:** เมื่อ Deploy เสร็จ ให้สังเกตตาราง `Outputs` ใน Terminal มันจะแสดง URL ของ API Gateway (เช่น `[https://xyz123.execute-api.us-east-1.amazonaws.com/api/](https://xyz123.execute-api.us-east-1.amazonaws.com/api/)...`) **ให้ Copy Base URL นี้เก็บไว้**
-4. รัน Script เพื่ออิมพอร์ตข้อมูลจำลองเข้า Database ในบัญชีของคุณ:
+คำสั่งเดียวนี้ทำให้ครบทั้งระบบ:
 
-```bash
-node tools/data-extraction/lc3/seed-dynamodb.mjs
+| ขั้น | สิ่งที่เกิดขึ้น |
+| :-- | :-- |
+| `sam build` + `sam deploy` | สร้าง DynamoDB table, Lambda 2 ตัว, API Gateway และ **S3 bucket สำหรับโฮสต์เว็บ** ตาม `template.yaml` |
+| seed | นำเข้าข้อมูลห้อง 131 รายการเข้า table ของคุณเอง (อ่านชื่อ table จาก Outputs ของ stack ตัวเอง ไม่แตะของเพื่อน) |
+| env:pull | เขียน `frontend/.env.local` ให้ชี้ API URL ของคุณอัตโนมัติ — **ไม่ต้องก๊อป URL มาวางเองอีกแล้ว** |
+| site:publish | build หน้าเว็บแล้ว sync ขึ้น S3 ของคุณ |
+| verify | เช็ก 7 จุด แล้วพิมพ์ `[PASS]`/`[FAIL]` ทีละบรรทัด |
 
-```
+จบแล้วจะพิมพ์ URL ของเว็บกับ API ออกมา เปิด URL นั้นได้เลย
 
-### Step 3: เชื่อมหน้าบ้านเข้ากับหลังบ้าน (Environment Variables)
+### Step 3: รันและทดสอบระบบ (Local Server)
 
-**ทำไมต้องมีไฟล์ .env และมันต่างกันอย่างไร?**
-
-* `.env.example`: คือ "ไฟล์แม่แบบ" ที่แชร์กันใน Git เพื่อให้ทุกคนรู้ว่าโปรเจกต์นี้ต้องใช้ตัวแปรอะไรบ้าง (แต่ไม่มีค่าจริงอยู่ข้างใน)
-* `.env.local`: คือ "ไฟล์ส่วนตัวของคุณ" ที่ Git จะไม่สนใจ (Untracked) เราใช้ไฟล์นี้เพื่อให้ API URL ของคุณไม่ไปทับกับของเพื่อนตอน Merge โค้ด
-
-*(💡 **ต้องทำขั้นตอนนี้ทุกครั้งที่แตก Branch ใหม่ไหม?** ตอบ: **ไม่ต้อง!** ทำแค่ครั้งเดียว ตราบใดที่คุณยังใช้ API ตัวเดิมบน AWS ของคุณ URL นี้จะคงเดิมเสมอ แตก Branch ใหม่ก็รันโค้ดต่อได้เลย)*
-
-1. เข้าไปที่โฟลเดอร์ `frontend/`
-2. Copy ไฟล์ `.env.example` แล้วเปลี่ยนชื่อเป็น `.env.local`
-3. เปิดไฟล์ `.env.local` แล้วเอา URL ที่ Copy จาก Step 2 มาวาง:
-
-```env
-VITE_API_BASE_URL=https://xyz123.execute-api.us-east-1.amazonaws.com
-
-```
-
-### Step 4: รันและทดสอบระบบ (Local Server)
-
-1. รันเซิร์ฟเวอร์จำลองหน้าเว็บ (ให้แน่ใจว่าอยู่ในโฟลเดอร์ `frontend/`):
+1. รันเซิร์ฟเวอร์จำลองหน้าเว็บ:
 
 ```bash
 npm run dev
-
 ```
 
-2. เปิดบราวเซอร์ที่ `http://localhost:5173` หน้าเว็บของคุณจะทำงานโดยดึงข้อมูลจริงจาก Database บน AWS ของคุณเอง!
+2. เปิดบราวเซอร์ที่ `http://localhost:5173` หน้าเว็บจะดึงข้อมูลจริงจาก DynamoDB บน AWS ของคุณเอง
 *(💡 หากต้องการเทสบนมือถือ ให้รัน `npm run dev -- --host` แล้วเข้าผ่าน URL ในช่อง Network)*
+
+### Step 4: คำสั่งที่ใช้ประจำ
+
+| สถานการณ์ | คำสั่ง |
+| :-- | :-- |
+| แก้ `template.yaml` หรือโค้ด Lambda | `npm run bootstrap` |
+| แก้เฉพาะหน้าบ้าน อยากอัปขึ้นเว็บจริง | `npm run site:publish` |
+| Start Lab ใหม่ / สงสัยว่าของตัวเองพัง | `npm run verify` |
+| API URL เปลี่ยนหลังสร้าง stack ใหม่ | `npm run env:pull` |
+| อยากโหลดข้อมูลใหม่ | `npm run seed` |
+| เลิกใช้ อยากลบทิ้งให้หมด | `npm run site:empty` แล้วค่อย `sam delete` |
+
+*(⚠️ ต้อง `npm run site:empty` ก่อน `sam delete` เสมอ — CloudFormation ลบ bucket ที่ยังมีไฟล์อยู่ไม่ได้ stack จะค้างกลางทาง)*
 
 ### Step 5: เปิด Pull Request & Deploy to Production
 
 1. เมื่อเทสในเครื่องตัวเองผ่านหมดแล้ว ให้ Commit โค้ดและเปิด Pull Request (PR) เข้า Branch `main`
 2. เมื่อ PR ถูกตรวจสอบและ Merge สำเร็จ ระบบ CI/CD (GitHub Actions) จะนำโค้ด `template.yaml` ชุดเดียวกันนี้ ไปรันสร้างและอัปเดตระบบบน **บัญชี Production หลัก** ให้อัตโนมัติ
+
+### 🩺 Troubleshooting
+
+| อาการ | สาเหตุ / วิธีแก้ |
+| :-- | :-- |
+| `ExpiredToken` หรือ `Unable to locate credentials` | Credentials หมดอายุ (4 ชม.) — กด Start Lab ใหม่ ก๊อป Credentials มาวางในเทอร์มินัลเดิม แล้วรัน `npm run bootstrap` อีกครั้ง |
+| `sam : The term 'sam' is not recognized` | เทอร์มินัลเปิดค้างไว้ตั้งแต่ก่อนติดตั้ง PATH เลยยังเป็นของเก่า — ปิดเปิดเทอร์มินัลใหม่ |
+| `BucketAlreadyExists` ตอน deploy | ชื่อ bucket มาจาก `<stack name>-site-<account id>` — ถ้าตั้งชื่อ stack เป็นตัวพิมพ์ใหญ่ มี `_` หรือยาวเกิน ~37 ตัวอักษร จะได้ชื่อที่ S3 ไม่รับ ให้ใช้ชื่อ stack ตัวเล็กสั้นๆ |
+| deploy พังที่ `SiteBucketPolicy` เป็น `AccessDenied` | บัญชีเปิด Block Public Access ระดับ account ไว้ (ตั้งค่าระดับ bucket ทับไม่ได้) เช็กด้วย `aws s3control get-public-access-block --account-id <id>` ถ้าเปิดอยู่ให้ปิดสองตัวนี้: `aws s3control put-public-access-block --account-id <id> --public-access-block-configuration BlockPublicPolicy=false,RestrictPublicBuckets=false` |
+| เว็บขึ้นแต่ไม่มีห้องเลย / `.env.local` หาย | `npm run env:pull` แล้ว `npm run site:publish` ใหม่ (Vite ฝัง API URL ตอน build ถ้าตอน build ไม่มีค่า เว็บจะยิงผิดที่) |
 
 ---
 

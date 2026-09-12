@@ -59,6 +59,9 @@ CS333-CS361-Smart-Faculty-Navigator/
 │   │   ├── index.mjs
 │   │   └── package.json    <-- Each Lambda has its own dependencies
 │   └── get-schedules/      <-- Example: GET /api/schedules handler
+├── scripts/                <-- Deploy helpers run through root npm scripts (bootstrap, seed,
+│   │                           env:pull, site:publish, site:empty, verify). Node built-ins only:
+│   └── lib/stack.mjs           no dependencies may be added at the repo root.
 ├── tools/                  <-- Tooling, data extraction, and seed scripts
 │   └── data-extraction/
 ├── AGENTS.md               <-- This file — rules for AI CLI tools
