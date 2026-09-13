@@ -48,7 +48,7 @@ describe('RoomMarkers', () => {
     expect(screen.queryByRole('button', { name: 'ห้อง 201' })).not.toBeInTheDocument()
   })
 
-  it('calls onSelectRoom with the same roomId whether the hit-layer or the pin is clicked', async () => {
+  it('calls onSelectRoom with the same roomId whether the hit-layer or the badge is clicked', async () => {
     const user = userEvent.setup()
     const onSelectRoom = vi.fn()
 
@@ -107,6 +107,22 @@ describe('RoomMarkers', () => {
     expect(marker.querySelector('[data-testid="room-selected-halo"]')).not.toBeNull()
   })
 
+  it('draws only the selected room as a pointed pin; every other room is a round badge', () => {
+    render(
+      <RoomMarkers
+        rooms={[rooms[0], { ...rooms[0], id: 'LC3-F1-R102', nameThai: 'ห้อง 102', roomNumber: '102', coordinates: { x: 600, y: 400 } }]}
+        currentFloor={1}
+        floorConfig={getFloorConfig(1)}
+        selectedRoomId="LC3-F1-R101"
+        onSelectRoom={vi.fn()}
+      />
+    )
+
+    expect(screen.getAllByTestId('room-selected-pin')).toHaveLength(1)
+    expect(screen.getByRole('button', { name: 'ห้อง 101' }).querySelector('[data-testid="room-badge"]')).toBeNull()
+    expect(screen.getByRole('button', { name: 'ห้อง 102' }).querySelector('[data-testid="room-badge"]')).not.toBeNull()
+  })
+
   it('does not render a halo when no room is selected', () => {
     render(
       <RoomMarkers
@@ -121,7 +137,7 @@ describe('RoomMarkers', () => {
     expect(screen.queryByTestId('room-selected-halo')).not.toBeInTheDocument()
   })
 
-  it('shows the room number beside the pin, because students look for door numbers', () => {
+  it('shows the room number beside the badge, because students look for door numbers', () => {
     render(
       <RoomMarkers
         rooms={rooms}
@@ -133,7 +149,7 @@ describe('RoomMarkers', () => {
     )
 
     expect(screen.getByText('101')).toBeInTheDocument()
-    expect(screen.getByTestId('room-pin')).toBeInTheDocument()
+    expect(screen.getByTestId('room-badge')).toBeInTheDocument()
   })
 
   it('labels a POI without a room number by its short name', () => {
@@ -181,14 +197,14 @@ describe('RoomMarkers', () => {
       />
     )
 
-    expect(screen.getAllByTestId('room-pin')).toHaveLength(1)
+    expect(screen.getAllByTestId('room-badge')).toHaveLength(1)
     expect(screen.getAllByTestId('room-dot')).toHaveLength(1)
 
     await user.click(screen.getByRole('button', { name: 'ห้องพักอาจารย์' }))
     expect(onSelectRoom).toHaveBeenCalledWith('LC3-F1-R101-OFFICE')
   })
 
-  it('scales markers about their own anchor on hover, so a pin cannot flee the cursor', () => {
+  it('scales markers about their own anchor on hover, so a badge cannot flee the cursor', () => {
     render(
       <RoomMarkers
         rooms={[rooms[0]]}
@@ -201,7 +217,7 @@ describe('RoomMarkers', () => {
 
     // SVG defaults to transform-box: view-box, where any origin keyword resolves
     // against the whole floor plan and slides the marker out from under the pointer.
-    expect(screen.getByTestId('room-pin').style.transformOrigin).toBe('0px 0px')
+    expect(screen.getByTestId('room-badge').style.transformOrigin).toBe('0px 0px')
   })
 
   it('draws separate man and woman pictograms for the two restrooms', () => {

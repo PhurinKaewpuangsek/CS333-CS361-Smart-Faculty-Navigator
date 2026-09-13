@@ -79,56 +79,7 @@ export const DEFAULT_CATEGORY_COLOR: CategoryColorStyle = {
 }
 
 /**
- * Hex equivalents of CATEGORY_COLORS, for the SVG floor-plan area tint.
- *
- * An SVG `fill` cannot take a Tailwind class, so the same families are repeated here as
- * literal colours. These are the 100-level tints on purpose: RoomAreas.tsx composites
- * them with `mix-blend-mode: multiply` over the white room interiors, which keeps the
- * black room numbers and wall strokes baked into the floor plan fully legible.
- *
- * The map artwork used to carry its own arbitrary fills (faculty_office was spread over
- * three of them); driving the colour from category here is what makes it mean something.
- */
-export const CATEGORY_AREA_FILLS: Record<string, string> = {
-  lecture_room: '#ede9fe', // violet-100
-  seminar_room: '#fae8ff', // fuchsia-100
-  meeting_room: '#ccfbf1', // teal-100
-  research_room: '#d1fae5', // emerald-100
-  laboratory: '#ecfccb', // lime-100
-  lab: '#ecfccb',
-  faculty_office: '#fef3c7', // amber-100
-  department_office: '#fef3c7',
-  staff_room: '#fef3c7',
-  office: '#fef3c7',
-}
-
-/** slate-100 — matches DEFAULT_CATEGORY_COLOR for every unclassified space. */
-export const DEFAULT_CATEGORY_AREA_FILL = '#f1f5f9'
-
-/**
- * Categories shown in the map colour key, in reading order.
- *
- * One representative key per distinct colour — laboratory and lab share a tint, as do
- * the four office-ish categories, so listing all of them would repeat swatches. Anything
- * not covered here falls through to DEFAULT_CATEGORY_AREA_FILL, which the legend shows
- * as its final "other" row.
- */
-export const AREA_LEGEND_CATEGORIES: readonly string[] = [
-  'lecture_room',
-  'seminar_room',
-  'meeting_room',
-  'research_room',
-  'laboratory',
-  'faculty_office',
-]
-
-export function getCategoryAreaFill(categoryKey?: string): string {
-  if (!categoryKey) return DEFAULT_CATEGORY_AREA_FILL
-  return CATEGORY_AREA_FILLS[categoryKey.toLowerCase()] ?? DEFAULT_CATEGORY_AREA_FILL
-}
-
-/**
- * Map-pin colours: the 600-level of the same families as CATEGORY_AREA_FILLS, dark
+ * Map-marker colours: the 600-level of the same families as CATEGORY_COLORS, dark
  * enough to carry a white icon and to read as label text over the floor plan.
  *
  * Keeps this file's colour rule — blue is reserved for the active filter and red for the

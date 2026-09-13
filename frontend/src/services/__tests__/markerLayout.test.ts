@@ -57,12 +57,12 @@ describe('estimateLabelWidth', () => {
 })
 
 describe('layoutMarkers', () => {
-  it('ห้องที่อยู่ห่างกันได้หมุดเต็มพร้อมป้ายชื่อทั้งคู่', () => {
+  it('ห้องที่อยู่ห่างกันได้วงกลมเต็มพร้อมป้ายชื่อทั้งคู่', () => {
     const rooms = [makeRoom('101', 100, 100), makeRoom('102', 600, 400)]
     const layout = layoutMarkers({ rooms, scale: 1, selectedRoomId: null })
 
-    assert.deepEqual(layout.get('101'), { mode: 'pin', label: 'right' })
-    assert.deepEqual(layout.get('102'), { mode: 'pin', label: 'right' })
+    assert.deepEqual(layout.get('101'), { mode: 'badge', label: 'right' })
+    assert.deepEqual(layout.get('102'), { mode: 'badge', label: 'right' })
   })
 
   it('ห้องที่ชนกันตอนซูมออก ห้องสำคัญน้อยกว่ายุบเป็นจุด', () => {
@@ -72,21 +72,21 @@ describe('layoutMarkers', () => {
     ]
     const layout = layoutMarkers({ rooms, scale: 0.8, selectedRoomId: null })
 
-    assert.equal(layout.get('LECTURE')?.mode, 'pin')
+    assert.equal(layout.get('LECTURE')?.mode, 'badge')
     assert.equal(layout.get('OFFICE')?.mode, 'dot')
   })
 
-  it('ซูมเข้าแล้วห้องเดิมกลับมาเป็นหมุดเต็มทั้งคู่', () => {
+  it('ซูมเข้าแล้วห้องเดิมกลับมาเป็นวงกลมเต็มทั้งคู่', () => {
     const rooms = [
-      makeRoom('OFFICE', 130, 100, { category: 'faculty_office' }),
+      makeRoom('OFFICE', 120, 100, { category: 'faculty_office' }),
       makeRoom('LECTURE', 100, 100, { category: 'lecture_room' }),
     ]
 
     assert.equal(layoutMarkers({ rooms, scale: 0.8, selectedRoomId: null }).get('OFFICE')?.mode, 'dot')
 
     const zoomed = layoutMarkers({ rooms, scale: 3, selectedRoomId: null })
-    assert.equal(zoomed.get('LECTURE')?.mode, 'pin')
-    assert.equal(zoomed.get('OFFICE')?.mode, 'pin')
+    assert.equal(zoomed.get('LECTURE')?.mode, 'badge')
+    assert.equal(zoomed.get('OFFICE')?.mode, 'badge')
   })
 
   it('ห้องที่ถูกเลือกได้หมุดและป้ายเสมอ แม้ชนกับห้องน้ำ', () => {
@@ -96,7 +96,7 @@ describe('layoutMarkers', () => {
     ]
     const layout = layoutMarkers({ rooms, scale: 0.8, selectedRoomId: 'OFFICE' })
 
-    assert.equal(layout.get('OFFICE')?.mode, 'pin')
+    assert.equal(layout.get('OFFICE')?.mode, 'badge')
     assert.notEqual(layout.get('OFFICE')?.label, null)
     assert.equal(layout.get('TOILET')?.mode, 'dot')
   })
@@ -108,15 +108,15 @@ describe('layoutMarkers', () => {
     ]
     const layout = layoutMarkers({ rooms, scale: 1, selectedRoomId: null })
 
-    assert.equal(layout.get('TOILET')?.mode, 'pin')
-    assert.deepEqual(layout.get('LECTURE'), { mode: 'pin', label: 'left' })
+    assert.equal(layout.get('TOILET')?.mode, 'badge')
+    assert.deepEqual(layout.get('LECTURE'), { mode: 'badge', label: 'left' })
   })
 
   it('ป้ายชื่อไม่ทับจุดของห้องอื่น', () => {
     // A dot sits right where LECTURE's right label would go.
     const rooms = [
       makeRoom('LECTURE', 100, 100, { category: 'lecture_room' }),
-      makeRoom('OTHER', 125, 80, { category: 'unknown' }),
+      makeRoom('OTHER', 125, 100, { category: 'unknown' }),
     ]
     const layout = layoutMarkers({ rooms, scale: 1, selectedRoomId: null })
 
@@ -124,8 +124,9 @@ describe('layoutMarkers', () => {
   })
 
   it('จุดยังโชว์เลขห้องตัวเล็กถ้ามีที่ว่าง (เลขไม่หายตอนซูมออก)', () => {
+    // Just below LECTURE: the badges collide, but the dot's label clears LECTURE's badge.
     const rooms = [
-      makeRoom('OFFICE', 110, 100, { category: 'faculty_office' }),
+      makeRoom('OFFICE', 100, 125, { category: 'faculty_office' }),
       makeRoom('LECTURE', 100, 100, { category: 'lecture_room' }),
     ]
     const layout = layoutMarkers({ rooms, scale: 0.8, selectedRoomId: null })

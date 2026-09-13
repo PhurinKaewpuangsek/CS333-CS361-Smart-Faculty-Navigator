@@ -6,12 +6,11 @@ import type { FloorConfig } from './floorConfig'
 import { getCategoryIcon } from '../categoryIcon'
 import { getCategoryPinColor } from '../../services/roomDisplay'
 import {
+  BADGE_RADIUS,
   DOT_LABEL_FONT_SIZE,
   DOT_RADIUS,
   LABEL_FONT_SIZE,
   LABEL_GAP,
-  PIN_HEAD_Y,
-  PIN_WIDTH,
   SELECTED_PIN_HEAD_Y,
   SELECTED_PIN_WIDTH,
   getMarkerLabel,
@@ -31,17 +30,17 @@ export interface RoomMarkersProps {
  * Hover growth has to scale about the marker itself. SVG elements default to
  * `transform-box: view-box`, so a Tailwind origin class (origin-bottom, or the default
  * centre) resolves against the whole floor plan and the marker slides away from the
- * pointer — which drops the hover, snaps it back, and makes the pin flee the cursor.
- * Local (0,0) is the pin tip and the dot centre, because the parent `g` translates there.
+ * pointer — which drops the hover, snaps it back, and makes the marker flee the cursor.
+ * Local (0,0) is the badge and dot centre, because the parent `g` translates there.
  */
 const HOVER_ORIGIN = { transformOrigin: '0px 0px' } as const
 
 /** Screen-px radius of the invisible tap target around a dot. */
 const DOT_HIT_RADIUS = 11
 
-/** Category pin: 24×32px teardrop, tip at (0,0), head centred at (0,-20). */
-const PIN_PATH = 'M 0 0 C -2 -6.4 -12 -12 -12 -20 A 12 12 0 1 1 12 -20 C 12 -12 2 -6.4 0 0 Z'
-/** Selected pin: the larger 30×40px Google red teardrop, head centred at (0,-25). */
+const BADGE_ICON_SIZE = 13
+
+/** Selected pin: the 30×40px Google red teardrop, tip at (0,0), head centred at (0,-25). */
 const SELECTED_PIN_PATH = 'M 0 0 C -2.5 -8 -15 -15 -15 -25 A 15 15 0 1 1 15 -25 C 15 -15 2.5 -8 0 0 Z'
 
 const SELECTED_PIN_COLOR = '#EA4335'
@@ -85,7 +84,7 @@ function renderIcon(room: Room, x: number, y: number, size: number): ReactNode {
   })
 }
 
-/** Room number (or POI name) beside a pin, with a white halo so it reads over any tint. */
+/** Room number (or POI name) beside a marker, with a white halo so it reads over any fill. */
 function MarkerLabel({
   text,
   side,
@@ -145,7 +144,7 @@ function RoomMarkers({
   )
 
   const dots = floorRooms.filter((room) => room.id !== selectedRoomId && layout.get(room.id)?.mode === 'dot')
-  const pins = floorRooms.filter((room) => room.id !== selectedRoomId && layout.get(room.id)?.mode === 'pin')
+  const badges = floorRooms.filter((room) => room.id !== selectedRoomId && layout.get(room.id)?.mode === 'badge')
   const selected = floorRooms.filter((room) => room.id === selectedRoomId)
 
   const interactiveProps = (room: Room, isSelected: boolean) => ({
@@ -174,8 +173,8 @@ function RoomMarkers({
       height={floorConfig.height}
       style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none', overflow: 'visible' }}
     >
-      {/* Paint order: dots → pins (with labels) → selected. The layout guarantees no
-          label overlaps another pin, so labels never end up under a later marker. */}
+      {/* Paint order: dots → badges (with labels) → selected. The layout guarantees no
+          label overlaps another marker, so labels never end up under a later one. */}
       {dots.map((room) => {
         const color = getCategoryPinColor(room.category)
         const side = layout.get(room.id)?.label ?? null
@@ -210,32 +209,33 @@ function RoomMarkers({
         )
       })}
 
-      {pins.map((room) => {
+      {badges.map((room) => {
         const color = getCategoryPinColor(room.category)
         const side = layout.get(room.id)?.label ?? null
-        const props = interactiveProps(room, false)
         return (
           <g
             key={room.id}
-            {...props}
+            {...interactiveProps(room, false)}
             className="group"
             transform={`translate(${room.coordinates.x}, ${room.coordinates.y}) scale(${invScale})`}
-            style={{ ...props.style, filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25))' }}
           >
             <g
-              data-testid="room-pin"
+              data-testid="room-badge"
               className="transition-transform duration-150 group-hover:scale-110"
               style={HOVER_ORIGIN}
             >
-              <path d={PIN_PATH} fill={color} stroke="white" strokeWidth={1.5} />
-              {renderIcon(room, -7, -PIN_HEAD_Y - 7, 14)}
+              {/* A plain offset circle stands in for a shadow: a CSS drop-shadow filter on
+                  every badge is re-rasterised on each zoom frame and made panning lag. */}
+              <circle cy={1} r={BADGE_RADIUS + 1} fill="#0f172a" fillOpacity={0.18} />
+              <circle r={BADGE_RADIUS} fill={color} stroke="white" strokeWidth={2} />
+              {renderIcon(room, -BADGE_ICON_SIZE / 2, -BADGE_ICON_SIZE / 2, BADGE_ICON_SIZE)}
             </g>
             {side && (
               <MarkerLabel
                 text={getMarkerLabel(room)}
                 side={side}
-                offset={PIN_WIDTH / 2 + LABEL_GAP}
-                y={-PIN_HEAD_Y}
+                offset={BADGE_RADIUS + LABEL_GAP}
+                y={0}
                 color={color}
               />
             )}
@@ -261,7 +261,7 @@ function RoomMarkers({
               fill="#000000"
               fillOpacity={0.3}
             />
-            <g className="animate-pin-drop" style={{ filter: 'drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25))' }}>
+            <g data-testid="room-selected-pin" className="animate-pin-drop" style={{ filter: 'drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25))' }}>
               <path d={SELECTED_PIN_PATH} fill={SELECTED_PIN_COLOR} />
               {renderIcon(room, -9, -SELECTED_PIN_HEAD_Y - 9, 18)}
             </g>

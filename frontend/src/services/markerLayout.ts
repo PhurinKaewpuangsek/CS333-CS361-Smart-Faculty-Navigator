@@ -4,15 +4,18 @@ import type { Room } from '../types/room.ts'
  * Google-Maps-style marker placement for the floor plan.
  *
  * Room points are dense — nearest neighbours sit 20–45 map units apart — so drawing a
- * full pin and label for every room at default zoom turns the map into mush. This does
+ * full marker and label for every room at default zoom turns the map into mush. This does
  * what Google does: place markers greedily by importance, and whatever would collide
- * with something already placed is demoted (pin → dot). Zooming in spreads the points
+ * with something already placed is demoted (badge → dot). Zooming in spreads the points
  * apart on screen, so the same pass promotes them back.
+ *
+ * Like Google, only the selected room gets a pointed pin; every other room is a round
+ * badge centred on its point, so the selected one is the only teardrop on the map.
  *
  * Kept free of React and the DOM so it runs under plain `node --test`.
  */
 
-export type MarkerMode = 'pin' | 'dot'
+export type MarkerMode = 'badge' | 'dot'
 export type LabelSide = 'right' | 'left'
 
 export interface MarkerPlacement {
@@ -20,12 +23,10 @@ export interface MarkerPlacement {
   label: LabelSide | null
 }
 
-/** Pin geometry in screen px. The tip sits on the room point; the head is above it. */
-export const PIN_WIDTH = 24
-export const PIN_HEIGHT = 32
-export const PIN_HEAD_Y = 20
+/** Round category badge in screen px, centred on the room point. */
+export const BADGE_RADIUS = 11
 
-/** The selected pin is drawn larger so it stands out from the category pins. */
+/** The selected room's teardrop pin: tip on the room point, head above it. */
 export const SELECTED_PIN_WIDTH = 30
 export const SELECTED_PIN_HEIGHT = 40
 export const SELECTED_PIN_HEAD_Y = 25
@@ -149,26 +150,25 @@ export function layoutMarkers({ rooms, scale, selectedRoomId }: LayoutInput): Ma
     ]
   }
 
-  // Pass 1: pins and their labels, most important room first.
+  // Pass 1: badges (and the selected pin) with their labels, most important room first.
   for (const room of ordered) {
     const { x, y } = room.coordinates
     const isSelected = room.id === selectedRoomId
-    const width = isSelected ? SELECTED_PIN_WIDTH : PIN_WIDTH
-    const height = isSelected ? SELECTED_PIN_HEIGHT : PIN_HEIGHT
-    const headY = isSelected ? SELECTED_PIN_HEAD_Y : PIN_HEAD_Y
 
-    const pinBox: Box = { x1: x - px(width / 2), y1: y - px(height), x2: x + px(width / 2), y2: y }
+    const markerBox: Box = isSelected
+      ? { x1: x - px(SELECTED_PIN_WIDTH / 2), y1: y - px(SELECTED_PIN_HEIGHT), x2: x + px(SELECTED_PIN_WIDTH / 2), y2: y }
+      : { x1: x - px(BADGE_RADIUS), y1: y - px(BADGE_RADIUS), x2: x + px(BADGE_RADIUS), y2: y + px(BADGE_RADIUS) }
 
-    if (!isSelected && occupied.some((box) => overlaps(box, pinBox))) {
+    if (!isSelected && occupied.some((box) => overlaps(box, markerBox))) {
       placements.set(room.id, { mode: 'dot', label: null })
       continue
     }
-    occupied.push(pinBox)
+    occupied.push(markerBox)
 
     const candidates = labelCandidates(
       x,
-      y - px(headY),
-      px(width / 2 + LABEL_GAP),
+      isSelected ? y - px(SELECTED_PIN_HEAD_Y) : y,
+      px((isSelected ? SELECTED_PIN_WIDTH / 2 : BADGE_RADIUS) + LABEL_GAP),
       px(estimateLabelWidth(getMarkerLabel(room))),
       px(LABEL_HEIGHT)
     )
@@ -178,10 +178,10 @@ export function layoutMarkers({ rooms, scale, selectedRoomId }: LayoutInput): Ma
     const chosen = free ?? (isSelected ? candidates[0] : undefined)
 
     if (chosen) occupied.push(chosen[1])
-    placements.set(room.id, { mode: 'pin', label: chosen ? chosen[0] : null })
+    placements.set(room.id, { mode: 'badge', label: chosen ? chosen[0] : null })
   }
 
-  // Pass 2: demoted dots bid for a small label, but only for space no pin wanted.
+  // Pass 2: demoted dots bid for a small label, but only for space no badge wanted.
   for (const room of ordered) {
     if (placements.get(room.id)?.mode !== 'dot') continue
     const { x, y } = room.coordinates
