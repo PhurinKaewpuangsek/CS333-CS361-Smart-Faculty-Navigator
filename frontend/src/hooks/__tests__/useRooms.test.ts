@@ -1,8 +1,23 @@
 import { createElement } from 'react'
-import { afterEach, describe, it } from 'node:test'
+import { afterEach, beforeEach, describe, it } from 'node:test'
 import assert from 'node:assert'
 import { act, create, type ReactTestRenderer } from 'react-test-renderer'
-import { useRooms, type UseRoomsResult } from '../useRooms.ts'
+import { ROOMS_CACHE_KEY, useRooms, type UseRoomsResult } from '../useRooms.ts'
+
+/** In-memory stand-in for window.localStorage, fresh for every test. */
+let storage: Map<string, string>
+
+beforeEach(() => {
+  storage = new Map()
+  Object.defineProperty(globalThis, 'localStorage', {
+    configurable: true,
+    value: {
+      getItem: (key: string) => storage.get(key) ?? null,
+      setItem: (key: string, value: string) => void storage.set(key, value),
+      removeItem: (key: string) => void storage.delete(key),
+    },
+  })
+})
 
 const reactTestEnvironment = globalThis as typeof globalThis & {
   IS_REACT_ACT_ENVIRONMENT: boolean
@@ -162,5 +177,63 @@ describe('useRooms()', () => {
 
     assert.strictEqual(readResult().loading, false)
     assert.strictEqual(readResult().rooms.length, 1)
+  })
+
+  it('เข้าเว็บครั้งถัดไปโชว์ห้องจาก cache ทันที ไม่ต้องรอ API แล้วค่อยอัปเดตเป็นข้อมูลใหม่', async () => {
+    const cachedRoom = {
+      id: 'LC3-F1-R101',
+      code: 'LC3-101',
+      nameThai: 'ห้องเก่า',
+      building: 'LC3',
+      floor: 1,
+      roomNumber: '101',
+      category: 'lecture_room',
+      coordinates: { x: 100, y: 200 },
+      landmarks: [],
+      aliases: [],
+    }
+    storage.set(ROOMS_CACHE_KEY, JSON.stringify([cachedRoom]))
+
+    let resolveFetch: (response: Response) => void = () => undefined
+    globalThis.fetch = (() =>
+      new Promise<Response>((resolve) => {
+        resolveFetch = resolve
+      })) as typeof fetch
+
+    const readResult = await renderUseRooms()
+    assert.strictEqual(readResult().loading, false)
+    assert.strictEqual(readResult().rooms[0].nameThai, 'ห้องเก่า')
+
+    await act(async () => {
+      resolveFetch(createResponse({ records: [{ location_id: 'LC3-F1-R101', name_th: 'ห้องใหม่', floor: 1, x: 100, y: 200 }] }))
+      await flushUpdates()
+    })
+
+    assert.strictEqual(readResult().rooms[0].nameThai, 'ห้องใหม่')
+    assert.strictEqual(JSON.parse(storage.get(ROOMS_CACHE_KEY) ?? '[]')[0].nameThai, 'ห้องใหม่')
+  })
+
+  it('มี cache อยู่แล้ว API ล่มก็ยังใช้ข้อมูลเดิมได้ ไม่ขึ้น error', async () => {
+    storage.set(
+      ROOMS_CACHE_KEY,
+      JSON.stringify([{ id: 'A', code: '', nameThai: 'A', building: 'LC3', floor: 1, roomNumber: '', category: '', coordinates: { x: 0, y: 0 }, landmarks: [], aliases: [] }])
+    )
+    globalThis.fetch = (() => Promise.reject(new Error('Network unavailable'))) as typeof fetch
+
+    const readResult = await renderUseRooms()
+
+    assert.strictEqual(readResult().error, null)
+    assert.strictEqual(readResult().loading, false)
+    assert.strictEqual(readResult().rooms.length, 1)
+  })
+
+  it('cache เสียหาย ไม่ทำให้พัง แค่กลับไปรอ API ตามปกติ', async () => {
+    storage.set(ROOMS_CACHE_KEY, '{not json')
+    globalThis.fetch = (() => new Promise<Response>(() => undefined)) as typeof fetch
+
+    const readResult = await renderUseRooms()
+
+    assert.strictEqual(readResult().loading, true)
+    assert.deepStrictEqual(readResult().rooms, [])
   })
 })
