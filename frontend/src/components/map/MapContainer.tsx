@@ -7,7 +7,6 @@ import type { Room } from '../../types/room'
 import { FLOOR_CONFIGS, getFloorConfig } from './floorConfig'
 import FloorPlanSvg from './FloorPlanSvg'
 import MapLegend from './MapLegend'
-import MapLoadStatus from './MapLoadStatus'
 import RoomMarkers from './RoomMarkers'
 import './MapContainer.css'
 
@@ -18,9 +17,6 @@ export interface MapContainerProps {
   selectedRoomId: string | null
   onSelectRoom: (roomId: string) => void
   onClearSelection?: () => void
-  loading?: boolean
-  error?: Error | null
-  onRetry?: () => void
 }
 
 const PADDING_X = 300
@@ -33,9 +29,6 @@ function MapContainer({
   selectedRoomId,
   onSelectRoom,
   onClearSelection,
-  loading = false,
-  error = null,
-  onRetry,
 }: MapContainerProps) {
   const floorConfig = getFloorConfig(currentFloor)
   const transformRef = useRef<ReactZoomPanPinchRef | null>(null)
@@ -75,7 +68,6 @@ function MapContainer({
   return (
     <div className="relative h-full w-full overflow-hidden">
       <MapLegend entries={floorConfig.legend} />
-      <MapLoadStatus loading={loading} error={error} onRetry={onRetry} />
 
       {/* Re-center floating action button */}
       <button
