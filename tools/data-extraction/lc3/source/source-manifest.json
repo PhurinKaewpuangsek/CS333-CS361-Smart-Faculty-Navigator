@@ -27,10 +27,10 @@
       "floor": 1,
       "source_path": "Frontend/resources/LC3-MAP-1stFloor-old.svg",
       "dest_path": "frontend/public/maps/lc3/floor-1.svg",
-      "sha256": "c6c4c627ae743fecf9477d092a319c860d7e5f2db5ae1437d0557484734cdca1",
-      "bytes": 131112,
+      "sha256": "90c57f02e1a9bd20eff8fe66f14b348379f8d2e1ac3e7b6dc5e8c1dd24ae0bd5",
+      "bytes": 63502,
       "upstream_sha256": "d14e34f7fbd03844b9e9ef33e4ccbf2365c971e0ff472b0e86178b6785366676",
-      "modification": "Removed the 4 red QR-marker glyphs (QR1-QR4) baked into the upstream artwork; removed the leftover Figma frame badge (\"LC3-1-color but soft\"). Room fills, the department colour legend, and the corridor and courtyard colours are the upstream artwork's own. Removed 61 baked room-number glyph paths whose room now shows that number on its map pin (tool: tools/data-extraction/strip-baked-room-labels.mjs: a label is matched to the room area containing it, then its glyph contour count must equal what that room number draws). Everything else is untouched: wing headings, seat numbering, subdivisions the seed does not model (135/1, 136/3, 136/4, 220/3, 207/1, the 218/* family), and the numbers of rooms the seed models as named POIs (112-114, 133-134, 214-215, 231-232), whose pins show a Thai name instead. Geometry, viewBox and all room/structure paths are untouched.",
+      "modification": "Removed the 4 red QR-marker glyphs (QR1-QR4) baked into the upstream artwork; removed the leftover Figma frame badge (\"LC3-1-color but soft\"); removed the baked department colour legend (a 195x138 card, floor 1 only), which the app now renders on screen for both floors from FLOOR_CONFIGS in frontend/src/components/map/floorConfig.ts. Room fills and the corridor and courtyard colours are the upstream artwork's own. Removed 61 baked room-number glyph paths whose room now shows that number on its map pin (tool: tools/data-extraction/strip-baked-room-labels.mjs: a label is matched to the room area containing it, then its glyph contour count must equal what that room number draws). Everything else is untouched: wing headings, seat numbering, subdivisions the seed does not model (135/1, 136/3, 136/4, 220/3, 207/1, the 218/* family), and the numbers of rooms the seed models as named POIs (112-114, 133-134, 214-215, 231-232), whose pins show a Thai name instead. Geometry, viewBox and all room/structure paths are untouched.",
       "viewbox": [
         0,
         0,
