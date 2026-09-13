@@ -8,7 +8,6 @@ export interface Landmark {
   ref_location_id?: string
   walk_hops?: number
   text_th?: string
-  verification?: string
   [key: string]: unknown
 }
 
@@ -26,25 +25,24 @@ export interface Room {
   capacity?: number
 }
 
+/**
+ * One item of GET /api/locations. The API sends only these fields
+ * (functions/get-locations/index.mjs RESPONSE_FIELDS); the table's provenance
+ * attributes such as `source` and `verification` stay in DynamoDB.
+ */
 export interface RawRoomRecord {
   location_id?: string
   building_code?: string
   floor?: number
-  location_kind?: string
   room_code?: string
   room_number?: string
   aliases?: string[]
   name_th?: string
   category?: string
-  map_asset_id?: string
   x?: number
   y?: number
-  detail_th?: string
   landmarks?: Landmark[]
   capacity?: number
-  source?: unknown
-  verification?: unknown
-  flags?: unknown[]
   [key: string]: unknown
 }
 
