@@ -20,7 +20,19 @@ export function normalizeRoom(raw: RawRoomRecord): Room {
     },
     landmarks: Array.isArray(raw.landmarks) ? raw.landmarks : [],
     aliases: Array.isArray(raw.aliases) ? raw.aliases : [],
+    ...normalizeCapacity(raw.capacity),
   }
+}
+
+/**
+ * Capacity saved through PUT /api/locations/{id}. update-location stores a number, but
+ * keeps the raw value when it does not parse, so a string may come back. Only a real
+ * non-negative number is kept; otherwise the key is left off, matching rooms that were
+ * never given one.
+ */
+function normalizeCapacity(value: unknown): Pick<Room, 'capacity'> {
+  const parsed = typeof value === 'string' && value.trim() !== '' ? Number(value) : value
+  return typeof parsed === 'number' && Number.isFinite(parsed) && parsed >= 0 ? { capacity: parsed } : {}
 }
 
 /**

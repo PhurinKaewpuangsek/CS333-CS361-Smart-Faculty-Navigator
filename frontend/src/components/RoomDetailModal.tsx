@@ -1,20 +1,7 @@
-import { useEffect, useState } from 'react'
+import { createElement, useEffect, useState } from 'react'
 import type { FormEvent, ReactNode } from 'react'
-import {
-  MapPin,
-  BookOpen,
-  Flask,
-  Briefcase,
-  Toilet,
-  Gear,
-  Package,
-  Bell,
-  Users,
-  ChalkboardTeacher,
-  X,
-  Atom,
-  PencilSimple,
-} from '@phosphor-icons/react'
+import { MapPin, X, PencilSimple } from '@phosphor-icons/react'
+import { getCategoryIcon } from './categoryIcon.ts'
 import { getBuildingLabel, getCategoryLabel, getLandmarkText, getCategoryColor } from '../services/roomDisplay.ts'
 
 import type { Room } from '../types/room.ts'
@@ -30,19 +17,13 @@ export interface RoomDetailModalProps {
   onClose: () => void
 }
 
-function renderCategoryIcon(category: string): ReactNode {
-  const key = (category || '').toLowerCase()
-  if (key.includes('lab')) return <Flask size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
-  if (key.includes('lecture')) return <BookOpen size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
-  if (key.includes('seminar')) return <ChalkboardTeacher size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
-  if (key.includes('office')) return <Briefcase size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
-  if (key.includes('toilet') || key.includes('restroom')) return <Toilet size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
-  if (key.includes('student') || key.includes('meeting') || key.includes('staff')) return <Users size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
-  if (key.includes('research')) return <Atom size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
-  if (key.includes('utility')) return <Gear size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
-  if (key.includes('storage')) return <Package size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
-  if (key.includes('service')) return <Bell size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
-  return <MapPin size={16} weight="duotone" className="text-current shrink-0" aria-hidden="true" />
+function renderCategoryIcon(category: string, name?: string): ReactNode {
+  return createElement(getCategoryIcon(category, name), {
+    size: 16,
+    weight: 'duotone',
+    className: 'text-current shrink-0',
+    'aria-hidden': true,
+  })
 }
 
 export function RoomDetailModal({
@@ -353,7 +334,7 @@ export function RoomDetailModal({
                     <span
                       className={`mt-3 inline-flex items-center gap-1.5 w-fit rounded-full border ${color.border} ${color.bg} px-3 py-1 text-xs font-medium ${color.text} shadow-sm`}
                     >
-                      {renderCategoryIcon(room.category)}
+                      {renderCategoryIcon(room.category, room.nameThai)}
                       <span>{getCategoryLabel(room.category)}</span>
                     </span>
                   )

@@ -105,6 +105,22 @@ describe('roomsService - Data Access Layer', () => {
       assert.ok(Array.isArray(room.landmarks))
       assert.ok(Array.isArray(room.aliases))
     })
+
+    it('keeps the capacity saved through the edit flow, so the detail view can show it', () => {
+      assert.strictEqual(normalizeRoom({ ...SAMPLE_ROOM, capacity: 45 }).capacity, 45)
+    })
+
+    it('reads a numeric capacity that came back as a string', () => {
+      assert.strictEqual(normalizeRoom({ ...SAMPLE_ROOM, capacity: '30' as unknown as number }).capacity, 30)
+    })
+
+    it('leaves capacity off when the room has none or it is not a usable number', () => {
+      assert.strictEqual('capacity' in normalizeRoom(SAMPLE_ROOM), false)
+      for (const bad of ['', 'ไม่ทราบ', -5, Number.NaN, null]) {
+        const room = normalizeRoom({ ...SAMPLE_ROOM, capacity: bad as unknown as number })
+        assert.strictEqual('capacity' in room, false, `capacity ${String(bad)} should be dropped`)
+      }
+    })
   })
 
   describe('getRooms()', () => {

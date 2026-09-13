@@ -184,6 +184,5 @@ describe('MapContainer', () => {
 
     expect(onClearSelection).toHaveBeenCalledTimes(1)
   })
+
 })
-
-

@@ -48,7 +48,7 @@ describe('RoomMarkers', () => {
     expect(screen.queryByRole('button', { name: 'ห้อง 201' })).not.toBeInTheDocument()
   })
 
-  it('calls onSelectRoom with the same roomId whether the hit-layer or the pin is clicked', async () => {
+  it('calls onSelectRoom with the same roomId whether the hit-layer or the badge is clicked', async () => {
     const user = userEvent.setup()
     const onSelectRoom = vi.fn()
 
@@ -107,6 +107,22 @@ describe('RoomMarkers', () => {
     expect(marker.querySelector('[data-testid="room-selected-halo"]')).not.toBeNull()
   })
 
+  it('draws only the selected room as a pointed pin; every other room is a round badge', () => {
+    render(
+      <RoomMarkers
+        rooms={[rooms[0], { ...rooms[0], id: 'LC3-F1-R102', nameThai: 'ห้อง 102', roomNumber: '102', coordinates: { x: 600, y: 400 } }]}
+        currentFloor={1}
+        floorConfig={getFloorConfig(1)}
+        selectedRoomId="LC3-F1-R101"
+        onSelectRoom={vi.fn()}
+      />
+    )
+
+    expect(screen.getAllByTestId('room-selected-pin')).toHaveLength(1)
+    expect(screen.getByRole('button', { name: 'ห้อง 101' }).querySelector('[data-testid="room-badge"]')).toBeNull()
+    expect(screen.getByRole('button', { name: 'ห้อง 102' }).querySelector('[data-testid="room-badge"]')).not.toBeNull()
+  })
+
   it('does not render a halo when no room is selected', () => {
     render(
       <RoomMarkers
@@ -119,5 +135,113 @@ describe('RoomMarkers', () => {
     )
 
     expect(screen.queryByTestId('room-selected-halo')).not.toBeInTheDocument()
+  })
+
+  it('shows the room number beside the badge, because students look for door numbers', () => {
+    render(
+      <RoomMarkers
+        rooms={rooms}
+        currentFloor={1}
+        floorConfig={getFloorConfig(1)}
+        selectedRoomId={null}
+        onSelectRoom={vi.fn()}
+      />
+    )
+
+    expect(screen.getByText('101')).toBeInTheDocument()
+    expect(screen.getByTestId('room-badge')).toBeInTheDocument()
+  })
+
+  it('labels a POI without a room number by its short name', () => {
+    const toilet: Room = {
+      ...rooms[0],
+      id: 'LC3-F1-PLFTOILET',
+      code: '',
+      nameThai: 'ห้องน้ำหญิง (ฝั่งซ้าย)',
+      roomNumber: '',
+      category: 'toilet',
+    }
+
+    render(
+      <RoomMarkers
+        rooms={[toilet]}
+        currentFloor={1}
+        floorConfig={getFloorConfig(1)}
+        selectedRoomId={null}
+        onSelectRoom={vi.fn()}
+      />
+    )
+
+    expect(screen.getByText('ห้องน้ำหญิง')).toBeInTheDocument()
+  })
+
+  it('collapses a crowded lower-priority room to a dot that is still clickable', async () => {
+    const user = userEvent.setup()
+    const onSelectRoom = vi.fn()
+    const office: Room = {
+      ...rooms[0],
+      id: 'LC3-F1-R101-OFFICE',
+      nameThai: 'ห้องพักอาจารย์',
+      roomNumber: '101/9',
+      category: 'faculty_office',
+      coordinates: { x: 104, y: 200 },
+    }
+
+    render(
+      <RoomMarkers
+        rooms={[rooms[0], office]}
+        currentFloor={1}
+        floorConfig={getFloorConfig(1)}
+        selectedRoomId={null}
+        onSelectRoom={onSelectRoom}
+      />
+    )
+
+    expect(screen.getAllByTestId('room-badge')).toHaveLength(1)
+    expect(screen.getAllByTestId('room-dot')).toHaveLength(1)
+
+    await user.click(screen.getByRole('button', { name: 'ห้องพักอาจารย์' }))
+    expect(onSelectRoom).toHaveBeenCalledWith('LC3-F1-R101-OFFICE')
+  })
+
+  it('scales markers about their own anchor on hover, so a badge cannot flee the cursor', () => {
+    render(
+      <RoomMarkers
+        rooms={[rooms[0]]}
+        currentFloor={1}
+        floorConfig={getFloorConfig(1)}
+        selectedRoomId={null}
+        onSelectRoom={vi.fn()}
+      />
+    )
+
+    // SVG defaults to transform-box: view-box, where any origin keyword resolves
+    // against the whole floor plan and slides the marker out from under the pointer.
+    expect(screen.getByTestId('room-badge').style.transformOrigin).toBe('0px 0px')
+  })
+
+  it('draws separate man and woman pictograms for the two restrooms', () => {
+    const restroom = (id: string, nameThai: string, x: number): Room => ({
+      ...rooms[0],
+      id,
+      code: '',
+      nameThai,
+      roomNumber: '',
+      category: 'toilet',
+      coordinates: { x, y: 200 },
+    })
+
+    render(
+      <RoomMarkers
+        rooms={[restroom('M', 'ห้องน้ำชาย (ฝั่งซ้าย)', 100), restroom('F', 'ห้องน้ำหญิง (ฝั่งซ้าย)', 400)]}
+        currentFloor={1}
+        floorConfig={getFloorConfig(1)}
+        selectedRoomId={null}
+        onSelectRoom={vi.fn()}
+      />
+    )
+
+    expect(screen.getByTestId('icon-restroom-male')).toBeInTheDocument()
+    expect(screen.getByTestId('icon-restroom-female')).toBeInTheDocument()
   })
 })

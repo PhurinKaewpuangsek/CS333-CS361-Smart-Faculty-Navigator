@@ -7,7 +7,6 @@ import type { Room } from '../../types/room'
 import { FLOOR_CONFIGS, getFloorConfig } from './floorConfig'
 import FloorPlanSvg from './FloorPlanSvg'
 import MapLegend from './MapLegend'
-import RoomAreas from './RoomAreas'
 import RoomMarkers from './RoomMarkers'
 import './MapContainer.css'
 
@@ -68,7 +67,7 @@ function MapContainer({
 
   return (
     <div className="relative h-full w-full overflow-hidden">
-      <MapLegend />
+      <MapLegend entries={floorConfig.legend} />
 
       {/* Re-center floating action button */}
       <button
@@ -191,7 +190,6 @@ function MapContainer({
             }}
           >
             <FloorPlanSvg floorConfig={floorConfig} />
-            <RoomAreas rooms={rooms} currentFloor={currentFloor} floorConfig={floorConfig} />
             <RoomMarkers
               rooms={rooms}
               currentFloor={currentFloor}

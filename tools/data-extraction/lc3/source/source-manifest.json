@@ -27,10 +27,10 @@
       "floor": 1,
       "source_path": "Frontend/resources/LC3-MAP-1stFloor-old.svg",
       "dest_path": "frontend/public/maps/lc3/floor-1.svg",
-      "sha256": "6bfbd3bd5616dc9457817098d0c01fd07c1156f0d144e8cceaa20691364f0f51",
-      "bytes": 205549,
+      "sha256": "90c57f02e1a9bd20eff8fe66f14b348379f8d2e1ac3e7b6dc5e8c1dd24ae0bd5",
+      "bytes": 63502,
       "upstream_sha256": "d14e34f7fbd03844b9e9ef33e4ccbf2365c971e0ff472b0e86178b6785366676",
-      "modification": "Removed the 4 red QR-marker glyphs (QR1-QR4) baked into the upstream artwork; removed the leftover Figma frame badge (\"LC3-1-color but soft\"); removed the baked-in department colour legend, which described fills this asset no longer uses; neutralised 66 room-interior fills to white so category colour is applied by the app; repainted the corridor and courtyard fills to neutrals (see room_area_extraction below). Geometry, viewBox and all room/structure paths are untouched.",
+      "modification": "Removed the 4 red QR-marker glyphs (QR1-QR4) baked into the upstream artwork; removed the leftover Figma frame badge (\"LC3-1-color but soft\"); removed the baked department colour legend (a 195x138 card, floor 1 only), which the app now renders on screen for both floors from FLOOR_CONFIGS in frontend/src/components/map/floorConfig.ts. Room fills and the corridor and courtyard colours are the upstream artwork's own. Removed 61 baked room-number glyph paths whose room now shows that number on its map pin (tool: tools/data-extraction/strip-baked-room-labels.mjs: a label is matched to the room area containing it, then its glyph contour count must equal what that room number draws). Everything else is untouched: wing headings, seat numbering, subdivisions the seed does not model (135/1, 136/3, 136/4, 220/3, 207/1, the 218/* family), and the numbers of rooms the seed models as named POIs (112-114, 133-134, 214-215, 231-232), whose pins show a Thai name instead. Geometry, viewBox and all room/structure paths are untouched.",
       "viewbox": [
         0,
         0,
@@ -56,10 +56,10 @@
       "floor": 2,
       "source_path": "Frontend/resources/LC3-MAP-2ndFloor-old.svg",
       "dest_path": "frontend/public/maps/lc3/floor-2.svg",
-      "sha256": "1b80776879590768c15d4900dd189211341dcf5092062eaae28fc3102aa113b9",
-      "bytes": 435221,
+      "sha256": "0e3827c23ce9359f5fc70e782399a934aa8da79cf2f9d116b9aac72bd5322e52",
+      "bytes": 247405,
       "upstream_sha256": "b3e111b85e016d4ea7a6e1a4e513f0c961a463b8acde7bc44d8fe32461073a36",
-      "modification": "Removed the 4 red QR-marker glyphs (QR5-QR8) baked into the upstream artwork; neutralised 53 room-interior fills to white so category colour is applied by the app (see room_area_extraction below). Geometry, viewBox and all room/structure paths are untouched.",
+      "modification": "Removed the 4 red QR-marker glyphs (QR5-QR8) baked into the upstream artwork. Room fills are the upstream artwork's own. Removed 52 baked room-number glyph paths whose room now shows that number on its map pin (tool: tools/data-extraction/strip-baked-room-labels.mjs: a label is matched to the room area containing it, then its glyph contour count must equal what that room number draws). Everything else is untouched: wing headings, seat numbering, subdivisions the seed does not model (135/1, 136/3, 136/4, 220/3, 207/1, the 218/* family), and the numbers of rooms the seed models as named POIs (112-114, 133-134, 214-215, 231-232), whose pins show a Thai name instead. Geometry, viewBox and all room/structure paths are untouched.",
       "viewbox": [
         0,
         0,
@@ -85,17 +85,9 @@
   "room_area_extraction": {
     "tool": "tools/data-extraction/extract-room-areas.mjs",
     "output": "frontend/src/components/map/roomAreaGeometry.ts",
-    "reason": "The four Figma room fills (#F5CAAB, #BFD8EB, #CBE6D8, #F0E3EB) carried no meaning — faculty_office alone was spread across three of them. Each fill was matched to the seed record whose (x,y) falls inside the rect, the geometry was exported to the app, and the rect was set to fill=white so RoomAreas.tsx can tint it by category with mix-blend-mode: multiply. Room-number glyphs and wall strokes stay black and legible.",
-    "rects_neutralised": { "floor_1": 66, "floor_2": 53 },
-    "rects_left_untouched": { "floor_1": 10, "floor_2": 40 },
-    "untouched_because": "Those areas have no seed record at all (floor 2's 218/x cubicle grid, 219/x, 202/x, 214, 215). Recolouring them would mean inventing data.",
-    "structural_fills_recoloured": {
-      "#B3FCFF": "#E3EAEE (corridors — carry no room data, so they stay in the artwork, repainted to stop shouting over the room tints)",
-      "#A29393": "#DEDAD8 (courtyard and voids — same reason)"
-    },
-    "legend_removed": "floor 1 only: a 195x138 card whose four swatches were exactly the four room fills. The artwork grouped rooms by department, which the seed does not model; frontend/src/components/map/MapLegend.tsx now renders the category key from the same data that tints the map.",
+    "reason": "Each rect in one of the four Figma room fills (#F5CAAB, #BFD8EB, #CBE6D8, #F0E3EB) is matched to the seed record whose (x,y) falls inside it, and the geometry is exported so strip-baked-room-labels.mjs can tell which room a baked number belongs to. Read-only on the artwork: the SVG keeps its own room colours, legend, corridors (#B3FCFF) and courtyard (#A29393), which are drawn baked in rather than as an app overlay so panning does not recomposite a blended layer every frame.",
     "records_without_area": 16,
-    "records_without_area_note": "14 corridor POIs (toilets, stairs) plus LC3-F2-R212 and LC3-F2-R217, whose seed points fall just outside their rects. These render no tint; their map pins are unaffected.",
+    "records_without_area_note": "14 corridor POIs (toilets, stairs) plus LC3-F2-R212 and LC3-F2-R217, whose seed points fall just outside their rects. Label matching falls back to distance for these.",
     "coordinate_space_unchanged": true
   },
   "integrity_rules": [

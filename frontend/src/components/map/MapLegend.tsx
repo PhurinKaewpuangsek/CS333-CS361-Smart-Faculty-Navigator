@@ -1,11 +1,10 @@
 import { useState } from 'react'
 import { CaretDown, Palette } from '@phosphor-icons/react'
-import {
-  AREA_LEGEND_CATEGORIES,
-  DEFAULT_CATEGORY_AREA_FILL,
-  getCategoryAreaFill,
-  getCategoryLabel,
-} from '../../services/roomDisplay'
+import type { LegendEntry } from './floorConfig'
+
+export interface MapLegendProps {
+  entries: LegendEntry[]
+}
 
 /** Desktop shows the key by default; on phones the map is small, so it starts collapsed. */
 function prefersOpenLegend(): boolean {
@@ -14,23 +13,13 @@ function prefersOpenLegend(): boolean {
 }
 
 /**
- * Colour key for the floor-plan area tints.
+ * Colour key for the floor-plan room fills.
  *
- * The floor plan used to carry its own baked-in legend explaining a department colour
- * scheme. Room areas are now tinted by category from CATEGORY_AREA_FILLS, so the key is
- * rendered here off that same data — one source of truth for what the map colours mean.
+ * The artwork only printed its legend on floor 1, and there it scrolled out of view as
+ * soon as you zoomed in. Drawn here instead, it stays on screen and follows the floor.
  */
-function MapLegend() {
+function MapLegend({ entries }: MapLegendProps) {
   const [isOpen, setIsOpen] = useState<boolean>(prefersOpenLegend)
-
-  const entries = [
-    ...AREA_LEGEND_CATEGORIES.map((category) => ({
-      key: category,
-      label: getCategoryLabel(category),
-      fill: getCategoryAreaFill(category),
-    })),
-    { key: 'other', label: 'อื่นๆ / สิ่งอำนวยความสะดวก', fill: DEFAULT_CATEGORY_AREA_FILL },
-  ]
 
   return (
     <div className="absolute bottom-6 left-4 z-10 sm:bottom-6 sm:left-6">
@@ -58,11 +47,11 @@ function MapLegend() {
 
         <ul id="map-legend-items" hidden={!isOpen} className="px-3 pb-2.5 pt-0.5 space-y-1.5">
           {entries.map((entry) => (
-            <li key={entry.key} className="flex items-center gap-2 text-xs text-slate-600">
+            <li key={entry.fill} className="flex items-center gap-2 text-xs text-slate-600">
               <span
-                data-testid={`legend-swatch-${entry.key}`}
+                data-testid={`legend-swatch-${entry.fill}`}
                 aria-hidden="true"
-                className="h-3 w-3 shrink-0 rounded-sm border border-slate-300"
+                className="h-3 w-3 shrink-0 rounded-full border border-slate-300"
                 style={{ backgroundColor: entry.fill }}
               />
               <span>{entry.label}</span>

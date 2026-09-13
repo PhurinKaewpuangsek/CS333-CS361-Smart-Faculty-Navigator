@@ -5,9 +5,9 @@
  * Axis-aligned bounds of each room's floor-plan area, in the SVG user-unit space of
  * frontend/public/maps/lc3/floor-{1,2}.svg — the same space Room.coordinates uses.
  *
- * RoomAreas.tsx tints these by category. Rooms absent from this map (corridor POIs such
- * as toilets and stairs, plus a couple of rooms whose seed point sits outside its rect)
- * simply render no tint; their map pins are unaffected.
+ * tools/data-extraction/strip-baked-room-labels.mjs matches baked room numbers to rooms by
+ * these areas. Rooms absent from this map (corridor POIs such as toilets and stairs, plus a
+ * couple of rooms whose seed point sits outside its rect) fall back to distance there.
  */
 
 export interface RoomArea {

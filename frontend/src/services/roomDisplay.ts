@@ -79,52 +79,46 @@ export const DEFAULT_CATEGORY_COLOR: CategoryColorStyle = {
 }
 
 /**
- * Hex equivalents of CATEGORY_COLORS, for the SVG floor-plan area tint.
+ * Map-marker colours: the 600-level of the same families as CATEGORY_COLORS, dark
+ * enough to carry a white icon and to read as label text over the floor plan.
  *
- * An SVG `fill` cannot take a Tailwind class, so the same families are repeated here as
- * literal colours. These are the 100-level tints on purpose: RoomAreas.tsx composites
- * them with `mix-blend-mode: multiply` over the white room interiors, which keeps the
- * black room numbers and wall strokes baked into the floor plan fully legible.
- *
- * The map artwork used to carry its own arbitrary fills (faculty_office was spread over
- * three of them); driving the colour from category here is what makes it mean something.
+ * Keeps this file's colour rule — blue is reserved for the active filter and red for the
+ * selected pin — so no category pin may be blue or red. Lime drops to 700 because
+ * lime-600 is too light behind a white glyph.
  */
-export const CATEGORY_AREA_FILLS: Record<string, string> = {
-  lecture_room: '#ede9fe', // violet-100
-  seminar_room: '#fae8ff', // fuchsia-100
-  meeting_room: '#ccfbf1', // teal-100
-  research_room: '#d1fae5', // emerald-100
-  laboratory: '#ecfccb', // lime-100
-  lab: '#ecfccb',
-  faculty_office: '#fef3c7', // amber-100
-  department_office: '#fef3c7',
-  staff_room: '#fef3c7',
-  office: '#fef3c7',
+export const CATEGORY_PIN_COLORS: Record<string, string> = {
+  lecture_room: '#7c3aed', // violet-600
+  seminar_room: '#c026d3', // fuchsia-600
+  meeting_room: '#0d9488', // teal-600
+  research_room: '#059669', // emerald-600
+  laboratory: '#4d7c0f', // lime-700
+  lab: '#4d7c0f',
+  faculty_office: '#d97706', // amber-600
+  department_office: '#d97706',
+  staff_room: '#d97706',
+  office: '#d97706',
 }
 
-/** slate-100 — matches DEFAULT_CATEGORY_COLOR for every unclassified space. */
-export const DEFAULT_CATEGORY_AREA_FILL = '#f1f5f9'
+/** slate-600 — facilities (toilets, stairs) and anything unclassified. */
+export const DEFAULT_CATEGORY_PIN_COLOR = '#475569'
+
+export function getCategoryPinColor(categoryKey?: string): string {
+  if (!categoryKey) return DEFAULT_CATEGORY_PIN_COLOR
+  return CATEGORY_PIN_COLORS[categoryKey.toLowerCase()] ?? DEFAULT_CATEGORY_PIN_COLOR
+}
+
+export type RestroomGender = 'male' | 'female'
 
 /**
- * Categories shown in the map colour key, in reading order.
- *
- * One representative key per distinct colour — laboratory and lab share a tint, as do
- * the four office-ish categories, so listing all of them would repeat swatches. Anything
- * not covered here falls through to DEFAULT_CATEGORY_AREA_FILL, which the legend shows
- * as its final "other" row.
+ * Which restroom a POI is, read from its Thai name ("ห้องน้ำชาย (ฝั่งซ้าย)").
+ * The map draws a different pictogram for each, so a student can tell them apart
+ * without reading the label. Returns null when the name says neither.
  */
-export const AREA_LEGEND_CATEGORIES: readonly string[] = [
-  'lecture_room',
-  'seminar_room',
-  'meeting_room',
-  'research_room',
-  'laboratory',
-  'faculty_office',
-]
-
-export function getCategoryAreaFill(categoryKey?: string): string {
-  if (!categoryKey) return DEFAULT_CATEGORY_AREA_FILL
-  return CATEGORY_AREA_FILLS[categoryKey.toLowerCase()] ?? DEFAULT_CATEGORY_AREA_FILL
+export function getRestroomGender(name?: string): RestroomGender | null {
+  if (!name) return null
+  if (name.includes('หญิง')) return 'female'
+  if (name.includes('ชาย')) return 'male'
+  return null
 }
 
 export function getCategoryColor(categoryKey?: string): CategoryColorStyle {
