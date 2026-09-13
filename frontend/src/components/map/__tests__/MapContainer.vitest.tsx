@@ -184,6 +184,58 @@ describe('MapContainer', () => {
 
     expect(onClearSelection).toHaveBeenCalledTimes(1)
   })
+
+  it('tells the user the rooms are still loading, so an empty map does not look broken', () => {
+    render(
+      <MapContainer
+        rooms={[]}
+        currentFloor={1}
+        onFloorChange={vi.fn()}
+        selectedRoomId={null}
+        onSelectRoom={vi.fn()}
+        loading
+      />
+    )
+
+    expect(screen.getByRole('status')).toHaveTextContent('กำลังโหลดตำแหน่งห้อง')
+  })
+
+  it('shows no loading status once the rooms have arrived', () => {
+    render(
+      <MapContainer
+        rooms={rooms}
+        currentFloor={1}
+        onFloorChange={vi.fn()}
+        selectedRoomId={null}
+        onSelectRoom={vi.fn()}
+        loading={false}
+      />
+    )
+
+    expect(screen.queryByRole('status')).not.toBeInTheDocument()
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument()
+  })
+
+  it('offers a retry when loading the rooms failed', async () => {
+    const user = userEvent.setup()
+    const onRetry = vi.fn()
+
+    render(
+      <MapContainer
+        rooms={[]}
+        currentFloor={1}
+        onFloorChange={vi.fn()}
+        selectedRoomId={null}
+        onSelectRoom={vi.fn()}
+        error={new Error('Failed to fetch rooms: 500')}
+        onRetry={onRetry}
+      />
+    )
+
+    expect(screen.getByRole('alert')).toHaveTextContent('โหลดตำแหน่งห้องไม่สำเร็จ')
+    await user.click(screen.getByRole('button', { name: /ลองใหม่/ }))
+    expect(onRetry).toHaveBeenCalledTimes(1)
+  })
 })
 
 

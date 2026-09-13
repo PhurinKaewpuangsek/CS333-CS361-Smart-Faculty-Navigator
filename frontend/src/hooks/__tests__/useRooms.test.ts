@@ -131,4 +131,36 @@ describe('useRooms()', () => {
     assert.ok(error instanceof Error)
     assert.strictEqual(error.message, 'Network unavailable')
   })
+
+  it('reload() ล้าง error กลับไปโหลดใหม่ แล้วได้ข้อมูลห้อง', async () => {
+    let calls = 0
+    let resolveRetry: (response: Response) => void = () => undefined
+    globalThis.fetch = (() => {
+      calls += 1
+      if (calls === 1) return Promise.reject(new Error('Network unavailable'))
+      return new Promise<Response>((resolve) => {
+        resolveRetry = resolve
+      })
+    }) as typeof fetch
+
+    const readResult = await renderUseRooms()
+    assert.ok(readResult().error instanceof Error)
+
+    await act(async () => {
+      readResult().reload()
+      await flushUpdates()
+    })
+
+    assert.strictEqual(calls, 2)
+    assert.strictEqual(readResult().loading, true)
+    assert.strictEqual(readResult().error, null)
+
+    await act(async () => {
+      resolveRetry(createResponse({ records: [{ location_id: 'LC3-F1-R101', floor: 1, x: 1, y: 2 }] }))
+      await flushUpdates()
+    })
+
+    assert.strictEqual(readResult().loading, false)
+    assert.strictEqual(readResult().rooms.length, 1)
+  })
 })

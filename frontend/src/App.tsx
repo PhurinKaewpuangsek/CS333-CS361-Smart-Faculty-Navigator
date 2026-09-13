@@ -5,7 +5,7 @@ import RoomSearchPanel from './components/RoomSearchPanel'
 import RoomDetailModal from './components/RoomDetailModal'
 
 function App() {
-  const { rooms, loading, error } = useRooms()
+  const { rooms, loading, error, reload } = useRooms()
   const [currentFloor, setCurrentFloor] = useState(1)
   const [selectedRoomId, setSelectedRoomId] = useState<string | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -38,6 +38,9 @@ function App() {
         selectedRoomId={selectedRoomId}
         onSelectRoom={handleSelectRoom}
         onClearSelection={handleClearSelection}
+        loading={loading}
+        error={error}
+        onRetry={reload}
       />
 
       {/* Floating Search & Category Filter Overlay */}
