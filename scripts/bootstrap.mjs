@@ -15,9 +15,11 @@ const script = (name) => join(repoRoot, 'scripts', name)
 
 if (!hasSwitch('skip-deploy')) {
   banner('deploy')
-  // samconfig.toml supplies the stack name, region, and capabilities.
+  // samconfig.toml's [dev.*] section supplies the stack name, region (us-east-1,
+  // Learner Lab), and capabilities. --config-env is required now that there is no
+  // [default] section — sam deploy fails loudly instead of guessing an environment.
   run('sam', ['build'])
-  run('sam', ['deploy', '--no-confirm-changeset', '--no-fail-on-empty-changeset'])
+  run('sam', ['deploy', '--config-env', 'dev', '--no-confirm-changeset', '--no-fail-on-empty-changeset'])
 }
 
 run('node', [script('seed.mjs')])
