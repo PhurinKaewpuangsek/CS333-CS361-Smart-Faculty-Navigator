@@ -287,6 +287,43 @@ const roomCodeToLocationId = new Map(
     .map((r) => [r.room_code, r.location_id])
 );
 
+/**
+ * Resolves a canonical room_code (e.g. "LC3-101/1", "LC3-103") to its
+ * corresponding location_id (e.g. "LC3-F1-R101-1", "LC3-F1-R103") in the locations seed.
+ *
+ * If the room_code cannot be resolved, throws an AssertionError (fail-fast, NO silent skip).
+ */
+export function resolveRoomCodeToLocationId(roomCode, lookupMap = roomCodeToLocationId) {
+  assert.ok(
+    typeof roomCode === 'string' && roomCode.trim() !== '',
+    'room_code must be a non-empty string'
+  );
+  const locationId = lookupMap.get(roomCode);
+  assert.ok(
+    locationId !== undefined,
+    `room_code "${roomCode}" cannot be resolved to any location_id in lc3-locations.seed.json — check for typos or add the room to the locations seed first`
+  );
+  return locationId;
+}
+
+test('resolveRoomCodeToLocationId resolves valid canonical room codes to location_id', () => {
+  assert.equal(resolveRoomCodeToLocationId('LC3-101/1'), 'LC3-F1-R101-1');
+  assert.equal(resolveRoomCodeToLocationId('LC3-103'), 'LC3-F1-R103');
+  assert.equal(resolveRoomCodeToLocationId('LC3-118/1'), 'LC3-F1-R118-1');
+  assert.equal(resolveRoomCodeToLocationId('LC3-122'), 'LC3-F1-R122');
+});
+
+test('resolveRoomCodeToLocationId throws on unknown room codes (NO silent skip)', () => {
+  assert.throws(
+    () => resolveRoomCodeToLocationId('LC3-999'),
+    /room_code "LC3-999" cannot be resolved to any location_id/
+  );
+  assert.throws(
+    () => resolveRoomCodeToLocationId(''),
+    /room_code must be a non-empty string/
+  );
+});
+
 let scheduleRows;
 try {
   const scheduleCsvText = read('lc3-schedules.seed.csv');
@@ -362,7 +399,7 @@ test('schedule seed — every room_code resolves to a known location_id (NO sile
   // Any unresolvable room_code is an immediate hard failure — no silent skip allowed.
   for (let i = 0; i < scheduleRows.length; i += 1) {
     const { room_code } = scheduleRows[i];
-    const locationId = roomCodeToLocationId.get(room_code);
+    const locationId = resolveRoomCodeToLocationId(room_code);
     assert.ok(
       locationId !== undefined,
       `lc3-schedules.seed.csv row ${i + 2}: room_code "${room_code}" cannot be resolved to any location_id in lc3-locations.seed.json — check for typos or add the room to the locations seed first`
@@ -372,14 +409,25 @@ test('schedule seed — every room_code resolves to a known location_id (NO sile
 
 test('schedule seed — no two rows share the same room + day + start_time (no duplicate slots)', () => {
   if (!scheduleDataExists) return;
-  const seen = new Map();
+  const seenClass = new Map();
+  const seenExam = new Map();
   for (let i = 0; i < scheduleRows.length; i += 1) {
-    const { room_code, day_of_week, start_time } = scheduleRows[i];
-    const key = `${room_code}|${day_of_week}|${start_time}`;
-    assert.ok(
-      !seen.has(key),
-      `lc3-schedules.seed.csv row ${i + 2}: duplicate slot — room "${room_code}" on ${day_of_week} at ${start_time} already claimed by row ${seen.get(key)}`
-    );
-    seen.set(key, i + 2);
+    const { room_code, day_of_week, start_time, event_type, event_code } = scheduleRows[i];
+    if (event_type === 'class') {
+      const key = `${room_code}|${day_of_week}|${start_time}`;
+      assert.ok(
+        !seenClass.has(key),
+        `lc3-schedules.seed.csv row ${i + 2}: duplicate class slot — room "${room_code}" on ${day_of_week} at ${start_time} already claimed by row ${seenClass.get(key)}`
+      );
+      seenClass.set(key, i + 2);
+    } else if (event_type === 'exam') {
+      const key = `${room_code}|${day_of_week}|${start_time}|${event_code}`;
+      assert.ok(
+        !seenExam.has(key),
+        `lc3-schedules.seed.csv row ${i + 2}: duplicate exam slot — course "${event_code}" in room "${room_code}" on ${day_of_week} at ${start_time} already claimed by row ${seenExam.get(key)}`
+      );
+      seenExam.set(key, i + 2);
+    }
   }
 });
+

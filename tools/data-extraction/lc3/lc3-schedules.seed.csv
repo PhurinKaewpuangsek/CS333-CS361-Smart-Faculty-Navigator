@@ -1,412 +1,220 @@
 event_code,event_name,room_code,day_of_week,start_time,end_time,event_type
-BAS353,"Exam - BAS353",LC3-103,"6 พฤษภาคม 2569",09:00,12:00,Exam
-ASC332,"Exam - ASC332",LC3-103,"7 พฤษภาคม 2569",09:00,12:00,Exam
-AT407,"Exam - AT407 (Seats 1-6)",LC3-103,"15 พฤษภาคม 2569",09:00,12:00,Exam
-ST326,"Exam - ST326 (Seats 1-10)",LC3-103,"15 พฤษภาคม 2569",09:00,12:00,Exam
-BAS350,"Exam - BAS350",LC3-103,"18 พฤษภาคม 2569",13:00,16:00,Exam
-MR436,"MR436",LC3-103,"Monday",09:30,12:30,Class
-ES476,"ES476 (Note: ย้ายไปเรียน บร.3 ชั้น 2 ห้อง 230)",LC3-103,"Monday",13:30,16:30,Class
-CS361,"CS361",LC3-103,"Tuesday",08:00,11:00,Class
-CS379,"CS379",LC3-103,"Tuesday",11:00,12:30,Class
-CS379,"CS379",LC3-103,"Thursday",11:00,12:30,Class
-ES203,"ES203",LC3-103,"Thursday",13:30,15:30,Class
-ES206,"ES206",LC3-103,"Wednesday",08:00,09:30,Class
-ES206,"ES206",LC3-103,"Friday",08:00,09:30,Class
-NP308,"NP308",LC3-103,"Wednesday",09:30,11:30,Class
-ES436,"ES436",LC3-103,"Friday",09:30,12:30,Class
-วล202,"วล202 (SC202)",LC3-103,"Wednesday",13:30,15:30,Class
-NR201,"NR201",LC3-103,"Wednesday",16:30,19:30,Class
-NP307,"Exam - NP307 (Seats 1-3)",LC3-104,"8 พฤษภาคม 2569",09:00,12:00,Exam
-CS352,"Exam - CS352 (Seats 8-14)",LC3-104,"8 พฤษภาคม 2569",09:00,12:00,Exam
-NP307,"Exam - NP307 (Seats 4-7)",LC3-104,"8 พฤษภาคม 2569",09:00,12:00,Exam
-ST218,"Exam - ST218 (Seats 1-10)",LC3-104,"15 พฤษภาคม 2569",09:00,12:00,Exam
-NP310,"NP310",LC3-104,"Monday",09:30,11:30,Class
-ST477,"ST477",LC3-104,"Monday",13:30,16:30,Class
-MR336,"MR336",LC3-104,"Tuesday",09:30,11:00,Class
-MR336,"MR336",LC3-104,"Thursday",09:30,11:00,Class
-AM328,"AM328",LC3-104,"Tuesday",11:00,12:30,Class
-AM328,"AM328",LC3-104,"Thursday",11:00,12:30,Class
-ES468,"ES468",LC3-104,"Thursday",13:30,15:30,Class
-CS341,"CS341",LC3-104,"Wednesday",08:00,09:30,Class
-CS341,"CS341",LC3-104,"Friday",08:00,09:30,Class
-ASC,"ASC",LC3-104,"Wednesday",09:30,12:30,Class
-ES339,"ES339",LC3-104,"Friday",09:30,12:30,Class
-ST326,"ST326",LC3-104,"Wednesday",13:30,15:00,Class
-ST326,"ST326",LC3-104,"Friday",13:30,15:00,Class
-CS335,"CS335",LC3-104,"Wednesday",15:00,16:30,Class
-CS335,"CS335",LC3-104,"Friday",15:00,16:30,Class
-CS140,"Exam - CS140",LC3-105,"8 พฤษภาคม 2569",09:00,12:00,Exam
-CS100,"CS100 (Note: CS100 ของ ภาคพิเศษ)",LC3-105,"Monday",09:30,12:30,Class
-PHY621,"PHY621",LC3-105,"Tuesday",08:00,11:00,Class
-MA437,"MA437",LC3-105,"Tuesday",11:00,12:30,Class
-MA437,"MA437",LC3-105,"Thursday",11:00,12:30,Class
-ES479,"ES479",LC3-105,"Thursday",13:30,16:30,Class
-CS373,"CS373",LC3-105,"Wednesday",08:00,09:30,Class
-CS373,"CS373",LC3-105,"Friday",08:00,09:30,Class
-PC386,"PC386",LC3-105,"Wednesday",09:30,12:30,Class
-ES469,"ES469",LC3-105,"Friday",09:30,12:30,Class
-AM231,"AM231",LC3-105,"Wednesday",13:30,15:00,Class
-AM231,"AM231",LC3-105,"Friday",13:30,15:00,Class
-AM326,"AM326",LC3-105,"Wednesday",15:00,16:30,Class
-AM326,"AM326",LC3-105,"Friday",15:00,16:30,Class
-CS100,"CS100 (Note: CS100 ของ ภาคพิเศษ)",LC3-106,"Monday",09:30,12:30,Class
-MR446,"MR446",LC3-106,"Tuesday",08:00,09:30,Class
-MR446,"MR446",LC3-106,"Thursday",08:00,09:30,Class
-CS224,"CS224",LC3-106,"Tuesday",09:30,11:00,Class
-CS224,"CS224",LC3-106,"Thursday",09:30,11:00,Class
-AM447,"AM447",LC3-106,"Tuesday",11:00,12:30,Class
-AM447,"AM447",LC3-106,"Thursday",11:00,12:30,Class
-AM427,"AM427",LC3-106,"Tuesday",13:30,15:00,Class
-AM427,"AM427",LC3-106,"Thursday",13:30,15:00,Class
-MR447,"MR447",LC3-106,"Tuesday",15:00,16:30,Class
-MR447,"MR447",LC3-106,"Thursday",15:00,16:30,Class
-NP318,"NP318",LC3-106,"Wednesday",09:30,11:30,Class
-ES476,"ES476",LC3-106,"Friday",09:30,12:30,Class
-MA121,"MA121",LC3-106,"Wednesday",13:30,15:00,Class
-MA121,"MA121",LC3-106,"Friday",13:30,15:00,Class
-CS450,"CS450",LC3-107,"Monday",09:30,12:30,Class
-NP416,"NP416",LC3-107,"Tuesday",09:30,11:30,Class
-RT486,"RT486",LC3-107,"Thursday",09:30,12:30,Class
-PC341,"PC341",LC3-107,"Tuesday",13:30,15:00,Class
-PC341,"PC341",LC3-107,"Thursday",13:30,15:00,Class
-CS348,"CS348",LC3-107,"Tuesday",15:00,16:30,Class
-CS348,"CS348",LC3-107,"Thursday",15:00,16:30,Class
-MA317,"MA317",LC3-107,"Wednesday",09:30,11:00,Class
-MA317,"MA317",LC3-107,"Friday",09:30,11:00,Class
-CS346,"CS346",LC3-107,"Wednesday",11:00,12:30,Class
-CS346,"CS346",LC3-107,"Friday",11:00,12:30,Class
-NP202,"NP202",LC3-107,"Wednesday",13:30,16:30,Class
-ASC351,"ASC351",LC3-107,"Friday",13:30,16:30,Class
-CS345,"CS345",LC3-108,"Tuesday",09:30,11:00,Class
-CS345,"CS345",LC3-108,"Thursday",09:30,11:00,Class
-PC357,"PC357",LC3-108,"Tuesday",11:00,12:30,Class
-PC357,"PC357",LC3-108,"Thursday",11:00,12:30,Class
-PC406,"PC406",LC3-108,"Thursday",13:30,16:30,Class
-PC244,"PC244",LC3-108,"Wednesday",09:30,11:00,Class
-PC244,"PC244",LC3-108,"Friday",09:30,11:00,Class
-CS384,"CS384",LC3-108,"Wednesday",11:00,12:30,Class
-CS384,"CS384",LC3-108,"Friday",11:00,12:30,Class
-NP218,"NP218",LC3-108,"Wednesday",13:30,15:30,Class
-PC368,"PC368",LC3-108,"Friday",13:30,16:30,Class
-TU154,"TU154 (Note: ย้ายไปเรียนห้อง 214 บร.4)",LC3-109,"Monday",09:30,12:30,Class
-TU156,"TU156 (Note: ย้ายไปเรียน บร.4 ห้อง 214)",LC3-109,"Monday",13:30,16:30,Class
-CS373,"CS373",LC3-109,"Tuesday",09:30,11:00,Class
-CS373,"CS373",LC3-109,"Thursday",09:30,11:00,Class
-MA212,"MA212",LC3-109,"Tuesday",11:00,12:30,Class
-MA212,"MA212",LC3-109,"Thursday",11:00,12:30,Class
-AM347,"AM347",LC3-109,"Thursday",13:30,16:30,Class
-PC345,"PC345",LC3-109,"Wednesday",09:30,11:00,Class
-PC345,"PC345",LC3-109,"Friday",09:30,11:00,Class
-AM341,"AM341",LC3-109,"Wednesday",11:00,12:30,Class
-AM341,"AM341",LC3-109,"Friday",11:00,12:30,Class
-CS374,"CS374",LC3-109,"Wednesday",13:30,16:30,Class
-NP306,"NP306",LC3-109,"Friday",13:30,16:30,Class
-PC320,"PC320",LC3-110,"Monday",09:30,12:30,Class
-ASC332,"ASC332",LC3-110,"Tuesday",11:00,12:30,Class
-ASC332,"ASC332",LC3-110,"Thursday",11:00,12:30,Class
-PC240,"PC240",LC3-110,"Tuesday",13:30,15:00,Class
-PC240,"PC240",LC3-110,"Thursday",13:30,15:00,Class
-CS341,"CS341",LC3-110,"Wednesday",09:30,11:00,Class
-CS341,"CS341",LC3-110,"Friday",09:30,11:00,Class
-CS346,"CS346",LC3-110,"Wednesday",13:30,16:30,Class
-PC287,"PC287",LC3-110,"Friday",13:30,16:30,Class
-NP211,"NP211",LC3-111,"Monday",09:30,11:00,Class
-MA426,"MA426",LC3-111,"Tuesday",09:30,11:00,Class
-MA426,"MA426",LC3-111,"Thursday",09:30,11:00,Class
-PC206,"PC206",LC3-111,"Tuesday",11:00,12:30,Class
-PC206,"PC206",LC3-111,"Thursday",11:00,12:30,Class
-PC417,"PC417",LC3-111,"Thursday",13:30,16:30,Class
-MA436,"MA436",LC3-111,"Wednesday",11:00,12:30,Class
-MA436,"MA436",LC3-111,"Friday",11:00,12:30,Class
-CS223,"CS223",LC3-111,"Wednesday",13:30,16:30,Class
-ES352,"ES352",LC3-116,"Monday",08:00,10:00,Class
-ES357,"ES357",LC3-116,"Monday",13:30,16:30,Class
-NP300,"NP300",LC3-116,"Tuesday",09:30,11:00,Class
-NP300,"NP300",LC3-116,"Thursday",09:30,11:00,Class
-PC447,"PC447",LC3-116,"Tuesday",11:00,12:30,Class
-PC447,"PC447",LC3-116,"Thursday",11:00,12:30,Class
-NP309,"NP309",LC3-116,"Thursday",16:30,19:30,Class
-CS384,"CS384",LC3-116,"Wednesday",09:30,11:00,Class
-CS384,"CS384",LC3-116,"Friday",09:30,11:00,Class
-AM429,"AM429",LC3-116,"Wednesday",11:00,12:30,Class
-AM429,"AM429",LC3-116,"Friday",11:00,12:30,Class
-ES202,"ES202",LC3-116,"Friday",13:30,16:30,Class
-ES338,"ES338",LC3-117,"Monday",09:30,12:30,Class
-NP210,"NP210",LC3-117,"Tuesday",09:30,11:30,Class
-ES356,"ES356",LC3-117,"Tuesday",13:30,16:30,Class
-ASC391,"ASC391",LC3-117,"Thursday",13:30,16:30,Class
-CS265,"CS265",LC3-117,"Wednesday",08:00,11:00,Class
-ES268,"ES268",LC3-117,"Friday",09:30,12:30,Class
-ES266,"ES266",LC3-118,"Monday",09:30,12:30,Class
-ES347,"ES347",LC3-118,"Tuesday",09:30,11:30,Class
-ES366,"ES366",LC3-118,"Thursday",09:30,12:30,Class
-ES450,"ES450",LC3-118,"Wednesday",09:30,12:30,Class
-ES427,"ES427",LC3-118,"Friday",09:30,11:30,Class
-ES345,"ES345",LC3-118/1,"Monday",08:00,10:00,Class
-PC257,"PC257",LC3-118/1,"Monday",13:30,16:30,Class
-ES416,"ES416",LC3-118/1,"Tuesday",09:30,12:30,Class
-ES427//cantdefinedmisalingedbetweenextra_1andlc3-f1-118_1-01,illuselc3-f1-118_1-01asamainthensothiswouldchangetoES41609:30-12:30Thursday,"ES427 //cant defined misalinged between extra_1 and lc3-f1-118_1-01, ill use lc3-f1-118_1-01 as a main then so this would change to ES416 09:30 - 12:30 Thursday",LC3-118/1,"Thursday",09:30,12:30,Class
-ES316,"ES316",LC3-118/1,"Wednesday",09:30,12:30,Class
-ES386,"ES386",LC3-118/1,"Friday",09:30,12:30,Class
-ES346,"ES346",LC3-118/1,"Tuesday",13:30,16:30,Class
-CS301,"CS301",LC3-121,"Monday",09:30,12:30,Class
-AM260,"AM260",LC3-121,"Monday",13:30,16:30,Class
-CS100,"CS100",LC3-121,"Tuesday",08:00,09:30,Class
-CS100,"CS100",LC3-121,"Thursday",08:00,09:30,Class
-CS101,"CS101",LC3-121,"Tuesday",09:30,11:00,Class
-CS101,"CS101",LC3-121,"Thursday",09:30,11:00,Class
-CS102,"CS102",LC3-121,"Tuesday",11:00,12:30,Class
-CS102,"CS102",LC3-121,"Thursday",11:00,12:30,Class
-CS101,"CS101",LC3-121,"Tuesday",13:30,15:00,Class
-CS101,"CS101",LC3-121,"Thursday",13:30,15:00,Class
-CS213,"CS213",LC3-121,"Tuesday",15:00,16:30,Class
-CS213,"CS213",LC3-121,"Thursday",15:00,16:30,Class
-CS103,"CS103",LC3-121,"Wednesday",09:30,11:00,Class
-CS103,"CS103",LC3-121,"Friday",09:30,11:00,Class
-CS333,"CS333",LC3-121,"Wednesday",13:30,16:30,Class
-NP214,"NP214",LC3-121,"Friday",16:30,19:30,Class
-ST349,"ST349",LC3-122,"Monday",09:30,12:30,Class
-AM460,"AM460",LC3-122,"Monday",13:30,16:30,Class
-CS100,"CS100",LC3-122,"Tuesday",08:00,09:30,Class
-CS100,"CS100",LC3-122,"Thursday",08:00,09:30,Class
-CS101,"CS101",LC3-122,"Tuesday",09:30,11:00,Class
-CS101,"CS101",LC3-122,"Thursday",09:30,11:00,Class
-CS102,"CS102",LC3-122,"Tuesday",11:00,12:30,Class
-CS102,"CS102",LC3-122,"Thursday",11:00,12:30,Class
-CS101,"CS101",LC3-122,"Tuesday",13:30,15:00,Class
-CS101,"CS101",LC3-122,"Thursday",13:30,15:00,Class
-CS213,"CS213",LC3-122,"Tuesday",15:00,16:30,Class
-CS213,"CS213",LC3-122,"Thursday",15:00,16:30,Class
-CS103,"CS103",LC3-122,"Wednesday",09:30,11:00,Class
-CS103,"CS103",LC3-122,"Friday",09:30,11:00,Class
-CNC101,"CNC101",LC3-122,"Wednesday",11:00,12:30,Class
-CNC101,"CNC101",LC3-122,"Friday",11:00,12:30,Class
-AM201,"AM201",LC3-122,"Wednesday",13:30,15:00,Class
-AM201,"AM201",LC3-122,"Friday",13:30,15:00,Class
-CNC222,"CNC222",LC3-122,"Wednesday",15:00,16:30,Class
-CNC222,"CNC222",LC3-122,"Friday",15:00,16:30,Class
-MMA446,"Exam - MMA446",LC3-227,"7 พฤษภาคม 2569",09:00,12:00,Exam
-MA624,"MA624",LC3-101/1,"Monday",11:00,12:30,Class
-MA624,"MA624",LC3-101/1,"Friday",11:00,12:30,Class
-ST447,"ST447",LC3-101/1,"Tuesday",11:00,12:30,Class
-ST447,"ST447",LC3-101/1,"Thursday",11:00,12:30,Class
-MA821,"MA821",LC3-101/1,"Wednesday",09:30,12:30,Class
-ST657/ST688,"ST657/ST688",LC3-101/1,"Thursday",13:30,16:30,Class
-MA491,"MA491",LC3-102/2,"Monday",13:30,16:30,Class
-ST790,"ST790",LC3-102/2,"Tuesday",11:00,12:30,Class
-MA830,"MA830",LC3-102/2,"Wednesday",11:00,12:30,Class
-MA830,"MA830",LC3-102/2,"Friday",11:00,12:30,Class
-MA811,"MA811",LC3-102/2,"Wednesday",14:00,15:30,Class
-MA811,"MA811",LC3-102/2,"Friday",14:00,15:30,Class
-MR436,"MR 436",LC3-103,"Monday",09:30,12:30,Class
-CS361,"CS 361",LC3-103,"Tuesday",08:00,11:00,Class
-CS379,"CS 379",LC3-103,"Tuesday",11:00,12:30,Class
-CS379,"CS 379",LC3-103,"Thursday",11:00,12:30,Class
-ES206,"ES 206",LC3-103,"Wednesday",09:30,12:30,Class
-วล202,"วล 202",LC3-103,"Wednesday",13:30,15:30,Class
-NP201,"NP 201",LC3-103,"Wednesday",16:30,19:30,Class
-ES203,"ES 203",LC3-103,"Thursday",13:30,16:30,Class
-ES206,"ES 206",LC3-103,"Friday",08:00,09:30,Class
-ES436,"ES 436",LC3-103,"Friday",09:30,12:30,Class
-PHY627,"PHY 627",LC3-103,"Friday",13:30,16:30,Class
-NP310,"NP 310",LC3-104,"Monday",09:30,11:30,Class
-ST477,"ST 477",LC3-104,"Monday",13:30,16:30,Class
-MR336,"MR 336",LC3-104,"Tuesday",09:30,11:00,Class
-MR336,"MR 336",LC3-104,"Thursday",09:30,11:00,Class
-AM328,"AM 328",LC3-104,"Tuesday",11:00,12:30,Class
-AM328,"AM 328",LC3-104,"Thursday",11:00,12:30,Class
-CS341,"CS 341",LC3-104,"Wednesday",08:00,09:30,Class
-CS341,"CS 341",LC3-104,"Friday",08:00,09:30,Class
-ASC,"ASC",LC3-104,"Wednesday",09:30,12:30,Class
-ST326,"ST 326",LC3-104,"Wednesday",13:30,15:00,Class
-ST326,"ST 326",LC3-104,"Friday",13:30,15:00,Class
-CS335,"CS 335",LC3-104,"Wednesday",15:00,16:30,Class
-CS335,"CS 335",LC3-104,"Friday",15:00,16:30,Class
-ES468,"ES 468",LC3-104,"Thursday",13:30,16:30,Class
-ES339,"ES 339",LC3-104,"Friday",09:30,12:30,Class
-CS100,"CS 100",LC3-105,"Monday",09:30,12:30,Class
-MA437,"MA 437",LC3-105,"Tuesday",11:00,12:30,Class
-MA437,"MA 437",LC3-105,"Thursday",11:00,12:30,Class
-CS373,"CS 373",LC3-105,"Wednesday",08:00,09:30,Class
-CS373,"CS 373",LC3-105,"Friday",08:00,09:30,Class
-PE386,"PE 386",LC3-105,"Wednesday",09:30,12:30,Class
-AM231,"AM 231",LC3-105,"Wednesday",13:30,15:00,Class
-AM231,"AM 231",LC3-105,"Friday",13:30,15:00,Class
-AM326,"AM 326",LC3-105,"Wednesday",15:00,16:30,Class
-AM326,"AM 326",LC3-105,"Friday",15:00,16:30,Class
-ES479,"ES 479",LC3-105,"Thursday",13:30,16:30,Class
-ES469,"ES 469",LC3-105,"Friday",09:30,12:30,Class
-CS100,"CS 100",LC3-106,"Monday",09:30,12:30,Class
-MR446,"MR 446",LC3-106,"Tuesday",08:00,09:30,Class
-MR446,"MR 446",LC3-106,"Thursday",08:00,09:30,Class
-CS224,"CS 224 (NOTE: ย้ายไปเรียน บร.2 ชั้น 3)",LC3-106,"Tuesday",09:30,11:00,Class
-CS224,"CS 224 (NOTE: ย้ายไปเรียน บร.2 ชั้น 3)",LC3-106,"Thursday",09:30,11:00,Class
-AM447,"AM 447",LC3-106,"Tuesday",11:00,12:30,Class
-AM447,"AM 447",LC3-106,"Thursday",11:00,12:30,Class
-AM427,"AM 427",LC3-106,"Tuesday",13:30,15:00,Class
-AM427,"AM 427",LC3-106,"Thursday",13:30,15:00,Class
-MR447,"MR 447",LC3-106,"Tuesday",15:00,16:30,Class
-MR447,"MR 447",LC3-106,"Thursday",15:00,16:30,Class
-NP318,"NP 318",LC3-106,"Wednesday",09:30,12:30,Class
-MA121,"MA 121",LC3-106,"Wednesday",13:30,16:30,Class
-ES476,"ES 476",LC3-106,"Friday",09:30,12:30,Class
-MA121,"MA 121",LC3-106,"Friday",13:30,15:00,Class
-ES450,"ES 450",LC3-107,"Monday",09:30,12:30,Class
-NP416,"NP 416",LC3-107,"Tuesday",09:30,12:30,Class
-PC341,"PC 341",LC3-107,"Tuesday",13:30,15:00,Class
-PC341,"PC 341",LC3-107,"Thursday",13:30,15:00,Class
-CS348,"CS 348",LC3-107,"Tuesday",15:00,16:30,Class
-CS348,"CS 348",LC3-107,"Thursday",15:00,16:30,Class
-MA317,"MA 317",LC3-107,"Wednesday",09:30,11:00,Class
-MA317,"MA 317",LC3-107,"Friday",09:30,11:00,Class
-CS346,"CS 346",LC3-107,"Wednesday",11:00,12:30,Class
-CS346,"CS 346",LC3-107,"Friday",11:00,12:30,Class
-RT486,"RT 486",LC3-107,"Thursday",09:30,12:30,Class
-CS345,"CS 345",LC3-108,"Tuesday",09:30,11:00,Class
-CS345,"CS 345",LC3-108,"Thursday",09:30,11:00,Class
-PC357,"PC 357",LC3-108,"Tuesday",11:00,12:30,Class
-PC357,"PC 357",LC3-108,"Thursday",11:00,12:30,Class
-PC244,"PC 244",LC3-108,"Wednesday",09:30,11:00,Class
-PC244,"PC 244",LC3-108,"Friday",09:30,11:00,Class
-CS384,"CS 384",LC3-108,"Wednesday",11:00,12:30,Class
-CS384,"CS 384",LC3-108,"Friday",11:00,12:30,Class
-NP218,"NP 218",LC3-108,"Wednesday",13:30,16:30,Class
-PC406,"PC 406",LC3-108,"Thursday",13:30,16:30,Class
-PC368,"PC 368",LC3-108,"Friday",13:30,16:30,Class
-CS374,"CS 374",LC3-109,"Tuesday",08:00,09:30,Class
-CS374,"CS 374",LC3-109,"Thursday",08:00,09:30,Class
-CS373,"CS 373",LC3-109,"Tuesday",09:30,11:00,Class
-CS373,"CS 373",LC3-109,"Thursday",09:30,11:00,Class
-MA212,"MA 212",LC3-109,"Tuesday",11:00,12:30,Class
-MA212,"MA 212",LC3-109,"Thursday",11:00,12:30,Class
-AM341,"AM 341",LC3-109,"Wednesday",11:00,12:30,Class
-AM341,"AM 341",LC3-109,"Friday",11:00,12:30,Class
-CS374,"CS 374",LC3-109,"Wednesday",13:30,16:30,Class
-AM347,"AM 347",LC3-109,"Thursday",13:30,16:30,Class
-NP306,"NP 306",LC3-109,"Friday",13:30,16:30,Class
-PC320,"PC 320",LC3-110,"Monday",09:30,12:30,Class
-ES368,"ES 368",LC3-110,"Tuesday",09:30,11:00,Class
-ASC332,"ASC 332",LC3-110,"Tuesday",11:00,12:30,Class
-ASC332,"ASC 332",LC3-110,"Thursday",11:00,12:30,Class
-CS341,"CS 341 (NOTE: ย้ายไปเรียน บร.2 ห้อง 213)",LC3-110,"Wednesday",09:30,11:00,Class
-CS341,"CS 341 (NOTE: ย้ายไปเรียน บร.2 ห้อง 213)",LC3-110,"Friday",09:30,11:00,Class
-ST446,"ST 446",LC3-110,"Wednesday",11:00,12:30,Class
-ST446,"ST 446",LC3-110,"Friday",11:00,12:30,Class
-CS346,"CS 346",LC3-110,"Wednesday",13:30,16:30,Class
-NP211,"NP 211",LC3-111,"Monday",09:30,11:00,Class
-MA426,"MA 426",LC3-111,"Tuesday",09:30,11:00,Class
-MA426,"MA 426",LC3-111,"Thursday",09:30,11:00,Class
-PC206,"PC 206",LC3-111,"Tuesday",11:00,12:30,Class
-PC206,"PC 206",LC3-111,"Thursday",11:00,12:30,Class
-AM436,"AM 436",LC3-111,"Wednesday",11:00,12:30,Class
-AM436,"AM 436",LC3-111,"Friday",11:00,12:30,Class
-CS223,"CS 223",LC3-111,"Wednesday",13:30,16:30,Class
-PC417,"PC 417",LC3-111,"Thursday",13:30,16:30,Class
-MA725,"MA725",LC3-115,"Tuesday",13:30,16:30,Class
-MA623,"MA623",LC3-115,"Wednesday",09:30,11:00,Class
-MA623,"MA623",LC3-115,"Friday",09:30,11:00,Class
-MA313,"MA313",LC3-115,"Wednesday",11:00,12:30,Class
-MA313,"MA313",LC3-115,"Friday",11:00,12:30,Class
-MA683,"MA683",LC3-115,"Thursday",09:30,12:30,Class
-ES352,"ES 352",LC3-116,"Monday",08:00,11:00,Class
-NP300,"NP 300",LC3-116,"Tuesday",08:00,11:00,Class
-NP300,"NP 300",LC3-116,"Thursday",08:00,11:00,Class
-PC447,"PC 447",LC3-116,"Tuesday",11:00,12:30,Class
-PC447,"PC 447",LC3-116,"Thursday",11:00,12:30,Class
-CS384,"CS 384",LC3-116,"Wednesday",09:30,11:00,Class
-CS384,"CS 384",LC3-116,"Friday",09:30,11:00,Class
-AM429,"AM 429",LC3-116,"Wednesday",11:00,12:30,Class
-AM429,"AM 429",LC3-116,"Friday",11:00,12:30,Class
-NP300,"NP 300",LC3-116,"Thursday",16:30,18:00,Class
-ES202,"ES 202",LC3-116,"Friday",13:30,16:30,Class
-ES338/ES336,"ES 338 / ES 336 (ผู้สอน: อ.สรณ์)",LC3-117,"Monday",09:30,12:30,Class
-NP210,"NP 210 (ผู้สอน: อ.เรวัช)",LC3-117,"Tuesday",09:30,12:30,Class
-ES356,"ES 356 (ผู้สอน: อ.ป้อม)",LC3-117,"Tuesday",13:30,16:30,Class
-CS265,"CS 265",LC3-117,"Wednesday",08:00,11:00,Class
-BEE396,"BEE 396",LC3-117,"Thursday",09:30,12:30,Class
-ASC391,"ASC 391 (ผู้สอน: อ.วราฤทธิ์)",LC3-117,"Thursday",13:30,16:30,Class
-ES268,"ES 268 (ผู้สอน: อ.มารุต)",LC3-117,"Friday",09:30,12:30,Class
-ES266,"ES 266 (ผู้สอน: อ.ไตรเทพ)",LC3-118,"Monday",09:30,12:30,Class
-ES347,"ES 347",LC3-118,"Tuesday",09:30,12:30,Class
-ES450,"ES 450",LC3-118,"Wednesday",09:30,12:30,Class
-ST431,"ST 431 (ผู้สอน: อ.กมล)",LC3-118,"Wednesday",15:00,16:30,Class
-ES366,"ES 366",LC3-118,"Thursday",09:30,12:30,Class
-ES427,"ES 427",LC3-118,"Friday",09:30,12:30,Class
-ST431,"ST 431 (ผู้สอน: อ.กมล)",LC3-118,"Friday",15:00,16:30,Class
-ES345,"ES 345",LC3-118/1,"Monday",09:30,12:30,Class
-PC257,"PC 257",LC3-118/1,"Monday",13:30,16:30,Class
-ES416,"ES 416 (ผู้สอน: อ.ยุ้ย)",LC3-118/1,"Tuesday",09:30,12:30,Class
-ES346,"ES 346 (ผู้สอน: อ.ยุ้ย)",LC3-118/1,"Tuesday",13:30,16:30,Class
-ES316,"ES 316",LC3-118/1,"Wednesday",09:30,12:30,Class
-ES416,"ES 416 (เรียน อ.มารุต)",LC3-118/1,"Thursday",09:30,12:30,Class
-ES386,"ES 386",LC3-118/1,"Friday",09:30,12:30,Class
-CS301,"CS 301",LC3-121,"Monday",09:30,12:30,Class
-AM260,"AM 260 (ผู้สอน: อ.นวลักษณ์)",LC3-121,"Monday",13:30,16:30,Class
-CS100,"CS 100",LC3-121,"Tuesday",08:00,09:30,Class
-CS101,"CS 101 (ผู้สอน: อ.นัทนนท์)",LC3-121,"Tuesday",09:30,11:00,Class
-CS102,"CS 102",LC3-121,"Tuesday",11:00,12:30,Class
-CS101,"CS 101 (ผู้สอน: อ.ติ๊ก)",LC3-121,"Tuesday",13:30,15:00,Class
-CS213,"CS 213",LC3-121,"Tuesday",15:00,16:30,Class
-CS103,"CS 103 (ผู้สอน: อ.นัทนนท์)",LC3-121,"Wednesday",09:30,11:00,Class
-CS333,"CS 333",LC3-121,"Wednesday",13:30,16:30,Class
-CS100,"CS 100",LC3-121,"Thursday",08:00,09:30,Class
-CS101,"CS 101 (ผู้สอน: อ.ติ๊ก)",LC3-121,"Thursday",09:30,11:00,Class
-CS102,"CS 102",LC3-121,"Thursday",11:00,12:30,Class
-CS101,"CS 101 (ผู้สอน: อ.ติ๊ก)",LC3-121,"Thursday",13:30,15:00,Class
-CS213,"CS 213",LC3-121,"Thursday",15:00,16:30,Class
-CS103,"CS 103 (ผู้สอน: อ.นัทนนท์)",LC3-121,"Friday",09:30,11:00,Class
-NP214,"NP 214",LC3-121,"Friday",16:30,18:00,Class
-ST349,"ST 349",LC3-122,"Monday",09:30,12:30,Class
-AM460,"AM 460",LC3-122,"Monday",13:30,16:30,Class
-CS100,"CS 100",LC3-122,"Tuesday",08:00,09:30,Class
-CS101,"CS 101",LC3-122,"Tuesday",09:30,11:00,Class
-CS102,"CS 102",LC3-122,"Tuesday",11:00,12:30,Class
-CS101,"CS 101",LC3-122,"Tuesday",13:30,15:00,Class
-CS213,"CS 213",LC3-122,"Tuesday",15:00,16:30,Class
-CS103,"CS 103",LC3-122,"Wednesday",08:00,09:30,Class
-CS103,"CS 103",LC3-122,"Wednesday",09:30,11:00,Class
-CNC101,"CNC 101",LC3-122,"Wednesday",11:00,12:30,Class
-AM201,"AM 201 (อ.ส้ม)",LC3-122,"Wednesday",13:30,15:00,Class
-CNC222,"CNC 222 (อ.หยวน)",LC3-122,"Wednesday",15:00,16:30,Class
-CS100,"CS 100",LC3-122,"Thursday",08:00,09:30,Class
-CS101,"CS 101 (อ.นัทนนท์)",LC3-122,"Thursday",09:30,11:00,Class
-CS102,"CS 102",LC3-122,"Thursday",11:00,12:30,Class
-CS101,"CS 101",LC3-122,"Thursday",13:30,15:00,Class
-CS213,"CS 213 (อ.หยวน)",LC3-122,"Thursday",15:00,16:30,Class
-CS103,"CS 103",LC3-122,"Friday",08:00,09:30,Class
-CS103,"CS 103 (อ.นันทนนท์)",LC3-122,"Friday",09:30,11:00,Class
-CNC101,"CNC 101",LC3-122,"Friday",11:00,12:30,Class
-AM201,"AM 201 (อ.ส้ม)",LC3-122,"Friday",13:30,15:00,Class
-CNC222,"CNC 222 (อ.หยวน)",LC3-122,"Friday",15:00,16:30,Class
-ST349,"ST 349",LC3-122,"Saturday",09:30,12:30,Class
-,"Thesis Research (ทำการวิจัย สำหรับวิทยานิพนธ์) - นอกเวลาราชการ",LC3-203,"10 มิ.ย. 2567 - 30 พ.ย. 2567 (ทุกวัน)",06:00,24:00,Lab Booking
-,"Thesis Research (ทำการวิจัย สำหรับวิทยานิพนธ์) - ในเวลาราชการ (เตาอบ, เครื่องชั่ง, Magnetic stirrer)",LC3-203,"10 มิ.ย. 2567 - 30 พ.ย. 2567 (วันเวลาราชการ)",08:30,16:30,Lab Booking
-,"Thesis Research (ทำการวิจัย สำหรับวิทยานิพนธ์) - ในเวลาราชการ (เครื่องแก้ว, ตู้อบ) [Note: Form specifies room 103, posted on room 203]",LC3-203,"10 มิ.ย. 2567 - 30 พ.ย. 2567 (วันเวลาราชการ)",08:30,16:30,Lab Booking
-,"Thesis Research (ทำการวิจัย สำหรับวิทยานิพนธ์) - นอกเวลาราชการ",LC3-203,"10 มิ.ย. 2567 - 30 พ.ย. 2567 (ทุกวัน)",06:00,24:00,Lab Booking
-,"Special Project (ทำปัญหาพิเศษ) - ในเวลาราชการ (เครื่องแก้ว, เครื่องกวน)",LC3-203,"1 ส.ค. 2567 - 31 ต.ค. 2567 (วันเวลาราชการ)",08:00,16:30,Lab Booking
-,"Special Project (ทำ project ปัญหาพิเศษ) - ในเวลาราชการ (อุปกรณ์เครื่องเตาอบ, อุปกรณ์เครื่องแก้ว)",LC3-203,"2 ก.ย. 2567 - 20 ก.ย. 2567 (วันเวลาราชการ)",08:30,16:30,Lab Booking
-,"Special Project (ทำการทดลองสำหรับ ปัญหาพิเศษ - ทดลองการดูดซับด้วย biochar) - นอกเวลาราชการ",LC3-203,"25 ส.ค. 2567 - 25 ก.ย. 2567 (ทุกวัน)",08:00,24:00,Lab Booking
-,"Special Project (ทำการทดลอง ปัญหาพิเศษ - ทดลองการดูดซับด้วย biochar) - ในเวลาราชการ (เตาอบ)",LC3-203,"25 ส.ค. 2567 - 25 ก.ย. 2567 (ทุกวัน)",08:00,24:00,Lab Booking
-,"ปัญหาพิเศษ (Special Project)",LC3-203,"3 ก.ย. 2567 - 30 ก.ย. 2567",07:00,22:00,Lab Booking
-,"ทำการทดลองปัญหาพิเศษ (Special Project)",LC3-203,"1 ต.ค. 2567 - 31 ต.ค. 2567",08:00,21:00,Lab Booking
-,"วิจัย วล.491 / ปัญหาพิเศษ",LC3-213,"17 ส.ค. 2567 - 17 ก.ย. 2567",08:30,16:30,Lab Booking
-,"ปัญหาพิเศษ วล.491",LC3-213,"17 ส.ค. 2567 - 17 ก.ย. 2567",16:30,23:30,Lab Booking
-,"โปรเจคปัญหาพิเศษ วล.491",LC3-213,"17 ส.ค. 2567 - 17 ก.ย. 2567",16:30,23:00,Lab Booking
-,"ทำการทดลองโปรเจคปัญหาพิเศษ (วล.491)",LC3-213,"17 ส.ค. 2567 - 17 ก.ย. 2567",08:00,16:30,Lab Booking
-,"ทำการทดลองโปรเจคปัญหาพิเศษ (วล.491)",LC3-213,"17 ส.ค. 2567 - 17 ก.ย. 2567",08:00,16:30,Lab Booking
-,"ทำการทดลองโปรเจคปัญหาพิเศษ (วล.491)",LC3-213,"17 ส.ค. 2567 - 17 ก.ย. 2567",,,Lab Booking
-,"เกี่ยวกับปัญหาพิเศษ (Special Project)",LC3-241,"3 ก.ย. 2567 - 3 ต.ค. 2567",08:00,21:00,Lab Booking
-,"เกี่ยวกับปัญหาพิเศษ (Special Project)",LC3-241,"3 ก.ย. 2567 - 3 ต.ค. 2567",08:00,21:00,Lab Booking
-,"ปัญหาพิเศษ (Special Problem / Lab Experiment)",LC3-241,"3 กันยายน 2567 – 3 ตุลาคม 2567",08:00,16:00,Lab Booking
-,"ปัญหาพิเศษ (Special Problem / Lab Experiment)",LC3-241,"3 กันยายน 2567 – 3 ตุลาคม 2567",08:00,16:30,Lab Booking
-,"วิทยานิพนธ์ (Thesis Lab Research)",LC3-241,"22 กรกฎาคม 2567 – 30 กันยายน 2567",08:00,16:30,Lab Booking
-,"ปัญหาพิเศษ (Special Problem - ทดสอบการดูดซับ ใช้เครื่องอบ)",LC3-241,"25 สิงหาคม 2567 – 25 กันยายน 2567",08:00,24:00,Lab Booking
-,"ปัญหาพิเศษ (Special Problem - ทดลองการดูดซับด้วย biochar)",LC3-241,"25 สิงหาคม 2567 – 25 กันยายน 2567",08:00,24:00,Lab Booking
-,"ปัญหาพิเศษ (Special Problem)",LC3-241,"3 กันยายน 2567 – 3 ตุลาคม 2567",08:30,21:00,Lab Booking
-,"ปัญหาพิเศษ (Special Problem)",LC3-241,"3 กันยายน 2567 – 3 ตุลาคม 2567",08:30,21:00,Lab Booking
-,"วิทยานิพนธ์ (Thesis Lab Research)",LC3-241,"22 กรกฎาคม 2567 – 30 กันยายน 2567",16:30,02:00,Lab Booking
-,"วิทยานิพนธ์ (Thesis)",LC3-243,"31 สิงหาคม 2567 – 31 มีนาคม 2568",09:00,24:00,Lab Booking
-,"วิทยานิพนธ์ (Thesis)",LC3-243,"31 สิงหาคม 2567 – 31 มีนาคม 2568",09:00,24:00,Lab Booking
-,"วิทยานิพนธ์ (Thesis - โครงการบัณฑิตศึกษา วศ.โยธา)",LC3-243,"พฤษภาคม 2567 – สิงหาคม 2567",,,Lab Booking
-,"รายวิชาวิทยานิพนธ์ (Thesis)",LC3-243,"22 กรกฎาคม 2567 – 30 กันยายน 2567",16:30,02:00,Lab Booking
-,"รายวิชาวิทยานิพนธ์ (Thesis)",LC3-243,"22 กรกฎาคม 2567 – 30 กันยายน 2567",08:00,16:30,Lab Booking
+MA624,MA624,LC3-101/1,MON,11:00,12:30,class
+ST447,ST447,LC3-101/1,TUE,11:00,12:30,class
+MA821,MA821,LC3-101/1,WED,09:30,12:30,class
+ST447,ST447,LC3-101/1,THU,11:00,12:30,class
+ST657/ST688,ST657/ST688,LC3-101/1,THU,13:30,16:30,class
+MA624,MA624,LC3-101/1,FRI,11:00,12:30,class
+MA491,MA491,LC3-102/2,MON,13:30,16:30,class
+ST790,ST790,LC3-102/2,TUE,11:00,12:30,class
+MA830,MA830,LC3-102/2,WED,11:00,12:30,class
+MA811,MA811,LC3-102/2,WED,14:00,15:30,class
+MA830,MA830,LC3-102/2,FRI,11:00,12:30,class
+MA811,MA811,LC3-102/2,FRI,14:00,15:30,class
+MR436,MR 436,LC3-103,MON,09:30,12:30,class
+BAS350,Exam - BAS350 (18 พ.ค. 2569),LC3-103,MON,13:00,16:00,exam
+ES476,ES476 (Note: ย้ายไปเรียน บร.3 ชั้น 2 ห้อง 230),LC3-103,MON,13:30,16:30,class
+CS361,CS 361,LC3-103,TUE,08:00,11:00,class
+CS379,CS 379,LC3-103,TUE,11:00,12:30,class
+ES206,ES206,LC3-103,WED,08:00,09:30,class
+BAS353,Exam - BAS353 (6 พ.ค. 2569),LC3-103,WED,09:00,12:00,exam
+ES206,ES 206,LC3-103,WED,09:30,12:30,class
+วล202,วล202 (SC202),LC3-103,WED,13:30,15:30,class
+NP201,NP 201,LC3-103,WED,16:30,19:30,class
+ASC332,Exam - ASC332 (7 พ.ค. 2569),LC3-103,THU,09:00,12:00,exam
+CS379,CS 379,LC3-103,THU,11:00,12:30,class
+ES203,ES 203,LC3-103,THU,13:30,16:30,class
+ES206,ES 206,LC3-103,FRI,08:00,09:30,class
+AT407,Exam - AT407 (Seats 1-6) (15 พ.ค. 2569),LC3-103,FRI,09:00,12:00,exam
+ST326,Exam - ST326 (Seats 1-10) (15 พ.ค. 2569),LC3-103,FRI,09:00,12:00,exam
+ES436,ES 436,LC3-103,FRI,09:30,12:30,class
+PHY627,PHY 627,LC3-103,FRI,13:30,16:30,class
+NP310,NP 310,LC3-104,MON,09:30,11:30,class
+ST477,ST 477,LC3-104,MON,13:30,16:30,class
+MR336,MR 336,LC3-104,TUE,09:30,11:00,class
+AM328,AM 328,LC3-104,TUE,11:00,12:30,class
+CS341,CS 341,LC3-104,WED,08:00,09:30,class
+ASC,ASC,LC3-104,WED,09:30,12:30,class
+ST326,ST 326,LC3-104,WED,13:30,15:00,class
+CS335,CS 335,LC3-104,WED,15:00,16:30,class
+MR336,MR 336,LC3-104,THU,09:30,11:00,class
+AM328,AM 328,LC3-104,THU,11:00,12:30,class
+ES468,ES 468,LC3-104,THU,13:30,16:30,class
+CS341,CS 341,LC3-104,FRI,08:00,09:30,class
+NP307,Exam - NP307 (Seats 1-7) (8 พ.ค. 2569),LC3-104,FRI,09:00,12:00,exam
+CS352,Exam - CS352 (Seats 8-14) (8 พ.ค. 2569),LC3-104,FRI,09:00,12:00,exam
+ST218,Exam - ST218 (Seats 1-10) (15 พ.ค. 2569),LC3-104,FRI,09:00,12:00,exam
+ES339,ES 339,LC3-104,FRI,09:30,12:30,class
+ST326,ST 326,LC3-104,FRI,13:30,15:00,class
+CS335,CS 335,LC3-104,FRI,15:00,16:30,class
+CS100,CS100 (Note: CS100 ของ ภาคพิเศษ),LC3-105,MON,09:30,12:30,class
+PHY621,PHY621,LC3-105,TUE,08:00,11:00,class
+MA437,MA 437,LC3-105,TUE,11:00,12:30,class
+CS373,CS 373,LC3-105,WED,08:00,09:30,class
+PE386,PE 386,LC3-105,WED,09:30,12:30,class
+AM231,AM 231,LC3-105,WED,13:30,15:00,class
+AM326,AM 326,LC3-105,WED,15:00,16:30,class
+MA437,MA 437,LC3-105,THU,11:00,12:30,class
+ES479,ES 479,LC3-105,THU,13:30,16:30,class
+CS373,CS 373,LC3-105,FRI,08:00,09:30,class
+CS140,Exam - CS140 (8 พ.ค. 2569),LC3-105,FRI,09:00,12:00,exam
+ES469,ES 469,LC3-105,FRI,09:30,12:30,class
+AM231,AM 231,LC3-105,FRI,13:30,15:00,class
+AM326,AM 326,LC3-105,FRI,15:00,16:30,class
+CS100,CS100 (Note: CS100 ของ ภาคพิเศษ),LC3-106,MON,09:30,12:30,class
+MR446,MR 446,LC3-106,TUE,08:00,09:30,class
+CS224,CS 224 (NOTE: ย้ายไปเรียน บร.2 ชั้น 3),LC3-106,TUE,09:30,11:00,class
+AM447,AM 447,LC3-106,TUE,11:00,12:30,class
+AM427,AM 427,LC3-106,TUE,13:30,15:00,class
+MR447,MR 447,LC3-106,TUE,15:00,16:30,class
+NP318,NP 318,LC3-106,WED,09:30,12:30,class
+MA121,MA 121,LC3-106,WED,13:30,16:30,class
+MR446,MR 446,LC3-106,THU,08:00,09:30,class
+CS224,CS 224 (NOTE: ย้ายไปเรียน บร.2 ชั้น 3),LC3-106,THU,09:30,11:00,class
+AM447,AM 447,LC3-106,THU,11:00,12:30,class
+AM427,AM 427,LC3-106,THU,13:30,15:00,class
+MR447,MR 447,LC3-106,THU,15:00,16:30,class
+ES476,ES 476,LC3-106,FRI,09:30,12:30,class
+MA121,MA 121,LC3-106,FRI,13:30,15:00,class
+ES450,ES 450,LC3-107,MON,09:30,12:30,class
+NP416,NP 416,LC3-107,TUE,09:30,12:30,class
+PC341,PC 341,LC3-107,TUE,13:30,15:00,class
+CS348,CS 348,LC3-107,TUE,15:00,16:30,class
+MA317,MA 317,LC3-107,WED,09:30,11:00,class
+CS346,CS 346,LC3-107,WED,11:00,12:30,class
+NP202,NP202,LC3-107,WED,13:30,16:30,class
+RT486,RT 486,LC3-107,THU,09:30,12:30,class
+PC341,PC 341,LC3-107,THU,13:30,15:00,class
+CS348,CS 348,LC3-107,THU,15:00,16:30,class
+MA317,MA 317,LC3-107,FRI,09:30,11:00,class
+CS346,CS 346,LC3-107,FRI,11:00,12:30,class
+ASC351,ASC351,LC3-107,FRI,13:30,16:30,class
+CS345,CS 345,LC3-108,TUE,09:30,11:00,class
+PC357,PC 357,LC3-108,TUE,11:00,12:30,class
+PC244,PC 244,LC3-108,WED,09:30,11:00,class
+CS384,CS 384,LC3-108,WED,11:00,12:30,class
+NP218,NP 218,LC3-108,WED,13:30,16:30,class
+CS345,CS 345,LC3-108,THU,09:30,11:00,class
+PC357,PC 357,LC3-108,THU,11:00,12:30,class
+PC406,PC 406,LC3-108,THU,13:30,16:30,class
+PC244,PC 244,LC3-108,FRI,09:30,11:00,class
+CS384,CS 384,LC3-108,FRI,11:00,12:30,class
+PC368,PC 368,LC3-108,FRI,13:30,16:30,class
+TU154,TU154 (Note: ย้ายไปเรียนห้อง 214 บร.4),LC3-109,MON,09:30,12:30,class
+TU156,TU156 (Note: ย้ายไปเรียน บร.4 ห้อง 214),LC3-109,MON,13:30,16:30,class
+CS374,CS 374,LC3-109,TUE,08:00,09:30,class
+CS373,CS 373,LC3-109,TUE,09:30,11:00,class
+MA212,MA 212,LC3-109,TUE,11:00,12:30,class
+PC345,PC345,LC3-109,WED,09:30,11:00,class
+AM341,AM 341,LC3-109,WED,11:00,12:30,class
+CS374,CS 374,LC3-109,WED,13:30,16:30,class
+CS374,CS 374,LC3-109,THU,08:00,09:30,class
+CS373,CS 373,LC3-109,THU,09:30,11:00,class
+MA212,MA 212,LC3-109,THU,11:00,12:30,class
+AM347,AM 347,LC3-109,THU,13:30,16:30,class
+PC345,PC345,LC3-109,FRI,09:30,11:00,class
+AM341,AM 341,LC3-109,FRI,11:00,12:30,class
+NP306,NP 306,LC3-109,FRI,13:30,16:30,class
+PC320,PC 320,LC3-110,MON,09:30,12:30,class
+ES368,ES 368,LC3-110,TUE,09:30,11:00,class
+ASC332,ASC 332,LC3-110,TUE,11:00,12:30,class
+PC240,PC240,LC3-110,TUE,13:30,15:00,class
+CS341,CS 341 (NOTE: ย้ายไปเรียน บร.2 ห้อง 213),LC3-110,WED,09:30,11:00,class
+ST446,ST 446,LC3-110,WED,11:00,12:30,class
+CS346,CS 346,LC3-110,WED,13:30,16:30,class
+ASC332,ASC 332,LC3-110,THU,11:00,12:30,class
+PC240,PC240,LC3-110,THU,13:30,15:00,class
+CS341,CS 341 (NOTE: ย้ายไปเรียน บร.2 ห้อง 213),LC3-110,FRI,09:30,11:00,class
+ST446,ST 446,LC3-110,FRI,11:00,12:30,class
+PC287,PC287,LC3-110,FRI,13:30,16:30,class
+NP211,NP 211,LC3-111,MON,09:30,11:00,class
+MA426,MA 426,LC3-111,TUE,09:30,11:00,class
+PC206,PC 206,LC3-111,TUE,11:00,12:30,class
+AM436,AM 436,LC3-111,WED,11:00,12:30,class
+CS223,CS 223,LC3-111,WED,13:30,16:30,class
+MA426,MA 426,LC3-111,THU,09:30,11:00,class
+PC206,PC 206,LC3-111,THU,11:00,12:30,class
+PC417,PC 417,LC3-111,THU,13:30,16:30,class
+AM436,AM 436,LC3-111,FRI,11:00,12:30,class
+MA725,MA725,LC3-115,TUE,13:30,16:30,class
+MA623,MA623,LC3-115,WED,09:30,11:00,class
+MA313,MA313,LC3-115,WED,11:00,12:30,class
+MA683,MA683,LC3-115,THU,09:30,12:30,class
+MA623,MA623,LC3-115,FRI,09:30,11:00,class
+MA313,MA313,LC3-115,FRI,11:00,12:30,class
+ES352,ES 352,LC3-116,MON,08:00,11:00,class
+ES357,ES357,LC3-116,MON,13:30,16:30,class
+NP300,NP 300,LC3-116,TUE,08:00,11:00,class
+NP300,NP300,LC3-116,TUE,09:30,11:00,class
+PC447,PC 447,LC3-116,TUE,11:00,12:30,class
+CS384,CS 384,LC3-116,WED,09:30,11:00,class
+AM429,AM 429,LC3-116,WED,11:00,12:30,class
+NP300,NP 300,LC3-116,THU,08:00,11:00,class
+NP300,NP300,LC3-116,THU,09:30,11:00,class
+PC447,PC 447,LC3-116,THU,11:00,12:30,class
+NP300,NP 300,LC3-116,THU,16:30,18:00,class
+CS384,CS 384,LC3-116,FRI,09:30,11:00,class
+AM429,AM 429,LC3-116,FRI,11:00,12:30,class
+ES202,ES 202,LC3-116,FRI,13:30,16:30,class
+ES338/ES336,ES 338 / ES 336 (ผู้สอน: อ.สรณ์),LC3-117,MON,09:30,12:30,class
+NP210,NP 210 (ผู้สอน: อ.เรวัช),LC3-117,TUE,09:30,12:30,class
+ES356,ES 356 (ผู้สอน: อ.ป้อม),LC3-117,TUE,13:30,16:30,class
+CS265,CS 265,LC3-117,WED,08:00,11:00,class
+BEE396,BEE 396,LC3-117,THU,09:30,12:30,class
+ASC391,ASC 391 (ผู้สอน: อ.วราฤทธิ์),LC3-117,THU,13:30,16:30,class
+ES268,ES 268 (ผู้สอน: อ.มารุต),LC3-117,FRI,09:30,12:30,class
+ES266,ES 266 (ผู้สอน: อ.ไตรเทพ),LC3-118,MON,09:30,12:30,class
+ES347,ES 347,LC3-118,TUE,09:30,12:30,class
+ES450,ES 450,LC3-118,WED,09:30,12:30,class
+ST431,ST 431 (ผู้สอน: อ.กมล),LC3-118,WED,15:00,16:30,class
+ES366,ES 366,LC3-118,THU,09:30,12:30,class
+ES427,ES 427,LC3-118,FRI,09:30,12:30,class
+ST431,ST 431 (ผู้สอน: อ.กมล),LC3-118,FRI,15:00,16:30,class
+ES345,ES345,LC3-118/1,MON,08:00,10:00,class
+ES345,ES 345,LC3-118/1,MON,09:30,12:30,class
+PC257,PC 257,LC3-118/1,MON,13:30,16:30,class
+ES416,ES 416 (ผู้สอน: อ.ยุ้ย),LC3-118/1,TUE,09:30,12:30,class
+ES346,ES 346 (ผู้สอน: อ.ยุ้ย),LC3-118/1,TUE,13:30,16:30,class
+ES316,ES 316,LC3-118/1,WED,09:30,12:30,class
+ES416,ES 416 (เรียน อ.มารุต),LC3-118/1,THU,09:30,12:30,class
+ES386,ES 386,LC3-118/1,FRI,09:30,12:30,class
+CS301,CS 301,LC3-121,MON,09:30,12:30,class
+AM260,AM 260 (ผู้สอน: อ.นวลักษณ์),LC3-121,MON,13:30,16:30,class
+CS100,CS 100,LC3-121,TUE,08:00,09:30,class
+CS101,CS 101 (ผู้สอน: อ.นัทนนท์),LC3-121,TUE,09:30,11:00,class
+CS102,CS 102,LC3-121,TUE,11:00,12:30,class
+CS101,CS 101 (ผู้สอน: อ.ติ๊ก),LC3-121,TUE,13:30,15:00,class
+CS213,CS 213,LC3-121,TUE,15:00,16:30,class
+CS103,CS 103 (ผู้สอน: อ.นัทนนท์),LC3-121,WED,09:30,11:00,class
+CS333,CS 333,LC3-121,WED,13:30,16:30,class
+CS100,CS 100,LC3-121,THU,08:00,09:30,class
+CS101,CS 101 (ผู้สอน: อ.ติ๊ก),LC3-121,THU,09:30,11:00,class
+CS102,CS 102,LC3-121,THU,11:00,12:30,class
+CS101,CS 101 (ผู้สอน: อ.ติ๊ก),LC3-121,THU,13:30,15:00,class
+CS213,CS 213,LC3-121,THU,15:00,16:30,class
+CS103,CS 103 (ผู้สอน: อ.นัทนนท์),LC3-121,FRI,09:30,11:00,class
+NP214,NP 214,LC3-121,FRI,16:30,18:00,class
+ST349,ST 349,LC3-122,MON,09:30,12:30,class
+AM460,AM 460,LC3-122,MON,13:30,16:30,class
+CS100,CS 100,LC3-122,TUE,08:00,09:30,class
+CS101,CS 101,LC3-122,TUE,09:30,11:00,class
+CS102,CS 102,LC3-122,TUE,11:00,12:30,class
+CS101,CS 101,LC3-122,TUE,13:30,15:00,class
+CS213,CS 213,LC3-122,TUE,15:00,16:30,class
+CS103,CS 103,LC3-122,WED,08:00,09:30,class
+CS103,CS 103,LC3-122,WED,09:30,11:00,class
+CNC101,CNC 101,LC3-122,WED,11:00,12:30,class
+AM201,AM 201 (อ.ส้ม),LC3-122,WED,13:30,15:00,class
+CNC222,CNC 222 (อ.หยวน),LC3-122,WED,15:00,16:30,class
+CS100,CS 100,LC3-122,THU,08:00,09:30,class
+CS101,CS 101 (อ.นัทนนท์),LC3-122,THU,09:30,11:00,class
+CS102,CS 102,LC3-122,THU,11:00,12:30,class
+CS101,CS 101,LC3-122,THU,13:30,15:00,class
+CS213,CS 213 (อ.หยวน),LC3-122,THU,15:00,16:30,class
+CS103,CS 103,LC3-122,FRI,08:00,09:30,class
+CS103,CS 103 (อ.นันทนนท์),LC3-122,FRI,09:30,11:00,class
+CNC101,CNC 101,LC3-122,FRI,11:00,12:30,class
+AM201,AM 201 (อ.ส้ม),LC3-122,FRI,13:30,15:00,class
+CNC222,CNC 222 (อ.หยวน),LC3-122,FRI,15:00,16:30,class
+ST349,ST 349,LC3-122,SAT,09:30,12:30,class
+MMA446,Exam - MMA446 (7 พ.ค. 2569),LC3-227,THU,09:00,12:00,exam
