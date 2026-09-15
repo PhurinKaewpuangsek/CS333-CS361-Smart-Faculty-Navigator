@@ -1,6 +1,12 @@
 name: CD - Frontend (S3)
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/cd-frontend.yml'
   workflow_dispatch:
 
 permissions:
