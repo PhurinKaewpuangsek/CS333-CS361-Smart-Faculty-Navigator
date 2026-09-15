@@ -57,7 +57,12 @@ export const hasSwitch = (name) => process.argv.slice(2).includes(`--${name}`)
 export function readStackConfig() {
   const path = join(repoRoot, 'samconfig.toml')
   const toml = existsSync(path) ? readFileSync(path, 'utf8') : ''
-  const value = (key) => toml.match(new RegExp(`^\\s*${key}\\s*=\\s*"([^"]+)"`, 'm'))?.[1]
+  // Scoped to [dev.deploy.parameters] on purpose: every script here is dev-sandbox
+  // tooling (seed/verify/publish-site/empty-site-bucket run against a teammate's own
+  // Learner Lab stack), so it must never pick up [prod.*] values by accident, no
+  // matter which order the sections happen to sit in the file.
+  const devBlock = toml.match(/\[dev\.deploy\.parameters\][^[]*/m)?.[0] ?? ''
+  const value = (key) => devBlock.match(new RegExp(`^\\s*${key}\\s*=\\s*"([^"]+)"`, 'm'))?.[1]
   return {
     stackName: flag('stack', process.env.TORCH_STACK_NAME ?? value('stack_name') ?? 'torch-v2'),
     region: flag('region', process.env.AWS_REGION ?? value('region') ?? 'us-east-1'),

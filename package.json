@@ -8,7 +8,7 @@
     "lint": "npm --prefix frontend run lint",
     "test": "npm --prefix frontend run test",
     "bootstrap": "node scripts/bootstrap.mjs",
-    "deploy": "sam build && sam deploy --no-confirm-changeset --no-fail-on-empty-changeset",
+    "deploy": "sam build && sam deploy --config-env dev --no-confirm-changeset --no-fail-on-empty-changeset",
     "seed": "node scripts/seed.mjs",
     "env:pull": "node scripts/write-env.mjs",
     "site:publish": "node scripts/publish-site.mjs",

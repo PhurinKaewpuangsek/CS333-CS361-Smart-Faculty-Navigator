@@ -33,6 +33,15 @@
 
 ---
 
+## Environments
+
+| Environment | Account | Region | Who Deploys | Lifetime | Credentials |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| **Dev** | AWS Academy Learner Lab | `us-east-1` | Teammate (Local via `sam deploy --config-env dev`) | Temporary (4 hours) | Temporary Session Token |
+| **Prod** | Real AWS Free Tier Account | `ap-southeast-1` | GitHub Actions CI/CD (`sam deploy --config-env prod`) | Persistent | Permanent IAM User (Least-privilege) |
+
+---
+
 ## 📂Project Structure (Monorepo)
 
 ```text
@@ -99,7 +108,7 @@ CS333-CS361-Smart-Faculty-Navigator/
 *(💡 ติดตั้งเสร็จแล้ว ต้องปิดแล้วเปิด VSCode / Terminal ใหม่ด้วยนะ ไม่งั้น PATH จะยังเป็นของเก่าแล้วขึ้นว่า `sam : The term 'sam' is not recognized`)*
 *(💡 SAM CLI ไม่ได้แถม AWS CLI มาให้ แต่ script ใน `scripts/` ใช้ทั้งคู่ ต้องลงทั้งสองตัว)*
 
-**2. การใส่ AWS Credentials (ต้องทำทุกครั้งที่ Start Lab ใหม่)**
+**2. การใส่ AWS Credentials สำหรับ Dev Sandbox (ต้องทำทุกครั้งที่ Start Lab ใหม่)**
 เนื่องจากเราใช้ AWS Academy Learner Lab กุญแจ (Credentials) ของเราจะหมดอายุทุกๆ 4 ชั่วโมง เมื่อคุณกดปุ่ม "Start Lab" บนหน้าเว็บ ให้ทำตามนี้:
 1. คลิกที่ **AWS Details** (ข้างปุ่ม Start Lab)
 2. กดปุ่ม **Show** ตรงหัวข้อ AWS CLI
@@ -172,7 +181,7 @@ npm run dev
 ### Step 5: เปิด Pull Request & Deploy to Production
 
 1. เมื่อเทสในเครื่องตัวเองผ่านหมดแล้ว ให้ Commit โค้ดและเปิด Pull Request (PR) เข้า Branch `main`
-2. เมื่อ PR ถูกตรวจสอบและ Merge สำเร็จ ระบบ CI/CD (GitHub Actions) จะนำโค้ด `template.yaml` ชุดเดียวกันนี้ ไปรันสร้างและอัปเดตระบบบน **บัญชี Production หลัก** ให้อัตโนมัติ
+2. เมื่อ PR ถูกตรวจสอบและ Merge สำเร็จ ระบบ CI/CD (GitHub Actions) จะนำโค้ด `template.yaml` ชุดเดียวกันนี้ ไปรันสร้างและอัปเดตระบบบน **บัญชี Production หลัก (ap-southeast-1)** ให้อัตโนมัติด้วยคำสั่ง `sam deploy --config-env prod` โดยไม่มีใครต้องกด Start Lab
 
 ### 🩺 Troubleshooting
 
