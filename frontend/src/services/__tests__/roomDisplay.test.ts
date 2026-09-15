@@ -1,6 +1,15 @@
 import { describe, it } from 'node:test'
 import assert from 'node:assert/strict'
-import { getBuildingLabel, getCategoryLabel, getLandmarkText, getCategoryColor } from '../roomDisplay.ts'
+import {
+  getBuildingLabel,
+  getCategoryLabel,
+  getLandmarkText,
+  getCategoryColor,
+  getCategoryPinColor,
+  getRestroomGender,
+  CATEGORY_PIN_COLORS,
+  DEFAULT_CATEGORY_PIN_COLOR,
+} from '../roomDisplay.ts'
 
 describe('getBuildingLabel', () => {
   it('แปลงรหัสอาคารที่รู้จัก (LC3) เป็นชื่อภาษาไทย', () => {
@@ -95,3 +104,53 @@ describe('getLandmarkText', () => {
   })
 })
 
+
+/** Hue (0–360) and saturation (0–1) of a #rrggbb colour. */
+function hueSat(hex: string): { hue: number; sat: number } {
+  const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)
+  const max = Math.max(r, g, b)
+  const min = Math.min(r, g, b)
+  const d = max - min
+  const l = (max + min) / 2
+  const sat = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1))
+  let hue = 0
+  if (d !== 0) {
+    if (max === r) hue = ((g - b) / d) % 6
+    else if (max === g) hue = (b - r) / d + 2
+    else hue = (r - g) / d + 4
+  }
+  return { hue: (hue * 60 + 360) % 360, sat }
+}
+
+describe('getCategoryPinColor', () => {
+  it('คืนสีหมุดตามหมวดหมู่', () => {
+    assert.equal(getCategoryPinColor('lecture_room'), '#7c3aed')
+    assert.equal(getCategoryPinColor('LABORATORY'), '#4d7c0f')
+  })
+
+  it('หมวดที่ไม่รู้จักหรือไม่มีหมวด ได้สี fallback', () => {
+    assert.equal(getCategoryPinColor('toilet'), DEFAULT_CATEGORY_PIN_COLOR)
+    assert.equal(getCategoryPinColor(undefined), DEFAULT_CATEGORY_PIN_COLOR)
+  })
+
+  it('ไม่มีสีหมุดหมวดไหนเป็นโทนน้ำเงินหรือแดง (สงวนไว้ให้ filter และหมุดที่เลือก)', () => {
+    for (const [category, hex] of Object.entries(CATEGORY_PIN_COLORS)) {
+      const { hue, sat } = hueSat(hex)
+      if (sat < 0.4) continue
+      assert.ok(!(hue >= 200 && hue <= 250), `${category} pin ${hex} is blue`)
+      assert.ok(!(hue <= 15 || hue >= 345), `${category} pin ${hex} is red`)
+    }
+  })
+})
+
+describe('getRestroomGender', () => {
+  it('อ่านเพศห้องน้ำจากชื่อไทย เพื่อเลือกสัญลักษณ์ชาย/หญิง', () => {
+    assert.equal(getRestroomGender('ห้องน้ำหญิง (ฝั่งซ้าย)'), 'female')
+    assert.equal(getRestroomGender('ห้องน้ำชาย (ฝั่งขวา)'), 'male')
+  })
+
+  it('ชื่อที่ไม่บอกเพศ คืน null (ใช้ไอคอนห้องน้ำกลาง)', () => {
+    assert.equal(getRestroomGender('ห้องน้ำ'), null)
+    assert.equal(getRestroomGender(undefined), null)
+  })
+})

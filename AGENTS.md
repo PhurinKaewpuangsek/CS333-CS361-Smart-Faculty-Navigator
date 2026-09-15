@@ -59,11 +59,14 @@ CS333-CS361-Smart-Faculty-Navigator/
 │   │   ├── index.mjs
 │   │   └── package.json    <-- Each Lambda has its own dependencies
 │   └── get-schedules/      <-- Example: GET /api/schedules handler
+├── scripts/                <-- Deploy helpers run through root npm scripts (bootstrap, seed,
+│   │                           env:pull, site:publish, site:empty, verify). Node built-ins only:
+│   └── lib/stack.mjs           no dependencies may be added at the repo root.
 ├── tools/                  <-- Tooling, data extraction, and seed scripts
 │   └── data-extraction/
 ├── AGENTS.md               <-- This file — rules for AI CLI tools
 ├── template.yaml           <-- AWS SAM IaC — all Lambda, API Gateway, DynamoDB definitions
-├── samconfig.toml          <-- SAM deploy configuration (stack name, region — safe to commit)
+├── samconfig.toml           <-- SAM deploy configuration (contains [dev.*] and [prod.*] environments)
 └── README.md               <-- Teammate onboarding guide
 ```
 
@@ -259,8 +262,8 @@ git commit --amend --no-edit
 - Lambda functions read environment variables declared in `template.yaml` (`Environment: Variables:`). Frontend reads `import.meta.env.VITE_<VAR>`.
 - Any new frontend variable must be added to `.env.example` with a **placeholder**, never a real value, in the same PR.
 - `.env` is git-ignored and stays that way. If you ever see `.env` staged, unstage it and tell the human.
-- AWS credentials for CI/CD are stored as GitHub Secrets (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN`) — never hardcoded.
-- For testing backend changes, deploy to a personal AWS Learner Lab sandbox via `sam deploy --guided` or mock responses in unit tests. See the README "Developer Workflow" section.
+- AWS credentials for CI/CD are stored as GitHub Secrets (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`). The IAM identity must use a least-privilege policy, not AdministratorAccess.
+- For testing backend changes, deploy to a personal AWS Learner Lab sandbox via `sam deploy --config-env dev` or mock responses in unit tests. Never run a bare `sam deploy` without `--config-env` to avoid picking up the wrong environment. See the README "Developer Workflow" section.
 
 ### 8.3 Monorepo isolation
 

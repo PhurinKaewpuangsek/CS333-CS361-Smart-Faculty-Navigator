@@ -1,0 +1,15 @@
+{
+  "name": "torch-data-extraction",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "LC3 dataset extraction, validation, and DynamoDB seeding scripts",
+  "scripts": {
+    "validate": "node --test validate-lc3-seed.mjs",
+    "seed:dry-run": "node lc3/seed-dynamodb.mjs --dry-run --table SmartFacultyLocations-dev"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.758.0",
+    "@aws-sdk/lib-dynamodb": "^3.758.0"
+  }
+}

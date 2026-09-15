@@ -1,6 +1,8 @@
 version = 0.1
 
-[default.deploy.parameters]
+# "dev" = personal AWS Academy Learner Lab sandbox. Every teammate deploys here with
+# `sam deploy --config-env dev`. Region is locked to us-east-1 by Learner Lab itself.
+[dev.deploy.parameters]
 stack_name = "torch-v2"
 resolve_s3 = true
 s3_prefix = "torch-v2"
@@ -8,5 +10,19 @@ region = "us-east-1"
 capabilities = "CAPABILITY_IAM"
 image_repositories = []
 
-[default.global.parameters]
+[dev.global.parameters]
 region = "us-east-1"
+
+# "prod" = the real AWS Free Tier account. Only the CD pipeline (cd-backend.yml) ever
+# deploys with --config-env prod. No teammate runs this locally.
+[prod.deploy.parameters]
+stack_name = "torch-v2"
+resolve_s3 = true
+s3_prefix = "torch-v2"
+region = "ap-southeast-1"
+capabilities = "CAPABILITY_IAM"
+image_repositories = []
+parameter_overrides = "ExistingLambdaRoleName=\"\""
+
+[prod.global.parameters]
+region = "ap-southeast-1"

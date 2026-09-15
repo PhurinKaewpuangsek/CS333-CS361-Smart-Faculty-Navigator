@@ -1,11 +1,17 @@
 import { useState } from 'react'
 import { useRooms } from './hooks/useRooms'
+import { usePreloadImages } from './hooks/usePreloadImages'
 import MapContainer from './components/map/MapContainer'
+import { FLOOR_CONFIGS } from './components/map/floorConfig'
+import LoadingScreen from './components/LoadingScreen'
 import RoomSearchPanel from './components/RoomSearchPanel'
 import RoomDetailModal from './components/RoomDetailModal'
 
+const FLOOR_PLAN_ASSETS = FLOOR_CONFIGS.map((config) => config.asset)
+
 function App() {
-  const { rooms, loading, error } = useRooms()
+  const { rooms, loading, error, reload } = useRooms()
+  const floorPlansReady = usePreloadImages(FLOOR_PLAN_ASSETS)
   const [currentFloor, setCurrentFloor] = useState(1)
   const [selectedRoomId, setSelectedRoomId] = useState<string | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -27,6 +33,10 @@ function App() {
     setSelectedRoomId(null)
     setIsModalOpen(false)
   }
+
+  // Map, markers and floor plans appear together — never a bare map waiting on its rooms.
+  if (error) return <LoadingScreen error={error} onRetry={reload} />
+  if (loading || !floorPlansReady) return <LoadingScreen />
 
   return (
     <main className="relative h-[100dvh] w-screen overflow-hidden bg-slate-100 font-sans">
@@ -67,4 +77,4 @@ function App() {
   )
 }
 
-export default App
+export default App

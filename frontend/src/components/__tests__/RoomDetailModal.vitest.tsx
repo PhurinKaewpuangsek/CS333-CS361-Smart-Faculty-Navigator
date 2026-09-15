@@ -65,6 +65,16 @@ describe('RoomDetailModal Component', () => {
     ).toBeInTheDocument()
   })
 
+  it('แสดงความจุที่บันทึกไว้บน server แม้เครื่องนี้ไม่เคยแก้ไขห้องนั้นเลย', () => {
+    const roomWithCapacity: Room = { ...mockRooms[0], capacity: 60 }
+
+    render(
+      <RoomDetailModal rooms={[roomWithCapacity]} selectedRoomId="room-1" onClose={vi.fn()} />
+    )
+
+    expect(screen.getByText('ความจุ 60 คน')).toBeInTheDocument()
+  })
+
   it('4. เรียกใช้ onClose เมื่อคลิกปุ่มปิด (X)', () => {
     const handleClose = vi.fn()
     render(
