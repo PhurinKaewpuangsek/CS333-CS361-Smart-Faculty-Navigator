@@ -38,7 +38,7 @@
 | Environment | Account | Region | Who Deploys | Lifetime | Credentials |
 | :-- | :-- | :-- | :-- | :-- | :-- |
 | **Dev** | AWS Academy Learner Lab | `us-east-1` | Teammate (Local via `sam deploy --config-env dev`) | Temporary (4 hours) | Temporary Session Token |
-| **Prod** | Real AWS Free Tier Account | `ap-southeast-1` | GitHub Actions CI/CD (`sam deploy --config-env prod`) | Persistent | Permanent IAM User (Least-privilege) |
+| **Prod** | Real AWS Free Tier Account | `ap-southeast-1` | GitHub Actions CI/CD (`sam deploy --config-env prod`) | Persistent | OIDC Role (Least-privilege) |
 
 ---
 
