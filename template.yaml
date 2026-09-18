@@ -19,6 +19,14 @@ Parameters:
       Changing it on a live stack REPLACES the table — re-run the seed afterwards.
     AllowedPattern: "^[A-Za-z0-9_.-]{3,255}$"
 
+  SchedulesTableName:
+    Type: String
+    Default: SmartFacultySchedules
+    Description: >
+      Name of the schedules table. Change it only when two people share one AWS
+      account. Changing it on a live stack REPLACES the table.
+    AllowedPattern: "^[A-Za-z0-9_.-]{3,255}$"
+
   ExistingLambdaRoleName:
     Type: String
     Default: LabRole
@@ -171,6 +179,71 @@ Resources:
             Path: /api/locations
             Method: get
 
+  SmartFacultySchedules:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Ref SchedulesTableName
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: room_code
+          AttributeType: S
+        - AttributeName: schedule_slot
+          AttributeType: S
+      KeySchema:
+        - AttributeName: room_code
+          KeyType: HASH
+        - AttributeName: schedule_slot
+          KeyType: RANGE
+
+  GetSchedulesRole:
+    Type: AWS::IAM::Role
+    Condition: CreateLambdaRoles
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: ScanSchedulesOnly
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:Scan
+                Resource: !GetAtt SmartFacultySchedules.Arn
+
+  GetSchedulesFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: functions/get-schedules/
+      Handler: index.handler
+      MemorySize: 1024
+      Role: !If
+        - UseExistingLambdaRole
+        - !Sub "arn:aws:iam::${AWS::AccountId}:role/${ExistingLambdaRoleName}"
+        - !GetAtt GetSchedulesRole.Arn
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref SmartFacultySchedules
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action: dynamodb:Scan
+              Resource: !GetAtt SmartFacultySchedules.Arn
+      Events:
+        GetSchedules:
+          # Type: Api with no RestApiId — joins the single implicit API Gateway.
+          # Never declare AWS::Serverless::Api.
+          Type: Api
+          Properties:
+            Path: /api/schedules
+            Method: get
+
   # The website itself, so `sam deploy` builds the whole system and nobody has to
   # create a bucket by hand on the console (README: "No ClickOps").
   SiteBucket:
@@ -232,3 +305,7 @@ Outputs:
   LocationsTableName:
     Description: DynamoDB table the seed script and the API read
     Value: !Ref SmartFacultyLocations
+
+  SchedulesTableName:
+    Description: DynamoDB table the schedules seed script and the API read
+    Value: !Ref SmartFacultySchedules
