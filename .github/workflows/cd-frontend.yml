@@ -1,7 +1,17 @@
 name: CD - Frontend (S3)
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/cd-frontend.yml'
   workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   deploy:
@@ -21,19 +31,25 @@ jobs:
         working-directory: frontend
         run: npm ci
 
-      - name: Build Static Assets
-        working-directory: frontend
-        env:
-          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
-          VITE_ENABLE_EDIT_MODE: 'true'
-        run: npm run build
-
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: ${{ secrets.AWS_OIDC_ROLE_ARN }}
           aws-region: ${{ secrets.AWS_REGION }}
 
+      - name: Fetch CloudFormation Outputs
+        id: cfn
+        run: |
+          API_URL=$(aws cloudformation describe-stacks --stack-name torch-v2 --query "Stacks[0].Outputs[?OutputKey=='ApiUrl'].OutputValue" --output text)
+          SITE_BUCKET=$(aws cloudformation describe-stacks --stack-name torch-v2 --query "Stacks[0].Outputs[?OutputKey=='SiteBucketName'].OutputValue" --output text)
+          echo "VITE_API_BASE_URL=$API_URL" >> $GITHUB_ENV
+          echo "AWS_S3_BUCKET_NAME=$SITE_BUCKET" >> $GITHUB_ENV
+
+      - name: Build Static Assets
+        working-directory: frontend
+        env:
+          VITE_ENABLE_EDIT_MODE: 'true'
+        run: npm run build
+
       - name: Sync to S3
-        run: aws s3 sync ./frontend/dist s3://${{ secrets.AWS_S3_BUCKET_NAME }} --delete
+        run: aws s3 sync ./frontend/dist s3://${{ env.AWS_S3_BUCKET_NAME }} --delete
