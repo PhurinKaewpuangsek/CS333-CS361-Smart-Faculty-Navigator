@@ -1,14 +1,18 @@
 import type { RawScheduleRecord, ScheduleSlot, SchedulesDataResponse } from '../types/schedule'
 
+function normalizeText(value: unknown): string {
+  return typeof value === 'string' ? value : ''
+}
+
 export function normalizeSchedule(raw: RawScheduleRecord): ScheduleSlot {
   return {
-    roomCode: raw.room_code ?? '',
-    eventCode: raw.event_code ?? '',
-    eventName: raw.event_name ?? '',
-    dayOfWeek: raw.day_of_week ?? '',
-    startTime: raw.start_time ?? '',
-    endTime: raw.end_time ?? '',
-    eventType: raw.event_type ?? '',
+    roomCode: normalizeText(raw.room_code),
+    eventCode: normalizeText(raw.event_code),
+    eventName: normalizeText(raw.event_name),
+    dayOfWeek: normalizeText(raw.day_of_week),
+    startTime: normalizeText(raw.start_time),
+    endTime: normalizeText(raw.end_time),
+    eventType: normalizeText(raw.event_type),
   }
 }
 

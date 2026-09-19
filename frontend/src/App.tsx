@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useRooms } from './hooks/useRooms'
+import { useSchedules } from './hooks/useSchedules'
 import { usePreloadImages } from './hooks/usePreloadImages'
 import MapContainer from './components/map/MapContainer'
 import { FLOOR_CONFIGS } from './components/map/floorConfig'
@@ -11,6 +12,7 @@ const FLOOR_PLAN_ASSETS = FLOOR_CONFIGS.map((config) => config.asset)
 
 function App() {
   const { rooms, loading, error, reload } = useRooms()
+  const { schedules, loading: schedulesLoading, error: schedulesError } = useSchedules()
   const floorPlansReady = usePreloadImages(FLOOR_PLAN_ASSETS)
   const [currentFloor, setCurrentFloor] = useState(1)
   const [selectedRoomId, setSelectedRoomId] = useState<string | null>(null)
@@ -55,6 +57,9 @@ function App() {
         <div className="pointer-events-auto">
           <RoomSearchPanel
             rooms={rooms}
+            schedules={schedules}
+            schedulesLoading={schedulesLoading}
+            schedulesError={schedulesError}
             loading={loading}
             error={error}
             onSelectRoom={handleSelectRoom}

@@ -19,7 +19,7 @@ export default function SearchBar({
   onFocus,
   onKeyDown,
   inputRef,
-  placeholder = 'ค้นหาห้อง เช่น 109, ห้องบรรยาย 1',
+  placeholder = 'ค้นหาห้องหรือรหัสวิชา เช่น 109, CS361',
   isFilterOpen,
   hasActiveFilter,
   onToggleFilter,
