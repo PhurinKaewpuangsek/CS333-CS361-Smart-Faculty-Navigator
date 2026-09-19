@@ -2,6 +2,7 @@ import { describe, it } from 'node:test'
 import assert from 'node:assert'
 import { filterRooms } from '../filterRooms.ts'
 import type { Room } from '../../types/room.ts'
+import type { ScheduleSlot } from '../../types/schedule.ts'
 
 function makeRoom(overrides: Partial<Room>): Room {
   return {
@@ -35,12 +36,39 @@ const sampleRooms: Room[] = [
     aliases: ['LC3-102', '102'],
   }),
   makeRoom({
+    id: 'LC3-F1-R103',
+    code: 'LC3-103',
+    nameThai: 'ห้อง 103',
+    aliases: ['LC3-103', '103'],
+  }),
+  makeRoom({
     id: 'LC3-F1-PLMTOILET',
     code: '',
     nameThai: 'ห้องน้ำชาย (ฝั่งซ้าย)',
     category: 'toilet',
     aliases: [],
   }),
+]
+
+const sampleSchedules: ScheduleSlot[] = [
+  {
+    roomCode: 'LC3-103',
+    eventCode: 'CS361',
+    eventName: 'CS 361',
+    dayOfWeek: 'TUE',
+    startTime: '08:00',
+    endTime: '11:00',
+    eventType: 'class',
+  },
+  {
+    roomCode: 'LC3-103',
+    eventCode: 'BAS350',
+    eventName: 'Exam - BAS350',
+    dayOfWeek: 'MON',
+    startTime: '13:00',
+    endTime: '16:00',
+    eventType: 'exam',
+  },
 ]
 
 describe('filterRooms()', () => {
@@ -71,6 +99,29 @@ describe('filterRooms()', () => {
       result.map((room) => room.id),
       ['LC3-F1-R102']
     )
+  })
+
+  it('matches a subject code through its schedule and returns the classroom', () => {
+    const result = filterRooms(sampleRooms, 'CS361', 'all', sampleSchedules)
+    assert.deepStrictEqual(
+      result.map((room) => room.id),
+      ['LC3-F1-R103']
+    )
+  })
+
+  it('matches exam names and remains case-insensitive', () => {
+    const result = filterRooms(sampleRooms, 'exam - bas350', 'all', sampleSchedules)
+    assert.deepStrictEqual(
+      result.map((room) => room.code),
+      ['LC3-103']
+    )
+  })
+
+  it('does not match a schedule in a different classroom', () => {
+    const result = filterRooms(sampleRooms, 'CS361', 'all', [
+      { ...sampleSchedules[0], roomCode: 'LC3-999' },
+    ])
+    assert.deepStrictEqual(result, [])
   })
 
   it('filters by category key alone', () => {

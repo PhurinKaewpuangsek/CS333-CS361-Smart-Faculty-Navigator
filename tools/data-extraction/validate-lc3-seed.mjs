@@ -437,3 +437,18 @@ test('schedule seed — no two rows share the same room + day + start_time (no d
   }
 });
 
+test('schedule seed — generated DynamoDB room_code + schedule_slot keys are unique', () => {
+  if (!scheduleDataExists) return;
+  const seen = new Map();
+  for (let i = 0; i < scheduleRows.length; i += 1) {
+    const row = scheduleRows[i];
+    const scheduleSlot = `${row.day_of_week}#${row.start_time}#${row.event_code}`;
+    const key = `${row.room_code}#${scheduleSlot}`;
+    assert.ok(
+      !seen.has(key),
+      `lc3-schedules.seed.csv row ${i + 2}: duplicate DynamoDB key "${key}" already used by row ${seen.get(key)}`
+    );
+    seen.set(key, i + 2);
+  }
+});
+

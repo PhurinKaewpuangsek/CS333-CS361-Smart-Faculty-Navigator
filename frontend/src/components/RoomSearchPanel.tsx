@@ -6,9 +6,13 @@ import SearchBar from './SearchBar.tsx'
 import CategoryFilter from './CategoryFilter.tsx'
 import SearchResultList from './SearchResultList.tsx'
 import type { Room } from '../types/room.ts'
+import type { ScheduleSlot } from '../types/schedule.ts'
 
 export interface RoomSearchPanelProps {
   rooms: Room[]
+  schedules?: ScheduleSlot[]
+  schedulesLoading?: boolean
+  schedulesError?: Error | null
   loading?: boolean
   error?: Error | null
   /** ยิง event ออกไปเมื่อผู้ใช้กดเลือกห้องจากผลลัพธ์ ให้ parent ไปปักหมุด SVG / เปิด Room Detail Modal ต่อ */
@@ -22,6 +26,9 @@ export interface RoomSearchPanelProps {
  */
 export default function RoomSearchPanel({
   rooms,
+  schedules = [],
+  schedulesLoading = false,
+  schedulesError = null,
   loading = false,
   error = null,
   onSelectRoom,
@@ -43,8 +50,8 @@ export default function RoomSearchPanel({
   const hasActiveQueryOrFilter = query.trim() !== '' || hasActiveFilter
 
   const results = useMemo(
-    () => (hasActiveQueryOrFilter ? filterRooms(rooms, query, categoryKey) : []),
-    [rooms, query, categoryKey, hasActiveQueryOrFilter]
+    () => (hasActiveQueryOrFilter ? filterRooms(rooms, query, categoryKey, schedules) : []),
+    [rooms, query, categoryKey, schedules, hasActiveQueryOrFilter]
   )
 
   const showDropdown = isDropdownOpen && hasActiveQueryOrFilter
@@ -143,6 +150,9 @@ export default function RoomSearchPanel({
       {showDropdown && (
         <SearchResultList
           rooms={results}
+          schedules={schedules}
+          schedulesLoading={schedulesLoading}
+          schedulesError={schedulesError}
           loading={loading}
           error={error}
           onSelectRoom={handleSelect}

@@ -1,7 +1,11 @@
 import type { Room } from '../types/room.ts'
+import type { ScheduleSlot } from '../types/schedule.ts'
 
 interface SearchResultListProps {
   rooms: Room[]
+  schedules: ScheduleSlot[]
+  schedulesLoading: boolean
+  schedulesError: Error | null
   loading: boolean
   error: Error | null
   onSelectRoom: (roomId: string) => void
@@ -9,6 +13,9 @@ interface SearchResultListProps {
 
 export default function SearchResultList({
   rooms,
+  schedules,
+  schedulesLoading,
+  schedulesError,
   loading,
   error,
   onSelectRoom,
@@ -16,6 +23,20 @@ export default function SearchResultList({
   if (loading) {
     return (
       <p className="px-4 py-6 text-center text-sm text-slate-500">กำลังโหลดข้อมูลห้อง...</p>
+    )
+  }
+
+  if (schedulesLoading) {
+    return (
+      <p className="px-4 py-6 text-center text-sm text-slate-500">กำลังโหลดตารางเรียน...</p>
+    )
+  }
+
+  if (schedulesError) {
+    return (
+      <p className="px-4 py-6 text-center text-sm text-red-600">
+        เกิดข้อผิดพลาดในการโหลดตารางเรียน: {schedulesError.message}
+      </p>
     )
   }
 
@@ -48,6 +69,13 @@ export default function SearchResultList({
               {room.code || room.roomNumber || room.id}
             </span>
             <span className="text-sm text-slate-600">{room.nameThai || 'ไม่มีชื่อห้อง'}</span>
+            {schedules
+              .filter((schedule) => schedule.roomCode.toLowerCase() === room.code.toLowerCase())
+              .map((schedule) => (
+                <span key={`${schedule.roomCode}-${schedule.dayOfWeek}-${schedule.startTime}-${schedule.eventCode}`} className="text-xs text-slate-500">
+                  {schedule.eventName || schedule.eventCode} · {schedule.dayOfWeek} {schedule.startTime}-{schedule.endTime} · {room.code}
+                </span>
+              ))}
           </button>
         </li>
       ))}

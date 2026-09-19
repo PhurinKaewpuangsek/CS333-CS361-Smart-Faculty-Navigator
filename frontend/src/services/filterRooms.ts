@@ -1,4 +1,5 @@
 import type { Room } from '../types/room.ts'
+import type { ScheduleSlot } from '../types/schedule.ts'
 
 export interface CategoryFilterOption {
   /** ค่าที่ใช้อ้างอิงปุ่มนี้ภายในแอป (ส่งเข้า filterRooms เป็นพารามิเตอร์ category) */
@@ -180,6 +181,21 @@ function roomMatchesQuery(room: Room, searchTerms: string[]): boolean {
   })
 }
 
+function scheduleMatchesQuery(schedule: ScheduleSlot, searchTerms: string[]): boolean {
+  if (searchTerms.length === 0) return false
+
+  const searchableValues = [schedule.eventCode, schedule.eventName].map(normalize)
+  return searchTerms.some((term) => searchableValues.some((value) => value.includes(term)))
+}
+
+function roomMatchesSchedule(room: Room, schedules: ScheduleSlot[], searchTerms: string[]): boolean {
+  return schedules.some(
+    (schedule) =>
+      normalize(schedule.roomCode) === normalize(room.code) &&
+      scheduleMatchesQuery(schedule, searchTerms)
+  )
+}
+
 function roomMatchesCategory(room: Room, categoryKey: string): boolean {
   if (categoryKey === DEFAULT_CATEGORY_KEY) return true
 
@@ -193,12 +209,20 @@ function roomMatchesCategory(room: Room, categoryKey: string): boolean {
  * กรองห้องจาก query (ค้นหาแบบ case-insensitive พร้อมระบบขยายคำพ้องใน code, nameThai, aliases)
  * และ category (key จาก CATEGORY_FILTERS ด้านบน)
  *
+ * schedules เป็น optional เพื่อให้ค้นหารหัสวิชา/ชื่อวิชาแล้วคืนห้องที่มีตารางนั้นได้
  * Pure function — ไม่แตะ state หรือ side effect ใดๆ จึงเทสได้ตรงไปตรงมา
  */
-export function filterRooms(rooms: Room[], query: string, category: string): Room[] {
+export function filterRooms(
+  rooms: Room[],
+  query: string,
+  category: string,
+  schedules: ScheduleSlot[] = []
+): Room[] {
   const searchTerms = getExpandedSearchTerms(query)
 
   return rooms.filter(
-    (room) => roomMatchesQuery(room, searchTerms) && roomMatchesCategory(room, category)
+    (room) =>
+      (roomMatchesQuery(room, searchTerms) || roomMatchesSchedule(room, schedules, searchTerms)) &&
+      roomMatchesCategory(room, category)
   )
 }
