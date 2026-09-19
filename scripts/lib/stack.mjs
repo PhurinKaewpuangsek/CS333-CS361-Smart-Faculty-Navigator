@@ -60,10 +60,15 @@ export function readStackConfig() {
   const toml = existsSync(path) ? readFileSync(path, 'utf8') : ''
   const configEnv = flag('config-env', 'dev')
   
-  // Scoped to the requested config-env on purpose, defaulting to 'dev'.
-  // This prevents accidental production targeting without an explicit --config-env prod flag.
-  const blockRegex = new RegExp(`\\[${configEnv}\\.deploy\\.parameters\\][^[]*`, 'm')
-  const envBlock = toml.match(blockRegex)?.[0] ?? ''
+  const safeEnv = configEnv.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const blockRegex = new RegExp(`\\[${safeEnv}\\.deploy\\.parameters\\][^[]*`, 'm')
+  const match = toml.match(blockRegex)
+  
+  if (toml.trim().length > 0 && !match) {
+    fail(`Configuration block [${configEnv}.deploy.parameters] not found in samconfig.toml`)
+  }
+  
+  const envBlock = match?.[0] ?? ''
   const value = (key) => envBlock.match(new RegExp(`^\\s*${key}\\s*=\\s*"([^"]+)"`, 'm'))?.[1]
   
   return {

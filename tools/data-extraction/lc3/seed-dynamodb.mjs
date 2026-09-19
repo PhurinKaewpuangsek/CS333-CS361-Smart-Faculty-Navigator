@@ -91,6 +91,21 @@ export function readSeedRecords(type = 'locations') {
   if (missingKey) {
     throw new Error(`Every record needs a ${pk} (partition key); found one without.`);
   }
+
+  if (type === 'schedules') {
+    const missingSk = seed.records.find((r) => !r.schedule_slot);
+    if (missingSk) {
+      throw new Error(`Every schedule record needs a schedule_slot (sort key); found one without.`);
+    }
+  }
+
+  const seen = new Set();
+  for (const r of seed.records) {
+    const key = type === 'schedules' ? `${r[pk]}#${r.schedule_slot}` : r[pk];
+    if (seen.has(key)) throw new Error(`Duplicate DynamoDB key found: ${key}`);
+    seen.add(key);
+  }
+
   return { records: seed.records, seedPath, pk };
 }
 
