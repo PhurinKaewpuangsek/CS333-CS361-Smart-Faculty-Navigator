@@ -43,10 +43,7 @@
 | **Prod** | Real AWS Free Tier Account | `ap-southeast-1` | GitHub Actions CI/CD (`sam deploy --config-env prod`) | Persistent | OIDC Role (Least-privilege) |
 
 ### Production Seeding
-Production seeding must verify the AWS account first. To explicitly seed production from a local machine with proper AWS credentials loaded (Account ID: `287785301136`):
-```bash
-npm run seed -- --config-env prod
-```
+Production seeding runs only in the GitHub Actions CD pipeline after deployment. Local credentials are never authorized to seed the production account.
 
 ---
 

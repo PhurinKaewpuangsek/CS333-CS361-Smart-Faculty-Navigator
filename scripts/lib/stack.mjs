@@ -120,7 +120,7 @@ export function awsJson(args, { stackName = '' } = {}) {
  * { ApiUrl, SiteUrl, SiteBucketName, LocationsTableName }.
  */
 export function getStackOutputs() {
-  const { stackName, region } = readStackConfig()
+  const { stackName, region, configEnv } = readStackConfig()
   const data = awsJson(
     ['cloudformation', 'describe-stacks', '--stack-name', stackName, '--region', region],
     { stackName }
@@ -130,7 +130,7 @@ export function getStackOutputs() {
   const outputs = Object.fromEntries(
     (stack.Outputs ?? []).map((o) => [o.OutputKey, o.OutputValue])
   )
-  return { stackName, region, status: stack.StackStatus, outputs }
+  return { stackName, region, configEnv, status: stack.StackStatus, outputs }
 }
 
 /** Number of records the seed file holds, so nothing has to hardcode 131. */

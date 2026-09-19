@@ -45,4 +45,9 @@ jobs:
             --no-fail-on-empty-changeset
 
       - name: Seed Production DynamoDB
+        env:
+          AWS_OIDC_ROLE_ARN: ${{ secrets.AWS_OIDC_ROLE_ARN }}
         run: npm run seed -- --config-env prod
+
+      - name: Verify Production Deployment
+        run: npm run verify -- --config-env prod

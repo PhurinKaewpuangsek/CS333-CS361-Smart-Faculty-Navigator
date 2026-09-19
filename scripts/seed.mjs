@@ -10,7 +10,7 @@
  */
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
-import { banner, fail, getStackOutputs, hasSwitch, repoRoot, run } from './lib/stack.mjs'
+import { awsJson, banner, fail, getStackOutputs, hasSwitch, repoRoot, run } from './lib/stack.mjs'
 
 banner('seed')
 
@@ -20,9 +20,18 @@ if (configEnv === 'prod') {
   console.log('⚠️  PRODUCTION SEEDING DETECTED ⚠️')
   console.log('Verifying AWS Caller Identity...')
   const identity = awsJson(['sts', 'get-caller-identity'])
+  const configuredRole = process.env.AWS_OIDC_ROLE_ARN ?? ''
+  const roleName = configuredRole.split('/').pop()
+  const isCiRole = process.env.GITHUB_ACTIONS === 'true'
+    && roleName
+    && identity.Arn?.startsWith(`arn:aws:sts::${identity.Account}:assumed-role/${roleName}/`)
+
   // The production account ID must match exactly.
   if (identity.Account !== '287785301136') {
     fail(`Refusing to seed production in wrong account: ${identity.Account}. Expected 287785301136.`)
+  }
+  if (!isCiRole) {
+    fail('Refusing to seed production outside the GitHub Actions CD pipeline role.')
   }
   console.log(`✅ Caller identity confirmed: Account ${identity.Account}\n`)
 }
