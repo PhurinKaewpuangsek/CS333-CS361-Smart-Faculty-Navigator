@@ -44,6 +44,29 @@ describe('schedulesService - Data Access Layer', () => {
         eventType: '',
       })
     })
+
+    it('replaces non-string fields from malformed API records with empty strings', () => {
+      assert.deepStrictEqual(
+        normalizeSchedule(({
+          room_code: 103,
+          event_code: { code: 'CS361' },
+          event_name: ['CS 361'],
+          day_of_week: true,
+          start_time: 800,
+          end_time: null,
+          event_type: 'class',
+        } as unknown) as RawScheduleRecord),
+        {
+          roomCode: '',
+          eventCode: '',
+          eventName: '',
+          dayOfWeek: '',
+          startTime: '',
+          endTime: '',
+          eventType: 'class',
+        }
+      )
+    })
   })
 
   describe('getSchedules()', () => {

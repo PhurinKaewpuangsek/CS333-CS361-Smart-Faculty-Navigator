@@ -14,54 +14,12 @@
 import { readFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parseCsv } from './csv.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 /** DynamoDB caps BatchWriteItem at 25 requests. */
 const BATCH_SIZE = 25;
 const MAX_RETRIES = 5;
-
-function parseCsv(text) {
-  const rows = [];
-  let row = [];
-  let cell = '';
-  let quoted = false;
-
-  for (let i = 0; i < text.length; i += 1) {
-    const ch = text[i];
-    if (quoted) {
-      if (ch === '"' && text[i + 1] === '"') {
-        cell += '"';
-        i += 1;
-      } else if (ch === '"') {
-        quoted = false;
-      } else {
-        cell += ch;
-      }
-    } else if (ch === '"') {
-      quoted = true;
-    } else if (ch === ',') {
-      row.push(cell);
-      cell = '';
-    } else if (ch === '\n') {
-      row.push(cell.replace(/\r$/, ''));
-      rows.push(row);
-      row = [];
-      cell = '';
-    } else {
-      cell += ch;
-    }
-  }
-
-  if (cell !== '' || row.length > 0) {
-    row.push(cell.replace(/\r$/, ''));
-    rows.push(row);
-  }
-
-  const [headers, ...data] = rows;
-  return data
-    .filter((values) => values.some((value) => value !== ''))
-    .map((values) => Object.fromEntries(headers.map((header, i) => [header, values[i] ?? ''])));
-}
 
 /**
  * Parses command-line tokens into the target table, region, dataset type, and mode.

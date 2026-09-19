@@ -104,6 +104,47 @@ describe('RoomSearchPanel Component', () => {
     expect(handleSelectRoom).toHaveBeenCalledWith('LC3-F1-R103')
   })
 
+  it('keeps direct room results available while schedules are loading', async () => {
+    const user = userEvent.setup()
+    const handleSelectRoom = vi.fn()
+    render(
+      <RoomSearchPanel
+        rooms={mockRooms}
+        schedulesLoading
+        onSelectRoom={handleSelectRoom}
+      />
+    )
+
+    await user.type(screen.getByPlaceholderText(/ค้นหาห้อง/i), '101')
+
+    expect(screen.getByText('LC3-101')).toBeInTheDocument()
+    expect(screen.getByText('กำลังโหลดตารางเรียน...')).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: /LC3-101/i }))
+
+    expect(handleSelectRoom).toHaveBeenCalledWith('LC3-F1-R101')
+  })
+
+  it('keeps direct room results available when schedules fail', async () => {
+    const user = userEvent.setup()
+    const handleSelectRoom = vi.fn()
+    render(
+      <RoomSearchPanel
+        rooms={mockRooms}
+        schedulesError={new Error('schedule service unavailable')}
+        onSelectRoom={handleSelectRoom}
+      />
+    )
+
+    await user.type(screen.getByPlaceholderText(/ค้นหาห้อง/i), '101')
+
+    expect(screen.getByText('LC3-101')).toBeInTheDocument()
+    expect(screen.getByText('ไม่สามารถโหลดรายละเอียดตารางเรียนได้')).toBeInTheDocument()
+    expect(screen.queryByText('schedule service unavailable')).not.toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: /LC3-101/i }))
+
+    expect(handleSelectRoom).toHaveBeenCalledWith('LC3-F1-R101')
+  })
+
   it('renders filtered results when user selects a category', async () => {
     const user = userEvent.setup()
     render(<RoomSearchPanel rooms={mockRooms} onSelectRoom={vi.fn()} />)

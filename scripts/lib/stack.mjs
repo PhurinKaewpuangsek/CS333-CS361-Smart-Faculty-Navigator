@@ -15,6 +15,7 @@ import { spawnSync } from 'node:child_process'
 import { existsSync, readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { parseCsv } from '../../tools/data-extraction/lc3/csv.mjs'
 
 export const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..', '..')
 
@@ -147,11 +148,7 @@ export function expectedRecordCount() {
 /** Number of records the schedule seed file holds. */
 export function expectedSchedulesRecordCount() {
   const seed = join(repoRoot, 'tools/data-extraction/lc3/lc3-schedules.seed.csv')
-  return readFileSync(seed, 'utf8')
-    .trim()
-    .split(/\r?\n/)
-    .slice(1)
-    .filter((line) => line.trim() !== '').length
+  return parseCsv(readFileSync(seed, 'utf8')).length
 }
 
 export function banner(text) {
