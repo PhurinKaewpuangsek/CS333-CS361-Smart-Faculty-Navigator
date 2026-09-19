@@ -6,6 +6,7 @@ export function parseCsv(text) {
   let row = []
   let cell = ''
   let quoted = false
+  let afterQuote = false
 
   for (let i = 0; i < text.length; i += 1) {
     const ch = text[i]
@@ -15,10 +16,28 @@ export function parseCsv(text) {
         i += 1
       } else if (ch === '"') {
         quoted = false
+        afterQuote = true
       } else {
         cell += ch
       }
+    } else if (afterQuote) {
+      if (ch === ',') {
+        row.push(cell)
+        cell = ''
+        afterQuote = false
+      } else if (ch === '\n') {
+        row.push(cell.replace(/\r$/, ''))
+        rows.push(row)
+        row = []
+        cell = ''
+        afterQuote = false
+      } else if (ch !== '\r') {
+        throw new Error('Malformed CSV: unexpected content after closing quote.')
+      }
     } else if (ch === '"') {
+      if (cell !== '') {
+        throw new Error('Malformed CSV: quote must start a field.')
+      }
       quoted = true
     } else if (ch === ',') {
       row.push(cell)
