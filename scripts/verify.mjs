@@ -49,7 +49,8 @@ await check('table item count', async () => {
   expect(Boolean(outputs.LocationsTableName), 'no Locations table to scan')
   expect(Boolean(outputs.SchedulesTableName), 'no Schedules table to scan')
   
-  const getCount = (table) => awsJson(['dynamodb', 'scan', '--table-name', table, '--select', 'COUNT', '--region', region]).Count
+  const getCount = (table) =>
+    awsJson(['dynamodb', 'scan', '--table-name', table, '--select', 'COUNT', '--consistent-read', '--region', region]).Count
 
   const locCount = getCount(outputs.LocationsTableName)
   expect(locCount === expected, `${outputs.LocationsTableName} holds ${locCount}, expected ${expected} — run: npm run seed`)
