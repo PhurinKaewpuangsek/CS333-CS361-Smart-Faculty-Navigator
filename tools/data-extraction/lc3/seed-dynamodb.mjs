@@ -22,8 +22,13 @@ const SEED_PATH = join(HERE, 'lc3-locations.seed.json');
 const BATCH_SIZE = 25;
 const MAX_RETRIES = 5;
 
+/**
+ * Parses command-line tokens into the target table, region, dataset type, and mode.
+ * Table and region default from the environment, while the dataset defaults to
+ * locations. Throws for unknown options, a missing table, or an unsupported type.
+ */
 function parseArgs(argv) {
-  const args = { table: process.env.TABLE_NAME, dryRun: false, region: process.env.AWS_REGION };
+  const args = { table: process.env.TABLE_NAME, dryRun: false, region: process.env.AWS_REGION, type: 'locations' };
 
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
@@ -32,6 +37,8 @@ function parseArgs(argv) {
     else if (arg.startsWith('--table=')) args.table = arg.slice('--table='.length);
     else if (arg === '--region') args.region = argv[++i];
     else if (arg.startsWith('--region=')) args.region = arg.slice('--region='.length);
+    else if (arg === '--type') args.type = argv[++i];
+    else if (arg.startsWith('--type=')) args.type = arg.slice('--type='.length);
     else throw new Error(`Unknown argument: ${arg}`);
   }
 
@@ -40,6 +47,9 @@ function parseArgs(argv) {
       'Target table is required. Pass --table <name> or set TABLE_NAME.\n' +
         'Point this at your own sandbox table, not the shared production stack (AGENTS.md §8.4).'
     );
+  }
+  if (args.type !== 'locations' && args.type !== 'schedules') {
+    throw new Error(`Unknown --type: ${args.type}. Must be 'locations' or 'schedules'.`);
   }
   return args;
 }
@@ -62,16 +72,41 @@ export function toItem(record) {
   return JSON.parse(JSON.stringify(record));
 }
 
-export function readSeedRecords(seedPath = SEED_PATH) {
+/**
+ * Loads the schedule seed when requested and the location seed otherwise.
+ * Returns its records, resolved path, and required partition-key name. Throws when
+ * the file has no records or a record lacks that key.
+ */
+export function readSeedRecords(type = 'locations') {
+  const seedPath = type === 'schedules' 
+    ? join(HERE, 'lc3-schedules.seed.json') 
+    : join(HERE, 'lc3-locations.seed.json');
+  const pk = type === 'schedules' ? 'room_code' : 'location_id';
+
   const seed = JSON.parse(readFileSync(seedPath, 'utf8'));
   if (!Array.isArray(seed.records) || seed.records.length === 0) {
     throw new Error(`No records found in ${seedPath}`);
   }
-  const missingKey = seed.records.find((r) => !r.location_id);
+  const missingKey = seed.records.find((r) => !r[pk]);
   if (missingKey) {
-    throw new Error(`Every record needs a location_id (partition key); found one without.`);
+    throw new Error(`Every record needs a ${pk} (partition key); found one without.`);
   }
-  return seed.records;
+
+  if (type === 'schedules') {
+    const missingSk = seed.records.find((r) => !r.schedule_slot);
+    if (missingSk) {
+      throw new Error(`Every schedule record needs a schedule_slot (sort key); found one without.`);
+    }
+  }
+
+  const seen = new Set();
+  for (const r of seed.records) {
+    const key = type === 'schedules' ? `${r[pk]}#${r.schedule_slot}` : r[pk];
+    if (seen.has(key)) throw new Error(`Duplicate DynamoDB key found: ${key}`);
+    seen.add(key);
+  }
+
+  return { records: seed.records, seedPath, pk };
 }
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -102,12 +137,16 @@ async function writeBatch(docClient, BatchWriteCommand, tableName, batch, batchN
   }
 }
 
+/**
+ * Seeds the dataset selected by the command line, or only prints its planned batches
+ * in dry-run mode. Write mode sends each batch to DynamoDB and propagates failures.
+ */
 async function main() {
-  const { table, dryRun, region } = parseArgs(process.argv.slice(2));
-  const records = readSeedRecords();
+  const { table, dryRun, region, type } = parseArgs(process.argv.slice(2));
+  const { records, seedPath, pk } = readSeedRecords(type);
   const batches = chunk(records);
 
-  console.log(`Seed file : ${resolve(SEED_PATH)}`);
+  console.log(`Seed file : ${resolve(seedPath)}`);
   console.log(`Table     : ${table}`);
   console.log(`Records   : ${records.length}`);
   console.log(`Batches   : ${batches.length} (${batches.map((b) => b.length).join('/')})`);
@@ -117,7 +156,7 @@ async function main() {
   if (dryRun) {
     batches.forEach((batch, i) => {
       console.log(
-        `batch ${i + 1}: ${batch.length} items  ${batch[0].location_id} … ${batch[batch.length - 1].location_id}`
+        `batch ${i + 1}: ${batch.length} items  ${batch[0][pk]} … ${batch[batch.length - 1][pk]}`
       );
     });
     console.log(`\nDry run complete. ${records.length} items would be written to "${table}".`);

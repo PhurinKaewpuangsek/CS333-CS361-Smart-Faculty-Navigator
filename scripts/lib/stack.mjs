@@ -48,24 +48,33 @@ export function flag(name, fallback = undefined) {
 export const hasSwitch = (name) => process.argv.slice(2).includes(`--${name}`)
 
 /**
- * Stack name and region.
+ * Resolves the stack name, region, and SAM configuration environment.
  *
- * samconfig.toml is committed and is the single source of truth, so a teammate who
- * changes it there gets every script pointed at the right stack for free. Parsed by
- * regex on purpose: a TOML parser would mean a dependency at the repo root.
+ * Command-line flags take precedence. The stack name and region then fall back to
+ * environment variables, the selected samconfig.toml deploy block, and built-in
+ * defaults; the configuration environment defaults to dev. The TOML is parsed by
+ * regex to avoid adding a dependency at the repository root.
  */
 export function readStackConfig() {
   const path = join(repoRoot, 'samconfig.toml')
   const toml = existsSync(path) ? readFileSync(path, 'utf8') : ''
-  // Scoped to [dev.deploy.parameters] on purpose: every script here is dev-sandbox
-  // tooling (seed/verify/publish-site/empty-site-bucket run against a teammate's own
-  // Learner Lab stack), so it must never pick up [prod.*] values by accident, no
-  // matter which order the sections happen to sit in the file.
-  const devBlock = toml.match(/\[dev\.deploy\.parameters\][^[]*/m)?.[0] ?? ''
-  const value = (key) => devBlock.match(new RegExp(`^\\s*${key}\\s*=\\s*"([^"]+)"`, 'm'))?.[1]
+  const configEnv = flag('config-env', 'dev')
+  
+  const safeEnv = configEnv.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const blockRegex = new RegExp(`\\[${safeEnv}\\.deploy\\.parameters\\][^[]*`, 'm')
+  const match = toml.match(blockRegex)
+  
+  if (toml.trim().length > 0 && !match) {
+    fail(`Configuration block [${configEnv}.deploy.parameters] not found in samconfig.toml`)
+  }
+  
+  const envBlock = match?.[0] ?? ''
+  const value = (key) => envBlock.match(new RegExp(`^\\s*${key}\\s*=\\s*"([^"]+)"`, 'm'))?.[1]
+  
   return {
     stackName: flag('stack', process.env.TORCH_STACK_NAME ?? value('stack_name') ?? 'torch-v2'),
     region: flag('region', process.env.AWS_REGION ?? value('region') ?? 'us-east-1'),
+    configEnv,
   }
 }
 
@@ -116,7 +125,7 @@ export function awsJson(args, { stackName = '' } = {}) {
  * { ApiUrl, SiteUrl, SiteBucketName, LocationsTableName }.
  */
 export function getStackOutputs() {
-  const { stackName, region } = readStackConfig()
+  const { stackName, region, configEnv } = readStackConfig()
   const data = awsJson(
     ['cloudformation', 'describe-stacks', '--stack-name', stackName, '--region', region],
     { stackName }
@@ -126,12 +135,18 @@ export function getStackOutputs() {
   const outputs = Object.fromEntries(
     (stack.Outputs ?? []).map((o) => [o.OutputKey, o.OutputValue])
   )
-  return { stackName, region, status: stack.StackStatus, outputs }
+  return { stackName, region, configEnv, status: stack.StackStatus, outputs }
 }
 
 /** Number of records the seed file holds, so nothing has to hardcode 131. */
 export function expectedRecordCount() {
   const seed = join(repoRoot, 'tools/data-extraction/lc3/lc3-locations.seed.json')
+  return JSON.parse(readFileSync(seed, 'utf8')).records.length
+}
+
+/** Number of records the schedule seed file holds. */
+export function expectedSchedulesRecordCount() {
+  const seed = join(repoRoot, 'tools/data-extraction/lc3/lc3-schedules.seed.json')
   return JSON.parse(readFileSync(seed, 'utf8')).records.length
 }
 

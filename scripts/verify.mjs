@@ -8,7 +8,7 @@
  *
  * Usage: npm run verify
  */
-import { awsJson, banner, expectedRecordCount, getStackOutputs } from './lib/stack.mjs'
+import { awsJson, banner, expectedRecordCount, expectedSchedulesRecordCount, getStackOutputs } from './lib/stack.mjs'
 
 const results = []
 
@@ -27,6 +27,7 @@ banner('verify')
 
 const { stackName, region, status, outputs } = getStackOutputs()
 const expected = expectedRecordCount()
+const expectedSchedules = expectedSchedulesRecordCount()
 
 await check('stack status', async () => {
   expect(
@@ -37,7 +38,7 @@ await check('stack status', async () => {
 })
 
 await check('stack outputs', async () => {
-  const missing = ['ApiUrl', 'SiteUrl', 'SiteBucketName', 'LocationsTableName'].filter(
+  const missing = ['ApiUrl', 'SiteUrl', 'SiteBucketName', 'LocationsTableName', 'SchedulesTableName'].filter(
     (key) => !outputs[key]
   )
   expect(missing.length === 0, `missing output(s): ${missing.join(', ')}`)
@@ -45,32 +46,37 @@ await check('stack outputs', async () => {
 })
 
 await check('table item count', async () => {
-  expect(Boolean(outputs.LocationsTableName), 'no table to scan')
-  const data = awsJson([
-    'dynamodb',
-    'scan',
-    '--table-name',
-    outputs.LocationsTableName,
-    '--select',
-    'COUNT',
-    '--region',
-    region,
-  ])
-  expect(data.Count === expected, `${outputs.LocationsTableName} holds ${data.Count}, expected ${expected} — run: npm run seed`)
-  return `${data.Count} items in ${outputs.LocationsTableName}`
+  expect(Boolean(outputs.LocationsTableName), 'no Locations table to scan')
+  expect(Boolean(outputs.SchedulesTableName), 'no Schedules table to scan')
+  
+  const getCount = (table) =>
+    awsJson(['dynamodb', 'scan', '--table-name', table, '--select', 'COUNT', '--consistent-read', '--region', region]).Count
+
+  const locCount = getCount(outputs.LocationsTableName)
+  expect(locCount === expected, `${outputs.LocationsTableName} holds ${locCount}, expected ${expected} — run: npm run seed`)
+
+  const schedCount = getCount(outputs.SchedulesTableName)
+  expect(schedCount === expectedSchedules, `${outputs.SchedulesTableName} holds ${schedCount}, expected ${expectedSchedules} — run: npm run seed`)
+
+  return `${locCount} locs, ${schedCount} scheds`
 })
 
-await check('GET /api/locations', async () => {
+await check('GET /api/locations & /api/schedules', async () => {
   expect(Boolean(outputs.ApiUrl), 'no ApiUrl output')
-  const response = await fetch(`${outputs.ApiUrl}/api/locations`)
-  expect(response.status === 200, `HTTP ${response.status}`)
-  expect(
-    response.headers.get('access-control-allow-origin') === '*',
-    'missing Access-Control-Allow-Origin: * — the browser will block this'
-  )
-  const body = await response.json()
-  expect(body.count === expected, `API returned ${body.count} records, expected ${expected}`)
-  return `200, ${body.count} records, CORS header present`
+  
+  const locRes = await fetch(`${outputs.ApiUrl}/api/locations`)
+  expect(locRes.status === 200, `Locations HTTP ${locRes.status}`)
+  expect(locRes.headers.get('access-control-allow-origin') === '*', 'missing CORS header')
+  const locBody = await locRes.json()
+  expect(locBody.count === expected, `Locations API returned ${locBody.count} records, expected ${expected}`)
+
+  const schedRes = await fetch(`${outputs.ApiUrl}/api/schedules`)
+  expect(schedRes.status === 200, `Schedules HTTP ${schedRes.status}`)
+  expect(schedRes.headers.get('access-control-allow-origin') === '*', 'missing CORS header')
+  const schedBody = await schedRes.json()
+  expect(schedBody.count === expectedSchedules, `Schedules API returned ${schedBody.count} records, expected ${expectedSchedules}`)
+
+  return `200 OK, counts match expected`
 })
 
 await check('OPTIONS preflight', async () => {

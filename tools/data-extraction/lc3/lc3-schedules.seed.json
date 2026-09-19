@@ -1,0 +1,2194 @@
+{
+  "records": [
+    {
+      "event_code": "MA624",
+      "event_name": "MA624",
+      "room_code": "LC3-101/1",
+      "day_of_week": "MON",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "MON#11:00#MA624"
+    },
+    {
+      "event_code": "ST447",
+      "event_name": "ST447",
+      "room_code": "LC3-101/1",
+      "day_of_week": "TUE",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#11:00#ST447"
+    },
+    {
+      "event_code": "MA821",
+      "event_name": "MA821",
+      "room_code": "LC3-101/1",
+      "day_of_week": "WED",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "WED#09:30#MA821"
+    },
+    {
+      "event_code": "ST447",
+      "event_name": "ST447",
+      "room_code": "LC3-101/1",
+      "day_of_week": "THU",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "THU#11:00#ST447"
+    },
+    {
+      "event_code": "ST657/ST688",
+      "event_name": "ST657/ST688",
+      "room_code": "LC3-101/1",
+      "day_of_week": "THU",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "THU#13:30#ST657/ST688"
+    },
+    {
+      "event_code": "MA624",
+      "event_name": "MA624",
+      "room_code": "LC3-101/1",
+      "day_of_week": "FRI",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#11:00#MA624"
+    },
+    {
+      "event_code": "MA491",
+      "event_name": "MA491",
+      "room_code": "LC3-102/2",
+      "day_of_week": "MON",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "MON#13:30#MA491"
+    },
+    {
+      "event_code": "ST790",
+      "event_name": "ST790",
+      "room_code": "LC3-102/2",
+      "day_of_week": "TUE",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#11:00#ST790"
+    },
+    {
+      "event_code": "MA830",
+      "event_name": "MA830",
+      "room_code": "LC3-102/2",
+      "day_of_week": "WED",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "WED#11:00#MA830"
+    },
+    {
+      "event_code": "MA811",
+      "event_name": "MA811",
+      "room_code": "LC3-102/2",
+      "day_of_week": "WED",
+      "start_time": "14:00",
+      "end_time": "15:30",
+      "event_type": "class",
+      "schedule_slot": "WED#14:00#MA811"
+    },
+    {
+      "event_code": "MA830",
+      "event_name": "MA830",
+      "room_code": "LC3-102/2",
+      "day_of_week": "FRI",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#11:00#MA830"
+    },
+    {
+      "event_code": "MA811",
+      "event_name": "MA811",
+      "room_code": "LC3-102/2",
+      "day_of_week": "FRI",
+      "start_time": "14:00",
+      "end_time": "15:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#14:00#MA811"
+    },
+    {
+      "event_code": "MR436",
+      "event_name": "MR 436",
+      "room_code": "LC3-103",
+      "day_of_week": "MON",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "MON#09:30#MR436"
+    },
+    {
+      "event_code": "BAS350",
+      "event_name": "Exam - BAS350 (18 พ.ค. 2569)",
+      "room_code": "LC3-103",
+      "day_of_week": "MON",
+      "start_time": "13:00",
+      "end_time": "16:00",
+      "event_type": "exam",
+      "schedule_slot": "MON#13:00#BAS350"
+    },
+    {
+      "event_code": "ES476",
+      "event_name": "ES476 (Note: ย้ายไปเรียน บร.3 ชั้น 2 ห้อง 230)",
+      "room_code": "LC3-103",
+      "day_of_week": "MON",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "MON#13:30#ES476"
+    },
+    {
+      "event_code": "CS361",
+      "event_name": "CS 361",
+      "room_code": "LC3-103",
+      "day_of_week": "TUE",
+      "start_time": "08:00",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "TUE#08:00#CS361"
+    },
+    {
+      "event_code": "CS379",
+      "event_name": "CS 379",
+      "room_code": "LC3-103",
+      "day_of_week": "TUE",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#11:00#CS379"
+    },
+    {
+      "event_code": "ES206",
+      "event_name": "ES206",
+      "room_code": "LC3-103",
+      "day_of_week": "WED",
+      "start_time": "08:00",
+      "end_time": "09:30",
+      "event_type": "class",
+      "schedule_slot": "WED#08:00#ES206"
+    },
+    {
+      "event_code": "BAS353",
+      "event_name": "Exam - BAS353 (6 พ.ค. 2569)",
+      "room_code": "LC3-103",
+      "day_of_week": "WED",
+      "start_time": "09:00",
+      "end_time": "12:00",
+      "event_type": "exam",
+      "schedule_slot": "WED#09:00#BAS353"
+    },
+    {
+      "event_code": "ES206",
+      "event_name": "ES 206",
+      "room_code": "LC3-103",
+      "day_of_week": "WED",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "WED#09:30#ES206"
+    },
+    {
+      "event_code": "วล202",
+      "event_name": "วล202 (SC202)",
+      "room_code": "LC3-103",
+      "day_of_week": "WED",
+      "start_time": "13:30",
+      "end_time": "15:30",
+      "event_type": "class",
+      "schedule_slot": "WED#13:30#วล202"
+    },
+    {
+      "event_code": "NP201",
+      "event_name": "NP 201",
+      "room_code": "LC3-103",
+      "day_of_week": "WED",
+      "start_time": "16:30",
+      "end_time": "19:30",
+      "event_type": "class",
+      "schedule_slot": "WED#16:30#NP201"
+    },
+    {
+      "event_code": "ASC332",
+      "event_name": "Exam - ASC332 (7 พ.ค. 2569)",
+      "room_code": "LC3-103",
+      "day_of_week": "THU",
+      "start_time": "09:00",
+      "end_time": "12:00",
+      "event_type": "exam",
+      "schedule_slot": "THU#09:00#ASC332"
+    },
+    {
+      "event_code": "CS379",
+      "event_name": "CS 379",
+      "room_code": "LC3-103",
+      "day_of_week": "THU",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "THU#11:00#CS379"
+    },
+    {
+      "event_code": "ES203",
+      "event_name": "ES 203",
+      "room_code": "LC3-103",
+      "day_of_week": "THU",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "THU#13:30#ES203"
+    },
+    {
+      "event_code": "ES206",
+      "event_name": "ES 206",
+      "room_code": "LC3-103",
+      "day_of_week": "FRI",
+      "start_time": "08:00",
+      "end_time": "09:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#08:00#ES206"
+    },
+    {
+      "event_code": "AT407",
+      "event_name": "Exam - AT407 (Seats 1-6) (15 พ.ค. 2569)",
+      "room_code": "LC3-103",
+      "day_of_week": "FRI",
+      "start_time": "09:00",
+      "end_time": "12:00",
+      "event_type": "exam",
+      "schedule_slot": "FRI#09:00#AT407"
+    },
+    {
+      "event_code": "ST326",
+      "event_name": "Exam - ST326 (Seats 1-10) (15 พ.ค. 2569)",
+      "room_code": "LC3-103",
+      "day_of_week": "FRI",
+      "start_time": "09:00",
+      "end_time": "12:00",
+      "event_type": "exam",
+      "schedule_slot": "FRI#09:00#ST326"
+    },
+    {
+      "event_code": "ES436",
+      "event_name": "ES 436",
+      "room_code": "LC3-103",
+      "day_of_week": "FRI",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#09:30#ES436"
+    },
+    {
+      "event_code": "PHY627",
+      "event_name": "PHY 627",
+      "room_code": "LC3-103",
+      "day_of_week": "FRI",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#13:30#PHY627"
+    },
+    {
+      "event_code": "NP310",
+      "event_name": "NP 310",
+      "room_code": "LC3-104",
+      "day_of_week": "MON",
+      "start_time": "09:30",
+      "end_time": "11:30",
+      "event_type": "class",
+      "schedule_slot": "MON#09:30#NP310"
+    },
+    {
+      "event_code": "ST477",
+      "event_name": "ST 477",
+      "room_code": "LC3-104",
+      "day_of_week": "MON",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "MON#13:30#ST477"
+    },
+    {
+      "event_code": "MR336",
+      "event_name": "MR 336",
+      "room_code": "LC3-104",
+      "day_of_week": "TUE",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "TUE#09:30#MR336"
+    },
+    {
+      "event_code": "AM328",
+      "event_name": "AM 328",
+      "room_code": "LC3-104",
+      "day_of_week": "TUE",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#11:00#AM328"
+    },
+    {
+      "event_code": "CS341",
+      "event_name": "CS 341",
+      "room_code": "LC3-104",
+      "day_of_week": "WED",
+      "start_time": "08:00",
+      "end_time": "09:30",
+      "event_type": "class",
+      "schedule_slot": "WED#08:00#CS341"
+    },
+    {
+      "event_code": "ASC",
+      "event_name": "ASC",
+      "room_code": "LC3-104",
+      "day_of_week": "WED",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "WED#09:30#ASC"
+    },
+    {
+      "event_code": "ST326",
+      "event_name": "ST 326",
+      "room_code": "LC3-104",
+      "day_of_week": "WED",
+      "start_time": "13:30",
+      "end_time": "15:00",
+      "event_type": "class",
+      "schedule_slot": "WED#13:30#ST326"
+    },
+    {
+      "event_code": "CS335",
+      "event_name": "CS 335",
+      "room_code": "LC3-104",
+      "day_of_week": "WED",
+      "start_time": "15:00",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "WED#15:00#CS335"
+    },
+    {
+      "event_code": "MR336",
+      "event_name": "MR 336",
+      "room_code": "LC3-104",
+      "day_of_week": "THU",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "THU#09:30#MR336"
+    },
+    {
+      "event_code": "AM328",
+      "event_name": "AM 328",
+      "room_code": "LC3-104",
+      "day_of_week": "THU",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "THU#11:00#AM328"
+    },
+    {
+      "event_code": "ES468",
+      "event_name": "ES 468",
+      "room_code": "LC3-104",
+      "day_of_week": "THU",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "THU#13:30#ES468"
+    },
+    {
+      "event_code": "CS341",
+      "event_name": "CS 341",
+      "room_code": "LC3-104",
+      "day_of_week": "FRI",
+      "start_time": "08:00",
+      "end_time": "09:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#08:00#CS341"
+    },
+    {
+      "event_code": "NP307",
+      "event_name": "Exam - NP307 (Seats 1-7) (8 พ.ค. 2569)",
+      "room_code": "LC3-104",
+      "day_of_week": "FRI",
+      "start_time": "09:00",
+      "end_time": "12:00",
+      "event_type": "exam",
+      "schedule_slot": "FRI#09:00#NP307"
+    },
+    {
+      "event_code": "CS352",
+      "event_name": "Exam - CS352 (Seats 8-14) (8 พ.ค. 2569)",
+      "room_code": "LC3-104",
+      "day_of_week": "FRI",
+      "start_time": "09:00",
+      "end_time": "12:00",
+      "event_type": "exam",
+      "schedule_slot": "FRI#09:00#CS352"
+    },
+    {
+      "event_code": "ST218",
+      "event_name": "Exam - ST218 (Seats 1-10) (15 พ.ค. 2569)",
+      "room_code": "LC3-104",
+      "day_of_week": "FRI",
+      "start_time": "09:00",
+      "end_time": "12:00",
+      "event_type": "exam",
+      "schedule_slot": "FRI#09:00#ST218"
+    },
+    {
+      "event_code": "ES339",
+      "event_name": "ES 339",
+      "room_code": "LC3-104",
+      "day_of_week": "FRI",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#09:30#ES339"
+    },
+    {
+      "event_code": "ST326",
+      "event_name": "ST 326",
+      "room_code": "LC3-104",
+      "day_of_week": "FRI",
+      "start_time": "13:30",
+      "end_time": "15:00",
+      "event_type": "class",
+      "schedule_slot": "FRI#13:30#ST326"
+    },
+    {
+      "event_code": "CS335",
+      "event_name": "CS 335",
+      "room_code": "LC3-104",
+      "day_of_week": "FRI",
+      "start_time": "15:00",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#15:00#CS335"
+    },
+    {
+      "event_code": "CS100",
+      "event_name": "CS100 (Note: CS100 ของ ภาคพิเศษ)",
+      "room_code": "LC3-105",
+      "day_of_week": "MON",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "MON#09:30#CS100"
+    },
+    {
+      "event_code": "PHY621",
+      "event_name": "PHY621",
+      "room_code": "LC3-105",
+      "day_of_week": "TUE",
+      "start_time": "08:00",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "TUE#08:00#PHY621"
+    },
+    {
+      "event_code": "MA437",
+      "event_name": "MA 437",
+      "room_code": "LC3-105",
+      "day_of_week": "TUE",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#11:00#MA437"
+    },
+    {
+      "event_code": "CS373",
+      "event_name": "CS 373",
+      "room_code": "LC3-105",
+      "day_of_week": "WED",
+      "start_time": "08:00",
+      "end_time": "09:30",
+      "event_type": "class",
+      "schedule_slot": "WED#08:00#CS373"
+    },
+    {
+      "event_code": "PE386",
+      "event_name": "PE 386",
+      "room_code": "LC3-105",
+      "day_of_week": "WED",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "WED#09:30#PE386"
+    },
+    {
+      "event_code": "AM231",
+      "event_name": "AM 231",
+      "room_code": "LC3-105",
+      "day_of_week": "WED",
+      "start_time": "13:30",
+      "end_time": "15:00",
+      "event_type": "class",
+      "schedule_slot": "WED#13:30#AM231"
+    },
+    {
+      "event_code": "AM326",
+      "event_name": "AM 326",
+      "room_code": "LC3-105",
+      "day_of_week": "WED",
+      "start_time": "15:00",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "WED#15:00#AM326"
+    },
+    {
+      "event_code": "MA437",
+      "event_name": "MA 437",
+      "room_code": "LC3-105",
+      "day_of_week": "THU",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "THU#11:00#MA437"
+    },
+    {
+      "event_code": "ES479",
+      "event_name": "ES 479",
+      "room_code": "LC3-105",
+      "day_of_week": "THU",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "THU#13:30#ES479"
+    },
+    {
+      "event_code": "CS373",
+      "event_name": "CS 373",
+      "room_code": "LC3-105",
+      "day_of_week": "FRI",
+      "start_time": "08:00",
+      "end_time": "09:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#08:00#CS373"
+    },
+    {
+      "event_code": "CS140",
+      "event_name": "Exam - CS140 (8 พ.ค. 2569)",
+      "room_code": "LC3-105",
+      "day_of_week": "FRI",
+      "start_time": "09:00",
+      "end_time": "12:00",
+      "event_type": "exam",
+      "schedule_slot": "FRI#09:00#CS140"
+    },
+    {
+      "event_code": "ES469",
+      "event_name": "ES 469",
+      "room_code": "LC3-105",
+      "day_of_week": "FRI",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#09:30#ES469"
+    },
+    {
+      "event_code": "AM231",
+      "event_name": "AM 231",
+      "room_code": "LC3-105",
+      "day_of_week": "FRI",
+      "start_time": "13:30",
+      "end_time": "15:00",
+      "event_type": "class",
+      "schedule_slot": "FRI#13:30#AM231"
+    },
+    {
+      "event_code": "AM326",
+      "event_name": "AM 326",
+      "room_code": "LC3-105",
+      "day_of_week": "FRI",
+      "start_time": "15:00",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#15:00#AM326"
+    },
+    {
+      "event_code": "CS100",
+      "event_name": "CS100 (Note: CS100 ของ ภาคพิเศษ)",
+      "room_code": "LC3-106",
+      "day_of_week": "MON",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "MON#09:30#CS100"
+    },
+    {
+      "event_code": "MR446",
+      "event_name": "MR 446",
+      "room_code": "LC3-106",
+      "day_of_week": "TUE",
+      "start_time": "08:00",
+      "end_time": "09:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#08:00#MR446"
+    },
+    {
+      "event_code": "CS224",
+      "event_name": "CS 224 (NOTE: ย้ายไปเรียน บร.2 ชั้น 3)",
+      "room_code": "LC3-106",
+      "day_of_week": "TUE",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "TUE#09:30#CS224"
+    },
+    {
+      "event_code": "AM447",
+      "event_name": "AM 447",
+      "room_code": "LC3-106",
+      "day_of_week": "TUE",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#11:00#AM447"
+    },
+    {
+      "event_code": "AM427",
+      "event_name": "AM 427",
+      "room_code": "LC3-106",
+      "day_of_week": "TUE",
+      "start_time": "13:30",
+      "end_time": "15:00",
+      "event_type": "class",
+      "schedule_slot": "TUE#13:30#AM427"
+    },
+    {
+      "event_code": "MR447",
+      "event_name": "MR 447",
+      "room_code": "LC3-106",
+      "day_of_week": "TUE",
+      "start_time": "15:00",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#15:00#MR447"
+    },
+    {
+      "event_code": "NP318",
+      "event_name": "NP 318",
+      "room_code": "LC3-106",
+      "day_of_week": "WED",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "WED#09:30#NP318"
+    },
+    {
+      "event_code": "MA121",
+      "event_name": "MA 121",
+      "room_code": "LC3-106",
+      "day_of_week": "WED",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "WED#13:30#MA121"
+    },
+    {
+      "event_code": "MR446",
+      "event_name": "MR 446",
+      "room_code": "LC3-106",
+      "day_of_week": "THU",
+      "start_time": "08:00",
+      "end_time": "09:30",
+      "event_type": "class",
+      "schedule_slot": "THU#08:00#MR446"
+    },
+    {
+      "event_code": "CS224",
+      "event_name": "CS 224 (NOTE: ย้ายไปเรียน บร.2 ชั้น 3)",
+      "room_code": "LC3-106",
+      "day_of_week": "THU",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "THU#09:30#CS224"
+    },
+    {
+      "event_code": "AM447",
+      "event_name": "AM 447",
+      "room_code": "LC3-106",
+      "day_of_week": "THU",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "THU#11:00#AM447"
+    },
+    {
+      "event_code": "AM427",
+      "event_name": "AM 427",
+      "room_code": "LC3-106",
+      "day_of_week": "THU",
+      "start_time": "13:30",
+      "end_time": "15:00",
+      "event_type": "class",
+      "schedule_slot": "THU#13:30#AM427"
+    },
+    {
+      "event_code": "MR447",
+      "event_name": "MR 447",
+      "room_code": "LC3-106",
+      "day_of_week": "THU",
+      "start_time": "15:00",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "THU#15:00#MR447"
+    },
+    {
+      "event_code": "ES476",
+      "event_name": "ES 476",
+      "room_code": "LC3-106",
+      "day_of_week": "FRI",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#09:30#ES476"
+    },
+    {
+      "event_code": "MA121",
+      "event_name": "MA 121",
+      "room_code": "LC3-106",
+      "day_of_week": "FRI",
+      "start_time": "13:30",
+      "end_time": "15:00",
+      "event_type": "class",
+      "schedule_slot": "FRI#13:30#MA121"
+    },
+    {
+      "event_code": "ES450",
+      "event_name": "ES 450",
+      "room_code": "LC3-107",
+      "day_of_week": "MON",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "MON#09:30#ES450"
+    },
+    {
+      "event_code": "NP416",
+      "event_name": "NP 416",
+      "room_code": "LC3-107",
+      "day_of_week": "TUE",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#09:30#NP416"
+    },
+    {
+      "event_code": "PC341",
+      "event_name": "PC 341",
+      "room_code": "LC3-107",
+      "day_of_week": "TUE",
+      "start_time": "13:30",
+      "end_time": "15:00",
+      "event_type": "class",
+      "schedule_slot": "TUE#13:30#PC341"
+    },
+    {
+      "event_code": "CS348",
+      "event_name": "CS 348",
+      "room_code": "LC3-107",
+      "day_of_week": "TUE",
+      "start_time": "15:00",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#15:00#CS348"
+    },
+    {
+      "event_code": "MA317",
+      "event_name": "MA 317",
+      "room_code": "LC3-107",
+      "day_of_week": "WED",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "WED#09:30#MA317"
+    },
+    {
+      "event_code": "CS346",
+      "event_name": "CS 346",
+      "room_code": "LC3-107",
+      "day_of_week": "WED",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "WED#11:00#CS346"
+    },
+    {
+      "event_code": "NP202",
+      "event_name": "NP202",
+      "room_code": "LC3-107",
+      "day_of_week": "WED",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "WED#13:30#NP202"
+    },
+    {
+      "event_code": "RT486",
+      "event_name": "RT 486",
+      "room_code": "LC3-107",
+      "day_of_week": "THU",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "THU#09:30#RT486"
+    },
+    {
+      "event_code": "PC341",
+      "event_name": "PC 341",
+      "room_code": "LC3-107",
+      "day_of_week": "THU",
+      "start_time": "13:30",
+      "end_time": "15:00",
+      "event_type": "class",
+      "schedule_slot": "THU#13:30#PC341"
+    },
+    {
+      "event_code": "CS348",
+      "event_name": "CS 348",
+      "room_code": "LC3-107",
+      "day_of_week": "THU",
+      "start_time": "15:00",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "THU#15:00#CS348"
+    },
+    {
+      "event_code": "MA317",
+      "event_name": "MA 317",
+      "room_code": "LC3-107",
+      "day_of_week": "FRI",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "FRI#09:30#MA317"
+    },
+    {
+      "event_code": "CS346",
+      "event_name": "CS 346",
+      "room_code": "LC3-107",
+      "day_of_week": "FRI",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#11:00#CS346"
+    },
+    {
+      "event_code": "ASC351",
+      "event_name": "ASC351",
+      "room_code": "LC3-107",
+      "day_of_week": "FRI",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#13:30#ASC351"
+    },
+    {
+      "event_code": "CS345",
+      "event_name": "CS 345",
+      "room_code": "LC3-108",
+      "day_of_week": "TUE",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "TUE#09:30#CS345"
+    },
+    {
+      "event_code": "PC357",
+      "event_name": "PC 357",
+      "room_code": "LC3-108",
+      "day_of_week": "TUE",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#11:00#PC357"
+    },
+    {
+      "event_code": "PC244",
+      "event_name": "PC 244",
+      "room_code": "LC3-108",
+      "day_of_week": "WED",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "WED#09:30#PC244"
+    },
+    {
+      "event_code": "CS384",
+      "event_name": "CS 384",
+      "room_code": "LC3-108",
+      "day_of_week": "WED",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "WED#11:00#CS384"
+    },
+    {
+      "event_code": "NP218",
+      "event_name": "NP 218",
+      "room_code": "LC3-108",
+      "day_of_week": "WED",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "WED#13:30#NP218"
+    },
+    {
+      "event_code": "CS345",
+      "event_name": "CS 345",
+      "room_code": "LC3-108",
+      "day_of_week": "THU",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "THU#09:30#CS345"
+    },
+    {
+      "event_code": "PC357",
+      "event_name": "PC 357",
+      "room_code": "LC3-108",
+      "day_of_week": "THU",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "THU#11:00#PC357"
+    },
+    {
+      "event_code": "PC406",
+      "event_name": "PC 406",
+      "room_code": "LC3-108",
+      "day_of_week": "THU",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "THU#13:30#PC406"
+    },
+    {
+      "event_code": "PC244",
+      "event_name": "PC 244",
+      "room_code": "LC3-108",
+      "day_of_week": "FRI",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "FRI#09:30#PC244"
+    },
+    {
+      "event_code": "CS384",
+      "event_name": "CS 384",
+      "room_code": "LC3-108",
+      "day_of_week": "FRI",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#11:00#CS384"
+    },
+    {
+      "event_code": "PC368",
+      "event_name": "PC 368",
+      "room_code": "LC3-108",
+      "day_of_week": "FRI",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#13:30#PC368"
+    },
+    {
+      "event_code": "TU154",
+      "event_name": "TU154 (Note: ย้ายไปเรียนห้อง 214 บร.4)",
+      "room_code": "LC3-109",
+      "day_of_week": "MON",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "MON#09:30#TU154"
+    },
+    {
+      "event_code": "TU156",
+      "event_name": "TU156 (Note: ย้ายไปเรียน บร.4 ห้อง 214)",
+      "room_code": "LC3-109",
+      "day_of_week": "MON",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "MON#13:30#TU156"
+    },
+    {
+      "event_code": "CS374",
+      "event_name": "CS 374",
+      "room_code": "LC3-109",
+      "day_of_week": "TUE",
+      "start_time": "08:00",
+      "end_time": "09:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#08:00#CS374"
+    },
+    {
+      "event_code": "CS373",
+      "event_name": "CS 373",
+      "room_code": "LC3-109",
+      "day_of_week": "TUE",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "TUE#09:30#CS373"
+    },
+    {
+      "event_code": "MA212",
+      "event_name": "MA 212",
+      "room_code": "LC3-109",
+      "day_of_week": "TUE",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#11:00#MA212"
+    },
+    {
+      "event_code": "PC345",
+      "event_name": "PC345",
+      "room_code": "LC3-109",
+      "day_of_week": "WED",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "WED#09:30#PC345"
+    },
+    {
+      "event_code": "AM341",
+      "event_name": "AM 341",
+      "room_code": "LC3-109",
+      "day_of_week": "WED",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "WED#11:00#AM341"
+    },
+    {
+      "event_code": "CS374",
+      "event_name": "CS 374",
+      "room_code": "LC3-109",
+      "day_of_week": "WED",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "WED#13:30#CS374"
+    },
+    {
+      "event_code": "CS374",
+      "event_name": "CS 374",
+      "room_code": "LC3-109",
+      "day_of_week": "THU",
+      "start_time": "08:00",
+      "end_time": "09:30",
+      "event_type": "class",
+      "schedule_slot": "THU#08:00#CS374"
+    },
+    {
+      "event_code": "CS373",
+      "event_name": "CS 373",
+      "room_code": "LC3-109",
+      "day_of_week": "THU",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "THU#09:30#CS373"
+    },
+    {
+      "event_code": "MA212",
+      "event_name": "MA 212",
+      "room_code": "LC3-109",
+      "day_of_week": "THU",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "THU#11:00#MA212"
+    },
+    {
+      "event_code": "AM347",
+      "event_name": "AM 347",
+      "room_code": "LC3-109",
+      "day_of_week": "THU",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "THU#13:30#AM347"
+    },
+    {
+      "event_code": "PC345",
+      "event_name": "PC345",
+      "room_code": "LC3-109",
+      "day_of_week": "FRI",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "FRI#09:30#PC345"
+    },
+    {
+      "event_code": "AM341",
+      "event_name": "AM 341",
+      "room_code": "LC3-109",
+      "day_of_week": "FRI",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#11:00#AM341"
+    },
+    {
+      "event_code": "NP306",
+      "event_name": "NP 306",
+      "room_code": "LC3-109",
+      "day_of_week": "FRI",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#13:30#NP306"
+    },
+    {
+      "event_code": "PC320",
+      "event_name": "PC 320",
+      "room_code": "LC3-110",
+      "day_of_week": "MON",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "MON#09:30#PC320"
+    },
+    {
+      "event_code": "ES368",
+      "event_name": "ES 368",
+      "room_code": "LC3-110",
+      "day_of_week": "TUE",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "TUE#09:30#ES368"
+    },
+    {
+      "event_code": "ASC332",
+      "event_name": "ASC 332",
+      "room_code": "LC3-110",
+      "day_of_week": "TUE",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#11:00#ASC332"
+    },
+    {
+      "event_code": "PC240",
+      "event_name": "PC240",
+      "room_code": "LC3-110",
+      "day_of_week": "TUE",
+      "start_time": "13:30",
+      "end_time": "15:00",
+      "event_type": "class",
+      "schedule_slot": "TUE#13:30#PC240"
+    },
+    {
+      "event_code": "CS341",
+      "event_name": "CS 341 (NOTE: ย้ายไปเรียน บร.2 ห้อง 213)",
+      "room_code": "LC3-110",
+      "day_of_week": "WED",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "WED#09:30#CS341"
+    },
+    {
+      "event_code": "ST446",
+      "event_name": "ST 446",
+      "room_code": "LC3-110",
+      "day_of_week": "WED",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "WED#11:00#ST446"
+    },
+    {
+      "event_code": "CS346",
+      "event_name": "CS 346",
+      "room_code": "LC3-110",
+      "day_of_week": "WED",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "WED#13:30#CS346"
+    },
+    {
+      "event_code": "ASC332",
+      "event_name": "ASC 332",
+      "room_code": "LC3-110",
+      "day_of_week": "THU",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "THU#11:00#ASC332"
+    },
+    {
+      "event_code": "PC240",
+      "event_name": "PC240",
+      "room_code": "LC3-110",
+      "day_of_week": "THU",
+      "start_time": "13:30",
+      "end_time": "15:00",
+      "event_type": "class",
+      "schedule_slot": "THU#13:30#PC240"
+    },
+    {
+      "event_code": "CS341",
+      "event_name": "CS 341 (NOTE: ย้ายไปเรียน บร.2 ห้อง 213)",
+      "room_code": "LC3-110",
+      "day_of_week": "FRI",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "FRI#09:30#CS341"
+    },
+    {
+      "event_code": "ST446",
+      "event_name": "ST 446",
+      "room_code": "LC3-110",
+      "day_of_week": "FRI",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#11:00#ST446"
+    },
+    {
+      "event_code": "PC287",
+      "event_name": "PC287",
+      "room_code": "LC3-110",
+      "day_of_week": "FRI",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#13:30#PC287"
+    },
+    {
+      "event_code": "NP211",
+      "event_name": "NP 211",
+      "room_code": "LC3-111",
+      "day_of_week": "MON",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "MON#09:30#NP211"
+    },
+    {
+      "event_code": "MA426",
+      "event_name": "MA 426",
+      "room_code": "LC3-111",
+      "day_of_week": "TUE",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "TUE#09:30#MA426"
+    },
+    {
+      "event_code": "PC206",
+      "event_name": "PC 206",
+      "room_code": "LC3-111",
+      "day_of_week": "TUE",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#11:00#PC206"
+    },
+    {
+      "event_code": "AM436",
+      "event_name": "AM 436",
+      "room_code": "LC3-111",
+      "day_of_week": "WED",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "WED#11:00#AM436"
+    },
+    {
+      "event_code": "CS223",
+      "event_name": "CS 223",
+      "room_code": "LC3-111",
+      "day_of_week": "WED",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "WED#13:30#CS223"
+    },
+    {
+      "event_code": "MA426",
+      "event_name": "MA 426",
+      "room_code": "LC3-111",
+      "day_of_week": "THU",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "THU#09:30#MA426"
+    },
+    {
+      "event_code": "PC206",
+      "event_name": "PC 206",
+      "room_code": "LC3-111",
+      "day_of_week": "THU",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "THU#11:00#PC206"
+    },
+    {
+      "event_code": "PC417",
+      "event_name": "PC 417",
+      "room_code": "LC3-111",
+      "day_of_week": "THU",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "THU#13:30#PC417"
+    },
+    {
+      "event_code": "AM436",
+      "event_name": "AM 436",
+      "room_code": "LC3-111",
+      "day_of_week": "FRI",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#11:00#AM436"
+    },
+    {
+      "event_code": "MA725",
+      "event_name": "MA725",
+      "room_code": "LC3-115",
+      "day_of_week": "TUE",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#13:30#MA725"
+    },
+    {
+      "event_code": "MA623",
+      "event_name": "MA623",
+      "room_code": "LC3-115",
+      "day_of_week": "WED",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "WED#09:30#MA623"
+    },
+    {
+      "event_code": "MA313",
+      "event_name": "MA313",
+      "room_code": "LC3-115",
+      "day_of_week": "WED",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "WED#11:00#MA313"
+    },
+    {
+      "event_code": "MA683",
+      "event_name": "MA683",
+      "room_code": "LC3-115",
+      "day_of_week": "THU",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "THU#09:30#MA683"
+    },
+    {
+      "event_code": "MA623",
+      "event_name": "MA623",
+      "room_code": "LC3-115",
+      "day_of_week": "FRI",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "FRI#09:30#MA623"
+    },
+    {
+      "event_code": "MA313",
+      "event_name": "MA313",
+      "room_code": "LC3-115",
+      "day_of_week": "FRI",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#11:00#MA313"
+    },
+    {
+      "event_code": "ES352",
+      "event_name": "ES 352",
+      "room_code": "LC3-116",
+      "day_of_week": "MON",
+      "start_time": "08:00",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "MON#08:00#ES352"
+    },
+    {
+      "event_code": "ES357",
+      "event_name": "ES357",
+      "room_code": "LC3-116",
+      "day_of_week": "MON",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "MON#13:30#ES357"
+    },
+    {
+      "event_code": "NP300",
+      "event_name": "NP 300",
+      "room_code": "LC3-116",
+      "day_of_week": "TUE",
+      "start_time": "08:00",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "TUE#08:00#NP300"
+    },
+    {
+      "event_code": "NP300",
+      "event_name": "NP300",
+      "room_code": "LC3-116",
+      "day_of_week": "TUE",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "TUE#09:30#NP300"
+    },
+    {
+      "event_code": "PC447",
+      "event_name": "PC 447",
+      "room_code": "LC3-116",
+      "day_of_week": "TUE",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#11:00#PC447"
+    },
+    {
+      "event_code": "CS384",
+      "event_name": "CS 384",
+      "room_code": "LC3-116",
+      "day_of_week": "WED",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "WED#09:30#CS384"
+    },
+    {
+      "event_code": "AM429",
+      "event_name": "AM 429",
+      "room_code": "LC3-116",
+      "day_of_week": "WED",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "WED#11:00#AM429"
+    },
+    {
+      "event_code": "NP300",
+      "event_name": "NP 300",
+      "room_code": "LC3-116",
+      "day_of_week": "THU",
+      "start_time": "08:00",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "THU#08:00#NP300"
+    },
+    {
+      "event_code": "NP300",
+      "event_name": "NP300",
+      "room_code": "LC3-116",
+      "day_of_week": "THU",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "THU#09:30#NP300"
+    },
+    {
+      "event_code": "PC447",
+      "event_name": "PC 447",
+      "room_code": "LC3-116",
+      "day_of_week": "THU",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "THU#11:00#PC447"
+    },
+    {
+      "event_code": "NP300",
+      "event_name": "NP 300",
+      "room_code": "LC3-116",
+      "day_of_week": "THU",
+      "start_time": "16:30",
+      "end_time": "18:00",
+      "event_type": "class",
+      "schedule_slot": "THU#16:30#NP300"
+    },
+    {
+      "event_code": "CS384",
+      "event_name": "CS 384",
+      "room_code": "LC3-116",
+      "day_of_week": "FRI",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "FRI#09:30#CS384"
+    },
+    {
+      "event_code": "AM429",
+      "event_name": "AM 429",
+      "room_code": "LC3-116",
+      "day_of_week": "FRI",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#11:00#AM429"
+    },
+    {
+      "event_code": "ES202",
+      "event_name": "ES 202",
+      "room_code": "LC3-116",
+      "day_of_week": "FRI",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#13:30#ES202"
+    },
+    {
+      "event_code": "ES338/ES336",
+      "event_name": "ES 338 / ES 336 (ผู้สอน: อ.สรณ์)",
+      "room_code": "LC3-117",
+      "day_of_week": "MON",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "MON#09:30#ES338/ES336"
+    },
+    {
+      "event_code": "NP210",
+      "event_name": "NP 210 (ผู้สอน: อ.เรวัช)",
+      "room_code": "LC3-117",
+      "day_of_week": "TUE",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#09:30#NP210"
+    },
+    {
+      "event_code": "ES356",
+      "event_name": "ES 356 (ผู้สอน: อ.ป้อม)",
+      "room_code": "LC3-117",
+      "day_of_week": "TUE",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#13:30#ES356"
+    },
+    {
+      "event_code": "CS265",
+      "event_name": "CS 265",
+      "room_code": "LC3-117",
+      "day_of_week": "WED",
+      "start_time": "08:00",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "WED#08:00#CS265"
+    },
+    {
+      "event_code": "BEE396",
+      "event_name": "BEE 396",
+      "room_code": "LC3-117",
+      "day_of_week": "THU",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "THU#09:30#BEE396"
+    },
+    {
+      "event_code": "ASC391",
+      "event_name": "ASC 391 (ผู้สอน: อ.วราฤทธิ์)",
+      "room_code": "LC3-117",
+      "day_of_week": "THU",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "THU#13:30#ASC391"
+    },
+    {
+      "event_code": "ES268",
+      "event_name": "ES 268 (ผู้สอน: อ.มารุต)",
+      "room_code": "LC3-117",
+      "day_of_week": "FRI",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#09:30#ES268"
+    },
+    {
+      "event_code": "ES266",
+      "event_name": "ES 266 (ผู้สอน: อ.ไตรเทพ)",
+      "room_code": "LC3-118",
+      "day_of_week": "MON",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "MON#09:30#ES266"
+    },
+    {
+      "event_code": "ES347",
+      "event_name": "ES 347",
+      "room_code": "LC3-118",
+      "day_of_week": "TUE",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#09:30#ES347"
+    },
+    {
+      "event_code": "ES450",
+      "event_name": "ES 450",
+      "room_code": "LC3-118",
+      "day_of_week": "WED",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "WED#09:30#ES450"
+    },
+    {
+      "event_code": "ST431",
+      "event_name": "ST 431 (ผู้สอน: อ.กมล)",
+      "room_code": "LC3-118",
+      "day_of_week": "WED",
+      "start_time": "15:00",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "WED#15:00#ST431"
+    },
+    {
+      "event_code": "ES366",
+      "event_name": "ES 366",
+      "room_code": "LC3-118",
+      "day_of_week": "THU",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "THU#09:30#ES366"
+    },
+    {
+      "event_code": "ES427",
+      "event_name": "ES 427",
+      "room_code": "LC3-118",
+      "day_of_week": "FRI",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#09:30#ES427"
+    },
+    {
+      "event_code": "ST431",
+      "event_name": "ST 431 (ผู้สอน: อ.กมล)",
+      "room_code": "LC3-118",
+      "day_of_week": "FRI",
+      "start_time": "15:00",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#15:00#ST431"
+    },
+    {
+      "event_code": "ES345",
+      "event_name": "ES345",
+      "room_code": "LC3-118/1",
+      "day_of_week": "MON",
+      "start_time": "08:00",
+      "end_time": "10:00",
+      "event_type": "class",
+      "schedule_slot": "MON#08:00#ES345"
+    },
+    {
+      "event_code": "ES345",
+      "event_name": "ES 345",
+      "room_code": "LC3-118/1",
+      "day_of_week": "MON",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "MON#09:30#ES345"
+    },
+    {
+      "event_code": "PC257",
+      "event_name": "PC 257",
+      "room_code": "LC3-118/1",
+      "day_of_week": "MON",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "MON#13:30#PC257"
+    },
+    {
+      "event_code": "ES416",
+      "event_name": "ES 416 (ผู้สอน: อ.ยุ้ย)",
+      "room_code": "LC3-118/1",
+      "day_of_week": "TUE",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#09:30#ES416"
+    },
+    {
+      "event_code": "ES346",
+      "event_name": "ES 346 (ผู้สอน: อ.ยุ้ย)",
+      "room_code": "LC3-118/1",
+      "day_of_week": "TUE",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#13:30#ES346"
+    },
+    {
+      "event_code": "ES316",
+      "event_name": "ES 316",
+      "room_code": "LC3-118/1",
+      "day_of_week": "WED",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "WED#09:30#ES316"
+    },
+    {
+      "event_code": "ES416",
+      "event_name": "ES 416 (เรียน อ.มารุต)",
+      "room_code": "LC3-118/1",
+      "day_of_week": "THU",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "THU#09:30#ES416"
+    },
+    {
+      "event_code": "ES386",
+      "event_name": "ES 386",
+      "room_code": "LC3-118/1",
+      "day_of_week": "FRI",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#09:30#ES386"
+    },
+    {
+      "event_code": "CS301",
+      "event_name": "CS 301",
+      "room_code": "LC3-121",
+      "day_of_week": "MON",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "MON#09:30#CS301"
+    },
+    {
+      "event_code": "AM260",
+      "event_name": "AM 260 (ผู้สอน: อ.นวลักษณ์)",
+      "room_code": "LC3-121",
+      "day_of_week": "MON",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "MON#13:30#AM260"
+    },
+    {
+      "event_code": "CS100",
+      "event_name": "CS 100",
+      "room_code": "LC3-121",
+      "day_of_week": "TUE",
+      "start_time": "08:00",
+      "end_time": "09:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#08:00#CS100"
+    },
+    {
+      "event_code": "CS101",
+      "event_name": "CS 101 (ผู้สอน: อ.นัทนนท์)",
+      "room_code": "LC3-121",
+      "day_of_week": "TUE",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "TUE#09:30#CS101"
+    },
+    {
+      "event_code": "CS102",
+      "event_name": "CS 102",
+      "room_code": "LC3-121",
+      "day_of_week": "TUE",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#11:00#CS102"
+    },
+    {
+      "event_code": "CS101",
+      "event_name": "CS 101 (ผู้สอน: อ.ติ๊ก)",
+      "room_code": "LC3-121",
+      "day_of_week": "TUE",
+      "start_time": "13:30",
+      "end_time": "15:00",
+      "event_type": "class",
+      "schedule_slot": "TUE#13:30#CS101"
+    },
+    {
+      "event_code": "CS213",
+      "event_name": "CS 213",
+      "room_code": "LC3-121",
+      "day_of_week": "TUE",
+      "start_time": "15:00",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#15:00#CS213"
+    },
+    {
+      "event_code": "CS103",
+      "event_name": "CS 103 (ผู้สอน: อ.นัทนนท์)",
+      "room_code": "LC3-121",
+      "day_of_week": "WED",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "WED#09:30#CS103"
+    },
+    {
+      "event_code": "CS333",
+      "event_name": "CS 333",
+      "room_code": "LC3-121",
+      "day_of_week": "WED",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "WED#13:30#CS333"
+    },
+    {
+      "event_code": "CS100",
+      "event_name": "CS 100",
+      "room_code": "LC3-121",
+      "day_of_week": "THU",
+      "start_time": "08:00",
+      "end_time": "09:30",
+      "event_type": "class",
+      "schedule_slot": "THU#08:00#CS100"
+    },
+    {
+      "event_code": "CS101",
+      "event_name": "CS 101 (ผู้สอน: อ.ติ๊ก)",
+      "room_code": "LC3-121",
+      "day_of_week": "THU",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "THU#09:30#CS101"
+    },
+    {
+      "event_code": "CS102",
+      "event_name": "CS 102",
+      "room_code": "LC3-121",
+      "day_of_week": "THU",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "THU#11:00#CS102"
+    },
+    {
+      "event_code": "CS101",
+      "event_name": "CS 101 (ผู้สอน: อ.ติ๊ก)",
+      "room_code": "LC3-121",
+      "day_of_week": "THU",
+      "start_time": "13:30",
+      "end_time": "15:00",
+      "event_type": "class",
+      "schedule_slot": "THU#13:30#CS101"
+    },
+    {
+      "event_code": "CS213",
+      "event_name": "CS 213",
+      "room_code": "LC3-121",
+      "day_of_week": "THU",
+      "start_time": "15:00",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "THU#15:00#CS213"
+    },
+    {
+      "event_code": "CS103",
+      "event_name": "CS 103 (ผู้สอน: อ.นัทนนท์)",
+      "room_code": "LC3-121",
+      "day_of_week": "FRI",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "FRI#09:30#CS103"
+    },
+    {
+      "event_code": "NP214",
+      "event_name": "NP 214",
+      "room_code": "LC3-121",
+      "day_of_week": "FRI",
+      "start_time": "16:30",
+      "end_time": "18:00",
+      "event_type": "class",
+      "schedule_slot": "FRI#16:30#NP214"
+    },
+    {
+      "event_code": "ST349",
+      "event_name": "ST 349",
+      "room_code": "LC3-122",
+      "day_of_week": "MON",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "MON#09:30#ST349"
+    },
+    {
+      "event_code": "AM460",
+      "event_name": "AM 460",
+      "room_code": "LC3-122",
+      "day_of_week": "MON",
+      "start_time": "13:30",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "MON#13:30#AM460"
+    },
+    {
+      "event_code": "CS100",
+      "event_name": "CS 100",
+      "room_code": "LC3-122",
+      "day_of_week": "TUE",
+      "start_time": "08:00",
+      "end_time": "09:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#08:00#CS100"
+    },
+    {
+      "event_code": "CS101",
+      "event_name": "CS 101",
+      "room_code": "LC3-122",
+      "day_of_week": "TUE",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "TUE#09:30#CS101"
+    },
+    {
+      "event_code": "CS102",
+      "event_name": "CS 102",
+      "room_code": "LC3-122",
+      "day_of_week": "TUE",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#11:00#CS102"
+    },
+    {
+      "event_code": "CS101",
+      "event_name": "CS 101",
+      "room_code": "LC3-122",
+      "day_of_week": "TUE",
+      "start_time": "13:30",
+      "end_time": "15:00",
+      "event_type": "class",
+      "schedule_slot": "TUE#13:30#CS101"
+    },
+    {
+      "event_code": "CS213",
+      "event_name": "CS 213",
+      "room_code": "LC3-122",
+      "day_of_week": "TUE",
+      "start_time": "15:00",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "TUE#15:00#CS213"
+    },
+    {
+      "event_code": "CS103",
+      "event_name": "CS 103",
+      "room_code": "LC3-122",
+      "day_of_week": "WED",
+      "start_time": "08:00",
+      "end_time": "09:30",
+      "event_type": "class",
+      "schedule_slot": "WED#08:00#CS103"
+    },
+    {
+      "event_code": "CS103",
+      "event_name": "CS 103",
+      "room_code": "LC3-122",
+      "day_of_week": "WED",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "WED#09:30#CS103"
+    },
+    {
+      "event_code": "CNC101",
+      "event_name": "CNC 101",
+      "room_code": "LC3-122",
+      "day_of_week": "WED",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "WED#11:00#CNC101"
+    },
+    {
+      "event_code": "AM201",
+      "event_name": "AM 201 (อ.ส้ม)",
+      "room_code": "LC3-122",
+      "day_of_week": "WED",
+      "start_time": "13:30",
+      "end_time": "15:00",
+      "event_type": "class",
+      "schedule_slot": "WED#13:30#AM201"
+    },
+    {
+      "event_code": "CNC222",
+      "event_name": "CNC 222 (อ.หยวน)",
+      "room_code": "LC3-122",
+      "day_of_week": "WED",
+      "start_time": "15:00",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "WED#15:00#CNC222"
+    },
+    {
+      "event_code": "CS100",
+      "event_name": "CS 100",
+      "room_code": "LC3-122",
+      "day_of_week": "THU",
+      "start_time": "08:00",
+      "end_time": "09:30",
+      "event_type": "class",
+      "schedule_slot": "THU#08:00#CS100"
+    },
+    {
+      "event_code": "CS101",
+      "event_name": "CS 101 (อ.นัทนนท์)",
+      "room_code": "LC3-122",
+      "day_of_week": "THU",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "THU#09:30#CS101"
+    },
+    {
+      "event_code": "CS102",
+      "event_name": "CS 102",
+      "room_code": "LC3-122",
+      "day_of_week": "THU",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "THU#11:00#CS102"
+    },
+    {
+      "event_code": "CS101",
+      "event_name": "CS 101",
+      "room_code": "LC3-122",
+      "day_of_week": "THU",
+      "start_time": "13:30",
+      "end_time": "15:00",
+      "event_type": "class",
+      "schedule_slot": "THU#13:30#CS101"
+    },
+    {
+      "event_code": "CS213",
+      "event_name": "CS 213 (อ.หยวน)",
+      "room_code": "LC3-122",
+      "day_of_week": "THU",
+      "start_time": "15:00",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "THU#15:00#CS213"
+    },
+    {
+      "event_code": "CS103",
+      "event_name": "CS 103",
+      "room_code": "LC3-122",
+      "day_of_week": "FRI",
+      "start_time": "08:00",
+      "end_time": "09:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#08:00#CS103"
+    },
+    {
+      "event_code": "CS103",
+      "event_name": "CS 103 (อ.นันทนนท์)",
+      "room_code": "LC3-122",
+      "day_of_week": "FRI",
+      "start_time": "09:30",
+      "end_time": "11:00",
+      "event_type": "class",
+      "schedule_slot": "FRI#09:30#CS103"
+    },
+    {
+      "event_code": "CNC101",
+      "event_name": "CNC 101",
+      "room_code": "LC3-122",
+      "day_of_week": "FRI",
+      "start_time": "11:00",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#11:00#CNC101"
+    },
+    {
+      "event_code": "AM201",
+      "event_name": "AM 201 (อ.ส้ม)",
+      "room_code": "LC3-122",
+      "day_of_week": "FRI",
+      "start_time": "13:30",
+      "end_time": "15:00",
+      "event_type": "class",
+      "schedule_slot": "FRI#13:30#AM201"
+    },
+    {
+      "event_code": "CNC222",
+      "event_name": "CNC 222 (อ.หยวน)",
+      "room_code": "LC3-122",
+      "day_of_week": "FRI",
+      "start_time": "15:00",
+      "end_time": "16:30",
+      "event_type": "class",
+      "schedule_slot": "FRI#15:00#CNC222"
+    },
+    {
+      "event_code": "ST349",
+      "event_name": "ST 349",
+      "room_code": "LC3-122",
+      "day_of_week": "SAT",
+      "start_time": "09:30",
+      "end_time": "12:30",
+      "event_type": "class",
+      "schedule_slot": "SAT#09:30#ST349"
+    },
+    {
+      "event_code": "MMA446",
+      "event_name": "Exam - MMA446 (7 พ.ค. 2569)",
+      "room_code": "LC3-227",
+      "day_of_week": "THU",
+      "start_time": "09:00",
+      "end_time": "12:00",
+      "event_type": "exam",
+      "schedule_slot": "THU#09:00#MMA446"
+    }
+  ]
+}
