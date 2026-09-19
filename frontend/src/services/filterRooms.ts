@@ -181,7 +181,7 @@ function roomMatchesQuery(room: Room, searchTerms: string[]): boolean {
   })
 }
 
-function scheduleMatchesQuery(schedule: ScheduleSlot, searchTerms: string[]): boolean {
+export function scheduleMatchesQuery(schedule: ScheduleSlot, searchTerms: string[]): boolean {
   if (searchTerms.length === 0) return false
 
   const searchableValues = [schedule.eventCode, schedule.eventName].map(normalize)

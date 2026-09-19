@@ -56,6 +56,19 @@ const mockSchedules: ScheduleSlot[] = [
   },
 ]
 
+const mockSchedulesForRoom: ScheduleSlot[] = [
+  ...mockSchedules,
+  {
+    roomCode: 'LC3-103',
+    eventCode: 'BAS350',
+    eventName: 'BAS 350',
+    dayOfWeek: 'MON',
+    startTime: '13:00',
+    endTime: '16:00',
+    eventType: 'class',
+  },
+]
+
 describe('RoomSearchPanel Component', () => {
   it('renders the TORCH brand logo at the top of the panel', () => {
     render(<RoomSearchPanel rooms={mockRooms} onSelectRoom={vi.fn()} />)
@@ -102,6 +115,22 @@ describe('RoomSearchPanel Component', () => {
     await user.click(screen.getByRole('button', { name: /CS 361/ }))
 
     expect(handleSelectRoom).toHaveBeenCalledWith('LC3-F1-R103')
+  })
+
+  it('only renders the schedule matching the subject query', async () => {
+    const user = userEvent.setup()
+    render(
+      <RoomSearchPanel
+        rooms={mockRooms}
+        schedules={mockSchedulesForRoom}
+        onSelectRoom={vi.fn()}
+      />
+    )
+
+    await user.type(screen.getByPlaceholderText(/ค้นหาห้อง/i), 'CS361')
+
+    expect(screen.getByText('CS 361 · TUE 08:00-11:00 · LC3-103')).toBeInTheDocument()
+    expect(screen.queryByText('BAS 350 · MON 13:00-16:00 · LC3-103')).not.toBeInTheDocument()
   })
 
   it('keeps direct room results available while schedules are loading', async () => {

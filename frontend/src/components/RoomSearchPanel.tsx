@@ -1,6 +1,11 @@
 import { useMemo, useState, useRef, useEffect } from 'react'
 import type { KeyboardEvent } from 'react'
-import { filterRooms, DEFAULT_CATEGORY_KEY } from '../services/filterRooms.ts'
+import {
+  filterRooms,
+  getExpandedSearchTerms,
+  scheduleMatchesQuery,
+  DEFAULT_CATEGORY_KEY,
+} from '../services/filterRooms.ts'
 import torchLogo from '../assets/torchv1.PNG'
 import SearchBar from './SearchBar.tsx'
 import CategoryFilter from './CategoryFilter.tsx'
@@ -53,6 +58,11 @@ export default function RoomSearchPanel({
     () => (hasActiveQueryOrFilter ? filterRooms(rooms, query, categoryKey, schedules) : []),
     [rooms, query, categoryKey, schedules, hasActiveQueryOrFilter]
   )
+
+  const matchedSchedules = useMemo(() => {
+    const searchTerms = getExpandedSearchTerms(query)
+    return schedules.filter((schedule) => scheduleMatchesQuery(schedule, searchTerms))
+  }, [query, schedules])
 
   const showDropdown = isDropdownOpen && hasActiveQueryOrFilter
 
@@ -150,7 +160,7 @@ export default function RoomSearchPanel({
       {showDropdown && (
         <SearchResultList
           rooms={results}
-          schedules={schedules}
+          schedules={matchedSchedules}
           schedulesLoading={schedulesLoading}
           schedulesError={schedulesError}
           loading={loading}
