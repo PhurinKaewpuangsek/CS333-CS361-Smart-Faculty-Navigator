@@ -48,11 +48,12 @@ export function flag(name, fallback = undefined) {
 export const hasSwitch = (name) => process.argv.slice(2).includes(`--${name}`)
 
 /**
- * Stack name and region.
+ * Resolves the stack name, region, and SAM configuration environment.
  *
- * samconfig.toml is committed and is the single source of truth, so a teammate who
- * changes it there gets every script pointed at the right stack for free. Parsed by
- * regex on purpose: a TOML parser would mean a dependency at the repo root.
+ * Command-line flags take precedence. The stack name and region then fall back to
+ * environment variables, the selected samconfig.toml deploy block, and built-in
+ * defaults; the configuration environment defaults to dev. The TOML is parsed by
+ * regex to avoid adding a dependency at the repository root.
  */
 export function readStackConfig() {
   const path = join(repoRoot, 'samconfig.toml')

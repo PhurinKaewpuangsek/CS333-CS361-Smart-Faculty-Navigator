@@ -40,6 +40,7 @@ if (!existsSync(join(toolsDir, 'node_modules'))) {
   run('npm', ['ci', '--prefix', toolsDir])
 }
 
+/** Runs the selected dataset seeder for one table and forwards dry-run mode. */
 const runSeeder = (table, type) => {
   console.log(`\n--- Seeding ${type} ---`)
   console.log(`table: ${table} (${region})\n`)

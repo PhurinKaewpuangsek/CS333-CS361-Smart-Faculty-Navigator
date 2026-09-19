@@ -22,6 +22,11 @@ const SEED_PATH = join(HERE, 'lc3-locations.seed.json');
 const BATCH_SIZE = 25;
 const MAX_RETRIES = 5;
 
+/**
+ * Parses command-line tokens into the target table, region, dataset type, and mode.
+ * Table and region default from the environment, while the dataset defaults to
+ * locations. Throws for unknown options, a missing table, or an unsupported type.
+ */
 function parseArgs(argv) {
   const args = { table: process.env.TABLE_NAME, dryRun: false, region: process.env.AWS_REGION, type: 'locations' };
 
@@ -67,6 +72,11 @@ export function toItem(record) {
   return JSON.parse(JSON.stringify(record));
 }
 
+/**
+ * Loads the schedule seed when requested and the location seed otherwise.
+ * Returns its records, resolved path, and required partition-key name. Throws when
+ * the file has no records or a record lacks that key.
+ */
 export function readSeedRecords(type = 'locations') {
   const seedPath = type === 'schedules' 
     ? join(HERE, 'lc3-schedules.seed.json') 
@@ -112,6 +122,10 @@ async function writeBatch(docClient, BatchWriteCommand, tableName, batch, batchN
   }
 }
 
+/**
+ * Seeds the dataset selected by the command line, or only prints its planned batches
+ * in dry-run mode. Write mode sends each batch to DynamoDB and propagates failures.
+ */
 async function main() {
   const { table, dryRun, region, type } = parseArgs(process.argv.slice(2));
   const { records, seedPath, pk } = readSeedRecords(type);
