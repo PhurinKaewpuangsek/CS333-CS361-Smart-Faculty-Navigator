@@ -282,6 +282,7 @@ All cloud resources are declared in `template.yaml` at the repo root. **No one c
 - **API Gateway (implicit — single gateway):** every Lambda must declare its API event using `Type: Api` **without** specifying `RestApiId`. **Do NOT create a separate `AWS::Serverless::Api` resource.** All endpoints share the single implicit API Gateway whose CORS is configured in the `Globals` block of `template.yaml`.
 - **CORS in Lambda responses:** in addition to the `Globals` CORS config (which handles `OPTIONS` preflight), every Lambda `Response` object must include `"Access-Control-Allow-Origin": "*"` in its `headers`.
 - **Destructive operations:** never run unbounded `DeleteItem` / `DeleteTable` against production. Seed scripts target your own personal AWS Learner Lab sandbox table by default — never point a seed script at the shared production stack's table directly; production data flows through the automated CD pipeline only.
+- **Environment Initialization:** When standing up a new AWS environment (e.g., migrating accounts), required application data must be explicitly seeded and verified. Infrastructure deployment (`sam deploy`) does not guarantee database contents. A newly provisioned environment requires explicit data seeding (e.g., using `npm run seed -- --config-env prod` with proper authorization checks).
 
 ### 8.5 Future-proofing
 

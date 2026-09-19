@@ -14,9 +14,24 @@ import { banner, fail, getStackOutputs, hasSwitch, repoRoot, run } from './lib/s
 
 banner('seed')
 
-const { region, outputs } = getStackOutputs()
-const table = outputs.LocationsTableName
-if (!table) fail('The stack has no LocationsTableName output. Deploy first: npm run deploy')
+const { region, outputs, configEnv } = getStackOutputs()
+
+if (configEnv === 'prod') {
+  console.log('⚠️  PRODUCTION SEEDING DETECTED ⚠️')
+  console.log('Verifying AWS Caller Identity...')
+  const identity = awsJson(['sts', 'get-caller-identity'])
+  // The production account ID must match exactly.
+  if (identity.Account !== '287785301136') {
+    fail(`Refusing to seed production in wrong account: ${identity.Account}. Expected 287785301136.`)
+  }
+  console.log(`✅ Caller identity confirmed: Account ${identity.Account}\n`)
+}
+
+const locationsTable = outputs.LocationsTableName
+if (!locationsTable) fail('The stack has no LocationsTableName output. Deploy first: npm run deploy')
+
+const schedulesTable = outputs.SchedulesTableName
+if (!schedulesTable) fail('The stack has no SchedulesTableName output. Deploy first: npm run deploy')
 
 // The seeder lives in tools/data-extraction and brings its own AWS SDK dependencies.
 const toolsDir = join(repoRoot, 'tools', 'data-extraction')
@@ -25,14 +40,20 @@ if (!existsSync(join(toolsDir, 'node_modules'))) {
   run('npm', ['ci', '--prefix', toolsDir])
 }
 
-console.log(`table: ${table} (${region})\n`)
+const runSeeder = (table, type) => {
+  console.log(`\n--- Seeding ${type} ---`)
+  console.log(`table: ${table} (${region})\n`)
+  run('node', [
+    join(toolsDir, 'lc3', 'seed-dynamodb.mjs'),
+    '--table',
+    table,
+    '--region',
+    region,
+    '--type',
+    type,
+    ...(hasSwitch('dry-run') ? ['--dry-run'] : []),
+  ])
+}
 
-run('node', [
-  join(toolsDir, 'lc3', 'seed-dynamodb.mjs'),
-  '--table',
-  table,
-  // Passed explicitly: the Learner Lab credential block sets no default region.
-  '--region',
-  region,
-  ...(hasSwitch('dry-run') ? ['--dry-run'] : []),
-])
+runSeeder(locationsTable, 'locations')
+runSeeder(schedulesTable, 'schedules')

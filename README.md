@@ -4,7 +4,7 @@
 
 โครงการนี้เป็นส่วนหนึ่งของรายวิชา **CS333 / CS361**
 
-🔗 **[Live Demo (V1 Production บน AWS S3)](http://torch-navigator-v1-810160236906.s3-website-us-east-1.amazonaws.com/)**
+🔗 **[Live Demo (V2 Production บน AWS S3)](http://torch-v2-site-287785301136.s3-website-ap-southeast-1.amazonaws.com/)**
 
 ---
 
@@ -31,6 +31,8 @@
 * **Data & Tooling:** Node.js Scripts for CSV/JSON validation and DynamoDB batch seeding
 * **CI/CD:** GitHub Actions (Automated Linting, Vitest, and `sam deploy`)
 
+> **Note on Data Seeding**: CI/CD deploys infrastructure and code, but **does not automatically guarantee application data exists**. A newly provisioned environment requires explicit data seeding. The dataset contains **131 location records** and **219 schedule records**.
+
 ---
 
 ## Environments
@@ -39,6 +41,12 @@
 | :-- | :-- | :-- | :-- | :-- | :-- |
 | **Dev** | AWS Academy Learner Lab | `us-east-1` | Teammate (Local via `sam deploy --config-env dev`) | Temporary (4 hours) | Temporary Session Token |
 | **Prod** | Real AWS Free Tier Account | `ap-southeast-1` | GitHub Actions CI/CD (`sam deploy --config-env prod`) | Persistent | OIDC Role (Least-privilege) |
+
+### Production Seeding
+Production seeding must verify the AWS account first. To explicitly seed production from a local machine with proper AWS credentials loaded (Account ID: `287785301136`):
+```bash
+npm run seed -- --config-env prod
+```
 
 ---
 
