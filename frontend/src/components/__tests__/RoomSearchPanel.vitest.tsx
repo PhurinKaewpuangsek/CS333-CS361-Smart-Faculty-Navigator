@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { describe, it, expect, vi } from 'vitest'
 import RoomSearchPanel from '../RoomSearchPanel'
 import type { Room } from '../../types/room'
+import type { ScheduleSlot } from '../../types/schedule'
 
 const mockRooms: Room[] = [
   {
@@ -28,6 +29,43 @@ const mockRooms: Room[] = [
     coordinates: { x: 300, y: 400 },
     aliases: [],
     landmarks: [],
+  },
+  {
+    id: 'LC3-F1-R103',
+    code: 'LC3-103',
+    roomNumber: '103',
+    nameThai: 'ห้อง 103',
+    building: 'LC3',
+    floor: 1,
+    category: 'lecture_room',
+    coordinates: { x: 200, y: 300 },
+    aliases: [],
+    landmarks: [],
+  },
+]
+
+const mockSchedules: ScheduleSlot[] = [
+  {
+    roomCode: 'LC3-103',
+    eventCode: 'CS361',
+    eventName: 'CS 361',
+    dayOfWeek: 'TUE',
+    startTime: '08:00',
+    endTime: '11:00',
+    eventType: 'class',
+  },
+]
+
+const mockSchedulesForRoom: ScheduleSlot[] = [
+  ...mockSchedules,
+  {
+    roomCode: 'LC3-103',
+    eventCode: 'BAS350',
+    eventName: 'BAS 350',
+    dayOfWeek: 'MON',
+    startTime: '13:00',
+    endTime: '16:00',
+    eventType: 'class',
   },
 ]
 
@@ -58,6 +96,82 @@ describe('RoomSearchPanel Component', () => {
     expect(screen.getByRole('list')).toBeInTheDocument()
     expect(screen.getByText('LC3-101')).toBeInTheDocument()
     expect(screen.queryByText('LC3-201')).not.toBeInTheDocument()
+  })
+
+  it('shows schedule details and selects its classroom for map zoom', async () => {
+    const user = userEvent.setup()
+    const handleSelectRoom = vi.fn()
+    render(
+      <RoomSearchPanel
+        rooms={mockRooms}
+        schedules={mockSchedules}
+        onSelectRoom={handleSelectRoom}
+      />
+    )
+
+    await user.type(screen.getByPlaceholderText(/ค้นหาห้อง/i), 'CS361')
+
+    expect(screen.getByText('CS 361 · TUE 08:00-11:00 · LC3-103')).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: /CS 361/ }))
+
+    expect(handleSelectRoom).toHaveBeenCalledWith('LC3-F1-R103')
+  })
+
+  it('only renders the schedule matching the subject query', async () => {
+    const user = userEvent.setup()
+    render(
+      <RoomSearchPanel
+        rooms={mockRooms}
+        schedules={mockSchedulesForRoom}
+        onSelectRoom={vi.fn()}
+      />
+    )
+
+    await user.type(screen.getByPlaceholderText(/ค้นหาห้อง/i), 'CS361')
+
+    expect(screen.getByText('CS 361 · TUE 08:00-11:00 · LC3-103')).toBeInTheDocument()
+    expect(screen.queryByText('BAS 350 · MON 13:00-16:00 · LC3-103')).not.toBeInTheDocument()
+  })
+
+  it('keeps direct room results available while schedules are loading', async () => {
+    const user = userEvent.setup()
+    const handleSelectRoom = vi.fn()
+    render(
+      <RoomSearchPanel
+        rooms={mockRooms}
+        schedulesLoading
+        onSelectRoom={handleSelectRoom}
+      />
+    )
+
+    await user.type(screen.getByPlaceholderText(/ค้นหาห้อง/i), '101')
+
+    expect(screen.getByText('LC3-101')).toBeInTheDocument()
+    expect(screen.getByText('กำลังโหลดตารางเรียน...')).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: /LC3-101/i }))
+
+    expect(handleSelectRoom).toHaveBeenCalledWith('LC3-F1-R101')
+  })
+
+  it('keeps direct room results available when schedules fail', async () => {
+    const user = userEvent.setup()
+    const handleSelectRoom = vi.fn()
+    render(
+      <RoomSearchPanel
+        rooms={mockRooms}
+        schedulesError={new Error('schedule service unavailable')}
+        onSelectRoom={handleSelectRoom}
+      />
+    )
+
+    await user.type(screen.getByPlaceholderText(/ค้นหาห้อง/i), '101')
+
+    expect(screen.getByText('LC3-101')).toBeInTheDocument()
+    expect(screen.getByText('ไม่สามารถโหลดรายละเอียดตารางเรียนได้')).toBeInTheDocument()
+    expect(screen.queryByText('schedule service unavailable')).not.toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: /LC3-101/i }))
+
+    expect(handleSelectRoom).toHaveBeenCalledWith('LC3-F1-R101')
   })
 
   it('renders filtered results when user selects a category', async () => {

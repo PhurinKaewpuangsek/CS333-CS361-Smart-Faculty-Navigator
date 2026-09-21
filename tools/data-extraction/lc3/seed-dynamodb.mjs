@@ -14,10 +14,9 @@
 import { readFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parseCsv } from './csv.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const SEED_PATH = join(HERE, 'lc3-locations.seed.json');
-
 /** DynamoDB caps BatchWriteItem at 25 requests. */
 const BATCH_SIZE = 25;
 const MAX_RETRIES = 5;
@@ -78,35 +77,48 @@ export function toItem(record) {
  * the file has no records or a record lacks that key.
  */
 export function readSeedRecords(type = 'locations') {
-  const seedPath = type === 'schedules' 
-    ? join(HERE, 'lc3-schedules.seed.json') 
+  const seedPath = type === 'schedules'
+    ? join(HERE, 'lc3-schedules.seed.csv')
     : join(HERE, 'lc3-locations.seed.json');
   const pk = type === 'schedules' ? 'room_code' : 'location_id';
 
-  const seed = JSON.parse(readFileSync(seedPath, 'utf8'));
-  if (!Array.isArray(seed.records) || seed.records.length === 0) {
+  const records = type === 'schedules'
+    ? parseCsv(readFileSync(seedPath, 'utf8')).map((record) => ({
+        ...record,
+        schedule_slot: `${record.day_of_week}#${record.start_time}#${record.event_code}`,
+      }))
+    : JSON.parse(readFileSync(seedPath, 'utf8')).records;
+
+  if (!Array.isArray(records) || records.length === 0) {
     throw new Error(`No records found in ${seedPath}`);
   }
-  const missingKey = seed.records.find((r) => !r[pk]);
+  const missingKey = records.find((r) => !r[pk]);
   if (missingKey) {
     throw new Error(`Every record needs a ${pk} (partition key); found one without.`);
   }
 
   if (type === 'schedules') {
-    const missingSk = seed.records.find((r) => !r.schedule_slot);
+    const missingField = records.find((r) =>
+      ['event_code', 'event_name', 'day_of_week', 'start_time', 'end_time', 'event_type']
+        .some((field) => !r[field])
+    );
+    if (missingField) {
+      throw new Error('Every schedule record needs all CSV fields populated.');
+    }
+    const missingSk = records.find((r) => !r.schedule_slot);
     if (missingSk) {
       throw new Error(`Every schedule record needs a schedule_slot (sort key); found one without.`);
     }
   }
 
   const seen = new Set();
-  for (const r of seed.records) {
+  for (const r of records) {
     const key = type === 'schedules' ? `${r[pk]}#${r.schedule_slot}` : r[pk];
     if (seen.has(key)) throw new Error(`Duplicate DynamoDB key found: ${key}`);
     seen.add(key);
   }
 
-  return { records: seed.records, seedPath, pk };
+  return { records, seedPath, pk };
 }
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
