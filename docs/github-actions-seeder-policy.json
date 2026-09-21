@@ -1,0 +1,17 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowProductionSeedingAndVerification",
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:BatchWriteItem",
+        "dynamodb:Scan"
+      ],
+      "Resource": [
+        "arn:aws:dynamodb:ap-southeast-1:287785301136:table/SmartFacultyLocations",
+        "arn:aws:dynamodb:ap-southeast-1:287785301136:table/SmartFacultySchedules"
+      ]
+    }
+  ]
+}
