@@ -183,7 +183,16 @@ npm run dev
 
 *(⚠️ ต้อง `npm run site:empty` ก่อน `sam delete` เสมอ — CloudFormation ลบ bucket ที่ยังมีไฟล์อยู่ไม่ได้ stack จะค้างกลางทาง)*
 
-### Step 5: เปิด Pull Request & Deploy to Production
+### Step 5: AI-Assisted Development (Matt Pocock Skills)
+
+โปรเจกต์นี้ตั้งค่าชุดคำสั่ง AI Skills จาก Matt Pocock ไว้ให้แล้ว เพื่อช่วยให้คุณและ AI ทำงานร่วมกันได้รวดเร็วและเป็นระบบมากขึ้น แนะนำให้พิมพ์คำสั่งเหล่านี้ใน AI Agent ของคุณ:
+
+- **ก่อนเริ่มเขียนโค้ด:** ใช้ `/grill-with-docs` เพื่อให้ AI สัมภาษณ์และเคลียร์ Requirement ให้ตรงกันก่อน
+- **เวลาแบ่งงานหรือทำฟีเจอร์ใหญ่:** ใช้ `/to-spec` ตามด้วย `/to-tickets` เพื่อแตกงาน
+- **ลงมือเขียนโค้ด:** ใช้ `/implement` เพื่อเริ่มเขียน หรือ `/tdd` ถ้าอยากให้ AI ช่วยเขียนแบบ Test-Driven Development
+- **ตรวจทานงาน:** ใช้ `/code-review` เพื่อรีวิวโค้ดก่อนเปิด PR เสมอ
+
+### Step 6: เปิด Pull Request & Deploy to Production
 
 1. เมื่อเทสในเครื่องตัวเองผ่านหมดแล้ว ให้ Commit โค้ดและเปิด Pull Request (PR) เข้า Branch `main`
 2. เมื่อ PR ถูกตรวจสอบและ Merge สำเร็จ ระบบ CI/CD (GitHub Actions) จะนำโค้ด `template.yaml` ชุดเดียวกันนี้ ไปรันสร้างและอัปเดตระบบบน **บัญชี Production หลัก (ap-southeast-1)** ให้อัตโนมัติด้วยคำสั่ง `sam deploy --config-env prod` โดยไม่มีใครต้องกด Start Lab
