@@ -183,10 +183,18 @@ npm run dev
 
 *(⚠️ ต้อง `npm run site:empty` ก่อน `sam delete` เสมอ — CloudFormation ลบ bucket ที่ยังมีไฟล์อยู่ไม่ได้ stack จะค้างกลางทาง)*
 
-### Step 5: เปิด Pull Request & Deploy to Production
+### Step 5: AI-Assisted Development (Matt Pocock Skills)
+
+โปรเจกต์นี้ติดตั้ง AI Agent Skills เพื่อช่วยให้การพัฒนาระบบรวดเร็วขึ้น หากคุณใช้งาน AI coding assistant ให้ใช้ Slash commands เหล่านี้:
+- **`/grill-with-docs`**: ใช้ก่อนเริ่มเขียนโค้ดเพื่อ brainstorm, ทำความเข้าใจ requirements ให้ตรงกัน, และอัปเดต domain glossary
+- **`/to-spec`**: ใช้สำหรับขั้นตอนการ planning เพื่อแตกฟีเจอร์ออกมาเป็น technical specification ที่ชัดเจน
+- **`/implement`** หรือ **`/tdd`**: ใช้เพื่อเริ่มเขียนโค้ดตาม spec ที่ได้วางแผนไว้
+
+### Step 6: เปิด Pull Request & Deploy to Production
 
 1. เมื่อเทสในเครื่องตัวเองผ่านหมดแล้ว ให้ Commit โค้ดและเปิด Pull Request (PR) เข้า Branch `main`
-2. เมื่อ PR ถูกตรวจสอบและ Merge สำเร็จ ระบบ CI/CD (GitHub Actions) จะนำโค้ด `template.yaml` ชุดเดียวกันนี้ ไปรันสร้างและอัปเดตระบบบน **บัญชี Production หลัก (ap-southeast-1)** ให้อัตโนมัติด้วยคำสั่ง `sam deploy --config-env prod` โดยไม่มีใครต้องกด Start Lab
+2. **รอการรีวิวจาก CodeRabbit:** ระบบ CodeRabbit จะทำการรีวิวโค้ดของคุณโดยอัตโนมัติ คุณต้องแก้ไขตามคอมเมนต์ (Resolve all inline comments) และรอให้ CI ผ่านสีเขียวทั้งหมดก่อน *(ยกเว้นกรณีที่ CodeRabbit token หมด สามารถข้ามการรีวิวได้)*
+3. เมื่อ PR ถูกตรวจสอบและ Merge สำเร็จ ระบบ CI/CD (GitHub Actions) จะนำโค้ด `template.yaml` ชุดเดียวกันนี้ ไปรันสร้างและอัปเดตระบบบน **บัญชี Production หลัก (ap-southeast-1)** ให้อัตโนมัติด้วยคำสั่ง `sam deploy --config-env prod` โดยไม่มีใครต้องกด Start Lab
 
 ### 🩺 Troubleshooting
 
