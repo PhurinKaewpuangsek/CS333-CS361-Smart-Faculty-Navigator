@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 Phurin Kaewpuangsek (privatekoom@gmail.com) and Contributors
+Copyright (c) 2026 Phurin Kaewpuangsek
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,11 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-
-----------------------------------------------------------------------
-Exceptions and Third-Party Assets:
-
-The MIT License above applies only to the original source code and assets created for this repository. 
-
-Third-party assets, specifically the interactive SVG floor plans and map navigation nodes adapted from the ronnakrit303/CS232-Map_Navigation repository, retain their original copyright. They are used here with permission for academic purposes and are EXCLUDED from this MIT License grant. Anyone wishing to redistribute or reuse those specific assets must obtain permission from their respective original authors.
