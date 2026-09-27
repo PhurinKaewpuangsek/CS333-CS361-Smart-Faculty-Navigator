@@ -210,3 +210,7 @@ npm run dev
 | Frontend | `npm run lint` (ใน `frontend/`) | ตรวจสอบ Code Style และข้อผิดพลาดด้วย ESLint |
 | Frontend | `npm run build` (ใน `frontend/`) | ตรวจสอบ TypeScript Types และสร้าง Production Bundle |
 | Backend / IaC | `sam validate` (ที่ Root) | ตรวจสอบ Syntax และ Schema ของไฟล์ `template.yaml` |
+
+
+## Acknowledgments
+- The interactive SVG floor plans and initial map navigation nodes were originally adapted from the [ronnakrit303/CS232-Map_Navigation](https://github.com/ronnakrit303/CS232-Map_Navigation) repository.
