@@ -214,3 +214,10 @@ npm run dev
 
 ## Acknowledgments
 - The interactive SVG floor plans and initial map navigation nodes were originally adapted from the [ronnakrit303/CS232-Map_Navigation](https://github.com/ronnakrit303/CS232-Map_Navigation) repository.
+
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 
+
+**Exceptions and Third-Party Assets:**
+The MIT License applies only to the original source code and assets created for this repository. Third-party assets, specifically the interactive SVG floor plans and map navigation nodes adapted from the [ronnakrit303/CS232-Map_Navigation](https://github.com/ronnakrit303/CS232-Map_Navigation) repository, retain their original copyright. They are used here with permission for academic purposes and are EXCLUDED from this MIT License grant. Anyone wishing to redistribute or reuse those specific assets must obtain permission from their respective original authors.
