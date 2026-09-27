@@ -92,7 +92,16 @@ npm run bootstrap
 * **`/tdd` หรือ `/implement`**: สั่งให้ AI ลงมือเขียนโค้ดตาม Spec หรือทำ Test-Driven Development ให้ทันที
 
 ## Testing & CI/CD
-
 * **Frontend Tests:** รัน `npm test` (Unit & Component Tests) และ `npm run lint`
 * **Backend / IaC:** รัน `sam validate` (ตรวจ template.yaml)
 * **CI/CD Pipeline:** เมื่อเปิด PR ระบบ **CodeRabbit** จะรีวิวโค้ดอัตโนมัติ และเมื่อ Merge ลง `main` แล้ว GitHub Actions จะ Deploy โค้ดขึ้น Production ให้อัตโนมัติ
+
+## Acknowledgments
+- The interactive SVG floor plans and initial map navigation nodes were originally adapted from the [ronnakrit303/CS232-Map_Navigation](https://github.com/ronnakrit303/CS232-Map_Navigation) repository.
+
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 
+
+**Exceptions and Third-Party Assets:**
+The MIT License applies only to the original source code and assets created for this repository. Third-party assets, specifically the interactive SVG floor plans and map navigation nodes adapted from the [ronnakrit303/CS232-Map_Navigation](https://github.com/ronnakrit303/CS232-Map_Navigation) repository, retain their original copyright. They are used here with permission for academic purposes and are EXCLUDED from this MIT License grant. Anyone wishing to redistribute or reuse those specific assets must obtain permission from their respective original authors.
