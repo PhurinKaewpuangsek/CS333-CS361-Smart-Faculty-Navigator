@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="frontend/src/assets/perimeter_logo_negative.png" width="400" />
+<img src="frontend/src/assets/perimeter_logo_negative.png" width="450" />
 
 # Smart indoor map Navigator (V2)
 
