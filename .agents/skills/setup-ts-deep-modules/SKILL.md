@@ -58,7 +58,7 @@ Copy [`dependency-cruiser.config.cjs`](./dependency-cruiser.config.cjs) to the r
 
 ### 4. Wire it into the checks
 
-- Add a `lint:boundaries` script: `depcruise <packages-root>` (or `depcruise src`).
+- Add a `lint:boundaries` script: `depcruise <app-source> <packages-root>` (or `depcruise src`). Also add a check that an app-to-private-internal import is rejected by the entrypoint-boundary-from-app rule.
 - Fold it into the repo's umbrella check command, the one that already runs typecheck (e.g. a `check` / `ci` / `validate` script). Do **not** touch `tsconfig` or add path aliases.
 - If there is no umbrella script, add `lint:boundaries` and tell the user to include it in CI.
 

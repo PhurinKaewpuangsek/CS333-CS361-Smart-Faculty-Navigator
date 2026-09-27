@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="frontend/src/assets/perimeter_logo_negative.png" width="450" />
+<img src="frontend/src/assets/perimeter_logo_negative.png" width="450" alt="Perimeter Logo" />
 
 # Smart indoor map Navigator (V2)
 
@@ -78,7 +78,7 @@ npm run bootstrap
 | **อัปเดต Tech Stack / Lambda** | `npm run bootstrap` |
 | **อัปเดตเฉพาะหน้าบ้าน (Frontend)** | `npm run site:publish` |
 | **อัปเดตข้อมูล Data ในฐานข้อมูล** | `npm run seed` |
-| **ล้างระบบทิ้งทั้งหมด (Clean up)** | รัน `npm run site:empty` แล้วตามด้วย `sam delete` |
+| **ล้างระบบทิ้งทั้งหมด (Clean up)** | รัน `npm run site:empty` แล้วตามด้วย `sam delete --config-env dev` |
 
 > [!IMPORTANT]
 >(สำคัญ: ต้องรัน `npm run site:empty` ก่อนลบ Stack เสมอ ไม่งั้นจะลบไม่ผ่านเพราะ S3 Bucket ยังมีไฟล์อยู่)
