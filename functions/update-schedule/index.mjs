@@ -92,7 +92,7 @@ export function createHandler({ docClient = defaultDocClient, tableName = TABLE_
           
           await docClient.send(new TransactWriteCommand({
             TransactItems: [
-              { Delete: { TableName: tableName, Key: { room_code: roomCode, schedule_slot: scheduleSlot } } },
+              { Delete: { TableName: tableName, Key: { room_code: roomCode, schedule_slot: scheduleSlot }, ConditionExpression: 'attribute_exists(schedule_slot)' } },
               { Put: { TableName: tableName, Item: newItem, ConditionExpression: 'attribute_not_exists(schedule_slot)' } }
             ]
           }));
@@ -140,6 +140,9 @@ export function createHandler({ docClient = defaultDocClient, tableName = TABLE_
       console.error('Error updating schedule:', error);
       if (error.name === 'ConditionalCheckFailedException') {
         return { statusCode: 404, headers: CORS_HEADERS, body: JSON.stringify({ error: 'Schedule slot not found' }) };
+      }
+      if (error.name === 'TransactionCanceledException') {
+        return { statusCode: 409, headers: CORS_HEADERS, body: JSON.stringify({ error: 'Schedule slot conflict: target slot already exists or source was deleted' }) };
       }
       return {
         statusCode: 500,

@@ -85,6 +85,13 @@ export function createHandler({ docClient = defaultDocClient, tableName = TABLE_
       };
     } catch (error) {
       console.error('Error creating schedule:', error);
+      if (error.name === 'ConditionalCheckFailedException') {
+        return {
+          statusCode: 409,
+          headers: CORS_HEADERS,
+          body: JSON.stringify({ error: 'Schedule slot already exists', schedule_slot }),
+        };
+      }
       return {
         statusCode: 500,
         headers: CORS_HEADERS,
