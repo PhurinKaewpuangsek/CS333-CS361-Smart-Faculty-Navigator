@@ -51,7 +51,7 @@ Globals:
     # and was spending about half a second of every page load just downloading.
     MinimumCompressionSize: 1024
     Cors:
-      AllowMethods: "'GET,PUT,OPTIONS'"
+      AllowMethods: "'GET,PUT,POST,DELETE,OPTIONS'"
       AllowHeaders: "'Content-Type'"
       AllowOrigin: "'*'"
 
@@ -243,6 +243,187 @@ Resources:
           Properties:
             Path: /api/schedules
             Method: get
+
+  # ---------------------------------------------------------------------------
+  # Admin write endpoints — issue #81 (admin-crud-panel).
+  # DELETE /api/locations/{location_id}
+  # POST   /api/schedules
+  # PUT    /api/schedules/{room_code}/{schedule_slot}
+  # DELETE /api/schedules/{room_code}/{schedule_slot}
+  # ---------------------------------------------------------------------------
+
+  DeleteLocationRole:
+    Type: AWS::IAM::Role
+    Condition: CreateLambdaRoles
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: DeleteLocationAndSchedules
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: 
+                  - dynamodb:GetItem
+                  - dynamodb:DeleteItem
+                Resource: !GetAtt SmartFacultyLocations.Arn
+              - Effect: Allow
+                Action:
+                  - dynamodb:Query
+                  - dynamodb:DeleteItem
+                  - dynamodb:BatchWriteItem
+                Resource: !GetAtt SmartFacultySchedules.Arn
+
+  DeleteLocationFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: functions/delete-location/
+      Handler: index.handler
+      Role: !If
+        - UseExistingLambdaRole
+        - !Sub "arn:aws:iam::${AWS::AccountId}:role/${ExistingLambdaRoleName}"
+        - !GetAtt DeleteLocationRole.Arn
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref SmartFacultyLocations
+          SCHEDULES_TABLE_NAME: !Ref SmartFacultySchedules
+      Events:
+        DeleteLocation:
+          Type: Api
+          Properties:
+            Path: /api/locations/{location_id}
+            Method: delete
+
+  CreateScheduleRole:
+    Type: AWS::IAM::Role
+    Condition: CreateLambdaRoles
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: PutScheduleOnly
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:PutItem
+                Resource: !GetAtt SmartFacultySchedules.Arn
+
+  CreateScheduleFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: functions/create-schedule/
+      Handler: index.handler
+      Role: !If
+        - UseExistingLambdaRole
+        - !Sub "arn:aws:iam::${AWS::AccountId}:role/${ExistingLambdaRoleName}"
+        - !GetAtt CreateScheduleRole.Arn
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref SmartFacultySchedules
+      Events:
+        CreateSchedule:
+          Type: Api
+          Properties:
+            Path: /api/schedules
+            Method: post
+
+  UpdateScheduleRole:
+    Type: AWS::IAM::Role
+    Condition: CreateLambdaRoles
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: UpdateScheduleOnly
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:UpdateItem
+                Resource: !GetAtt SmartFacultySchedules.Arn
+
+  UpdateScheduleFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: functions/update-schedule/
+      Handler: index.handler
+      Role: !If
+        - UseExistingLambdaRole
+        - !Sub "arn:aws:iam::${AWS::AccountId}:role/${ExistingLambdaRoleName}"
+        - !GetAtt UpdateScheduleRole.Arn
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref SmartFacultySchedules
+      Events:
+        UpdateSchedule:
+          Type: Api
+          Properties:
+            Path: /api/schedules/{room_code}/{schedule_slot}
+            Method: put
+
+  DeleteScheduleRole:
+    Type: AWS::IAM::Role
+    Condition: CreateLambdaRoles
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: DeleteScheduleOnly
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:DeleteItem
+                Resource: !GetAtt SmartFacultySchedules.Arn
+
+  DeleteScheduleFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: functions/delete-schedule/
+      Handler: index.handler
+      Role: !If
+        - UseExistingLambdaRole
+        - !Sub "arn:aws:iam::${AWS::AccountId}:role/${ExistingLambdaRoleName}"
+        - !GetAtt DeleteScheduleRole.Arn
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref SmartFacultySchedules
+      Events:
+        DeleteSchedule:
+          Type: Api
+          Properties:
+            Path: /api/schedules/{room_code}/{schedule_slot}
+            Method: delete
 
   # The website itself, so `sam deploy` builds the whole system and nobody has to
   # create a bucket by hand on the console (README: "No ClickOps").
