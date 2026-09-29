@@ -111,7 +111,7 @@ describe('RoomSearchPanel Component', () => {
 
     await user.type(screen.getByPlaceholderText(/ค้นหาห้อง/i), 'CS361')
 
-    expect(screen.getByText('CS 361 · TUE 08:00-11:00 · LC3-103')).toBeInTheDocument()
+    expect(screen.getByText('CS361 · CS 361 · TUE 08:00-11:00 · LC3-103')).toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: /CS 361/ }))
 
     expect(handleSelectRoom).toHaveBeenCalledWith('LC3-F1-R103')
@@ -129,8 +129,8 @@ describe('RoomSearchPanel Component', () => {
 
     await user.type(screen.getByPlaceholderText(/ค้นหาห้อง/i), 'CS361')
 
-    expect(screen.getByText('CS 361 · TUE 08:00-11:00 · LC3-103')).toBeInTheDocument()
-    expect(screen.queryByText('BAS 350 · MON 13:00-16:00 · LC3-103')).not.toBeInTheDocument()
+    expect(screen.getByText('CS361 · CS 361 · TUE 08:00-11:00 · LC3-103')).toBeInTheDocument()
+    expect(screen.queryByText('BAS350 · BAS 350 · MON 13:00-16:00 · LC3-103')).not.toBeInTheDocument()
   })
 
   it('keeps direct room results available while schedules are loading', async () => {
