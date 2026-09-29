@@ -71,11 +71,15 @@ export function useRooms(): UseRoomsResult {
     fetchRooms()
 
     const onFocus = () => fetchRooms()
-    window.addEventListener('focus', onFocus)
+    if (typeof window !== 'undefined') {
+      window.addEventListener('focus', onFocus)
+    }
 
     return () => {
       isMounted = false
-      window.removeEventListener('focus', onFocus)
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('focus', onFocus)
+      }
     }
   }, [attempt])
 

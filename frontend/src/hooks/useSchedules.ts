@@ -38,11 +38,15 @@ export function useSchedules(): UseSchedulesResult {
     fetchSchedules()
 
     const onFocus = () => fetchSchedules()
-    window.addEventListener('focus', onFocus)
+    if (typeof window !== 'undefined') {
+      window.addEventListener('focus', onFocus)
+    }
 
     return () => {
       isMounted = false
-      window.removeEventListener('focus', onFocus)
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('focus', onFocus)
+      }
     }
   }, [attempt])
 
