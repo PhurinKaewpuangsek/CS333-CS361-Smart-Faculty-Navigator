@@ -1,0 +1,90 @@
+/**
+ * MapPage — the public-facing interactive floor-plan view.
+ * Route: /map
+ *
+ * This is the content that formerly lived directly in App.tsx, extracted
+ * here so React Router can mount it at /map while /admin gets its own page.
+ */
+import { useState } from 'react'
+import { useRooms } from '../hooks/useRooms'
+import { useSchedules } from '../hooks/useSchedules'
+import { usePreloadImages } from '../hooks/usePreloadImages'
+import MapContainer from './map/MapContainer'
+import { FLOOR_CONFIGS } from './map/floorConfig'
+import LoadingScreen from './LoadingScreen'
+import RoomSearchPanel from './RoomSearchPanel'
+import RoomDetailModal from './RoomDetailModal'
+
+const FLOOR_PLAN_ASSETS = FLOOR_CONFIGS.map((config) => config.asset)
+
+export default function MapPage() {
+  const { rooms, loading, error, reload } = useRooms()
+  const { schedules, loading: schedulesLoading, error: schedulesError } = useSchedules()
+  const floorPlansReady = usePreloadImages(FLOOR_PLAN_ASSETS)
+  const [currentFloor, setCurrentFloor] = useState(1)
+  const [selectedRoomId, setSelectedRoomId] = useState<string | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  function handleSelectRoom(roomId: string) {
+    setSelectedRoomId(roomId)
+    setIsModalOpen(true)
+    const selected = rooms.find((room) => room.id === roomId)
+    if (selected && selected.floor !== currentFloor) {
+      setCurrentFloor(selected.floor)
+    }
+  }
+
+  function handleCloseModal() {
+    setIsModalOpen(false)
+  }
+
+  function handleClearSelection() {
+    setSelectedRoomId(null)
+    setIsModalOpen(false)
+  }
+
+  // Map, markers and floor plans appear together — never a bare map waiting on its rooms.
+  if (error) return <LoadingScreen error={error} onRetry={reload} />
+  if (loading || !floorPlansReady) return <LoadingScreen />
+
+  return (
+    <main className="relative h-[100dvh] w-screen overflow-hidden bg-slate-100 font-sans">
+      {/* Primary Workspace: Interactive SVG Map */}
+      <MapContainer
+        rooms={rooms}
+        currentFloor={currentFloor}
+        onFloorChange={setCurrentFloor}
+        selectedRoomId={selectedRoomId}
+        onSelectRoom={handleSelectRoom}
+        onClearSelection={handleClearSelection}
+      />
+
+      {/* Floating Search & Category Filter Overlay */}
+      <div className="pointer-events-none absolute top-4 left-4 right-4 z-20 max-w-sm sm:right-auto">
+        <div className="pointer-events-auto">
+          <RoomSearchPanel
+            rooms={rooms}
+            schedules={schedules}
+            schedulesLoading={schedulesLoading}
+            schedulesError={schedulesError}
+            loading={loading}
+            error={error}
+            onSelectRoom={handleSelectRoom}
+          />
+        </div>
+      </div>
+
+      {/* Room Detail Modal: Bottom Sheet on Mobile, Side Panel on Desktop */}
+      {isModalOpen && selectedRoomId && (
+        <RoomDetailModal
+          rooms={rooms}
+          loading={loading}
+          error={error}
+          selectedRoomId={selectedRoomId}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+        />
+      )}
+    </main>
+  )
+}
