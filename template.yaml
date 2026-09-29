@@ -1,11 +1,11 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  Project TORCH — Smart Faculty Navigator (CS333/CS361)
+  Project TORCH  ESmart Faculty Navigator (CS333/CS361)
   SAM template defining all Lambda functions, the implicit API Gateway, and DynamoDB tables.
 
 # ---------------------------------------------------------------------------
-# Parameters — everything that has to differ between one teammate's account and
+# Parameters  Eeverything that has to differ between one teammate's account and
 # another's. Deploying with no overrides reproduces the shared setup exactly.
 # ---------------------------------------------------------------------------
 Parameters:
@@ -16,7 +16,7 @@ Parameters:
       Name of the locations table. The default is the name issue #48 requires, so a
       plain `sam deploy` needs no override. Change it only when two people have to
       share one AWS account: two stacks cannot both own a fixed table name.
-      Changing it on a live stack REPLACES the table — re-run the seed afterwards.
+      Changing it on a live stack REPLACES the table  Ere-run the seed afterwards.
     AllowedPattern: "^[A-Za-z0-9_.-]{3,255}$"
 
   SchedulesTableName:
@@ -41,7 +41,7 @@ Conditions:
   CreateLambdaRoles: !Equals [!Ref ExistingLambdaRoleName, ""]
 
 # ---------------------------------------------------------------------------
-# Globals — apply to every Lambda function and the single implicit API Gateway
+# Globals  Eapply to every Lambda function and the single implicit API Gateway
 # ---------------------------------------------------------------------------
 Globals:
   Function:
@@ -74,7 +74,7 @@ Resources:
   # Function roles, created only outside Learner Lab (ExistingLambdaRoleName = "").
   # They cannot be written as `Role: !If [..., arn, !Ref AWS::NoValue]`: the SAM
   # transform decides whether to synthesize a role by looking at whether the Role
-  # key is present, long before CloudFormation resolves the intrinsic — so that
+  # key is present, long before CloudFormation resolves the intrinsic  Eso that
   # form silently skips role generation and then fails on a missing Role.
   GetLocationsRole:
     Type: AWS::IAM::Role
@@ -154,7 +154,7 @@ Resources:
       CodeUri: functions/get-locations/
       Handler: index.handler
       # Lambda CPU scales with memory. At the 128 MB default, loading the AWS SDK and
-      # serialising 131 records took 0.5–1.4 s before the first byte; this is still well
+      # serialising 131 records took 0.5 E.4 s before the first byte; this is still well
       # inside the free tier for one read on page load.
       MemorySize: 1024
       Role: !If
@@ -172,7 +172,7 @@ Resources:
               Resource: !GetAtt SmartFacultyLocations.Arn
       Events:
         GetLocations:
-          # Type: Api with no RestApiId — joins the single implicit API Gateway
+          # Type: Api with no RestApiId  Ejoins the single implicit API Gateway
           # whose CORS is configured in Globals. Never declare AWS::Serverless::Api.
           Type: Api
           Properties:
@@ -237,7 +237,7 @@ Resources:
               Resource: !GetAtt SmartFacultySchedules.Arn
       Events:
         GetSchedules:
-          # Type: Api with no RestApiId — joins the single implicit API Gateway.
+          # Type: Api with no RestApiId  Ejoins the single implicit API Gateway.
           # Never declare AWS::Serverless::Api.
           Type: Api
           Properties:
@@ -245,7 +245,7 @@ Resources:
             Method: get
 
   # ---------------------------------------------------------------------------
-  # Admin write endpoints — issue #81 (admin-crud-panel).
+  # Admin write endpoints  Eissue #81 (admin-crud-panel).
   # DELETE /api/locations/{location_id}
   # POST   /api/schedules
   # PUT    /api/schedules/{room_code}/{schedule_slot}
@@ -362,7 +362,11 @@ Resources:
             Version: '2012-10-17'
             Statement:
               - Effect: Allow
-                Action: dynamodb:UpdateItem
+                Action:
+                    - dynamodb:UpdateItem
+                    - dynamodb:GetItem
+                    - dynamodb:PutItem
+                    - dynamodb:DeleteItem
                 Resource: !GetAtt SmartFacultySchedules.Arn
 
   UpdateScheduleFunction:
@@ -442,7 +446,7 @@ Resources:
         # Single-page app: an unknown path must return the app shell, not S3's XML 404.
         ErrorDocument: index.html
       OwnershipControls:
-        # ACLs disabled — the bucket policy below is the only thing granting access.
+        # ACLs disabled  Ethe bucket policy below is the only thing granting access.
         Rules:
           - ObjectOwnership: BucketOwnerEnforced
       PublicAccessBlockConfiguration:
@@ -467,7 +471,7 @@ Resources:
             Resource: !Sub "${SiteBucket.Arn}/*"
 
 # ---------------------------------------------------------------------------
-# Outputs — the scripts under scripts/ read these instead of hardcoding names,
+# Outputs  Ethe scripts under scripts/ read these instead of hardcoding names,
 # so every teammate's stack drives their own environment.
 # ---------------------------------------------------------------------------
 Outputs:
@@ -476,7 +480,7 @@ Outputs:
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod"
 
   SiteUrl:
-    Description: S3 static website endpoint (http only — CloudFront is out of scope)
+    Description: S3 static website endpoint (http only  ECloudFront is out of scope)
     Value: !GetAtt SiteBucket.WebsiteURL
 
   SiteBucketName:

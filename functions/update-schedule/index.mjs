@@ -124,6 +124,7 @@ export function createHandler({ docClient = defaultDocClient, tableName = TABLE_
           ExpressionAttributeNames: expressionAttributeNames,
           ExpressionAttributeValues: expressionAttributeValues,
           ReturnValues: 'ALL_NEW',
+          ConditionExpression: 'attribute_exists(schedule_slot)',
         })
       );
 
@@ -137,6 +138,9 @@ export function createHandler({ docClient = defaultDocClient, tableName = TABLE_
       };
     } catch (error) {
       console.error('Error updating schedule:', error);
+      if (error.name === 'ConditionalCheckFailedException') {
+        return { statusCode: 404, headers: CORS_HEADERS, body: JSON.stringify({ error: 'Schedule slot not found' }) };
+      }
       return {
         statusCode: 500,
         headers: CORS_HEADERS,

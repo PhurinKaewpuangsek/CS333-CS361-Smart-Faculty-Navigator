@@ -74,6 +74,7 @@ export function createHandler({ docClient = defaultDocClient, tableName = TABLE_
         new PutCommand({
           TableName: tableName,
           Item: item,
+          ConditionExpression: 'attribute_not_exists(schedule_slot)',
         })
       );
 

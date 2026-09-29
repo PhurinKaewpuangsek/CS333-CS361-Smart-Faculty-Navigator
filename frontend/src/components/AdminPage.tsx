@@ -72,7 +72,7 @@ function RoomListItem({
 
 interface ScheduleRowProps {
   slot: ScheduleSlot & { schedule_slot: string }
-  onDelete: () => void
+  onDelete: () => Promise<void>
   onEdit: (updated: Partial<Pick<ScheduleSlot, 'dayOfWeek' | 'startTime' | 'eventCode' | 'endTime' | 'eventName' | 'eventType'>>) => void
 }
 
@@ -86,6 +86,18 @@ function ScheduleRow({ slot, onDelete, onEdit }: ScheduleRowProps) {
   const [eventType, setEventType] = useState(slot.eventType)
   const [saving, setSaving] = useState(false)
   const [err, setErr] = useState<string | null>(null)
+
+  async function handleDelete() {
+    setSaving(true)
+    setErr(null)
+    try {
+      await onDelete()
+    } catch (e) {
+      setErr(e instanceof Error ? e.message : 'เกิดข้อผิดพลาด')
+    } finally {
+      setSaving(false)
+    }
+  }
 
   async function handleSave() {
     setSaving(true)
@@ -206,8 +218,9 @@ function ScheduleRow({ slot, onDelete, onEdit }: ScheduleRowProps) {
       </button>
       <button
         type="button"
-        onClick={onDelete}
-        className="shrink-0 rounded px-2 py-0.5 text-xs text-red-600 hover:bg-red-50 cursor-pointer"
+        onClick={handleDelete}
+        disabled={saving}
+        className="shrink-0 rounded px-2 py-0.5 text-xs text-red-600 hover:bg-red-50 cursor-pointer disabled:opacity-50"
       >
         ลบ
       </button>
