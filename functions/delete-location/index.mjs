@@ -43,39 +43,51 @@ export function createHandler({ docClient = defaultDocClient, tableName = TABLE_
 
       // 2. If room exists and has a room_code, cascade delete its schedules
       if (room && room.room_code) {
-        // Query all schedules for this room_code
-        const queryRes = await docClient.send(
-          new QueryCommand({
-            TableName: schedulesTableName,
-            KeyConditionExpression: 'room_code = :rc',
-            ExpressionAttributeValues: {
-              ':rc': room.room_code,
-            },
-          })
-        );
-
-        const schedules = queryRes.Items || [];
-
-        // Batch delete schedules in chunks of 25 (DynamoDB limit)
-        for (let i = 0; i < schedules.length; i += 25) {
-          const chunk = schedules.slice(i, i + 25);
-          const deleteRequests = chunk.map((s) => ({
-            DeleteRequest: {
-              Key: {
-                room_code: s.room_code,
-                schedule_slot: s.schedule_slot,
+        let lastEvaluatedKey = undefined;
+        do {
+          const queryRes = await docClient.send(
+            new QueryCommand({
+              TableName: schedulesTableName,
+              KeyConditionExpression: 'room_code = :rc',
+              ExpressionAttributeValues: {
+                ':rc': room.room_code,
               },
-            },
-          }));
-
-          await docClient.send(
-            new BatchWriteCommand({
-              RequestItems: {
-                [schedulesTableName]: deleteRequests,
-              },
+              ExclusiveStartKey: lastEvaluatedKey,
             })
           );
-        }
+          
+          lastEvaluatedKey = queryRes.LastEvaluatedKey;
+          const schedules = queryRes.Items || [];
+
+          // Batch delete schedules in chunks of 25 (DynamoDB limit)
+          for (let i = 0; i < schedules.length; i += 25) {
+            const chunk = schedules.slice(i, i + 25);
+            let deleteRequests = chunk.map((s) => ({
+              DeleteRequest: {
+                Key: {
+                  room_code: s.room_code,
+                  schedule_slot: s.schedule_slot,
+                },
+              },
+            }));
+
+            while (deleteRequests.length > 0) {
+              const batchRes = await docClient.send(
+                new BatchWriteCommand({
+                  RequestItems: {
+                    [schedulesTableName]: deleteRequests,
+                  },
+                })
+              );
+              
+              if (batchRes.UnprocessedItems && batchRes.UnprocessedItems[schedulesTableName] && batchRes.UnprocessedItems[schedulesTableName].length > 0) {
+                deleteRequests = batchRes.UnprocessedItems[schedulesTableName];
+              } else {
+                deleteRequests = [];
+              }
+            }
+          }
+        } while (lastEvaluatedKey);
       }
 
       // 3. Delete the room itself

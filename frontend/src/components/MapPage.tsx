@@ -44,7 +44,7 @@ export default function MapPage() {
   }
 
   // Map, markers and floor plans appear together — never a bare map waiting on its rooms.
-  if (error) return <LoadingScreen error={error} onRetry={reload} />
+  if (error) return <LoadingScreen error={error} onRetry={() => reload()} />
   if (loading || !floorPlansReady) return <LoadingScreen />
 
   return (

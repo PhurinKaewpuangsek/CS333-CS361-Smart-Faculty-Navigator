@@ -93,7 +93,7 @@ export function createHandler({ docClient = defaultDocClient, tableName = TABLE_
           await docClient.send(new TransactWriteCommand({
             TransactItems: [
               { Delete: { TableName: tableName, Key: { room_code: roomCode, schedule_slot: scheduleSlot } } },
-              { Put: { TableName: tableName, Item: newItem } }
+              { Put: { TableName: tableName, Item: newItem, ConditionExpression: 'attribute_not_exists(schedule_slot)' } }
             ]
           }));
           return {

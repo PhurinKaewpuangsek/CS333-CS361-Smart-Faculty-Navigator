@@ -31,7 +31,7 @@ export function useSchedules(): UseSchedulesResult {
         .catch((err) => {
           if (!isMounted) return
           setLoading(false)
-          setError(err instanceof Error ? err : new Error(String(err)))
+          setSchedules((prev) => { if (prev.length === 0) setError(err instanceof Error ? err : new Error(String(err))); return prev })
         })
     }
 
