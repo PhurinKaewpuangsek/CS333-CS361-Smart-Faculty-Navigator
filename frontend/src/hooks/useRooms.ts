@@ -7,7 +7,7 @@ export interface UseRoomsResult {
   loading: boolean
   error: Error | null
   /** Fetches the rooms again, e.g. from a "try again" button after an error. */
-  reload: () => void
+  reload: (background?: boolean) => void
 }
 
 /**
@@ -49,30 +49,38 @@ export function useRooms(): UseRoomsResult {
   useEffect(() => {
     let isMounted = true
 
-    getRooms()
-      .then((data) => {
-        writeCachedRooms(data)
-        if (isMounted) {
-          hasRoomsRef.current = true
-          setRooms(data)
-          setError(null)
+    const fetchRooms = () => {
+      getRooms()
+        .then((data) => {
+          writeCachedRooms(data)
+          if (isMounted) {
+            hasRoomsRef.current = true
+            setRooms(data)
+            setError(null)
+            setLoading(false)
+          }
+        })
+        .catch((err) => {
+          if (!isMounted) return
           setLoading(false)
-        }
-      })
-      .catch((err) => {
-        if (!isMounted) return
-        setLoading(false)
-        // With a cached copy on screen, a failed refresh is not worth interrupting the user.
-        if (!hasRoomsRef.current) setError(err instanceof Error ? err : new Error(String(err)))
-      })
+          // With a cached copy on screen, a failed refresh is not worth interrupting the user.
+          if (!hasRoomsRef.current) setError(err instanceof Error ? err : new Error(String(err)))
+        })
+    }
+
+    fetchRooms()
+
+    const onFocus = () => fetchRooms()
+    window.addEventListener('focus', onFocus)
 
     return () => {
       isMounted = false
+      window.removeEventListener('focus', onFocus)
     }
   }, [attempt])
 
-  const reload = useCallback(() => {
-    setLoading(true)
+  const reload = useCallback((background = false) => {
+    if (!background) setLoading(true)
     setError(null)
     setAttempt((n) => n + 1)
   }, [])

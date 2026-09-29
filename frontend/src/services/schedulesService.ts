@@ -27,7 +27,7 @@ const API_BASE_URL = (import.meta.env?.VITE_API_BASE_URL ?? '').replace(/\/+$/, 
 export const SCHEDULES_ENDPOINT = `${API_BASE_URL}/api/schedules`
 
 export async function getSchedules(): Promise<ScheduleSlot[]> {
-  const response = await fetch(SCHEDULES_ENDPOINT)
+  const response = await fetch(SCHEDULES_ENDPOINT, { cache: 'no-store' })
 
   if (!response.ok) {
     throw new Error(`Failed to fetch schedules: ${response.status} ${response.statusText}`)

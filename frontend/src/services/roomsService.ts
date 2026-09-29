@@ -47,7 +47,7 @@ const API_BASE_URL = (import.meta.env?.VITE_API_BASE_URL ?? '').replace(/\/+$/, 
 export const ROOMS_ENDPOINT = `${API_BASE_URL}/api/locations`
 
 export async function getRooms(): Promise<Room[]> {
-  const response = await fetch(ROOMS_ENDPOINT)
+  const response = await fetch(ROOMS_ENDPOINT, { cache: 'no-store' })
 
   if (!response.ok) {
     throw new Error(`Failed to fetch rooms: ${response.status} ${response.statusText}`)

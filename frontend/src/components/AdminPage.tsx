@@ -73,11 +73,14 @@ function RoomListItem({
 interface ScheduleRowProps {
   slot: ScheduleSlot & { schedule_slot: string }
   onDelete: () => void
-  onEdit: (updated: Partial<Pick<ScheduleSlot, 'endTime' | 'eventName' | 'eventType'>>) => void
+  onEdit: (updated: Partial<Pick<ScheduleSlot, 'dayOfWeek' | 'startTime' | 'eventCode' | 'endTime' | 'eventName' | 'eventType'>>) => void
 }
 
 function ScheduleRow({ slot, onDelete, onEdit }: ScheduleRowProps) {
   const [editing, setEditing] = useState(false)
+  const [dayOfWeek, setDayOfWeek] = useState(slot.dayOfWeek)
+  const [startTime, setStartTime] = useState(slot.startTime)
+  const [eventCode, setEventCode] = useState(slot.eventCode)
   const [endTime, setEndTime] = useState(slot.endTime)
   const [eventName, setEventName] = useState(slot.eventName)
   const [eventType, setEventType] = useState(slot.eventType)
@@ -88,7 +91,7 @@ function ScheduleRow({ slot, onDelete, onEdit }: ScheduleRowProps) {
     setSaving(true)
     setErr(null)
     try {
-      await onEdit({ endTime, eventName, eventType })
+      await onEdit({ dayOfWeek, startTime, eventCode, endTime, eventName, eventType })
       setEditing(false)
     } catch (e) {
       setErr(e instanceof Error ? e.message : 'เกิดข้อผิดพลาด')
@@ -102,9 +105,34 @@ function ScheduleRow({ slot, onDelete, onEdit }: ScheduleRowProps) {
       <div className="rounded-lg border border-blue-200 bg-blue-50 p-3 space-y-2">
         {err && <p className="text-xs text-red-600">{err}</p>}
         <div className="grid grid-cols-2 gap-2">
-          {/* Read-only identifying fields */}
-          <div className="col-span-2 rounded bg-slate-100 px-2 py-1.5 text-xs text-slate-600 font-mono">
-            {slot.dayOfWeek} {slot.startTime} · {slot.eventCode}
+          <div>
+            <label className="block text-xs font-medium text-slate-700 mb-1">วัน</label>
+            <select
+              value={dayOfWeek}
+              onChange={(e) => setDayOfWeek(e.target.value)}
+              className="w-full rounded border border-slate-300 px-2 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+            >
+              {['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].map(d => <option key={d} value={d}>{d}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-slate-700 mb-1">เริ่ม</label>
+            <input
+              type="text"
+              value={startTime}
+              onChange={(e) => setStartTime(e.target.value)}
+              placeholder="HH:MM"
+              className="w-full rounded border border-slate-300 px-2 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-slate-700 mb-1">รหัสวิชา</label>
+            <input
+              type="text"
+              value={eventCode}
+              onChange={(e) => setEventCode(e.target.value)}
+              className="w-full rounded border border-slate-300 px-2 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
           </div>
           <div>
             <label className="block text-xs font-medium text-slate-700 mb-1">ชื่อวิชา</label>
@@ -395,9 +423,12 @@ function RoomEditPanel({
 
   async function handleScheduleEdit(
     slot: ScheduleSlot & { schedule_slot: string },
-    updated: Partial<Pick<ScheduleSlot, 'endTime' | 'eventName' | 'eventType'>>,
+    updated: Partial<Pick<ScheduleSlot, 'dayOfWeek' | 'startTime' | 'eventCode' | 'endTime' | 'eventName' | 'eventType'>>,
   ) {
     await updateSchedule(room.code, slot.schedule_slot, {
+      day_of_week: updated.dayOfWeek,
+      start_time: updated.startTime,
+      event_code: updated.eventCode,
       end_time: updated.endTime,
       event_name: updated.eventName,
       event_type: updated.eventType,
@@ -585,43 +616,48 @@ function AllSchedulesView({
   )
 
   return (
-    <div className="flex flex-col gap-3">
-      <h2 className="text-base font-semibold text-slate-800">ตารางทั้งหมด ({schedules.length})</h2>
-      <SearchBox value={search} onChange={setSearch} />
-      <div className="space-y-2 overflow-y-auto pb-6">
-        {filtered.map((s, i) => {
-          const room = rooms.find((r) => r.code === s.roomCode)
-          return (
-            <div
-              key={`${s.roomCode}-${s.dayOfWeek}-${s.startTime}-${s.eventCode}-${i}`}
-              className="rounded-lg border border-slate-200 bg-white p-3 shadow-sm hover:border-blue-300 transition-colors"
-            >
-              <div className="flex justify-between items-start mb-1.5">
-                <span className="font-semibold text-slate-900">{s.eventCode}</span>
-                <span className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-[10px] text-slate-600 font-medium">
-                  {s.dayOfWeek} {s.startTime}–{s.endTime}
-                </span>
-              </div>
-              <p className="text-xs text-slate-600 mb-2">{s.eventName || '(ไม่มีชื่อวิชา)'} • {s.eventType || 'N/A'}</p>
-              
-              <div className="flex items-center justify-between border-t border-slate-100 pt-2 mt-2">
-                <div className="flex items-center gap-1.5">
-                  <span className="font-mono text-xs font-medium text-blue-700">{s.roomCode}</span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => room && onSelectRoom(room.id)}
-                  disabled={!room}
-                  className="text-xs font-medium text-blue-600 hover:text-blue-800 disabled:opacity-50 cursor-pointer"
-                >
-                  จัดการห้อง →
-                </button>
-              </div>
-            </div>
-          )
-        })}
+    <div className="flex h-full flex-col gap-3">
+      <h2 className="text-base font-semibold text-slate-800 shrink-0">ตารางทั้งหมด ({schedules.length})</h2>
+      <div className="shrink-0">
+        <SearchBox value={search} onChange={setSearch} />
+      </div>
+      <div className="flex-1 overflow-auto rounded-lg border border-slate-200 bg-white">
+        <table className="min-w-full divide-y divide-slate-200">
+          <thead className="bg-slate-50 sticky top-0 z-10">
+            <tr>
+              <th scope="col" className="px-3 py-2 text-left text-xs font-semibold text-slate-900">รหัสวิชา</th>
+              <th scope="col" className="px-3 py-2 text-left text-xs font-semibold text-slate-900">ชื่อวิชา</th>
+              <th scope="col" className="px-3 py-2 text-left text-xs font-semibold text-slate-900">วัน/เวลา</th>
+              <th scope="col" className="px-3 py-2 text-left text-xs font-semibold text-slate-900">ห้อง</th>
+              <th scope="col" className="relative px-3 py-2"><span className="sr-only">จัดการ</span></th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-200 bg-white">
+            {filtered.map((s, i) => {
+              const room = rooms.find((r) => r.code === s.roomCode)
+              return (
+                <tr key={`${s.roomCode}-${s.dayOfWeek}-${s.startTime}-${s.eventCode}-${i}`} className="hover:bg-slate-50 transition-colors">
+                  <td className="whitespace-nowrap px-3 py-2 text-xs font-medium text-slate-900">{s.eventCode}</td>
+                  <td className="whitespace-nowrap px-3 py-2 text-xs text-slate-600">{s.eventName || '-'}</td>
+                  <td className="whitespace-nowrap px-3 py-2 text-xs text-slate-500">{s.dayOfWeek} {s.startTime}-{s.endTime}</td>
+                  <td className="whitespace-nowrap px-3 py-2 text-xs text-slate-900 font-mono">{s.roomCode}</td>
+                  <td className="whitespace-nowrap px-3 py-2 text-right text-xs font-medium">
+                    <button
+                      type="button"
+                      onClick={() => room && onSelectRoom(room.id)}
+                      disabled={!room}
+                      className="text-blue-600 hover:text-blue-900 disabled:opacity-50 cursor-pointer"
+                    >
+                      จัดการ →
+                    </button>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
         {filtered.length === 0 && (
-          <p className="text-xs text-slate-400">ไม่พบตารางที่ตรงกับการค้นหา</p>
+          <p className="p-4 text-center text-xs text-slate-400">ไม่พบตารางที่ตรงกับการค้นหา</p>
         )}
       </div>
     </div>
@@ -673,7 +709,7 @@ export default function AdminPage() {
   function handleRoomDeleted() {
     setPanelMode('list')
     setSelectedRoomId(null)
-    reloadRooms()
+    reloadRooms(true)
   }
 
   const filteredRooms = rooms.filter((r) => {
@@ -768,8 +804,8 @@ export default function AdminPage() {
               schedules={schedules}
               onBack={handleBack}
               onRoomDeleted={handleRoomDeleted}
-              onRoomMutated={reloadRooms}
-              onSchedulesMutated={reloadSchedules}
+              onRoomMutated={() => reloadRooms(true)}
+              onSchedulesMutated={() => reloadSchedules(true)}
             />
           ) : null}
         </div>

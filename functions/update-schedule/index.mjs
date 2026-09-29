@@ -1,5 +1,5 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, UpdateCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBDocumentClient, UpdateCommand, GetCommand, TransactWriteCommand } from '@aws-sdk/lib-dynamodb';
 
 const client = new DynamoDBClient({});
 const defaultDocClient = DynamoDBDocumentClient.from(client);
@@ -13,18 +13,9 @@ const CORS_HEADERS = {
   'Access-Control-Allow-Headers': 'Content-Type',
 };
 
-/** Fields the caller may update (keys that exist on the schedule item). */
-const UPDATABLE_FIELDS = ['end_time', 'event_name', 'event_type'];
+const UPDATABLE_FIELDS = ['end_time', 'event_name', 'event_type', 'day_of_week', 'start_time', 'event_code'];
 
-/**
- * Builds the Lambda handler around an injectable document client, for unit testing.
- * @param {{ docClient?: DynamoDBDocumentClient, tableName?: string }} deps
- */
 export function createHandler({ docClient = defaultDocClient, tableName = TABLE_NAME } = {}) {
-  /**
-   * Lambda handler for updating an existing schedule slot in DynamoDB.
-   * Path: PUT /api/schedules/{room_code}/{schedule_slot}
-   */
   return async function updateSchedule(event) {
     const rawRoomCode = event.pathParameters?.room_code || '';
     const roomCode = decodeURIComponent(rawRoomCode);
@@ -46,7 +37,6 @@ export function createHandler({ docClient = defaultDocClient, tableName = TABLE_
       };
     }
 
-    // Parse body
     let body = {};
     if (typeof event.body === 'string') {
       try {
@@ -62,7 +52,6 @@ export function createHandler({ docClient = defaultDocClient, tableName = TABLE_
       body = event.body;
     }
 
-    // Collect updatable fields present in the body
     const updateData = {};
     for (const field of UPDATABLE_FIELDS) {
       if (body[field] !== undefined) {
@@ -78,20 +67,55 @@ export function createHandler({ docClient = defaultDocClient, tableName = TABLE_
       };
     }
 
-    // Construct dynamic UpdateExpression with ExpressionAttributeNames to avoid reserved keyword conflicts
-    const updateExpressions = [];
-    const expressionAttributeNames = {};
-    const expressionAttributeValues = {};
-
-    Object.keys(updateData).forEach((key, index) => {
-      const attrName = `#attr${index}`;
-      const attrValue = `:val${index}`;
-      updateExpressions.push(`${attrName} = ${attrValue}`);
-      expressionAttributeNames[attrName] = key;
-      expressionAttributeValues[attrValue] = updateData[key];
-    });
-
     try {
+      if (updateData.day_of_week || updateData.start_time || updateData.event_code) {
+        const getResult = await docClient.send(new GetCommand({
+          TableName: tableName,
+          Key: { room_code: roomCode, schedule_slot: scheduleSlot }
+        }));
+        if (!getResult.Item) {
+          return {
+            statusCode: 404,
+            headers: CORS_HEADERS,
+            body: JSON.stringify({ error: 'Schedule not found' })
+          };
+        }
+        
+        const oldItem = getResult.Item;
+        const newDay = updateData.day_of_week || oldItem.day_of_week;
+        const newTime = updateData.start_time || oldItem.start_time;
+        const newCourse = updateData.event_code || oldItem.event_code;
+        const newScheduleSlot = `${newDay}#${newTime}#${newCourse}`;
+        
+        if (newScheduleSlot !== scheduleSlot) {
+          const newItem = { ...oldItem, ...updateData, schedule_slot: newScheduleSlot };
+          
+          await docClient.send(new TransactWriteCommand({
+            TransactItems: [
+              { Delete: { TableName: tableName, Key: { room_code: roomCode, schedule_slot: scheduleSlot } } },
+              { Put: { TableName: tableName, Item: newItem } }
+            ]
+          }));
+          return {
+            statusCode: 200,
+            headers: CORS_HEADERS,
+            body: JSON.stringify({ message: 'Schedule re-created successfully', data: newItem }),
+          };
+        }
+      }
+
+      const updateExpressions = [];
+      const expressionAttributeNames = {};
+      const expressionAttributeValues = {};
+
+      Object.keys(updateData).forEach((key, index) => {
+        const attrName = `#attr${index}`;
+        const attrValue = `:val${index}`;
+        updateExpressions.push(`${attrName} = ${attrValue}`);
+        expressionAttributeNames[attrName] = key;
+        expressionAttributeValues[attrValue] = updateData[key];
+      });
+
       const result = await docClient.send(
         new UpdateCommand({
           TableName: tableName,

@@ -1,0 +1,9 @@
+﻿feat(admin): finalize CRUD panel with data table and live sync (#81)
+
+- Update update-schedule Lambda to support composite sort key updates via Delete+Put transaction.
+- Replace "All Schedules" flat list with a searchable Data Table for bulk management.
+- Expose all 6 schedule fields in the AdminPage schedule edit form.
+- Implement cross-tab live sync via window.addEventListener('focus') for /map view.
+- Disable fetch cache in schedulesService and oomsService to guarantee fresh data.
+- Refine background refetching in hooks to eliminate aggressive loading screens.
+- Prioritize course code in /map schedule search results.

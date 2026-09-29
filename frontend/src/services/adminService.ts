@@ -29,6 +29,9 @@ export interface CreateSchedulePayload {
 }
 
 export interface UpdateSchedulePayload {
+  day_of_week?: string
+  start_time?: string
+  event_code?: string
   end_time?: string
   event_name?: string
   event_type?: string
