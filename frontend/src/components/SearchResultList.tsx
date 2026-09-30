@@ -71,7 +71,7 @@ export default function SearchResultList({
                     key={`${schedule.roomCode}-${schedule.dayOfWeek}-${schedule.startTime}-${schedule.eventCode}`}
                     className="text-xs text-slate-500"
                   >
-                    {schedule.eventName || schedule.eventCode} · {schedule.dayOfWeek}{' '}
+                    {schedule.eventCode} · {schedule.eventName || 'ไม่มีชื่อวิชา'} · {schedule.dayOfWeek}{' '}
                     {schedule.startTime}-{schedule.endTime} · {room.code}
                   </span>
                 ))}

@@ -7,7 +7,7 @@ export interface UseSchedulesResult {
   loading: boolean
   error: Error | null
   /** Fetches the schedules again, e.g. from a "try again" button after an error. */
-  reload: () => void
+  reload: (background?: boolean) => void
 }
 
 export function useSchedules(): UseSchedulesResult {
@@ -19,27 +19,39 @@ export function useSchedules(): UseSchedulesResult {
   useEffect(() => {
     let isMounted = true
 
-    getSchedules()
-      .then((data) => {
-        if (isMounted) {
-          setSchedules(data)
-          setError(null)
+    const fetchSchedules = () => {
+      getSchedules()
+        .then((data) => {
+          if (isMounted) {
+            setSchedules(data)
+            setError(null)
+            setLoading(false)
+          }
+        })
+        .catch((err) => {
+          if (!isMounted) return
           setLoading(false)
-        }
-      })
-      .catch((err) => {
-        if (!isMounted) return
-        setLoading(false)
-        setError(err instanceof Error ? err : new Error(String(err)))
-      })
+          setSchedules((prev) => { if (prev.length === 0) setError(err instanceof Error ? err : new Error(String(err))); return prev })
+        })
+    }
+
+    fetchSchedules()
+
+    const onFocus = () => fetchSchedules()
+    if (typeof window !== 'undefined') {
+      window.addEventListener('focus', onFocus)
+    }
 
     return () => {
       isMounted = false
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('focus', onFocus)
+      }
     }
   }, [attempt])
 
-  const reload = useCallback(() => {
-    setLoading(true)
+  const reload = useCallback((background = false) => {
+    if (!background) setLoading(true)
     setError(null)
     setAttempt((n) => n + 1)
   }, [])

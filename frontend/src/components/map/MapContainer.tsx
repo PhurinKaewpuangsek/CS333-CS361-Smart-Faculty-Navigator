@@ -17,6 +17,12 @@ export interface MapContainerProps {
   selectedRoomId: string | null
   onSelectRoom: (roomId: string) => void
   onClearSelection?: () => void
+  /**
+   * 'public' (default) — standard interactive map view used on /map.
+   * 'admin'            — same map but `onSelectRoom` targets the admin panel instead of a modal.
+   *                      No visual difference; the prop exists so callers can document intent.
+   */
+  mode?: 'public' | 'admin'
 }
 
 const PADDING_X = 300
